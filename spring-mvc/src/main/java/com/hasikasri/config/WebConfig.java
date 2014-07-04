@@ -1,4 +1,4 @@
-package com.hasika.config;
+package com.hasikasri.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.hasika.controller")
+@ComponentScan(basePackages = "com.hasikasri.web.controller")
 public class WebConfig {
 
 	@Bean

@@ -7,11 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <head>
-<title>Sample Application</title>
+<title>Hasikasri</title>
 </head>
 <body>
 	<form:form method="post" action="home">
-		<h1>Hello, ${result.message}!!</h1>
+		<h1>Hello, ${welcomeUser.username}!</h1>
 		<form:label path="username">username : </form:label>
 		<form:input path="username" />
 		<input type="submit" value="Get me a Hello" />
