@@ -14,7 +14,7 @@
 		</init-param>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>com.hasika.springconfig</param-value>
+			<param-value>com.hasika.config</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>

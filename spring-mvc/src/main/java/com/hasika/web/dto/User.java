@@ -1,4 +1,4 @@
-package com.hasika.dto;
+package com.hasika.web.dto;
 
 public class User {
 

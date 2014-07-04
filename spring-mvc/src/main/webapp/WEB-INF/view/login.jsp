@@ -10,7 +10,7 @@
 <title>Sample Application</title>
 </head>
 <body>
-	<form:form method="post" action="login">
+	<form:form method="post" action="home">
 		<h1>Hello, ${result.message}!!</h1>
 		<form:label path="username">username : </form:label>
 		<form:input path="username" />
