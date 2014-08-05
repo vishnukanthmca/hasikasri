@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = { "com.hasikasri.repository" })
 @EnableTransactionManagement
 @ComponentScan(basePackages = { "com.hasikasri.repository",
-		"com.hasikasri.core.domain" })
+		"com.hasikasri.core", "com.hasikasri.core.service.impl" })
 public class PersistenceConfig {
 
 	@Autowired

@@ -15,7 +15,7 @@ import com.hasikasri.web.dto.User;
 @Controller
 public class SampleController {
 
-	@RequestMapping(method = RequestMethod.GET, value = "login")
+	@RequestMapping(method = RequestMethod.GET, value = "home")
 	public ModelAndView index(HttpServletRequest request) {
 		ModelAndView modelAndView = null;
 		User user = new User();

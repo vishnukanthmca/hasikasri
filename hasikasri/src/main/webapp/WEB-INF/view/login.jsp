@@ -14,7 +14,9 @@
 		<h1>Hello, ${welcomeUser.username}!</h1>
 		<form:label path="username">username : </form:label>
 		<form:input path="username" />
-		<input type="submit" value="Get me a Hello" />
+		<form:label path="password">password: </form:label>
+		<form:password path="password" />
+		<input type="submit" value="Login" />
 	</form:form>
 </body>
 </html>

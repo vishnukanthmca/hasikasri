@@ -8,7 +8,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.hasikasri.web.controller")
+@ComponentScan(basePackages = { "com.hasikasri.web.controller",
+		"com.hasikasri.core.service", "com.hasikasri.core.service.impl" })
 public class WebConfig {
 
 	@Bean
