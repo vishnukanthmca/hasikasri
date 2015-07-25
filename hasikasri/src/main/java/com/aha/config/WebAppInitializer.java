@@ -1,4 +1,4 @@
-package com.hasikasri.config;
+package com.aha.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
