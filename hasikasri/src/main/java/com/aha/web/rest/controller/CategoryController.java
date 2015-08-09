@@ -20,7 +20,7 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	@RequestMapping(value = "/allCategories", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<CategoryDto> getAllCategories() {
+	public @ResponseBody String getAllCategories() {
 		// TODO - implment the method
 
 		System.out.println("inside controller..");
@@ -30,6 +30,6 @@ public class CategoryController {
 		List<CategoryDto> l = new ArrayList<>();
 		l.add(dto);
 		// Gson s = new Gson();
-		return l;
+		return "hello";
 	}
 }

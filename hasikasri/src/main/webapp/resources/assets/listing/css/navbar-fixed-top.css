@@ -1,0 +1,27 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+@media (min-width: 1000px) {
+  .container {
+    width: 1008px;
+  }
+}
+
+
+#owl-demo .item img{
+  display: block;
+  width: 100%;
+  height: auto;
+}
+#bar{
+  width: 0%;
+  max-width: 100%;
+  height: 4px;
+  background: #7fc242;
+}
+#progressBar{
+  width: 100%;
+  background: #EDEDED;
+}
