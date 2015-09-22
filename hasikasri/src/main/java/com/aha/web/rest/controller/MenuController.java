@@ -9,27 +9,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.aha.core.domain.Category;
 import com.aha.core.service.CategoryService;
 import com.aha.web.dto.CategoryDto;
+import com.google.gson.Gson;
 
 @RestController
-@RequestMapping("/category")
-public class CategoryController {
+@RequestMapping("/menu")
+public class MenuController {
 
 	@Autowired
 	private CategoryService categoryService;
 
-	@RequestMapping(value = "/allCategories", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/allCategories", produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String getAllCategories() {
-		// TODO - implment the method
 
-		System.out.println("inside controller..");
-		categoryService.findActiveCategories();
-
+		System.out.println("inside menu controller..");
+		List<Category> categories = categoryService.findActiveCategories();
+		
+		List<CategoryDto> categoriesDtos = new ArrayList<>();
+		for (Category category : categories) {
+			categoriesDtos.add(new CategoryDto(category));
+		}
+		
 		CategoryDto dto = new CategoryDto(null);
 		List<CategoryDto> l = new ArrayList<>();
 		l.add(dto);
-		// Gson s = new Gson();
-		return "hello";
+	
+		return new Gson().toJson(dto);
 	}
 }

@@ -15,9 +15,12 @@ public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	
-	
 	@Override
-	public List<Category> findAll() {
-		return categoryRepository.findAll();
+	public List<Category> findActiveCategories() {
+		Category category = new Category();
+		//category.setTemporaryDate(new java.sql.Date(year, month, day));
+		
+		categoryRepository.save(category);
+		return null;//categoryRepository.findByActive(ACTIVE);
 	}
 }

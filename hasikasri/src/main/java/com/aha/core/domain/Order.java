@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Order {
@@ -22,11 +24,10 @@ public class Order {
 	private Date orderedDate;
 
 	@Column
-	private Float shippingCharge;
+	private Double shippingCharge;
 
 	@OneToOne
 	private Delivery delivery;
 	
-	
-	
+		
 }

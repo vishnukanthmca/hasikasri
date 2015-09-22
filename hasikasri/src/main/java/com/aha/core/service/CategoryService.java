@@ -6,6 +6,8 @@ import com.aha.core.domain.Category;
 
 public interface CategoryService {
 
-	List<Category> findAll();
+	final static Boolean ACTIVE = true;
+	
+	List<Category> findActiveCategories();
 
 }

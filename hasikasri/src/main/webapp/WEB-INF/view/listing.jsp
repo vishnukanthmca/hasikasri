@@ -115,17 +115,17 @@
 				<div class="row">
 					<div class="col-lg-4">
 						<a class="thumbnail">
-							<img src="resources/assets/bootstrap-3.3.5-dist/home_page_main_slider/images/14.jpg" alt="thumbnail_2" />
+							<img src="resources/assets/listing/images/14.jpg" alt="thumbnail_2" />
 						</a>
 					</div>
 					<div class="col-lg-4">
 						<a class="thumbnail">
-							<img src="resources/assets/bootstrap-3.3.5-dist/home_page_main_slider/images/12.jpg" alt="thumbnail_2" />
+							<img src="resources/assets/listing/images/12.jpg" alt="thumbnail_2" />
 						</a>
 					</div>
 					<div class="col-lg-4">
 						<a class="thumbnail">
-							<img src="resources/assets/bootstrap-3.3.5-dist/home_page_main_slider/images/13.jpg" alt="thumbnail_2" />
+							<img src="resources/assets/listing/images/13.jpg" alt="thumbnail_2" />
 						</a>
 					</div>
 				</div>

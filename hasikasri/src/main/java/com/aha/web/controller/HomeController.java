@@ -20,6 +20,7 @@ public class HomeController {
 	public ModelAndView home() {
 		// TODO - implment the method
 
+		categoryService.findActiveCategories();
 		System.out.println("inside controller..");
 		
 		ModelAndView modelAndView = new ModelAndView(HOME_PAGE);

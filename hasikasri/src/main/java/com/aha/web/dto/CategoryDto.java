@@ -1,26 +1,28 @@
 package com.aha.web.dto;
 
+import java.util.List;
+
 import com.aha.core.domain.Category;
 
 public class CategoryDto {
-
-	private CategoryDto categoryDto;
-
-	private Category category;
 
 	private Long id;
 
 	private String name;
 
+	private List<ProductDto> products; 
+
+	private Category category;
+
 	public CategoryDto(Category category) {
 		this.category = category;
+		
+		this.createCategoryDto();
 	}
 
-	public CategoryDto getTransferObject() {
-		categoryDto.setId(category.getId());
-		categoryDto.setName(category.getName());
-
-		return categoryDto;
+	public void createCategoryDto() {
+		this.setId(category.getId());
+		this.setName(category.getName());
 	}
 
 	public Long getId() {
@@ -37,5 +39,21 @@ public class CategoryDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<ProductDto> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<ProductDto> products) {
+		this.products = products;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 }
