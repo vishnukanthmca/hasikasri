@@ -17,7 +17,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages = { "com.aha.persistence.repository" })
+@EnableJpaRepositories(basePackages = { "com.aha" })
 @EnableTransactionManagement
 public class PersistenceConfig {
 
@@ -26,10 +26,8 @@ public class PersistenceConfig {
 
 	@Bean
 	public DataSource dataSource() {
-		//
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		//dataSource.set
 		dataSource
 				.setUrl("jdbc:mysql://localhost:3306/hasikasri?useUnicode=true&characterEncoding=UTF-8");
 		dataSource.setUsername("root");
@@ -47,7 +45,7 @@ public class PersistenceConfig {
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(vendorAdapter);
-		factory.setPackagesToScan("com.aha.core.domain");
+		factory.setPackagesToScan("com.aha.core");
 		factory.setDataSource(dataSource());
 		factory.setJpaProperties(jpaProperties());
 

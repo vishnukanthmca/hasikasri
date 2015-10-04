@@ -1,0 +1,50 @@
+
+function loadDropDown() {
+	$
+			.ajax({
+				url : "menu/allCategories",
+				data : {
+					get_param : 'value'
+				},
+				success : function(data) {
+
+					$
+							.each(
+									data,
+									function(index, json) {
+
+										var html = "";
+
+										for (i = 0; i < json.length; ++i) {
+											var name = json[i].name;
+											var id = json[i].id;
+											var parentCategoryId = json[i].parentCategoryId;
+
+											var heading = '<ul class="col-sm-2 list-unstyled" id="go_menu_heading'
+													+ id
+													+ '"><li><p><strong>'
+													+ name;
+											var end_heading = '</strong></p></li></ul>';
+
+											if (parentCategoryId == 1) {
+												html = heading + end_heading;
+												$("#" + "go_menu").append(html);
+
+											} else {
+												var item = '<li><a href="#">'
+														+ name + '</a></li>';
+
+												$(
+														"#go_menu_heading"
+																+ parentCategoryId)
+														.append(item);
+
+											}
+										}
+									});
+				},
+				error : function(error) {
+					alert(error);
+				}
+			});
+}

@@ -10,19 +10,21 @@ public class CategoryDto {
 
 	private String name;
 
-	private List<ProductDto> products; 
+	private Long parentCategoryId;
 
-	private Category category;
+	private List<ProductDto> products;
 
-	public CategoryDto(Category category) {
-		this.category = category;
-		
-		this.createCategoryDto();
-	}
+	private List<CategoryDto> children;
 
-	public void createCategoryDto() {
-		this.setId(category.getId());
-		this.setName(category.getName());
+	private Integer totalCategoryCount;
+
+	public CategoryDto(Long id, String name, Category parentCategory) {
+		this.id = id;
+		this.name = name;
+
+		if (parentCategory != null) {
+			this.parentCategoryId = parentCategory.getId();
+		}
 	}
 
 	public Long getId() {
@@ -49,11 +51,28 @@ public class CategoryDto {
 		this.products = products;
 	}
 
-	public Category getCategory() {
-		return category;
+	public Long getParentCategoryId() {
+		return parentCategoryId;
 	}
 
-	public void setCategory(Category category) {
-		this.category = category;
+	public void setParentCategoryId(Long parentCategoryId) {
+		this.parentCategoryId = parentCategoryId;
 	}
+
+	public List<CategoryDto> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<CategoryDto> children) {
+		this.children = children;
+	}
+
+	public Integer getTotalCategoryCount() {
+		return totalCategoryCount;
+	}
+
+	public void setTotalCategoryCount(Integer totalCategoryCount) {
+		this.totalCategoryCount = totalCategoryCount;
+	}
+
 }

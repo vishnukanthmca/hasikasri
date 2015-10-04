@@ -16,11 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository categoryRepository;
 	
 	@Override
-	public List<Category> findActiveCategories() {
-		Category category = new Category();
-		//category.setTemporaryDate(new java.sql.Date(year, month, day));
-		
-		categoryRepository.save(category);
-		return null;//categoryRepository.findByActive(ACTIVE);
+	public List<Category> findActiveCategories(Long id) {
+		return categoryRepository.findByActive(ACTIVE,id);
 	}
 }

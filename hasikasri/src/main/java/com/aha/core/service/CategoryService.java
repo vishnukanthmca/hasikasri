@@ -8,6 +8,6 @@ public interface CategoryService {
 
 	final static Boolean ACTIVE = true;
 	
-	List<Category> findActiveCategories();
+	List<Category> findActiveCategories(Long id);
 
 }

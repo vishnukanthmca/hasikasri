@@ -1,14 +1,21 @@
 package com.aha.web.dto;
 
+import java.util.List;
+
 public class MenuDto {
 
-	private CategoryDto categoryDto;
+	public MenuDto(List<CategoryDto> categoryDto) {
+		super();
+		this.categoryDto = categoryDto;
+	}
 
-	public CategoryDto getCategoryDto() {
+	private List<CategoryDto> categoryDto;
+
+	public List<CategoryDto> getCategoryDto() {
 		return categoryDto;
 	}
 
-	public void setCategoryDto(CategoryDto categoryDto) {
+	public void setCategoryDto(List<CategoryDto> categoryDto) {
 		this.categoryDto = categoryDto;
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aha.core.domain.Category;
 import com.aha.core.service.CategoryService;
 import com.aha.web.dto.CategoryDto;
+import com.aha.web.dto.MenuDto;
 import com.google.gson.Gson;
 
 @RestController
@@ -25,17 +26,20 @@ public class MenuController {
 	public @ResponseBody String getAllCategories() {
 
 		System.out.println("inside menu controller..");
-		List<Category> categories = categoryService.findActiveCategories();
-		
+		List<Category> categories = null;// categoryService.findActiveCategories();
+
 		List<CategoryDto> categoriesDtos = new ArrayList<>();
-		for (Category category : categories) {
-			categoriesDtos.add(new CategoryDto(category));
+
+		if (categories != null && !categories.isEmpty()) {
+			// for (Category category : categories) {
+			// CategoryDto dto = new CategoryDto(category.getId(),
+			// category.getName(), category.getParentCategory());
+			// categoriesDtos.add(dto);
+			// }
 		}
-		
-		CategoryDto dto = new CategoryDto(null);
-		List<CategoryDto> l = new ArrayList<>();
-		l.add(dto);
-	
-		return new Gson().toJson(dto);
+
+		MenuDto menuDto = new MenuDto(null);
+
+		return new Gson().toJson(menuDto);
 	}
 }
