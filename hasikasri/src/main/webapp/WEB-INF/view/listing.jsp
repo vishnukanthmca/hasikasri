@@ -54,7 +54,7 @@
 								<div class="yamm-content">
 									<div class="row">
 										<ul class="col-sm-2 list-unstyled">
-											<li><strong>Men</strong></li>
+											<li><strong><a href="listing?cat=4">Men</a></strong></li>
 											<li><a href="#">Clothes</a></li>
 											<li>T-Shirts</li>
 										</ul>
@@ -268,7 +268,8 @@
 	</script>
 
 	<script src="resources/assets/listing/js/custom.js"></script>
-
+	<input type="hidden" id="current_cat_id"
+		value='<%=request.getParameter("cat")%>' />
 
 
 </body>

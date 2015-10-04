@@ -10,7 +10,7 @@ $(document).ready(function() {
 // category supports ONLY 3 levels
 function loadCategories() {
 
-	var y = new Number(5);
+	var y = new Number($('#current_cat_id').val());
 
 	$
 			.ajax({
@@ -19,6 +19,11 @@ function loadCategories() {
 				contentType : "application/json; charset=utf-8",
 				data : JSON.stringify(y),
 				success : function(data) {
+
+					if (data.length <= 0) {
+						alert('Could not load category - category does not exists');
+						return;
+					}
 
 					$
 							.each(
@@ -29,8 +34,6 @@ function loadCategories() {
 
 										if (json.children != null
 												&& json.children.length > 0) {
-
-											alert(JSON.stringify(json.children));
 
 											for (i = 0; i < json.children.length; ++i) {
 
