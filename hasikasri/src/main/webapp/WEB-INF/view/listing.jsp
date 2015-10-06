@@ -215,6 +215,11 @@
 
 		<!-- Main component for a primary marketing message or call to action -->
 		<div class="jumbotron">
+			<div class="row">
+				<ol class="breadcrumb" id="breadcrumb_category">
+					<li><a href="home">Home</a></li>
+				</ol>
+			</div>
 
 			<div class="row">
 				<div class="col-lg-3">
@@ -270,7 +275,6 @@
 	<script src="resources/assets/listing/js/custom.js"></script>
 	<input type="hidden" id="current_cat_id"
 		value='<%=request.getParameter("cat")%>' />
-
 
 </body>
 </html>

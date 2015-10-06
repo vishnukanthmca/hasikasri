@@ -53,7 +53,7 @@
 		enableLinks: false,
 		highlightSelected: true,
 		highlightSearchResults: true,
-		showBorder: true,
+		showBorder: false,
 		showIcon: true,
 		showCheckbox: false,
 		showTags: false,

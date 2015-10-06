@@ -20,87 +20,102 @@ function loadCategories() {
 				data : JSON.stringify(y),
 				success : function(data) {
 
-					if (data.length <= 0) {
+					if (data.breadcrumps != null) {
+						for (b = 0; b < data.breadcrumps.length; ++b) {
+
+							var breadcrumb_name = data.breadcrumps[b].name;
+							var breadcrumb_id = data.breadcrumps[b].id;
+
+							var breadcrumb = "";
+
+							if (data.name === breadcrumb_name) {
+								breadcrumb = breadcrumb + '<li class="active">'
+										+ breadcrumb_name + '</li>';
+							} else {
+								breadcrumb = breadcrumb
+										+ '<li><a href="listing?cat='
+										+ breadcrumb_id + '">'
+										+ breadcrumb_name + '</a></li>';
+							}
+
+							$('#breadcrumb_category').append(breadcrumb);
+
+						}
+					}
+
+					if (data == null || data.length <= 0) {
 						alert('Could not load category - category does not exists');
 						return;
 					}
 
-					$
-							.each(
-									data,
-									function(index, json) {
+					var parentNodes = [];
 
-										var parentNodes = [];
+					if (data.children != null && data.children.length > 0) {
 
-										if (json.children != null
-												&& json.children.length > 0) {
+						for (i = 0; i < data.children.length; ++i) {
 
-											for (i = 0; i < json.children.length; ++i) {
+							var childrenCategory = data.children[i];
 
-												var childrenCategory = json.children[i];
+							var grandChildrenNodes = [];
 
-												var grandChildrenNodes = [];
+							if (childrenCategory.children != null
+									&& childrenCategory.children.length > 0) {
 
-												if (childrenCategory.children != null
-														&& childrenCategory.children.length > 0) {
+								for (j = 0; j < childrenCategory.children.length; ++j) {
 
-													for (j = 0; j < childrenCategory.children.length; ++j) {
+									var grandChildrenCategory = childrenCategory.children[j];
 
-														var grandChildrenCategory = childrenCategory.children[j];
+									var grandChildrenCategoryName = "";
 
-														var grandChildrenCategoryName = "";
+									if (grandChildrenCategory != null) {
+										grandChildrenCategoryName = grandChildrenCategory.name;
+									}
 
-														if (grandChildrenCategory != null) {
-															grandChildrenCategoryName = grandChildrenCategory.name;
-														}
+									var greatGrandChildrenCategory = {
+										text : grandChildrenCategoryName,
+										href : 'listing?cat='
+												+ grandChildrenCategory.id,
+										tags : [ '0' ],
+										nodes : ""
+									}
 
-														var greatGrandChildrenCategory = {
-															text : grandChildrenCategoryName,
-															href : 'home',
-															tags : [ '0' ],
-															nodes : ""
-														}
+									grandChildrenNodes
+											.push(greatGrandChildrenCategory);
+								}
+							}
 
-														grandChildrenNodes
-																.push(greatGrandChildrenCategory);
-													}
-												}
+							var grandChildrenCategory = {
+								text : childrenCategory.name,
+								href : 'listing?cat=' + childrenCategory.id,
+								tags : [ '0' ],
+								nodes : ""
+							}
 
-												var grandChildrenCategory = {
-													text : childrenCategory.name,
-													href : 'home',
-													tags : [ '0' ],
-													nodes : ""
-												}
+							grandChildrenCategory.nodes = grandChildrenNodes;
 
-												grandChildrenCategory.nodes = grandChildrenNodes;
+							parentNodes.push(grandChildrenCategory);
+						}
 
-												parentNodes
-														.push(grandChildrenCategory);
-											}
+						parentNodes.nodes = grandChildrenNodes;
+					}
 
-											parentNodes.nodes = grandChildrenNodes;
-										}
+					var defaultData = [];
 
-										var defaultData = [];
+					var masterCategory = {
+						text : data.name,
+						href : '#',
+						tags : [ '0' ],
+						nodes : ""
+					};
 
-										var masterCategory = {
-											text : json.name,
-											href : '#',
-											tags : [ '0' ],
-											nodes : ""
-										};
+					masterCategory.nodes = parentNodes;
+					defaultData.push(masterCategory);
 
-										masterCategory.nodes = parentNodes;
-										defaultData.push(masterCategory);
-
-										$('#treeview10').treeview({
-											color : "#428bca",
-											enableLinks : true,
-											data : defaultData
-										});
-
-									});
+					$('#treeview10').treeview({
+						color : "#428bca",
+						enableLinks : true,
+						data : defaultData
+					});
 
 				},
 				failure : function(error) {

@@ -1,13 +1,13 @@
 package com.aha.core.service;
 
-import java.util.List;
-
 import com.aha.core.domain.Category;
 
 public interface CategoryService {
 
 	final static Boolean ACTIVE = true;
-	
-	List<Category> findActiveCategories(Long id);
+
+	Category findActiveCategories(Long id);
+
+	public Category findAllParents(Long id);
 
 }

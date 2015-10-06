@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aha.core.domain.Category;
 import com.aha.core.service.CategoryService;
+import com.aha.web.dto.BreadcrumbDto;
 import com.aha.web.dto.CategoryDto;
 import com.google.gson.Gson;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 @RestController
 @RequestMapping("/category")
@@ -25,109 +27,139 @@ public class CategoryController {
 
 	@RequestMapping(value = "/getCategory", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody String getCategoryById(@RequestBody Long id) {
-		// TODO - implment the method
 
 		long start = System.currentTimeMillis();
 
-		System.out.println("method start " + start);
+		Category category = categoryService.findActiveCategories(id);
 
-		System.out.println("inside category rest controller..");
-		List<Category> categories = categoryService.findActiveCategories(id);
+		CategoryDto categoriesDto = null;
 
-		List<CategoryDto> categoriesDtos = new ArrayList<>();
-
-		if (categories != null && !categories.isEmpty()) {
-			categoriesDtos = print(categories);
+		if (category != null) {
+			categoriesDto = print(category);
+			categoriesDto.setBreadcrumps(getParents(category));
 		}
 
 		Gson gson = new Gson();
-		String json = gson.toJson(categoriesDtos);
-		System.out.println(json);
+		String json = gson.toJson(categoriesDto);
 		System.out.println("end time " + (System.currentTimeMillis() - start));
 		return json;
+	}
+
+	private List<BreadcrumbDto> getParents(Category category) {
+
+		List<BreadcrumbDto> breadcrumps = new ArrayList<>();
+
+		if (category != null) {
+
+			BreadcrumbDto bto = new BreadcrumbDto();
+			bto.setId(category.getId());
+			bto.setName(category.getName());
+			breadcrumps.add(bto);
+
+			Category parentCategory = category.getParentCategory();
+
+			if (parentCategory != null) {
+
+				BreadcrumbDto bto1 = new BreadcrumbDto();
+				bto1.setId(parentCategory.getId());
+				bto1.setName(parentCategory.getName());
+
+				breadcrumps.add(bto1);
+
+				Category grandParentCategory = parentCategory
+						.getParentCategory();
+
+				if (grandParentCategory != null) {
+
+					BreadcrumbDto bto2 = new BreadcrumbDto();
+					bto2.setId(grandParentCategory.getId());
+					bto2.setName(grandParentCategory.getName());
+					breadcrumps.add(bto2);
+				}
+			}
+		}
+
+		java.util.Collections.reverse(breadcrumps);
+
+		return breadcrumps;
 	}
 
 	/**
 	 * Supports ONLY 3 levels
 	 * 
-	 * @param categories
+	 * @param category
 	 * @return
 	 */
-	public List<CategoryDto> print(List<Category> categories) {
-
-		List<CategoryDto> dtos = new ArrayList<>();
+	public CategoryDto print(Category category) {
 
 		Integer categoryCount = 0;
 
-		if (categories != null) {
+		CategoryDto dto = null;
 
-			for (Category category : categories) {
-				CategoryDto dto = new CategoryDto(category.getId(),
-						category.getName(), category.getParentCategory());
+		if (category != null) {
 
-				dtos.add(dto);
+			dto = new CategoryDto(category.getId(), category.getName(),
+					category.getParentCategory());
 
-				if (category.getChildrenCategories() != null) {
+			if (category.getChildrenCategories() != null) {
 
-					List<Category> subCategories = category
-							.getChildrenCategories();
-					List<CategoryDto> sub1Dtos = new ArrayList<>();
+				List<Category> subCategories = category.getChildrenCategories();
+				List<CategoryDto> sub1Dtos = new ArrayList<>();
 
-					if (subCategories != null) {
+				if (subCategories != null) {
 
-						categoryCount += 1;
+					categoryCount += 1;
 
-						for (Category subCategory : subCategories) {
+					for (Category subCategory : subCategories) {
 
-							CategoryDto sub1Dto = new CategoryDto(
-									subCategory.getId(), subCategory.getName(),
-									subCategory.getParentCategory());
+						CategoryDto sub1Dto = new CategoryDto(
+								subCategory.getId(), subCategory.getName(),
+								subCategory.getParentCategory());
 
-							sub1Dtos.add(sub1Dto);
+						sub1Dtos.add(sub1Dto);
 
-							List<CategoryDto> sub2Dtos = new ArrayList<>();
-							List<Category> sub2Categories = subCategory
-									.getChildrenCategories();
-							if (sub2Categories != null) {
+						List<CategoryDto> sub2Dtos = new ArrayList<>();
+						List<Category> sub2Categories = subCategory
+								.getChildrenCategories();
+						if (sub2Categories != null) {
 
-								categoryCount += 1;
+							categoryCount += 1;
 
-								for (Category sub2Category : sub2Categories) {
-									CategoryDto sub2Dto = new CategoryDto(
-											sub2Category.getId(),
-											sub2Category.getName(),
-											sub2Category.getParentCategory());
+							for (Category sub2Category : sub2Categories) {
+								CategoryDto sub2Dto = new CategoryDto(
+										sub2Category.getId(),
+										sub2Category.getName(),
+										sub2Category.getParentCategory());
 
-									sub2Dtos.add(sub2Dto);
+								sub2Dtos.add(sub2Dto);
 
-									List<CategoryDto> sub3Dtos = new ArrayList<>();
-									List<Category> sub3Categories = sub2Category
-											.getChildrenCategories();
-									if (sub3Categories != null) {
-										categoryCount += 1;
-										for (Category sub3Category : sub3Categories) {
+								List<CategoryDto> sub3Dtos = new ArrayList<>();
+								List<Category> sub3Categories = sub2Category
+										.getChildrenCategories();
+								if (sub3Categories != null) {
+									categoryCount += 1;
+									for (Category sub3Category : sub3Categories) {
 
-											CategoryDto sub3Dto = new CategoryDto(
-													sub3Category.getId(),
-													sub3Category.getName(),
-													sub3Category
-															.getParentCategory());
-											sub3Dtos.add(sub3Dto);
-										}
+										CategoryDto sub3Dto = new CategoryDto(
+												sub3Category.getId(),
+												sub3Category.getName(),
+												sub3Category
+														.getParentCategory());
+										sub3Dtos.add(sub3Dto);
 									}
-									sub2Dto.setChildren(sub3Dtos);
 								}
+								sub2Dto.setChildren(sub3Dtos);
 							}
-							sub1Dto.setChildren(sub2Dtos);
 						}
-						dto.setChildren(sub1Dtos);
+						sub1Dto.setChildren(sub2Dtos);
 					}
+					dto.setChildren(sub1Dtos);
 				}
 			}
 		}
 
 		System.out.println("categoryCount " + categoryCount);
 
-		return dtos;
+		return dto;
 	}
 }

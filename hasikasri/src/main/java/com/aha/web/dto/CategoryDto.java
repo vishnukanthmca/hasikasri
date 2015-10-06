@@ -18,12 +18,15 @@ public class CategoryDto {
 
 	private Integer totalCategoryCount;
 
+	private List<BreadcrumbDto> breadcrumps;
+
 	public CategoryDto(Long id, String name, Category parentCategory) {
 		this.id = id;
 		this.name = name;
 
 		if (parentCategory != null) {
 			this.parentCategoryId = parentCategory.getId();
+
 		}
 	}
 
@@ -75,4 +78,13 @@ public class CategoryDto {
 		this.totalCategoryCount = totalCategoryCount;
 	}
 
+	public List<BreadcrumbDto> getBreadcrumps() {
+		return breadcrumps;
+	}
+
+	public void setBreadcrumps(List<BreadcrumbDto> breadcrumps) {
+		this.breadcrumps = breadcrumps;
+	}
+	
+	
 }

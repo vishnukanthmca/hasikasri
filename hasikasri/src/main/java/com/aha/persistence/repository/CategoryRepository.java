@@ -15,7 +15,11 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 	public List<Category> findAll();
 
 	@Query("select c from Category c left join fetch c.products where c.id = :id AND c.active = :active order by c.parentCategory.id asc")
-	public List<Category> findByActive(@Param("active") Boolean active,
+	public Category findByActive(@Param("active") Boolean active,
+			@Param("id") Long id);
+
+	@Query("select c from Category c where c.id = :id AND c.active = :active")
+	public Category findAllParents(@Param("active") Boolean active,
 			@Param("id") Long id);
 
 }

@@ -1,7 +1,5 @@
 package com.aha.core.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +12,14 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
-	
+
 	@Override
-	public List<Category> findActiveCategories(Long id) {
-		return categoryRepository.findByActive(ACTIVE,id);
+	public Category findActiveCategories(Long id) {
+		return categoryRepository.findByActive(ACTIVE, id);
+	}
+
+	@Override
+	public Category findAllParents(Long id) {
+		return categoryRepository.findAllParents(ACTIVE, id);
 	}
 }

@@ -3,6 +3,7 @@ package com.aha.core.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +32,7 @@ public class Category {
 	@JoinColumn(name = "parent_id")
 	private Category parentCategory;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.LAZY)
 	private List<Product> products;
 
 	@OneToMany(mappedBy = "parentCategory", fetch = FetchType.EAGER)
@@ -95,12 +96,6 @@ public class Category {
 
 	public void setChildrenCategories(List<Category> childrenCategories) {
 		this.childrenCategories = childrenCategories;
-	}
-
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", active=" + active
-				+ ", parentCategory=" + parentCategory + "]";
 	}
 
 }
