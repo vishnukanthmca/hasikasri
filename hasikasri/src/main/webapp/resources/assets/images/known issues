@@ -1,2 +1,3 @@
 # plus mark in categories menu if no sub categories. To reproduce, pass id of the menu that has only 1 sub menu
 # If we navigate to grand child we can move to parent only through bread crumbs
+# on refine search the space between checkbox and text increases

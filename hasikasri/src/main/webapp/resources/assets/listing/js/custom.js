@@ -1,11 +1,26 @@
-$(document).ready(function() {
+$(document).ready(
+		function() {
 
-	$('.tree-toggle').click(function() {
-		$(this).parent().children('ul.tree').toggle(200);
-	});
+			$('.collapse').on(
+					'shown.bs.collapse',
+					function() {
+						$(this).parent().find(".glyphicon-plus").removeClass(
+								"glyphicon-plus").addClass("glyphicon-minus");
+					}).on(
+					'hidden.bs.collapse',
+					function() {
 
-	loadCategories();
-});
+						$(this).parent().find(".glyphicon-minus").removeClass(
+								"glyphicon-minus").addClass("glyphicon-plus");
+					});
+
+			$('.tree-toggle').click(function() {
+				$(this).parent().children('ul.tree').toggle(200);
+			});
+
+			loadCategories();
+
+		});
 
 // category supports ONLY 3 levels
 function loadCategories() {
@@ -20,7 +35,7 @@ function loadCategories() {
 				data : JSON.stringify(y),
 				success : function(data) {
 
-					if (data.breadcrumps != null) {
+					if (data != null && data.breadcrumps != null) {
 						for (b = 0; b < data.breadcrumps.length; ++b) {
 
 							var breadcrumb_name = data.breadcrumps[b].name;

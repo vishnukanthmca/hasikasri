@@ -50,3 +50,32 @@ span.nav-toggle-icon {
 	top: -2px !important;
 	color: #888 !important;
 }
+
+.checkboxes {
+	height: 150px;
+	overflow-y: scroll;
+}
+
+.txtFilter {
+	border: 1px solid #DCDCDC;
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.refiner_shrink_button {
+	color: #9400D3;
+	margin-bottom: 10px;
+	border: none;
+}
+
+.refiners_scroll {
+	height: 150px;
+	overflow-y: scroll;
+	padding-top: 10px;
+}
+
+.refiners_scroll label {
+	color: black;
+	margin-left: 10px;
+	font-weight: normal;
+}

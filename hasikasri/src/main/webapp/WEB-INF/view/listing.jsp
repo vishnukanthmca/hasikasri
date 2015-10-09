@@ -18,13 +18,15 @@
 
 <link href="resources/assets/listing/css/navbar-fixed-top.css"
 	rel="stylesheet">
+<!-- <link href="resources/assets/listing/css/checkList.css" rel="stylesheet"> -->
+
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--if lt IE 9
     script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
     script(src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js')
-    
-    -->
+-->
+
 </head>
 <body>
 
@@ -226,6 +228,17 @@
 					<div class="row">
 						<div id="treeview10"></div>
 					</div>
+					<div class="row">
+						<button class="refiner_shrink_button" type="button"
+							data-toggle="collapse" data-target="#shrink" aria-expanded="true"
+							aria-controls="shrink">
+							<span class="glyphicon glyphicon-minus" aria-hidden="false">
+								PRICE </span>
+						</button>
+						<div class="collapse in" id="shrink">
+							<div id='myCheckList'></div>
+						</div>
+					</div>
 				</div>
 				<div class="col-lg-9">
 					<div class="row">
@@ -275,6 +288,48 @@
 	<script src="resources/assets/listing/js/custom.js"></script>
 	<input type="hidden" id="current_cat_id"
 		value='<%=request.getParameter("cat")%>' />
+
+	<script
+		src="resources/assets/listing/js/jquery-ui-1.8.23.custom.min.js"></script>
+	<script src="resources/assets/listing/js/jquery.ui.checkList.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var items = [ {
+				text : 'Onion',
+				value : '1'
+			}, {
+				text : 'Ketchup',
+				value : '2'
+			}, {
+				text : 'Mayonnaise',
+				value : '3'
+			}, {
+				text : 'Pickles',
+				value : '4'
+			}, {
+				text : 'Tomato',
+				value : '5'
+			}, {
+				text : 'Patatoes',
+				value : '6'
+			}, {
+				text : 'Sausage',
+				value : '7'
+			}, {
+				text : 'Lettuce',
+				value : '8'
+			}, {
+				text : 'Pepper',
+				value : '9'
+			} ];
+
+			$('#myCheckList').checkList({
+				listItems : items
+			});
+
+		});
+	</script>
 
 </body>
 </html>
