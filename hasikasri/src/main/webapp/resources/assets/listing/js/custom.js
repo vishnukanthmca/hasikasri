@@ -1,26 +1,8 @@
-$(document).ready(
-		function() {
+$(document).ready(function() {
 
-			$('.collapse').on(
-					'shown.bs.collapse',
-					function() {
-						$(this).parent().find(".glyphicon-plus").removeClass(
-								"glyphicon-plus").addClass("glyphicon-minus");
-					}).on(
-					'hidden.bs.collapse',
-					function() {
+	loadCategories();
 
-						$(this).parent().find(".glyphicon-minus").removeClass(
-								"glyphicon-minus").addClass("glyphicon-plus");
-					});
-
-			$('.tree-toggle').click(function() {
-				$(this).parent().children('ul.tree').toggle(200);
-			});
-
-			loadCategories();
-
-		});
+});
 
 // category supports ONLY 3 levels
 function loadCategories() {
@@ -36,6 +18,7 @@ function loadCategories() {
 				success : function(data) {
 
 					if (data != null && data.breadcrumps != null) {
+						loadRefiners(data.refiners);
 						for (b = 0; b < data.breadcrumps.length; ++b) {
 
 							var breadcrumb_name = data.breadcrumps[b].name;
@@ -138,4 +121,45 @@ function loadCategories() {
 				}
 			});
 
+}
+
+function loadRefiners(refiners) {
+
+	if (refiners != null && refiners.length > 0) {
+
+		for (i = 0; i < refiners.length; ++i) {
+
+			var refiner = refiners[i];
+
+			var refiners_html = '<div class="refiner"><button class="refiner_shrink_button" type="button" data-toggle="collapse" data-target="#shrink'
+					+ refiner.name
+					+ '"'
+					+ 'aria-expanded="true" aria-controls="shrink">'
+					+ '<span class="glyphicon glyphicon-minus" aria-hidden="false">'
+					+ refiner.name
+					+ '</span></button><div class="collapse in" id="shrink'
+					+ refiner.name + '">';
+
+			var attributes = refiner.attributes;
+
+			var checkboxes = "";
+
+			if (attributes != null && attributes.length > 0) {
+
+				for (j = 0; j < attributes.length; ++j) {
+
+					var attribute = attributes[j];
+
+					var checkbox = '<div class="checkbox checkbox-success">'
+							+ '<input type="checkbox" id="checkbox1"> <label for="checkbox1"> '
+							+ attribute.name + ' </label>' + '</div>';
+					checkboxes += checkbox;
+				}
+			}
+
+			refiners_html += checkboxes + '</div></div>';
+
+			$('#refiners_and_attributes').append(refiners_html);
+		}
+	}
 }

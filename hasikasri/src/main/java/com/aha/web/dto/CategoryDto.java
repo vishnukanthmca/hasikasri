@@ -1,8 +1,11 @@
 package com.aha.web.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.aha.core.domain.Attribute;
 import com.aha.core.domain.Category;
+import com.aha.core.domain.Refiner;
 
 public class CategoryDto {
 
@@ -20,6 +23,8 @@ public class CategoryDto {
 
 	private List<BreadcrumbDto> breadcrumps;
 
+	private List<RefinerDto> refiners;
+
 	public CategoryDto(Long id, String name, Category parentCategory) {
 		this.id = id;
 		this.name = name;
@@ -27,6 +32,41 @@ public class CategoryDto {
 		if (parentCategory != null) {
 			this.parentCategoryId = parentCategory.getId();
 
+		}
+	}
+
+	public void loadRefinersWithAttribute(List<Refiner> refiners) {
+
+		if (refiners != null) {
+
+			List<RefinerDto> refinerDtos = new ArrayList<>();
+
+			for (Refiner refiner : refiners) {
+
+				RefinerDto refinerDto = new RefinerDto();
+				refinerDto.setName(refiner.getName());
+
+				List<Attribute> attributes = refiner.getAttributes();
+				List<AttributeDto> attributeDtos = new ArrayList<>();
+
+				if (refiner != null && attributes != null
+						&& !attributes.isEmpty()) {
+
+					for (Attribute attribute : attributes) {
+						AttributeDto attributeDto = new AttributeDto();
+						attributeDto.setId(attribute.getId());
+						attributeDto.setName(attribute.getName());
+
+						attributeDtos.add(attributeDto);
+					}
+
+					refinerDto.setAttributes(attributeDtos);
+				}
+
+				refinerDtos.add(refinerDto);
+			}
+
+			this.refiners = refinerDtos;
 		}
 	}
 
@@ -85,6 +125,12 @@ public class CategoryDto {
 	public void setBreadcrumps(List<BreadcrumbDto> breadcrumps) {
 		this.breadcrumps = breadcrumps;
 	}
-	
-	
+
+	public List<RefinerDto> getRefiners() {
+		return refiners;
+	}
+
+	public void setRefiners(List<RefinerDto> refiners) {
+		this.refiners = refiners;
+	}
 }

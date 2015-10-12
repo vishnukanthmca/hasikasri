@@ -16,7 +16,6 @@ import com.aha.core.service.CategoryService;
 import com.aha.web.dto.BreadcrumbDto;
 import com.aha.web.dto.CategoryDto;
 import com.google.gson.Gson;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 @RestController
 @RequestMapping("/category")
@@ -33,7 +32,6 @@ public class CategoryController {
 		Category category = categoryService.findActiveCategories(id);
 
 		CategoryDto categoriesDto = null;
-
 		if (category != null) {
 			categoriesDto = print(category);
 			categoriesDto.setBreadcrumps(getParents(category));
@@ -100,6 +98,8 @@ public class CategoryController {
 
 			dto = new CategoryDto(category.getId(), category.getName(),
 					category.getParentCategory());
+
+			dto.loadRefinersWithAttribute(category.getRefiners());
 
 			if (category.getChildrenCategories() != null) {
 

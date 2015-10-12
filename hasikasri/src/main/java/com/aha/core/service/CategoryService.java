@@ -7,7 +7,4 @@ public interface CategoryService {
 	final static Boolean ACTIVE = true;
 
 	Category findActiveCategories(Long id);
-
-	public Category findAllParents(Long id);
-
 }
