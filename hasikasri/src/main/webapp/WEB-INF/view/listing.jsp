@@ -273,8 +273,8 @@
 	<script src="resources/assets/listing/js/jquery-1.9.1.min.js"></script>
 	<script src="resources/assets/listing/js/bootstrap.min.js"></script>
 	<script src="resources/assets/listing/js/bootstrap-treeview.js"></script>
-	<script
-		src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css"></script>
+	<!-- 	<script
+		src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css"></script>-->
 	<script>
 		$(function() {
 			window.prettyPrint && prettyPrint()

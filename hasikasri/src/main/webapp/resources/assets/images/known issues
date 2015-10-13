@@ -2,4 +2,5 @@
 # If we navigate to grand child we can move to parent only through bread crumbs
 # on refine search the space between checkbox and text increases
 # Make Lazy fetch join for refiners and attributes from categories
-# Icon change on refiner 
+# Check boxes does not have tick mark on firefox
+  

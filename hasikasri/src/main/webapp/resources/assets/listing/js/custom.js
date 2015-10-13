@@ -131,14 +131,14 @@ function loadRefiners(refiners) {
 
 			var refiner = refiners[i];
 
-			var refiners_html = '<div class="refiner"><button class="refiner_shrink_button" type="button" data-toggle="collapse" data-target="#shrink'
+			var refiners_html = '<div class="refiner"><div class="panel panel-primary"><div class="panel-heading refiner"><button class="refiner_shrink_button" type="button" data-toggle="collapse" data-target="#shrink'
 					+ refiner.name
 					+ '"'
 					+ 'aria-expanded="true" aria-controls="shrink">'
-					+ '<span class="glyphicon glyphicon-minus" aria-hidden="false">'
+					+ '<span aria-hidden="false">'
 					+ refiner.name
-					+ '</span></button><div class="collapse in" id="shrink'
-					+ refiner.name + '">';
+					+ '</span></button></div><div class="collapse in" id="shrink'
+					+ refiner.name + '"><div class="panel-body">';
 
 			var attributes = refiner.attributes;
 
@@ -151,13 +151,15 @@ function loadRefiners(refiners) {
 					var attribute = attributes[j];
 
 					var checkbox = '<div class="checkbox checkbox-success">'
-							+ '<input type="checkbox" id="checkbox1"> <label for="checkbox1"> '
-							+ attribute.name + ' </label>' + '</div>';
+							+ '<input type="checkbox" id="checkbox'
+							+ attribute.id + '"> <label for="checkbox'
+							+ attribute.id + '"> ' + attribute.name
+							+ ' </label>' + '</div>';
 					checkboxes += checkbox;
 				}
 			}
 
-			refiners_html += checkboxes + '</div></div>';
+			refiners_html += checkboxes + '</div></div></div></div>';
 
 			$('#refiners_and_attributes').append(refiners_html);
 		}
