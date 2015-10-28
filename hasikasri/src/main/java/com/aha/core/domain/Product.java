@@ -1,12 +1,15 @@
 package com.aha.core.domain;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -18,16 +21,14 @@ public class Product {
 
 	@Column
 	private String pid;
-	
+
 	@Column
 	private String name;
 
-	@ManyToOne(targetEntity = Category.class)
-	private Set<Category> categories;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private List<Category> categories;
 
-	@ManyToOne(targetEntity = Attribute.class)
-	private Set<Attribute> attributes;
-	
 	@Column
 	private Float discount;
 
@@ -61,20 +62,12 @@ public class Product {
 		this.name = name;
 	}
 
-	public Set<Category> getCategories() {
+	public List<Category> getCategories() {
 		return categories;
 	}
 
-	public void setCategories(Set<Category> categories) {
+	public void setCategories(List<Category> categories) {
 		this.categories = categories;
-	}
-
-	public Set<Attribute> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(Set<Attribute> attributes) {
-		this.attributes = attributes;
 	}
 
 	public Float getDiscount() {
@@ -100,5 +93,10 @@ public class Product {
 	public void setSeller(Seller seller) {
 		this.seller = seller;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + "]";
+	}
+
 }

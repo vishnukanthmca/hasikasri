@@ -33,7 +33,7 @@ public class Category {
 	@JoinColumn(name = "parent_id")
 	private Category parentCategory;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
 	private List<Product> products;
 
 	@OneToMany(mappedBy = "parentCategory", fetch = FetchType.EAGER)

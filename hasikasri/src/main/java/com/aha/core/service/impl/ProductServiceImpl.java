@@ -1,5 +1,7 @@
 package com.aha.core.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +19,9 @@ public class ProductServiceImpl implements ProductService {
 	public Product findByPid(String pid) {
 		return productRepository.findByPid(pid);
 	}
+
+	public List<Product> findByCategoryIds(List<Long> categoryIds) {
+		return productRepository.findByCategoryIds(categoryIds);
+	}
+
 }

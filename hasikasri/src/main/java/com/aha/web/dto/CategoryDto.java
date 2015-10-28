@@ -25,6 +25,8 @@ public class CategoryDto {
 
 	private List<RefinerDto> refiners;
 
+	private List<Long> childrenIds;
+
 	public CategoryDto(Long id, String name, Category parentCategory) {
 		this.id = id;
 		this.name = name;
@@ -132,5 +134,13 @@ public class CategoryDto {
 
 	public void setRefiners(List<RefinerDto> refiners) {
 		this.refiners = refiners;
+	}
+
+	public List<Long> getChildrenIds() {
+		return childrenIds;
+	}
+
+	public void setChildrenIds(List<Long> childrenIds) {
+		this.childrenIds = childrenIds;
 	}
 }

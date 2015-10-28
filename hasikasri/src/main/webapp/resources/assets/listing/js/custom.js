@@ -17,8 +17,11 @@ function loadCategories() {
 				data : JSON.stringify(y),
 				success : function(data) {
 
+					alert(JSON.stringify(data));
+
 					if (data != null && data.breadcrumps != null) {
 						loadRefiners(data.refiners);
+						loadProducts(data.childrenIds);
 						for (b = 0; b < data.breadcrumps.length; ++b) {
 
 							var breadcrumb_name = data.breadcrumps[b].name;
@@ -164,4 +167,17 @@ function loadRefiners(refiners) {
 			$('#refiners_and_attributes').append(refiners_html);
 		}
 	}
+}
+
+function loadProducts(categoryIds) {
+
+	$.ajax({
+		url : "product/findProducts",
+		method : 'POST',
+		contentType : "application/json; charset=utf-8",
+		data : JSON.stringify(categoryIds),
+		success : function(data) {
+			alert("loadProducts ajax call " + JSON.stringify(data));
+		}
+	});
 }

@@ -92,6 +92,8 @@ public class CategoryController {
 
 		Integer categoryCount = 0;
 
+		List<Long> childrenIdsList = new ArrayList<>();
+
 		CategoryDto dto = null;
 
 		if (category != null) {
@@ -100,6 +102,8 @@ public class CategoryController {
 					category.getParentCategory());
 
 			dto.loadRefinersWithAttribute(category.getRefiners());
+
+			childrenIdsList.add(category.getId());
 
 			if (category.getChildrenCategories() != null) {
 
@@ -118,6 +122,8 @@ public class CategoryController {
 
 						sub1Dtos.add(sub1Dto);
 
+						childrenIdsList.add(subCategory.getId());
+
 						List<CategoryDto> sub2Dtos = new ArrayList<>();
 						List<Category> sub2Categories = subCategory
 								.getChildrenCategories();
@@ -133,6 +139,8 @@ public class CategoryController {
 
 								sub2Dtos.add(sub2Dto);
 
+								childrenIdsList.add(sub2Category.getId());
+
 								List<CategoryDto> sub3Dtos = new ArrayList<>();
 								List<Category> sub3Categories = sub2Category
 										.getChildrenCategories();
@@ -146,6 +154,9 @@ public class CategoryController {
 												sub3Category
 														.getParentCategory());
 										sub3Dtos.add(sub3Dto);
+
+										childrenIdsList.add(sub3Category
+												.getId());
 									}
 								}
 								sub2Dto.setChildren(sub3Dtos);
@@ -157,6 +168,8 @@ public class CategoryController {
 				}
 			}
 		}
+
+		dto.setChildrenIds(childrenIdsList);
 
 		System.out.println("categoryCount " + categoryCount);
 
