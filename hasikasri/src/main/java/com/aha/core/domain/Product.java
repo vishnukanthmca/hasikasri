@@ -25,6 +25,9 @@ public class Product {
 	@Column
 	private String name;
 
+	@Column
+	private String brand;
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
@@ -92,6 +95,14 @@ public class Product {
 
 	public void setSeller(Seller seller) {
 		this.seller = seller;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	@Override
