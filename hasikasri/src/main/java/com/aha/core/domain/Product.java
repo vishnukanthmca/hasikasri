@@ -33,13 +33,16 @@ public class Product {
 	private List<Category> categories;
 
 	@Column
-	private Float discount;
+	private Double discount;
 
 	@Column
 	private Double originalPrice;
 
 	@OneToOne
 	private Seller seller;
+
+	@Column
+	private String image;
 
 	public Long getId() {
 		return id;
@@ -73,11 +76,11 @@ public class Product {
 		this.categories = categories;
 	}
 
-	public Float getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(Float discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
@@ -103,6 +106,14 @@ public class Product {
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	@Override

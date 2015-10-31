@@ -1,5 +1,6 @@
 package com.aha.web.rest.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aha.core.domain.Product;
 import com.aha.core.service.ProductService;
+import com.aha.web.dto.ProductDto;
+import com.google.gson.Gson;
 
 @RestController
 @RequestMapping("/product")
@@ -33,15 +36,13 @@ public class ProductController {
 			return null;
 		}
 
-		for (Product product : products) {
-			System.out.println("product " + product);
-		}
+		List<ProductDto> dtos = new ArrayList<ProductDto>();
 
-		for (int i = 0; i < categoryIds.size(); i++) {
-			Long long1 = categoryIds.get(i);
-			System.out.println("long1 " + long1);
-		}
+		products.forEach(p -> {
+			ProductDto dto = new ProductDto(p);
+			dtos.add(dto);
+		});
 
-		return null;
+		return new Gson().toJson(dtos);
 	}
 }
