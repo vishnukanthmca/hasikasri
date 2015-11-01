@@ -95,3 +95,41 @@ span.nav-toggle-icon {
 .panel-heading {
 	padding: 0px;
 }
+
+.product {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.product_container {
+	padding-left: 45px;
+}
+
+.thumbnail:hover {
+	border-color: #337AB7;
+	/*no need to specify border-style and border-width again*/
+}
+
+.price_info {
+	border-top: 1px dotted gray;
+}
+
+.actual_price {
+	text-decoration: line-through;
+	color: gray;
+	font-size: 14px;
+}
+
+.price {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.offer {
+	color: #6FBA54;
+	font-size: 15px;
+}
+
+.product_row {
+	margin-bottom: 15px;
+}

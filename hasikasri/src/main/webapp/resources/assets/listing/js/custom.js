@@ -177,7 +177,67 @@ function loadProducts(categoryIds) {
 		contentType : "application/json; charset=utf-8",
 		data : JSON.stringify(categoryIds),
 		success : function(data) {
-			alert("loadProducts ajax call " + JSON.stringify(data));
+			renderProducts(data);
 		}
 	});
+}
+
+function renderProducts(data) {
+
+	if (data != null && data.length > 0) {
+
+		var all_products = "";
+
+		for (i = 0; i < data.length; i++) {
+
+			var id = data[i].id;
+			var row_begin = i % 3;
+
+			if (row_begin === 0) {
+
+				if (i != 0) {
+					all_products += '</div>';
+				}
+
+				all_products += '<div class="row product_row">';
+			}
+
+			all_products += '<div class="col-lg-4 product">'
+					+ '<div class="thumbnail">'
+					+ '<a href="#"><img src="resources/assets/listing/images/12.jpg" alt="..."></a>'
+					+ '<div class="caption">'
+					+ '<h6>Thumbnail label</h6>'
+
+					+ '<p><div id="'
+					+ id
+					+ '"></div>'
+
+					+ '<p class="price_info"><h5>'
+					+ '<span class="price">Rs. 199</span> <span class="actual_price">Rs.499</span>'
+					+ '</h5>' + '</p>' + '</div></div></div>';
+
+		}
+
+		$('.product_container').append(all_products);
+
+	} else {
+		$('.product_container').append('<h4>Oops. No products found.</h4>');
+	}
+
+	$.fn.raty.defaults.path = 'resources/assets/listing/images';
+	assignRating(data);
+
+}
+
+function assignRating(data) {
+	if (data != null && data.length > 0) {
+		for (i = 0; i < data.length; i++) {
+			var id = data[i].id;
+			var rating = data[i].rating;
+			$('#' + id).raty({
+				readOnly : true,
+				score : rating
+			});
+		}
+	}
 }

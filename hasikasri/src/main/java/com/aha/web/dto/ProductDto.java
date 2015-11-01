@@ -15,6 +15,8 @@ public class ProductDto {
 
 	private String image;
 
+	private Double rating;
+	
 	public ProductDto(Product product) {
 		this.createProductDto(product);
 	}
@@ -24,6 +26,7 @@ public class ProductDto {
 		this.pid = product.getPid();
 		this.name = product.getName();
 		this.brand = product.getBrand();
+		this.rating = product.getRating();
 		this.image = generateImageLocation(product.getImage());
 	}
 
@@ -75,5 +78,13 @@ public class ProductDto {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
 	}
 }

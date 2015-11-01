@@ -21,6 +21,9 @@
 
 <link href="resources/assets/listing/css/awesome-bootstrap-checkbox.css"
 	rel="stylesheet">
+<link href="resources/assets/listing/css/jquery.raty.css"
+	rel="stylesheet">
+
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--if lt IE 9
@@ -239,25 +242,9 @@
 
 
 				</div>
-				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-lg-4">
-							<a class="thumbnail"> <img
-								src="resources/assets/listing/images/14.jpg" alt="thumbnail_2" />
-							</a>
-						</div>
-						<div class="col-lg-4">
-							<a class="thumbnail"> <img
-								src="resources/assets/listing/images/12.jpg" alt="thumbnail_2" />
-							</a>
-						</div>
-						<div class="col-lg-4">
-							<a class="thumbnail"> <img
-								src="resources/assets/listing/images/13.jpg" alt="thumbnail_2" />
-							</a>
-						</div>
-					</div>
-				</div>
+				<!-- products list starts here -->
+				<div class="col-lg-9 product_container"></div>
+				<!-- products list ends here -->
 			</div>
 
 		</div>
@@ -273,6 +260,7 @@
 	<script src="resources/assets/listing/js/jquery-1.9.1.min.js"></script>
 	<script src="resources/assets/listing/js/bootstrap.min.js"></script>
 	<script src="resources/assets/listing/js/bootstrap-treeview.js"></script>
+	<script src="resources/assets/listing/js/jquery.raty.js"></script>
 	<!-- 	<script
 		src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css"></script>-->
 	<script>
@@ -283,8 +271,12 @@
 			})
 		})
 	</script>
-
 	<script src="resources/assets/listing/js/custom.js"></script>
+	<script>
+			</script>
+
+
+
 	<input type="hidden" id="current_cat_id"
 		value='<%=request.getParameter("cat")%>' />
 </body>

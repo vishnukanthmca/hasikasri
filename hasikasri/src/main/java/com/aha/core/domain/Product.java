@@ -44,6 +44,9 @@ public class Product {
 	@Column
 	private String image;
 
+	@Column
+	private Double rating;
+
 	public Long getId() {
 		return id;
 	}
@@ -114,6 +117,14 @@ public class Product {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
 	}
 
 	@Override
