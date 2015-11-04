@@ -2,6 +2,8 @@ $(document).ready(function() {
 
 	loadCategories();
 
+	loadOnScrollToBottom();
+
 });
 
 // category supports ONLY 3 levels
@@ -17,7 +19,7 @@ function loadCategories() {
 				data : JSON.stringify(y),
 				success : function(data) {
 
-					alert(JSON.stringify(data));
+					// alert(JSON.stringify(data));
 
 					if (data != null && data.breadcrumps != null) {
 						loadRefiners(data.refiners);
@@ -171,8 +173,10 @@ function loadRefiners(refiners) {
 
 function loadProducts(categoryIds) {
 
+	$('#child_category_ids').val(JSON.stringify(categoryIds));
+
 	$.ajax({
-		url : "product/findProducts",
+		url : "product/findProducts?page=0",
 		method : 'POST',
 		contentType : "application/json; charset=utf-8",
 		data : JSON.stringify(categoryIds),
@@ -191,6 +195,13 @@ function renderProducts(data) {
 		for (i = 0; i < data.length; i++) {
 
 			var id = data[i].id;
+			var name = data[i].name;
+			var shortName = data[i].shortName;
+			var image = data[i].image;
+			var price = data[i].price;
+			var actualPrice = data[i].actualPrice;
+			var off = data[i].off;
+
 			var row_begin = i % 3;
 
 			if (row_begin === 0) {
@@ -204,24 +215,21 @@ function renderProducts(data) {
 
 			all_products += '<div class="col-lg-4 product">'
 					+ '<div class="thumbnail">'
-					+ '<a href="#"><img src="resources/assets/listing/images/12.jpg" alt="..."></a>'
-					+ '<div class="caption">'
-					+ '<h6>Thumbnail label</h6>'
-
-					+ '<p><div id="'
-					+ id
-					+ '"></div>'
-
-					+ '<p class="price_info"><h5>'
-					+ '<span class="price">Rs. 199</span> <span class="actual_price">Rs.499</span>'
-					+ '</h5>' + '</p>' + '</div></div></div>';
+					+ '<a href="http://google.com"><img src="' + image
+					+ '" alt="' + name + '" class="thumbnail_images"></a>'
+					+ '<div class="caption"><div class="product_name_div">'
+					+ '<h6>' + shortName + '</h6></div>' + '<div id="' + id
+					+ '" class="rating_div"></div>' + '<p class="price_info">'
+					+ '<span class="price">Rs.' + price
+					+ '</span> <span class="actual_price">Rs.' + actualPrice
+					+ '</span></p>' + '</div></div></div>';
 
 		}
 
 		$('.product_container').append(all_products);
 
 	} else {
-		$('.product_container').append('<h4>Oops. No products found.</h4>');
+		// $('.product_container').append('<h4>Oops. No products found.</h4>');
 	}
 
 	$.fn.raty.defaults.path = 'resources/assets/listing/images';
@@ -240,4 +248,27 @@ function assignRating(data) {
 			});
 		}
 	}
+}
+
+function loadOnScrollToBottom() {
+
+	var start = 1;
+
+	$(window).scroll(
+			function() {
+				if ($(window).scrollTop() == $(document).height()
+						- $(window).height()) {
+
+					$.ajax({
+						url : "product/findProducts?page=" + start,
+						method : 'POST',
+						contentType : "application/json; charset=utf-8",
+						data : $('#child_category_ids').val(),
+						success : function(data) {
+							start += 1;
+							renderProducts(data);
+						}
+					});
+				}
+			});
 }

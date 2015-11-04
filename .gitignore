@@ -1,2 +1,4 @@
 .gradle
 build/
+/hasikasri/*.buildpath
+/hasikasri/.settings/*.prefs

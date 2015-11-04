@@ -38,7 +38,7 @@
 
 
 	<div class="navbar yamm navbar-default navbar-fixed-top">
-		<div class="container">
+		<div class="container static_top">
 			<div class="navbar-header">
 				<button type="button" data-toggle="collapse"
 					data-target="#navbar-collapse-1" class="navbar-toggle">
@@ -188,7 +188,7 @@
 			</div>
 		</div>
 
-		<div class="container">
+		<div class="container static_top">
 			<div id="search_div">
 
 
@@ -273,11 +273,13 @@
 	</script>
 	<script src="resources/assets/listing/js/custom.js"></script>
 	<script>
-			</script>
+		
+	</script>
 
 
 
 	<input type="hidden" id="current_cat_id"
 		value='<%=request.getParameter("cat")%>' />
+	<input type="hidden" id="child_category_ids" value="" />
 </body>
 </html>

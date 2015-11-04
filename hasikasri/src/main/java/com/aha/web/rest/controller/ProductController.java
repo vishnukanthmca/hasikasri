@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,13 +25,15 @@ public class ProductController {
 	private ProductService productService;
 
 	@RequestMapping(value = "/findProducts", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody String findByPid(@RequestBody List<Long> categoryIds) {
+	public @ResponseBody String findByPid(@RequestBody List<Long> categoryIds,
+			@RequestParam("page") Integer page) {
 
-		if (categoryIds == null || categoryIds.isEmpty()) {
+		if (categoryIds == null || categoryIds.isEmpty() || page < 0) {
 			return null;
 		}
 
-		List<Product> products = productService.findByCategoryIds(categoryIds);
+		List<Product> products = productService.findByCategoryIds(categoryIds,
+				page);
 
 		if (products == null || products.isEmpty()) {
 			return null;

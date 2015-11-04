@@ -38,6 +38,12 @@ public class Product {
 	@Column
 	private Double originalPrice;
 
+	@Column
+	private Double actualPrice;
+	
+	@Column
+	private Double price;
+	
 	@OneToOne
 	private Seller seller;
 
@@ -127,9 +133,24 @@ public class Product {
 		this.rating = rating;
 	}
 
+	public Double getActualPrice() {
+		return actualPrice;
+	}
+
+	public void setActualPrice(Double actualPrice) {
+		this.actualPrice = actualPrice;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + "]";
 	}
-
 }

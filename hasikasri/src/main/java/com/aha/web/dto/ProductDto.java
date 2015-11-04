@@ -11,12 +11,20 @@ public class ProductDto {
 
 	private String name;
 
+	private String shortName;
+
 	private String brand;
 
 	private String image;
 
 	private Double rating;
-	
+
+	private Double actualPrice;
+
+	private Double price;
+
+	private Integer off;
+
 	public ProductDto(Product product) {
 		this.createProductDto(product);
 	}
@@ -27,7 +35,30 @@ public class ProductDto {
 		this.name = product.getName();
 		this.brand = product.getBrand();
 		this.rating = product.getRating();
+		this.actualPrice = product.getActualPrice();
+		this.price = product.getPrice();
+		this.off = calculateOff();
+
+		this.createShortName();
+
 		this.image = generateImageLocation(product.getImage());
+	}
+
+	private void createShortName() {
+		if (this.name != null && this.name.length() > 60) {
+			this.shortName = this.name.substring(0, 58) + "...";
+		} else {
+			this.shortName = this.name;
+		}
+	}
+
+	private Integer calculateOff() {
+
+		if (price == null || actualPrice == null) {
+			return null;
+		}
+
+		return (int) Math.floor(100 - ((price / actualPrice) * 100));
 	}
 
 	private String generateImageLocation(String image) {
@@ -87,4 +118,38 @@ public class ProductDto {
 	public void setRating(Double rating) {
 		this.rating = rating;
 	}
+
+	public Double getActualPrice() {
+		return actualPrice;
+	}
+
+	public void setActualPrice(Double actualPrice) {
+		this.actualPrice = actualPrice;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Integer getOff() {
+		return off;
+	}
+
+	public void setOff(Integer off) {
+		this.off = off;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+	
+	
 }

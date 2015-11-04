@@ -8,5 +8,5 @@ public interface ProductService {
 
 	Product findByPid(String pid);
 
-	public List<Product> findByCategoryIds(List<Long> categoryId);
+	public List<Product> findByCategoryIds(List<Long> categoryId, Integer page);
 }

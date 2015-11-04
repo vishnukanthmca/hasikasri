@@ -5,8 +5,14 @@ body {
 
 @media ( min-width : 1000px) {
 	.container {
-		width: 1008px;
+		/**width: 1008px;**/
+		
 	}
+}
+
+.static_top {
+	margin: 0 auto;
+	width: 843px;
 }
 
 #owl-demo .item img {
@@ -132,4 +138,20 @@ span.nav-toggle-icon {
 
 .product_row {
 	margin-bottom: 15px;
+}
+
+.rating_div {
+	padding-bottom: 10px;
+}
+
+.caption {
+	word-wrap: break-word;
+}
+
+.product_name_div {
+	min-height: 27px;
+}
+
+.thumbnail_images {
+	min-height:233px;
 }
