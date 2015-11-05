@@ -248,6 +248,9 @@
 			</div>
 
 		</div>
+		<div id="loader-icon">
+			<img src="resources/assets/listing/images/loader_icon.gif" />
+		</div>
 	</div>
 	<!-- /container -->
 
@@ -277,9 +280,9 @@
 	</script>
 
 
-
 	<input type="hidden" id="current_cat_id"
 		value='<%=request.getParameter("cat")%>' />
 	<input type="hidden" id="child_category_ids" value="" />
+	<a href="#0" class="cd-top">Top</a>
 </body>
 </html>
