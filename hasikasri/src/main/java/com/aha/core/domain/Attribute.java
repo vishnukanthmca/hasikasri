@@ -1,9 +1,11 @@
 package com.aha.core.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Attribute {
@@ -17,6 +19,9 @@ public class Attribute {
 
 	@Column
 	private String refiner;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Product product;
 
 	public Long getId() {
 		return id;
@@ -40,5 +45,13 @@ public class Attribute {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 }

@@ -15,7 +15,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	public Product findByPid(String pid);
 
-	@Query("select p from Product p join p.categories c where c.id in :categoryIds")
+	@Query("select p from Product p where  p.category.id in :categoryIds")
 	public List<Product> findByCategoryIds(
 			@Param("categoryIds") List<Long> categoryIds, Pageable pageable);
 }

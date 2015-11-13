@@ -258,11 +258,15 @@ function loadOnScrollToBottom() {
 
 	var start = 1;
 
-	$(window).scroll(
+	$(window).data('ajaxready', true).scroll(
 			function() {
-				if ($(window).scrollTop() == $(document).height()
-						- $(window).height()) {
-
+			
+			if ($(window).data('ajaxready') == false) return;
+			
+				if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
+					
+					$(window).data('ajaxready', false);
+					
 					$.ajax({
 						url : "product/findProducts?page=" + start,
 						method : 'POST',
@@ -271,6 +275,7 @@ function loadOnScrollToBottom() {
 						success : function(data) {
 							start += 1;
 							renderProducts(data);
+							$(window).data('ajaxready', true);
 						},
 						beforeSend : function() {
 							$('#loader-icon').show();
