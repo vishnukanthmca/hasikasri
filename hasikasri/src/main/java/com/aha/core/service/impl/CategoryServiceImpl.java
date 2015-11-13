@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.aha.core.domain.Attribute;
 import com.aha.core.domain.Category;
-import com.aha.core.domain.Refiner;
 import com.aha.core.service.CategoryService;
 import com.aha.persistence.repository.CategoryRepository;
 
@@ -20,17 +19,12 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public Category findActiveCategories(Long id) {
+
 		return categoryRepository.findByActive(ACTIVE, id);
 	}
 
 	public void saveRefiner() {
-
-		Refiner refiner = new Refiner();
-		refiner.setName("FARIC");
-
 		Attribute attribute = new Attribute();
-		attribute.setName("Cotton");
-		attribute.setRefiner(refiner);
 
 		List<Attribute> attributes = new ArrayList<>();
 		attributes.add(attribute);

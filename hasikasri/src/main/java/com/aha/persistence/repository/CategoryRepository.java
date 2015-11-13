@@ -10,7 +10,8 @@ import com.aha.core.domain.Category;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-	@Query("select c from Category c left join fetch c.products where c.id = :id AND c.active = :active order by c.parentCategory.id asc")
+	@Query("select c from Category c where c.id = :id AND c.active = :active order by c.parentCategory.id asc")
 	public Category findByActive(@Param("active") Boolean active,
 			@Param("id") Long id);
+
 }

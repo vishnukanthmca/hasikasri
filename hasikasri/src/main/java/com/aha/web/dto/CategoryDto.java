@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.aha.core.domain.Attribute;
 import com.aha.core.domain.Category;
-import com.aha.core.domain.Refiner;
 
 public class CategoryDto {
 
@@ -33,44 +32,44 @@ public class CategoryDto {
 
 		if (parentCategory != null) {
 			this.parentCategoryId = parentCategory.getId();
-
 		}
 	}
 
-	public void loadRefinersWithAttribute(List<Refiner> refiners) {
-
-		if (refiners != null) {
-
-			List<RefinerDto> refinerDtos = new ArrayList<>();
-
-			for (Refiner refiner : refiners) {
-
-				RefinerDto refinerDto = new RefinerDto();
-				refinerDto.setName(refiner.getName());
-
-				List<Attribute> attributes = refiner.getAttributes();
-				List<AttributeDto> attributeDtos = new ArrayList<>();
-
-				if (refiner != null && attributes != null
-						&& !attributes.isEmpty()) {
-
-					for (Attribute attribute : attributes) {
-						AttributeDto attributeDto = new AttributeDto();
-						attributeDto.setId(attribute.getId());
-						attributeDto.setName(attribute.getName());
-
-						attributeDtos.add(attributeDto);
-					}
-
-					refinerDto.setAttributes(attributeDtos);
-				}
-
-				refinerDtos.add(refinerDto);
-			}
-
-			this.refiners = refinerDtos;
-		}
-	}
+//	public void loadRefiners(Category category) {
+//
+//		if (category != null && category.getAttributes() != null) {
+//			List<Attribute> attributes = category.getAttributes();
+//
+//			List<RefinerDto> refiners = new ArrayList<>();
+//
+//			attributes
+//					.forEach(attribute -> {
+//
+//						String refiner = attribute.getRefiner();
+//						RefinerDto dto = new RefinerDto();
+//						dto.setName(refiner);
+//
+//						AttributeDto attributeDto = new AttributeDto();
+//						attributeDto.setId(attribute.getId());
+//						attributeDto.setName(attribute.getName());
+//
+//						if (refiners.contains(dto)) {
+//							RefinerDto refinerDto = refiners.get(refiners
+//									.indexOf(dto));
+//							refinerDto.getAttributes().add(attributeDto);
+//
+//						} else {
+//							List<AttributeDto> attributeDtos = new ArrayList<>();
+//							attributeDtos.add(attributeDto);
+//
+//							dto.setAttributes(attributeDtos);
+//							refiners.add(dto);
+//						}
+//					});
+//
+//			this.refiners = refiners;
+//		}
+//	}
 
 	public Long getId() {
 		return id;

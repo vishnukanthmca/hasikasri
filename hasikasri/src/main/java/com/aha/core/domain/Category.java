@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -38,13 +37,6 @@ public class Category {
 
 	@OneToMany(mappedBy = "parentCategory", fetch = FetchType.EAGER)
 	private List<Category> childrenCategories;
-
-	@ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
-	private List<Attribute> attributes;
-
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "category_refiner", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "refiners_id"))
-	private List<Refiner> refiners;
 
 	@Column
 	@Temporal(TemporalType.DATE)
@@ -105,21 +97,4 @@ public class Category {
 	public void setChildrenCategories(List<Category> childrenCategories) {
 		this.childrenCategories = childrenCategories;
 	}
-
-	public List<Attribute> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(List<Attribute> attributes) {
-		this.attributes = attributes;
-	}
-
-	public List<Refiner> getRefiners() {
-		return refiners;
-	}
-
-	public void setRefiners(List<Refiner> refiners) {
-		this.refiners = refiners;
-	}
-
 }

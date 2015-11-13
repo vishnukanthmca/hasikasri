@@ -101,8 +101,6 @@ public class CategoryController {
 			dto = new CategoryDto(category.getId(), category.getName(),
 					category.getParentCategory());
 
-			dto.loadRefinersWithAttribute(category.getRefiners());
-
 			childrenIdsList.add(category.getId());
 
 			if (category.getChildrenCategories() != null) {

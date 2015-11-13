@@ -237,7 +237,38 @@
 
 
 					<!-- All Refiners starts here -->
-					<div class="row" id="refiners_and_attributes"></div>
+					<div class="row" id="refiners_and_attributes">
+
+						<div class="refiner">
+							<div class="panel panel-primary">
+								<div class="panel-heading refiner">
+									<button class="refiner_shrink_button" type="button"
+										data-toggle="collapse" data-target="#shrinkprice"
+										aria-expanded="
+										true" aria-controls="shrink">
+										<span aria-hidden="false">Price</span>
+									</button>
+								</div>
+								<div class="collapse in" id="shrinkprice">
+									<div class="panel-body" id="price_slider">
+
+										<div class="nstSlider" data-range_min="249"
+											data-range_max="49999" data-cur_min="500"
+											data-cur_max="35000">
+											<div class="bar"></div>
+											<div class="leftGrip"></div>
+											<div class="rightGrip"></div>
+										</div>
+										<div id="price_indicator_wrapper">
+											<div class="leftLabel" id="price_indicator_left"></div>
+											<div class="rightLabel" id="price_indicator_right"></div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<!-- All Refiners ends here -->
 
 
@@ -259,11 +290,16 @@
 	<!-- /container -->
 	<!-- Bootstrap core JavaScript-->
 	<!-- <script src="demo/components/jquery/dist/jquery.js"></script>
+	
     <script src="demo/components/bootstrap/dist/js/bootstrap.min.js"></script> -->
+
 	<script src="resources/assets/listing/js/jquery-1.9.1.min.js"></script>
 	<script src="resources/assets/listing/js/bootstrap.min.js"></script>
 	<script src="resources/assets/listing/js/bootstrap-treeview.js"></script>
 	<script src="resources/assets/listing/js/jquery.raty.js"></script>
+
+	<script src="resources/assets/listing/js/jquery.nstSlider.min.js"></script>
+
 	<!-- 	<script
 		src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css"></script>-->
 	<script>

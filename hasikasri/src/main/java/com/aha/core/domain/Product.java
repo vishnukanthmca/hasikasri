@@ -2,6 +2,7 @@ package com.aha.core.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,6 +33,10 @@ public class Product {
 	@JoinTable(name = "product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "product_attributes", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "attr_id"))
+	private List<Attribute> attributes;
+
 	@Column
 	private Double discount;
 
@@ -40,10 +45,10 @@ public class Product {
 
 	@Column
 	private Double actualPrice;
-	
+
 	@Column
 	private Double price;
-	
+
 	@OneToOne
 	private Seller seller;
 
@@ -147,6 +152,14 @@ public class Product {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public List<Attribute> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(List<Attribute> attributes) {
+		this.attributes = attributes;
 	}
 
 	@Override
