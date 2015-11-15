@@ -33,7 +33,6 @@ public class ProductDto {
 		this.id = product.getId();
 		this.pid = product.getPid();
 		this.name = product.getName();
-		this.brand = product.getBrand();
 		this.rating = product.getRating();
 		this.actualPrice = product.getActualPrice();
 		this.price = product.getPrice();
@@ -150,6 +149,5 @@ public class ProductDto {
 	public void setShortName(String shortName) {
 		this.shortName = shortName;
 	}
-	
-	
+
 }

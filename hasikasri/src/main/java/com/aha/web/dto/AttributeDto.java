@@ -4,7 +4,7 @@ public class AttributeDto {
 
 	private Long id;
 
-	private String name;
+	private String value;
 
 	public Long getId() {
 		return id;
@@ -14,11 +14,16 @@ public class AttributeDto {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getValue() {
+		return value;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String toString() {
+		return "AttributeDto [id=" + id + ", value=" + value + "]";
 	}
 }

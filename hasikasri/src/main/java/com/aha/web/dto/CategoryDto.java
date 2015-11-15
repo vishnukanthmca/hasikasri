@@ -1,9 +1,7 @@
 package com.aha.web.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.aha.core.domain.Attribute;
 import com.aha.core.domain.Category;
 
 public class CategoryDto {
@@ -22,8 +20,6 @@ public class CategoryDto {
 
 	private List<BreadcrumbDto> breadcrumps;
 
-	private List<RefinerDto> refiners;
-
 	private List<Long> childrenIds;
 
 	public CategoryDto(Long id, String name, Category parentCategory) {
@@ -35,41 +31,41 @@ public class CategoryDto {
 		}
 	}
 
-//	public void loadRefiners(Category category) {
-//
-//		if (category != null && category.getAttributes() != null) {
-//			List<Attribute> attributes = category.getAttributes();
-//
-//			List<RefinerDto> refiners = new ArrayList<>();
-//
-//			attributes
-//					.forEach(attribute -> {
-//
-//						String refiner = attribute.getRefiner();
-//						RefinerDto dto = new RefinerDto();
-//						dto.setName(refiner);
-//
-//						AttributeDto attributeDto = new AttributeDto();
-//						attributeDto.setId(attribute.getId());
-//						attributeDto.setName(attribute.getName());
-//
-//						if (refiners.contains(dto)) {
-//							RefinerDto refinerDto = refiners.get(refiners
-//									.indexOf(dto));
-//							refinerDto.getAttributes().add(attributeDto);
-//
-//						} else {
-//							List<AttributeDto> attributeDtos = new ArrayList<>();
-//							attributeDtos.add(attributeDto);
-//
-//							dto.setAttributes(attributeDtos);
-//							refiners.add(dto);
-//						}
-//					});
-//
-//			this.refiners = refiners;
-//		}
-//	}
+	// public void loadRefiners(Category category) {
+	//
+	// if (category != null && category.getAttributes() != null) {
+	// List<Attribute> attributes = category.getAttributes();
+	//
+	// List<RefinerDto> refiners = new ArrayList<>();
+	//
+	// attributes
+	// .forEach(attribute -> {
+	//
+	// String refiner = attribute.getRefiner();
+	// RefinerDto dto = new RefinerDto();
+	// dto.setName(refiner);
+	//
+	// AttributeDto attributeDto = new AttributeDto();
+	// attributeDto.setId(attribute.getId());
+	// attributeDto.setName(attribute.getName());
+	//
+	// if (refiners.contains(dto)) {
+	// RefinerDto refinerDto = refiners.get(refiners
+	// .indexOf(dto));
+	// refinerDto.getAttributes().add(attributeDto);
+	//
+	// } else {
+	// List<AttributeDto> attributeDtos = new ArrayList<>();
+	// attributeDtos.add(attributeDto);
+	//
+	// dto.setAttributes(attributeDtos);
+	// refiners.add(dto);
+	// }
+	// });
+	//
+	// this.refiners = refiners;
+	// }
+	// }
 
 	public Long getId() {
 		return id;
@@ -125,14 +121,6 @@ public class CategoryDto {
 
 	public void setBreadcrumps(List<BreadcrumbDto> breadcrumps) {
 		this.breadcrumps = breadcrumps;
-	}
-
-	public List<RefinerDto> getRefiners() {
-		return refiners;
-	}
-
-	public void setRefiners(List<RefinerDto> refiners) {
-		this.refiners = refiners;
 	}
 
 	public List<Long> getChildrenIds() {

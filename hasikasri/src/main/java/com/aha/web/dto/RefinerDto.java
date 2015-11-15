@@ -24,6 +24,7 @@ public class RefinerDto {
 		this.attributes = attributes;
 	}
 
+	// DO NOT CHANGE THIS
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -32,6 +33,7 @@ public class RefinerDto {
 		return result;
 	}
 
+	// DO NOT CHANGE THIS
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -47,5 +49,17 @@ public class RefinerDto {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+
+		String s = " ";
+		if (attributes != null && !attributes.isEmpty()) {
+			for (AttributeDto a : attributes) {
+				s = s + a;
+			}
+		}
+		return "RefinerDto [name=" + name + "]" + s;
 	}
 }

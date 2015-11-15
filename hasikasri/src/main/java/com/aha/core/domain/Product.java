@@ -24,9 +24,6 @@ public class Product {
 	@Column
 	private String name;
 
-	@Column
-	private String brand;
-
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 
@@ -108,14 +105,6 @@ public class Product {
 
 	public void setSeller(Seller seller) {
 		this.seller = seller;
-	}
-
-	public String getBrand() {
-		return brand;
-	}
-
-	public void setBrand(String brand) {
-		this.brand = brand;
 	}
 
 	public String getImage() {

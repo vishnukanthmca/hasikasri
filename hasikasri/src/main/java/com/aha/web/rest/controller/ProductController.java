@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aha.core.domain.Product;
 import com.aha.core.service.ProductService;
 import com.aha.web.dto.ProductDto;
+import com.aha.web.dto.RefinerDto;
 import com.google.gson.Gson;
 
 @RestController
@@ -47,5 +48,17 @@ public class ProductController {
 		});
 
 		return new Gson().toJson(dtos);
+	}
+
+	@RequestMapping(value = "/findRefiners", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String getRefiners(@RequestBody List<Long> categoryIds) {
+
+		if (categoryIds == null || categoryIds.isEmpty()) {
+			return null;
+		}
+
+		List<RefinerDto> refiners = productService.getAllRefinersByCategory(
+				categoryIds, 0);
+		return new Gson().toJson(refiners);
 	}
 }

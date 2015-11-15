@@ -26,7 +26,7 @@ function loadCategories() {
 					// alert(JSON.stringify(data));
 
 					if (data != null && data.breadcrumps != null) {
-						loadRefiners(data.refiners);
+						getAllRefinersFromNetwork(new Array(y));
 						loadProducts(data.childrenIds);
 						for (b = 0; b < data.breadcrumps.length; ++b) {
 
@@ -123,17 +123,29 @@ function loadCategories() {
 						enableLinks : true,
 						data : defaultData
 					});
-
 				},
 				failure : function(error) {
 					alert(error);
 				}
 			});
+}
 
+function getAllRefinersFromNetwork(categoryIds) {
+
+	$.ajax({
+					url : "product/findRefiners",
+					method : 'POST',
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify(categoryIds),
+					success : function(data) {
+						loadRefiners(data);
+					}
+	});
 }
 
 function loadRefiners(refiners) {
 
+alert(JSON.stringify(refiners));
 	if (refiners != null && refiners.length > 0) {
 
 		for (i = 0; i < refiners.length; ++i) {
@@ -162,7 +174,7 @@ function loadRefiners(refiners) {
 					var checkbox = '<div class="checkbox checkbox-success">'
 							+ '<input type="checkbox" id="checkbox'
 							+ attribute.id + '"> <label for="checkbox'
-							+ attribute.id + '"> ' + attribute.name
+							+ attribute.id + '"> ' + attribute.value
 							+ ' </label>' + '</div>';
 					checkboxes += checkbox;
 				}
@@ -289,31 +301,26 @@ function loadOnScrollToBottom() {
 }
 
 function backToTop() {
+	
 	var offset = 300,
-	// browser window scroll (in pixels) after which the "back to top" link
-	// opacity is reduced
 	offset_opacity = 1200,
-	// duration of the top scrolling animation (in ms)
 	scroll_top_duration = 700,
-	// grab the "back to top" link
 	$back_to_top = $('.cd-top');
 
-// hide or show the "back to top" link
-$(window).scroll(function(){
-	( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
-	if( $(this).scrollTop() > offset_opacity ) { 
-		$back_to_top.addClass('cd-fade-out');
-	}
-});
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) { 
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
 
-// smooth scroll to top
-$back_to_top.on('click', function(event){
-	event.preventDefault();
-	$('body,html').animate({
-		scrollTop: 0 ,
-	 	}, scroll_top_duration
-	);
-});
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
 }
 
 function slider() {
@@ -331,7 +338,6 @@ function slider() {
          },
      });
 
-     // Call methods and such...
      var highlightMin = Math.random() * 20,
          highlightMax = highlightMin + Math.random() * 80;
      $('.nstSlider').nstSlider('highlight_range', highlightMin, highlightMax);
