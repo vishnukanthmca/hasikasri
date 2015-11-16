@@ -8,6 +8,7 @@ $(document).ready(function() {
 	
 	slider();
 
+	loadProductsOnChange();
 });
 
 // category supports ONLY 3 levels
@@ -145,7 +146,6 @@ function getAllRefinersFromNetwork(categoryIds) {
 
 function loadRefiners(refiners) {
 
-alert(JSON.stringify(refiners));
 	if (refiners != null && refiners.length > 0) {
 
 		for (i = 0; i < refiners.length; ++i) {
@@ -161,7 +161,7 @@ alert(JSON.stringify(refiners));
 					+ '</span></button></div><div class="collapse in" id="shrink'
 					+ refiner.name + '"><div class="panel-body">';
 
-			var attributes = refiner.attributes;
+			var attributes = refiner.uniqueAttributes;
 
 			var checkboxes = "";
 
@@ -172,7 +172,7 @@ alert(JSON.stringify(refiners));
 					var attribute = attributes[j];
 
 					var checkbox = '<div class="checkbox checkbox-success">'
-							+ '<input type="checkbox" id="checkbox'
+							+ '<input class="refiner_checkboxes" onchange="loadProductsOnChange()" value="' + attribute.attributeIds +'" type="checkbox" id="checkbox'
 							+ attribute.id + '"> <label for="checkbox'
 							+ attribute.id + '"> ' + attribute.value
 							+ ' </label>' + '</div>';
@@ -341,4 +341,11 @@ function slider() {
      var highlightMin = Math.random() * 20,
          highlightMax = highlightMin + Math.random() * 80;
      $('.nstSlider').nstSlider('highlight_range', highlightMin, highlightMax);
+}
+
+function loadProductsOnChange() {
+	var items = document.getElementsByClassName('refiner_checkboxes');
+	for(i = 0; i < items.length; i++) {
+		alert(items[i].checked);
+	}
 }

@@ -6,7 +6,7 @@ public class RefinerDto {
 
 	private String name;
 
-	private List<AttributeDto> attributes;
+	private List<AttributeDto> uniqueAttributes;
 
 	public String getName() {
 		return name;
@@ -16,12 +16,12 @@ public class RefinerDto {
 		this.name = name;
 	}
 
-	public List<AttributeDto> getAttributes() {
-		return attributes;
+	public List<AttributeDto> getUniqueAttributes() {
+		return uniqueAttributes;
 	}
 
-	public void setAttributes(List<AttributeDto> attributes) {
-		this.attributes = attributes;
+	public void setUniqueAttributes(List<AttributeDto> uniqueAttributes) {
+		this.uniqueAttributes = uniqueAttributes;
 	}
 
 	// DO NOT CHANGE THIS
@@ -55,8 +55,8 @@ public class RefinerDto {
 	public String toString() {
 
 		String s = " ";
-		if (attributes != null && !attributes.isEmpty()) {
-			for (AttributeDto a : attributes) {
+		if (uniqueAttributes != null && !uniqueAttributes.isEmpty()) {
+			for (AttributeDto a : uniqueAttributes) {
 				s = s + a;
 			}
 		}

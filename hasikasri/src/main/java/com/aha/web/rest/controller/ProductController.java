@@ -17,6 +17,7 @@ import com.aha.core.service.ProductService;
 import com.aha.web.dto.ProductDto;
 import com.aha.web.dto.RefinerDto;
 import com.google.gson.Gson;
+import com.sun.corba.se.spi.activation._ActivatorImplBase;
 
 @RestController
 @RequestMapping("/product")
@@ -59,6 +60,18 @@ public class ProductController {
 
 		List<RefinerDto> refiners = productService.getAllRefinersByCategory(
 				categoryIds, 0);
+		refiners.forEach(r -> {
+			r.getUniqueAttributes().forEach(
+					a -> {
+						a.getAttributeIds().forEach(
+								id -> {
+									System.out.println("id -> " + id
+											+ " | for refiner -> " + r
+											+ " | for attribute -> " + a);
+								});
+					});
+		});
+
 		return new Gson().toJson(refiners);
 	}
 }
