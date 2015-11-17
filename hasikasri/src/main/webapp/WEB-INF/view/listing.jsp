@@ -315,10 +315,10 @@
 		
 	</script>
 
-
 	<input type="hidden" id="current_cat_id"
 		value='<%=request.getParameter("cat")%>' />
 	<input type="hidden" id="child_category_ids" value="" />
+	<input type="hidden" id="attribute_ids" value="-1" />
 	<a href="#0" class="cd-top">Top</a>
 </body>
 </html>

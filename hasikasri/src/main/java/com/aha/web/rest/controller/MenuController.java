@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aha.core.domain.Category;
 import com.aha.core.service.CategoryService;
-import com.aha.web.dto.CategoryDto;
-import com.aha.web.dto.MenuDto;
+import com.aha.web.dto.response.CategoryDto;
+import com.aha.web.dto.response.MenuDto;
 import com.google.gson.Gson;
 
 @RestController

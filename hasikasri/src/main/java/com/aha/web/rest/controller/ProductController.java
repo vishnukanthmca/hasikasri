@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aha.core.domain.Product;
 import com.aha.core.service.ProductService;
-import com.aha.web.dto.ProductDto;
-import com.aha.web.dto.RefinerDto;
+import com.aha.web.dto.request.GetProductsInputDto;
+import com.aha.web.dto.response.ProductDto;
+import com.aha.web.dto.response.RefinerDto;
 import com.google.gson.Gson;
-import com.sun.corba.se.spi.activation._ActivatorImplBase;
 
 @RestController
 @RequestMapping("/product")
@@ -27,15 +27,20 @@ public class ProductController {
 	private ProductService productService;
 
 	@RequestMapping(value = "/findProducts", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody String findByPid(@RequestBody List<Long> categoryIds,
-			@RequestParam("page") Integer page) {
+	public @ResponseBody String findByPid(@RequestParam("page") Integer page,
+			@RequestBody GetProductsInputDto input) {
 
-		if (categoryIds == null || categoryIds.isEmpty() || page < 0) {
+		System.out.println("attributeIds " + input.getAttributeIds()
+				+ " categoryIds " + input.getCategoryIds());
+
+		if (input.getCategoryIds() == null || input.getCategoryIds().isEmpty()
+				|| input.getAttributeIds() == null
+				|| input.getAttributeIds().isEmpty() || page < 0) {
 			return null;
 		}
 
-		List<Product> products = productService.findByCategoryIds(categoryIds,
-				page);
+		List<Product> products = productService.findByCategoryIds(
+				input.getCategoryIds(), input.getAttributeIds(), page);
 
 		if (products == null || products.isEmpty()) {
 			return null;
@@ -52,14 +57,17 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/findRefiners", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody String getRefiners(@RequestBody List<Long> categoryIds) {
+	public @ResponseBody String getRefiners(
+			@RequestBody GetProductsInputDto input) {
 
-		if (categoryIds == null || categoryIds.isEmpty()) {
+		if (input.getCategoryIds() == null || input.getCategoryIds().isEmpty()
+				|| input.getAttributeIds() == null
+				|| input.getAttributeIds().isEmpty()) {
 			return null;
 		}
 
 		List<RefinerDto> refiners = productService.getAllRefinersByCategory(
-				categoryIds, 0);
+				input.getCategoryIds(), input.getAttributeIds(), 0);
 		refiners.forEach(r -> {
 			r.getUniqueAttributes().forEach(
 					a -> {

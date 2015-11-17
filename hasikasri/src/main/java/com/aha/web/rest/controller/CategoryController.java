@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aha.core.domain.Category;
 import com.aha.core.service.CategoryService;
-import com.aha.web.dto.BreadcrumbDto;
-import com.aha.web.dto.CategoryDto;
+import com.aha.web.dto.response.BreadcrumbDto;
+import com.aha.web.dto.response.CategoryDto;
 import com.google.gson.Gson;
 
 @RestController

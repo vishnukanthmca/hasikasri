@@ -14,8 +14,8 @@ import com.aha.core.domain.Attribute;
 import com.aha.core.domain.Product;
 import com.aha.core.service.ProductService;
 import com.aha.persistence.repository.ProductRepository;
-import com.aha.web.dto.AttributeDto;
-import com.aha.web.dto.RefinerDto;
+import com.aha.web.dto.response.AttributeDto;
+import com.aha.web.dto.response.RefinerDto;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -30,23 +30,37 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByPid(pid);
 	}
 
-	public List<Product> findByCategoryIds(List<Long> categoryIds, Integer page) {
+	public List<Product> findByCategoryIds(List<Long> categoryIds,
+			List<Long> attributeIds, Integer page) {
 
 		PageRequest pageRequest = new PageRequest(page,
 				NO_OF_PRODUCTS_PER_PAGE, Sort.Direction.DESC, "id");
 
-		return productRepository.findByCategoryIds(categoryIds, pageRequest);
+		if (attributeIds.contains(-1L)) {
+			return productRepository
+					.findByCategoryIds(categoryIds, pageRequest);
+		} else {
+			return productRepository.findByCategoryIdsAndAttributeIds(
+					categoryIds, attributeIds, pageRequest);
+		}
 	}
 
 	@Override
 	public List<RefinerDto> getAllRefinersByCategory(List<Long> categoryIds,
-			Integer page) {
+			List<Long> attributeIds, Integer page) {
 
 		PageRequest pageRequest = new PageRequest(page,
 				NO_OF_PRODUCTS_PER_PAGE, Sort.Direction.DESC, "id");
 
-		List<Product> list = productRepository.getAllRefinersByCategory(
-				categoryIds, pageRequest);
+		List<Product> list = null;
+
+		if (attributeIds.contains(-1L)) {
+			list = productRepository.getAllRefinersByCategory(categoryIds,
+					pageRequest);
+		} else {
+			list = productRepository.getAllRefinersByCategoryAndAttributeId(
+					categoryIds, attributeIds, pageRequest);
+		}
 
 		Set<String> uniqueRefiners = new HashSet<>();
 		Set<AttributeDto> uniqueValues = new HashSet<>();

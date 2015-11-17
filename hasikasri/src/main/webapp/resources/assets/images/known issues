@@ -4,4 +4,6 @@
 # Make Lazy fetch join for refiners and attributes from categories
 # Check boxes does not have tick mark on firefox
 # MAKE ALL IMAGES INTO ONE IMAGE - IMAGE SPRITING
-# highlight the back to top button when scrolled to the end 
+# highlight the back to top button when scrolled to the end
+# Use chrome developer tools audit to enable performance
+# When back button clicked  

@@ -1,4 +1,4 @@
-package com.aha.web.dto;
+package com.aha.web.dto.response;
 
 import com.aha.core.domain.Product;
 import com.aha.core.util.Application;
