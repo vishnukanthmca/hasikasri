@@ -228,13 +228,10 @@
 			</div>
 
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-3" id="left_block">
 					<div class="row">
 						<div id="treeview10"></div>
 					</div>
-
-
-
 
 					<!-- All Refiners starts here -->
 					<div class="row" id="refiners_and_attributes">
@@ -261,6 +258,9 @@
 										</div>
 										<div id="price_indicator_wrapper">
 											<div class="leftLabel" id="price_indicator_left"></div>
+											<div id="loader-icon_left">
+												<img src="resources/assets/listing/images/GreenLoader.gif" />
+											</div>
 											<div class="rightLabel" id="price_indicator_right"></div>
 										</div>
 

@@ -166,6 +166,11 @@ span.nav-toggle-icon {
 	display: none;
 }
 
+#loader-icon_left {
+	text-align: center;
+	display: none;
+}
+
 /** start back to top button **/
 .cd-container {
 	width: 90%;
@@ -316,4 +321,13 @@ span.nav-toggle-icon {
 #price_indicator_right {
 	display: flex;
 	flex-direction: column;
+}
+
+.disable {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+.enable {
+	opacity: 1;
 }

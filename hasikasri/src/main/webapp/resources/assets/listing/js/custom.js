@@ -212,7 +212,7 @@ function loadProducts(categoryIds, attributeIds) {
 	});
 }
 
-function getProducts(categoryIds, attributeIds) {
+function getProductsOnRefinerChange(categoryIds, attributeIds) {
 
 	$.ajax({
 		url : "product/findProducts?page=0",
@@ -224,10 +224,15 @@ function getProducts(categoryIds, attributeIds) {
 			$(window).data('ajaxready', true);
 		},
 		beforeSend : function() {
-			$('#loader-icon').show();
+			$('#loader-icon_left').show();
+			$('#left_block').addClass("disable");
+			$('#left_block :input').prop('disabled', 'true'); 
 		},
 		complete : function() {
-			$('#loader-icon').hide();
+			$('#loader-icon_left').hide();
+			$('#left_block').removeClass("disable");
+			// $('#left_block').addClass("enable");
+			$('#left_block :input').removeProp('disabled');
 		}
 	});
 }
@@ -394,6 +399,6 @@ function loadProductsOnChange() {
 
 	document.getElementById('attribute_ids').value = allAttributesIdsInPage.toString();
 
-	getProducts($('#child_category_ids').val(),$('#attribute_ids').val());
+	getProductsOnRefinerChange($('#child_category_ids').val(),$('#attribute_ids').val());
 }
 
