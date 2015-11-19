@@ -15,6 +15,7 @@ import com.aha.core.domain.Product;
 import com.aha.core.service.ProductService;
 import com.aha.persistence.repository.ProductRepository;
 import com.aha.web.dto.response.AttributeDto;
+import com.aha.web.dto.response.FilterDto;
 import com.aha.web.dto.response.RefinerDto;
 
 @Service
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<RefinerDto> getAllRefinersByCategory(List<Long> categoryIds,
+	public FilterDto getAllRefinersByCategory(List<Long> categoryIds,
 			List<Long> attributeIds, Integer page) {
 
 		PageRequest pageRequest = new PageRequest(page,
@@ -65,10 +66,28 @@ public class ProductServiceImpl implements ProductService {
 		Set<String> uniqueRefiners = new HashSet<>();
 		Set<AttributeDto> uniqueValues = new HashSet<>();
 
+		FilterDto filterDto = new FilterDto();
+
 		List<RefinerDto> dtos = new ArrayList<RefinerDto>();
 
+		Double minPrice = 0d;
+		Double maxPrice = 0d;
+
+		int i = 0;
+
 		if (list != null && !list.isEmpty()) {
-			list.forEach(product -> {
+			for (Product product : list) {
+
+				if (i++ == 1) {
+					minPrice = product.getPrice();
+				}
+
+				if (product.getPrice() < minPrice) {
+					minPrice = product.getPrice();
+				}
+				if (product.getPrice() > maxPrice) {
+					maxPrice = product.getPrice();
+				}
 
 				List<Attribute> attributes = product.getAttributes();
 
@@ -138,8 +157,14 @@ public class ProductServiceImpl implements ProductService {
 								}
 							});
 				}
-			});
+			}
+
+			filterDto.setRefiners(dtos);
+			filterDto.setMaxPrice(maxPrice.intValue());
+			filterDto.setMinPrice(minPrice.intValue());
+
 		}
-		return dtos;
+
+		return filterDto;
 	}
 }

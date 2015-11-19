@@ -7,7 +7,8 @@ $(document).ready(function() {
 	backToTop();
 	
 	slider();
-
+	
+	capturePriceChange();
 });
 
 // category supports ONLY 3 levels
@@ -146,7 +147,9 @@ function loadRefiners(categoryIds, attributeIds) {
 	});
 }
 
-function renderRefiners(refiners) {
+function renderRefiners(filters) {
+
+	var refiners = filters.refiners;
 
 	if (refiners != null && refiners.length > 0) {
 
@@ -402,3 +405,15 @@ function loadProductsOnChange() {
 	getProductsOnRefinerChange($('#child_category_ids').val(),$('#attribute_ids').val());
 }
 
+function capturePriceChange() {
+	$('#price_bar_min').click(function(e) {
+		alert(' yes down');
+	});
+
+	$('#price_bar_max').click(function(e) {
+		alert(' yes down');
+	});
+}
+
+function getProductByPrice() {
+}

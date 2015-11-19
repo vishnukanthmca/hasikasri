@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.aha.core.domain.Product;
 import com.aha.core.service.ProductService;
 import com.aha.web.dto.request.GetProductsInputDto;
+import com.aha.web.dto.response.FilterDto;
 import com.aha.web.dto.response.ProductDto;
-import com.aha.web.dto.response.RefinerDto;
 import com.google.gson.Gson;
 
 @RestController
@@ -66,20 +66,8 @@ public class ProductController {
 			return null;
 		}
 
-		List<RefinerDto> refiners = productService.getAllRefinersByCategory(
+		FilterDto dto = productService.getAllRefinersByCategory(
 				input.getCategoryIds(), input.getAttributeIds(), 0);
-		refiners.forEach(r -> {
-			r.getUniqueAttributes().forEach(
-					a -> {
-						a.getAttributeIds().forEach(
-								id -> {
-									System.out.println("id -> " + id
-											+ " | for refiner -> " + r
-											+ " | for attribute -> " + a);
-								});
-					});
-		});
-
-		return new Gson().toJson(refiners);
+		return new Gson().toJson(dto);
 	}
 }

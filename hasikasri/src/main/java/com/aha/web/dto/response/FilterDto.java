@@ -4,9 +4,27 @@ import java.util.List;
 
 public class FilterDto {
 
+	private Integer minPrice;
+
+	private Integer maxPrice;
+
 	private List<RefinerDto> refiners;
 
-	private List<ProductDto> products;
+	public Integer getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(Integer minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public Integer getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(Integer maxPrice) {
+		this.maxPrice = maxPrice;
+	}
 
 	public List<RefinerDto> getRefiners() {
 		return refiners;
@@ -14,13 +32,5 @@ public class FilterDto {
 
 	public void setRefiners(List<RefinerDto> refiners) {
 		this.refiners = refiners;
-	}
-
-	public List<ProductDto> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<ProductDto> products) {
-		this.products = products;
 	}
 }
