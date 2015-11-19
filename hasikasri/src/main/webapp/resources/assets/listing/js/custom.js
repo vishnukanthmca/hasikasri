@@ -13,7 +13,6 @@ $(document).ready(function() {
 // category supports ONLY 3 levels
 function loadCategories() {
 
-	var y = new Number($('#current_cat_id').val());
 	var attributeIds = $('#attribute_ids').val();
 	
 	$
@@ -21,14 +20,17 @@ function loadCategories() {
 				url : "category/getCategory",
 				method : 'POST',
 				contentType : "application/json; charset=utf-8",
-				data : JSON.stringify(y),
+				data : JSON.stringify($('#current_cat_id').val()),
 				success : function(data) {
 
 					// alert(JSON.stringify(data));
 
 					if (data != null && data.breadcrumps != null) {
-						loadRefiners(new Array(y), attributeIds);
-						loadProducts(data.childrenIds, attributeIds);
+						loadRefiners($('#current_cat_id').val(), attributeIds);
+						
+						$('#child_category_ids').val(data.childrenIds);
+						
+						loadProducts($('#child_category_ids').val(), attributeIds);
 						for (b = 0; b < data.breadcrumps.length; ++b) {
 
 							var breadcrumb_name = data.breadcrumps[b].name;
@@ -137,7 +139,7 @@ function loadRefiners(categoryIds, attributeIds) {
 					url : "product/findRefiners",
 					method : 'POST',
 					contentType : "application/json; charset=utf-8",
-					data : getInputToLoadProducts(categoryIds, attributeIds.split(',').map(function(s){return Number(s);})),
+					data : getInputToLoadProducts(categoryIds, attributeIds),
 					success : function(data) {
 						renderRefiners(data);
 					}
@@ -188,20 +190,22 @@ function renderRefiners(refiners) {
 }
 
 function getInputToLoadProducts(categoryIds, attributeIds) {
-	var input = {categoryIds:categoryIds,attributeIds:attributeIds};
+
+	var numericAttributeIds = attributeIds.split(',').map(function(s){return Number(s);});
+	var numericCategoryIds = categoryIds.split(',').map(function(s){return Number(s);});
+
+	var input = {categoryIds:numericCategoryIds,attributeIds:numericAttributeIds};
 	input = JSON.stringify(input);
 	return input;
 }
 
 function loadProducts(categoryIds, attributeIds) {
 
-	$('#child_category_ids').val(categoryIds);
-
 	$.ajax({
 		url : "product/findProducts?page=0",
 		method : 'POST',
 		contentType : "application/json; charset=utf-8",
-		data : getInputToLoadProducts(categoryIds, attributeIds.split(',').map(function(s){return Number(s);})),
+		data : getInputToLoadProducts(categoryIds, attributeIds),
 		success : function(data) {
 			renderProducts(data,true);
 		}
@@ -228,7 +232,6 @@ function getProducts(categoryIds, attributeIds) {
 	});
 }
 
-
 function loadOnScrollToBottom() {
 
 	var start = 1;
@@ -246,7 +249,7 @@ function loadOnScrollToBottom() {
 						url : "product/findProducts?page=" + start,
 						method : 'POST',
 						contentType : "application/json; charset=utf-8",
-						data : getInputToLoadProducts($('#child_category_ids').val().split(',').map(function(s){return Number(s);}), $('#attribute_ids').val().split(',').map(function(s){return Number(s);})),
+						data : getInputToLoadProducts($('#child_category_ids').val(), $('#attribute_ids').val()),
 						success : function(data) {
 							start += 1;
 							renderProducts(data,true);
@@ -355,7 +358,6 @@ function assignRating(data) {
 	}
 }
 
-
 function slider() {
 	 $('.nstSlider').nstSlider({
          "left_grip_selector": ".leftGrip",
@@ -390,10 +392,8 @@ function loadProductsOnChange() {
 		allAttributesIdsInPage.push(-1);
 	}
 
-	document.getElementById('attribute_ids').value = allAttributesIdsInPage;
+	document.getElementById('attribute_ids').value = allAttributesIdsInPage.toString();
 
-	
-
-	getProducts($('#child_category_ids').val().split(',').map(function(s){return Number(s);}),$('#attribute_ids').val().split(',').map(function(s){return Number(s);}));
+	getProducts($('#child_category_ids').val(),$('#attribute_ids').val());
 }
 
