@@ -150,7 +150,7 @@ function loadRefiners(categoryIds, attributeIds) {
 function renderRefiners(filters) {
 
 	var refiners = filters.refiners;
-
+	
 	if (refiners != null && refiners.length > 0) {
 
 		for (i = 0; i < refiners.length; ++i) {

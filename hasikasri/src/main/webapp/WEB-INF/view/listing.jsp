@@ -298,7 +298,7 @@
 	<script src="resources/assets/listing/js/bootstrap-treeview.js"></script>
 	<script src="resources/assets/listing/js/jquery.raty.js"></script>
 
-	<script src="resources/assets/listing/js/jquery.nstSlider.js"></script>
+	<script src="resources/assets/listing/js/jquery.nstSlider.min.js"></script>
 
 	<!-- 	<script
 		src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css"></script>-->
