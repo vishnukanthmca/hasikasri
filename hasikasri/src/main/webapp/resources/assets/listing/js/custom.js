@@ -6,9 +6,6 @@ $(document).ready(function() {
 	
 	backToTop();
 	
-	slider();
-	
-	capturePriceChange();
 });
 
 // category supports ONLY 3 levels
@@ -24,14 +21,14 @@ function loadCategories() {
 				data : JSON.stringify($('#current_cat_id').val()),
 				success : function(data) {
 
-					// alert(JSON.stringify(data));
-
 					if (data != null && data.breadcrumps != null) {
+						
 						loadRefiners($('#current_cat_id').val(), attributeIds);
 						
 						$('#child_category_ids').val(data.childrenIds);
 						
-						loadProducts($('#child_category_ids').val(), attributeIds);
+						loadProductsOnPageLoad($('#child_category_ids').val(), attributeIds);
+						
 						for (b = 0; b < data.breadcrumps.length; ++b) {
 
 							var breadcrumb_name = data.breadcrumps[b].name;
@@ -202,7 +199,7 @@ function getInputToLoadProducts(categoryIds, attributeIds) {
 	return input;
 }
 
-function loadProducts(categoryIds, attributeIds) {
+function loadProductsOnPageLoad(categoryIds, attributeIds) {
 
 	$.ajax({
 		url : "product/findProducts?page=0",
@@ -234,9 +231,12 @@ function getProductsOnRefinerChange(categoryIds, attributeIds) {
 		complete : function() {
 			$('#loader-icon_left').hide();
 			$('#left_block').removeClass("disable");
-			// $('#left_block').addClass("enable");
 			$('#left_block :input').removeProp('disabled');
+		},
+		error : function(e) {
+			alert(e);
 		}
+		
 	});
 }
 
@@ -299,7 +299,7 @@ function backToTop() {
 
 function renderProducts(data,append) {
 
-	if (data != null && data.length > 0) {
+	if (data != null && data.length > 0 && !isEmpty(data)) {
 
 		var all_products = "";
 
@@ -342,10 +342,9 @@ function renderProducts(data,append) {
 		} else {
 			$('.product_container').html(all_products);
 		}
-		
 
 	} else {
-		// $('.product_container').append('<h4>Oops. No products found.</h4>');
+		$('.product_container').html('<h4>Oops. No products found.</h4>');
 	}
 
 	$.fn.raty.defaults.path = 'resources/assets/listing/images';
@@ -366,26 +365,6 @@ function assignRating(data) {
 	}
 }
 
-function slider() {
-	 $('.nstSlider').nstSlider({
-         "left_grip_selector": ".leftGrip",
-         "right_grip_selector": ".rightGrip",
-         "value_bar_selector": ".bar",
-         "highlight": {
-             "grip_class": "gripHighlighted",
-             "panel_selector": ".highlightPanel"
-         },
-         "value_changed_callback": function(cause, leftValue, rightValue) {
-             $('.leftLabel').text(leftValue);
-             $('.rightLabel').text(rightValue);
-         },
-     });
-
-     var highlightMin = Math.random() * 20,
-         highlightMax = highlightMin + Math.random() * 80;
-     $('.nstSlider').nstSlider('highlight_range', highlightMin, highlightMax);
-}
-
 function loadProductsOnChange() {
 	
 	var items = document.getElementsByClassName('refiner_checkboxes');
@@ -402,18 +381,37 @@ function loadProductsOnChange() {
 
 	document.getElementById('attribute_ids').value = allAttributesIdsInPage.toString();
 
+	reRenderPage();
+}
+
+function reRenderPage() {
 	getProductsOnRefinerChange($('#child_category_ids').val(),$('#attribute_ids').val());
 }
 
-function capturePriceChange() {
-	$('#price_bar_min').click(function(e) {
-		alert(' yes down');
-	});
-
-	$('#price_bar_max').click(function(e) {
-		alert(' yes down');
-	});
+function updateQueryStringParameter(uri, key, value) {
+  var re = new RegExp("([?|&])" + key + "=.*?(&|#|$)", "i");
+  if (uri.match(re)) {
+    return uri.replace(re, '$1' + key + "=" + value + '$2');
+  } else {
+    var hash =  '';
+    if( uri.indexOf('#') !== -1 ){
+        hash = uri.replace(/.*#/, '#');
+        uri = uri.replace(/#.*/, '');
+    }
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";    
+    return uri + separator + key + "=" + value + hash;
+  }
 }
 
-function getProductByPrice() {
+function isEmpty(str) {
+    return (!str || 0 === str.length);
+}
+
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+
+function getRequestParam(name){
+   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+      return decodeURIComponent(name[1]);
 }

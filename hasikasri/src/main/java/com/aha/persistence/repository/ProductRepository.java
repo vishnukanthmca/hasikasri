@@ -15,21 +15,29 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	public Product findByPid(String pid);
 
-	@Query("select distinct(p) from Product p where p.category.id in :categoryIds")
+	@Query("select distinct(p) from Product p where p.category.id in :categoryIds AND p.price between :minPrice AND :maxPrice")
 	public List<Product> findByCategoryIds(
-			@Param("categoryIds") List<Long> categoryIds, Pageable pageable);
-
-	@Query("select distinct(p) from Product p join p.attributes a where p.category.id in :categoryIds AND a.id in :attributeIds")
-	public List<Product> findByCategoryIdsAndAttributeIds(
 			@Param("categoryIds") List<Long> categoryIds,
-			@Param("attributeIds") List<Long> attributeIds, Pageable pageable);
+			@Param("minPrice") Double minPrice,
+			@Param("maxPrice") Double maxPrice, Pageable pageable);
 
-	@Query("select distinct(p) from Product p join fetch p.attributes a where p.category.id in :categoryIds")
+	@Query("select distinct(p) from Product p join p.attributes a where p.category.id in :categoryIds AND a.id in :attributeIds AND p.price between :minPrice AND :maxPrice")
+	public List<Product> findByCategoryIdsAndAttributeIdsAndPrice(
+			@Param("categoryIds") List<Long> categoryIds,
+			@Param("attributeIds") List<Long> attributeIds,
+			@Param("minPrice") Double minPrice,
+			@Param("maxPrice") Double maxPrice, Pageable pageable);
+
+	@Query("select distinct(p) from Product p join fetch p.attributes a where p.category.id in :categoryIds AND p.price between :minPrice AND :maxPrice")
 	public List<Product> getAllRefinersByCategory(
-			@Param("categoryIds") List<Long> categoryIds, Pageable pageable);
-
-	@Query("select distinct(p) from Product p join fetch p.attributes a where p.category.id in :categoryIds AND a.id in :attributeIds")
-	public List<Product> getAllRefinersByCategoryAndAttributeId(
 			@Param("categoryIds") List<Long> categoryIds,
-			@Param("attributeIds") List<Long> attributeIds, Pageable pageable);
+			@Param("minPrice") Double minPrice,
+			@Param("maxPrice") Double maxPrice, Pageable pageable);
+
+	@Query("select distinct(p) from Product p join fetch p.attributes a where p.category.id in :categoryIds AND a.id in :attributeIds AND p.price between :minPrice AND :maxPrice")
+	public List<Product> getAllRefinersByCategoryAndAttributeIdAndPrice(
+			@Param("categoryIds") List<Long> categoryIds,
+			@Param("attributeIds") List<Long> attributeIds,
+			@Param("minPrice") Double minPrice,
+			@Param("maxPrice") Double maxPrice, Pageable pageable);
 }

@@ -14,6 +14,7 @@ import com.aha.core.domain.Attribute;
 import com.aha.core.domain.Product;
 import com.aha.core.service.ProductService;
 import com.aha.persistence.repository.ProductRepository;
+import com.aha.web.dto.request.GetProductsInputDto;
 import com.aha.web.dto.response.AttributeDto;
 import com.aha.web.dto.response.FilterDto;
 import com.aha.web.dto.response.RefinerDto;
@@ -31,36 +32,61 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.findByPid(pid);
 	}
 
-	public List<Product> findByCategoryIds(List<Long> categoryIds,
-			List<Long> attributeIds, Integer page) {
+	public List<Product> findByCategoryIds(GetProductsInputDto input,
+			Integer page) {
+
+		Double minPrice = 0d;
+		Double maxPrice = 100000000d;
+
+		if (input.getMinPrice() != null) {
+			minPrice = input.getMinPrice().doubleValue();
+		}
+
+		if (input.getMaxPrice() != null) {
+			maxPrice = input.getMaxPrice().doubleValue();
+		}
 
 		PageRequest pageRequest = new PageRequest(page,
 				NO_OF_PRODUCTS_PER_PAGE, Sort.Direction.DESC, "id");
 
-		if (attributeIds.contains(-1L)) {
-			return productRepository
-					.findByCategoryIds(categoryIds, pageRequest);
+		if (input.getAttributeIds().contains(-1L)) {
+			return productRepository.findByCategoryIds(input.getCategoryIds(),
+					minPrice, maxPrice, pageRequest);
 		} else {
-			return productRepository.findByCategoryIdsAndAttributeIds(
-					categoryIds, attributeIds, pageRequest);
+			return productRepository.findByCategoryIdsAndAttributeIdsAndPrice(
+					input.getCategoryIds(), input.getAttributeIds(), minPrice,
+					maxPrice, pageRequest);
 		}
 	}
 
 	@Override
-	public FilterDto getAllRefinersByCategory(List<Long> categoryIds,
-			List<Long> attributeIds, Integer page) {
+	public FilterDto getAllRefinersByCategory(GetProductsInputDto input,
+			Integer page) {
+
+		Double minPrice = 0d;
+		Double maxPrice = 100000000d;
+
+		if (input.getMinPrice() != null) {
+			minPrice = input.getMinPrice().doubleValue();
+		}
+
+		if (input.getMaxPrice() != null) {
+			maxPrice = input.getMaxPrice().doubleValue();
+		}
 
 		PageRequest pageRequest = new PageRequest(page,
 				NO_OF_PRODUCTS_PER_PAGE, Sort.Direction.DESC, "id");
 
 		List<Product> list = null;
 
-		if (attributeIds.contains(-1L)) {
-			list = productRepository.getAllRefinersByCategory(categoryIds,
-					pageRequest);
+		if (input.getAttributeIds().contains(-1L)) {
+			list = productRepository.getAllRefinersByCategory(
+					input.getCategoryIds(), minPrice, maxPrice, pageRequest);
 		} else {
-			list = productRepository.getAllRefinersByCategoryAndAttributeId(
-					categoryIds, attributeIds, pageRequest);
+			list = productRepository
+					.getAllRefinersByCategoryAndAttributeIdAndPrice(
+							input.getCategoryIds(), input.getAttributeIds(),
+							minPrice, maxPrice, pageRequest);
 		}
 
 		Set<String> uniqueRefiners = new HashSet<>();
@@ -70,23 +96,23 @@ public class ProductServiceImpl implements ProductService {
 
 		List<RefinerDto> dtos = new ArrayList<RefinerDto>();
 
-		Double minPrice = 0d;
-		Double maxPrice = 0d;
+		Double minimumPrice = 0d;
+		Double maximumPrice = 0d;
 
 		int i = 0;
 
 		if (list != null && !list.isEmpty()) {
 			for (Product product : list) {
 
-				if (i++ == 1) {
-					minPrice = product.getPrice();
+				if (i++ == 0) {
+					minimumPrice = product.getPrice();
 				}
 
-				if (product.getPrice() < minPrice) {
-					minPrice = product.getPrice();
+				if (product.getPrice() < minimumPrice) {
+					minimumPrice = product.getPrice();
 				}
-				if (product.getPrice() > maxPrice) {
-					maxPrice = product.getPrice();
+				if (product.getPrice() > maximumPrice) {
+					maximumPrice = product.getPrice();
 				}
 
 				List<Attribute> attributes = product.getAttributes();
@@ -160,8 +186,8 @@ public class ProductServiceImpl implements ProductService {
 			}
 
 			filterDto.setRefiners(dtos);
-			filterDto.setMaxPrice(maxPrice.intValue());
-			filterDto.setMinPrice(minPrice.intValue());
+			filterDto.setMaxPrice(maximumPrice.intValue());
+			filterDto.setMinPrice(minimumPrice.intValue());
 
 		}
 

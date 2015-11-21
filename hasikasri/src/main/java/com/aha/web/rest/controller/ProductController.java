@@ -30,17 +30,13 @@ public class ProductController {
 	public @ResponseBody String findByPid(@RequestParam("page") Integer page,
 			@RequestBody GetProductsInputDto input) {
 
-		System.out.println("attributeIds " + input.getAttributeIds()
-				+ " categoryIds " + input.getCategoryIds());
-
 		if (input.getCategoryIds() == null || input.getCategoryIds().isEmpty()
 				|| input.getAttributeIds() == null
 				|| input.getAttributeIds().isEmpty() || page < 0) {
 			return null;
 		}
 
-		List<Product> products = productService.findByCategoryIds(
-				input.getCategoryIds(), input.getAttributeIds(), page);
+		List<Product> products = productService.findByCategoryIds(input, page);
 
 		if (products == null || products.isEmpty()) {
 			return null;
@@ -66,8 +62,7 @@ public class ProductController {
 			return null;
 		}
 
-		FilterDto dto = productService.getAllRefinersByCategory(
-				input.getCategoryIds(), input.getAttributeIds(), 0);
+		FilterDto dto = productService.getAllRefinersByCategory(input, 0);
 		return new Gson().toJson(dto);
 	}
 }

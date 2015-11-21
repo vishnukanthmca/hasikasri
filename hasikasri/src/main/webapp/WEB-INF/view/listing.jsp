@@ -248,22 +248,9 @@
 								</div>
 								<div class="collapse in" id="shrinkprice">
 									<div class="panel-body" id="price_slider">
-
-										<div class="nstSlider" data-range_min="249"
-											data-range_max="49999" data-cur_min="500"
-											data-cur_max="35000">
-											<div class="bar"></div>
-											<div class="leftGrip" id="price_bar_min"></div>
-											<div class="rightGrip" id="price_bar_max"></div>
+										<div id="loader-icon_left">
+											<img src="resources/assets/listing/images/GreenLoader.gif" />
 										</div>
-										<div id="price_indicator_wrapper">
-											<div class="leftLabel" id="price_indicator_left"></div>
-											<div id="loader-icon_left">
-												<img src="resources/assets/listing/images/GreenLoader.gif" />
-											</div>
-											<div class="rightLabel" id="price_indicator_right"></div>
-										</div>
-
 									</div>
 								</div>
 							</div>
@@ -298,8 +285,6 @@
 	<script src="resources/assets/listing/js/bootstrap-treeview.js"></script>
 	<script src="resources/assets/listing/js/jquery.raty.js"></script>
 
-	<script src="resources/assets/listing/js/jquery.nstSlider.min.js"></script>
-
 	<!-- 	<script
 		src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css"></script>-->
 	<script>
@@ -311,16 +296,11 @@
 		})
 	</script>
 	<script src="resources/assets/listing/js/custom.js"></script>
-	<script>
-		
-	</script>
 
 	<input type="hidden" id="current_cat_id"
 		value='<%=request.getParameter("cat")%>' />
 	<input type="hidden" id="child_category_ids" value="" />
 	<input type="hidden" id="attribute_ids" value="-1" />
-	<input type="hidden" id="price_slider_min" />
-	<input type="hidden" id="price_slider_max" />
 	<a href="#0" class="cd-top">Top</a>
 </body>
 </html>
