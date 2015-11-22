@@ -1,18 +1,162 @@
+var CURRENT_CATEGORY = "cat";
+var CHILD_CATEGORIES = "child_cat";
+var ATTRIBUTES = "ref";
+var SPLIT_CHAR = "^";
+var JOIN_CHAR = "_";
+
 $(document).ready(function() {
 
-	loadCategories();
+	getCategories();
 
-	loadOnScrollToBottom();
-	
-	backToTop();
-	
 });
 
-// category supports ONLY 3 levels
-function loadCategories() {
+function reRenderPage() {
+	getRefiners();
+	highlightCheckBoxes();
+}
+
+function getSelectedRefiners() {
+	return $("input[name=refiner_checkboxes]:checked").map(function() {
+		return this.id;
+	}).get().join(SPLIT_CHAR);
+}
+
+function makeSelectedFromParam() {
+
+	var param = getRequestParam(ATTRIBUTES);
+	var refiners = param.split(SPLIT_CHAR);
+
+	$("input[name=refiner_checkboxes]").each(function(index, element) {
+		for (i = 0; i < refiners.length; i++) {
+			if (refiners[i] === element.id) {
+				$(this).prop('checked', true);
+			}
+		}
+	});
+}
+
+function highlightCheckBoxes() {
+
+	if (isEmpty(getSelectedRefiners())) {
+		replaceRequestParameter(ATTRIBUTES, -1);
+		return false;
+	}
+
+	replaceRequestParameter(ATTRIBUTES, getSelectedRefiners());
+
+	makeSelectedFromParam();
+
+	replaceRequestParameter(ATTRIBUTES, getSelectedRefiners());
+
+}
+
+function getProductsOnRefinerChange() {
+	highlightCheckBoxes();
+}
+
+function getInputToLoadProducts() {
+
+	var param = getRequestParam(ATTRIBUTES).split(SPLIT_CHAR);
+
+	var attributeIds = [];
+
+	for (i = 0; i < param.length; i++) {
+		attributeIds.push(param[i].split("_").join(","));
+	}
+
+	attributeIds = attributeIds.join(",");
+
+	var categoryIds = getRequestParam(CHILD_CATEGORIES);
+
+	var numericAttributeIds = attributeIds.split(',').map(function(s) {
+		return Number(s);
+	});
+	var numericCategoryIds = categoryIds.split(',').map(function(s) {
+		return Number(s);
+	});
+
+	var input = {
+		categoryIds : numericCategoryIds,
+		attributeIds : numericAttributeIds
+	};
+	input = JSON.stringify(input);
+	return input;
+}
+
+function getRefiners() {
+
+	$.ajax({
+		url : "product/findRefiners",
+		method : 'POST',
+		contentType : "application/json; charset=utf-8",
+		data : getInputToLoadProducts(),
+		success : function(data) {
+			renderRefiners(data);
+		}
+	});
+}
+
+function renderRefiners(filters) {
+
+	var refiners = filters.refiners;
+
+	$('#refiners_and_attributes').empty();
+
+	if (refiners != null && refiners.length > 0) {
+
+		for (i = 0; i < refiners.length; ++i) {
+
+			var refiner = refiners[i];
+
+			var refiners_html = '<div class="refiner"><div class="panel panel-primary"><div class="panel-heading refiner"><button class="refiner_shrink_button" type="button" data-toggle="collapse" data-target="#shrink'
+					+ refiner.name
+					+ '"'
+					+ 'aria-expanded="true" aria-controls="shrink">'
+					+ '<span aria-hidden="false">'
+					+ refiner.name
+					+ '</span></button></div><div class="collapse in" id="shrink'
+					+ refiner.name + '"><div class="panel-body">';
+
+			var attributes = refiner.uniqueAttributes;
+
+			var checkboxes = "";
+
+			if (attributes != null && attributes.length > 0) {
+
+				for (j = 0; j < attributes.length; ++j) {
+
+					var attribute = attributes[j];
+
+					var idAndValue = changeCommaSeparatedToHashSeparated(attribute.attributeIds);
+
+					var checkbox = '<div class="checkbox checkbox-success">'
+							+ '<input name="refiner_checkboxes" class="refiner_checkboxes" id="'
+							+ idAndValue
+							+ '" onchange="getProductsOnRefinerChange()" value="'
+							+ attribute.attributeIds
+							+ '" type="checkbox" id="checkbox' + attribute.id
+							+ '"> <label for="' + idAndValue + '"> '
+							+ attribute.value + ' </label>' + '</div>';
+					checkboxes += checkbox;
+				}
+			}
+
+			refiners_html += checkboxes + '</div></div></div></div>';
+
+			$('#refiners_and_attributes').append(refiners_html);
+		}
+	}
+}
+
+function changeCommaSeparatedToHashSeparated(attributeIds) {
+	var comma = attributeIds;
+	return comma.join(JOIN_CHAR);
+}
+
+function getCategories() {
 
 	var attributeIds = $('#attribute_ids').val();
-	
+
 	$
 			.ajax({
 				url : "category/getCategory",
@@ -22,13 +166,23 @@ function loadCategories() {
 				success : function(data) {
 
 					if (data != null && data.breadcrumps != null) {
-						
-						loadRefiners($('#current_cat_id').val(), attributeIds);
-						
+
+						replaceRequestParameter(CHILD_CATEGORIES,
+								data.childrenIds);
+
+						updateRequestParameter(ATTRIBUTES,
+								getRequestParamForAttributes());
+
+						reRenderPage();
+
+						// loadRefiners($('#current_cat_id').val(),
+						// attributeIds);
+
 						$('#child_category_ids').val(data.childrenIds);
-						
-						loadProductsOnPageLoad($('#child_category_ids').val(), attributeIds);
-						
+
+						// loadProductsOnPageLoad($('#child_category_ids').val(),
+						// attributeIds);
+
 						for (b = 0; b < data.breadcrumps.length; ++b) {
 
 							var breadcrumb_name = data.breadcrumps[b].name;
@@ -131,287 +285,138 @@ function loadCategories() {
 			});
 }
 
-function loadRefiners(categoryIds, attributeIds) {
-
-	$.ajax({
-					url : "product/findRefiners",
-					method : 'POST',
-					contentType : "application/json; charset=utf-8",
-					data : getInputToLoadProducts(categoryIds, attributeIds),
-					success : function(data) {
-						renderRefiners(data);
-					}
-	});
-}
-
-function renderRefiners(filters) {
-
-	var refiners = filters.refiners;
-	
-	if (refiners != null && refiners.length > 0) {
-
-		for (i = 0; i < refiners.length; ++i) {
-
-			var refiner = refiners[i];
-
-			var refiners_html = '<div class="refiner"><div class="panel panel-primary"><div class="panel-heading refiner"><button class="refiner_shrink_button" type="button" data-toggle="collapse" data-target="#shrink'
-					+ refiner.name
-					+ '"'
-					+ 'aria-expanded="true" aria-controls="shrink">'
-					+ '<span aria-hidden="false">'
-					+ refiner.name
-					+ '</span></button></div><div class="collapse in" id="shrink'
-					+ refiner.name + '"><div class="panel-body">';
-
-			var attributes = refiner.uniqueAttributes;
-
-			var checkboxes = "";
-
-			if (attributes != null && attributes.length > 0) {
-
-				for (j = 0; j < attributes.length; ++j) {
-
-					var attribute = attributes[j];
-
-					var checkbox = '<div class="checkbox checkbox-success">'
-							+ '<input class="refiner_checkboxes" onchange="loadProductsOnChange()" value="' + attribute.attributeIds +'" type="checkbox" id="checkbox'
-							+ attribute.id + '"> <label for="checkbox'
-							+ attribute.id + '"> ' + attribute.value
-							+ ' </label>' + '</div>';
-					checkboxes += checkbox;
-				}
-			}
-
-			refiners_html += checkboxes + '</div></div></div></div>';
-
-			$('#refiners_and_attributes').append(refiners_html);
-		}
+function getRequestParamForAttributes() {
+	var attr = getRequestParam(ATTRIBUTES);
+	if (isEmpty(attr)) {
+		return -1;
 	}
+
+	return attr;
 }
 
-function getInputToLoadProducts(categoryIds, attributeIds) {
+/** uTILITY METHODS * */
+function updateRequestParameter(key, value) {
 
-	var numericAttributeIds = attributeIds.split(',').map(function(s){return Number(s);});
-	var numericCategoryIds = categoryIds.split(',').map(function(s){return Number(s);});
+	var url = window.location.href;
+	var attributes = getRequestParam(key);
 
-	var input = {categoryIds:numericCategoryIds,attributeIds:numericAttributeIds};
-	input = JSON.stringify(input);
-	return input;
-}
+	var attributesParam = "";
 
-function loadProductsOnPageLoad(categoryIds, attributeIds) {
+	var updatedValue = value;
 
-	$.ajax({
-		url : "product/findProducts?page=0",
-		method : 'POST',
-		contentType : "application/json; charset=utf-8",
-		data : getInputToLoadProducts(categoryIds, attributeIds),
-		success : function(data) {
-			renderProducts(data,true);
-		}
-	});
-}
-
-function getProductsOnRefinerChange(categoryIds, attributeIds) {
-
-	$.ajax({
-		url : "product/findProducts?page=0",
-		method : 'POST',
-		contentType : "application/json; charset=utf-8",
-		data : getInputToLoadProducts(categoryIds, attributeIds),
-		success : function(data) {
-			renderProducts(data, false);
-			$(window).data('ajaxready', true);
-		},
-		beforeSend : function() {
-			$('#loader-icon_left').show();
-			$('#left_block').addClass("disable");
-			$('#left_block :input').prop('disabled', 'true'); 
-		},
-		complete : function() {
-			$('#loader-icon_left').hide();
-			$('#left_block').removeClass("disable");
-			$('#left_block :input').removeProp('disabled');
-		},
-		error : function(e) {
-			alert(e);
-		}
-		
-	});
-}
-
-function loadOnScrollToBottom() {
-
-	var start = 1;
-
-	$(window).data('ajaxready', true).scroll(
-			function() {
-			
-			if ($(window).data('ajaxready') == false) return;
-			
-				if ($(window).scrollTop() >= ($(document).height() - $(window).height())) {
-					
-					$(window).data('ajaxready', false);
-					
-					$.ajax({
-						url : "product/findProducts?page=" + start,
-						method : 'POST',
-						contentType : "application/json; charset=utf-8",
-						data : getInputToLoadProducts($('#child_category_ids').val(), $('#attribute_ids').val()),
-						success : function(data) {
-							start += 1;
-							renderProducts(data,true);
-							$(window).data('ajaxready', true);
-						},
-						beforeSend : function() {
-							$('#loader-icon').show();
-						},
-						complete : function() {
-							$('#loader-icon').hide();
-						}
-					});
-				}
-			});
-}
-
-function backToTop() {
-	
-	var offset = 300,
-	offset_opacity = 1200,
-	scroll_top_duration = 700,
-	$back_to_top = $('.cd-top');
-
-	$(window).scroll(function(){
-		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
-		if( $(this).scrollTop() > offset_opacity ) { 
-			$back_to_top.addClass('cd-fade-out');
-		}
-	});
-
-	$back_to_top.on('click', function(event){
-		event.preventDefault();
-		$('body,html').animate({
-			scrollTop: 0 ,
-		 	}, scroll_top_duration
-		);
-	});
-}
-
-function renderProducts(data,append) {
-
-	if (data != null && data.length > 0 && !isEmpty(data)) {
-
-		var all_products = "";
-
-		for (i = 0; i < data.length; i++) {
-
-			var id = data[i].id;
-			var name = data[i].name;
-			var shortName = data[i].shortName;
-			var image = data[i].image;
-			var price = data[i].price;
-			var actualPrice = data[i].actualPrice;
-			var off = data[i].off;
-
-			var row_begin = i % 3;
-
-			if (row_begin === 0) {
-
-				if (i != 0) {
-					all_products += '</div>';
-				}
-
-				all_products += '<div class="row product_row">';
-			}
-
-			all_products += '<div class="col-lg-4 product">'
-					+ '<div class="thumbnail">'
-					+ '<a href="http://google.com"><img src="' + image
-					+ '" alt="' + name + '" class="thumbnail_images"></a>'
-					+ '<div class="caption"><div class="product_name_div">'
-					+ '<h6>' + shortName + '</h6></div>' + '<div id="' + id
-					+ '" class="rating_div"></div>' + '<p class="price_info">'
-					+ '<span class="price">Rs.' + price
-					+ '</span> <span class="actual_price">Rs.' + actualPrice
-					+ '</span></p>' + '</div></div></div>';
-
-		}
-		
-		if(append === true) {
-			$('.product_container').append(all_products);
-		} else {
-			$('.product_container').html(all_products);
-		}
+	if (isEmpty(attributes)) {
+		var updatedUrl = url + '&' + key + '=' + value;
+		ChangeUrl(url, updatedUrl);
 
 	} else {
-		$('.product_container').html('<h4>Oops. No products found.</h4>');
-	}
-
-	$.fn.raty.defaults.path = 'resources/assets/listing/images';
-	assignRating(data);
-
-}
-
-function assignRating(data) {
-	if (data != null && data.length > 0) {
-		for (i = 0; i < data.length; i++) {
-			var id = data[i].id;
-			var rating = data[i].rating;
-			$('#' + id).raty({
-				readOnly : true,
-				score : rating
-			});
+		var duplicate = isDuplicateValue(attributes, value);
+		if (!duplicate) {
+			attributes += SPLIT_CHAR + value;
+			var updatedUrl = updateQueryStringParameter(url, key, attributes);
+			ChangeUrl(url, updatedUrl);
+			console.log("updatedUrl = " + updatedUrl);
+		} else {
+			// do nothing
 		}
 	}
 }
 
-function loadProductsOnChange() {
-	
-	var items = document.getElementsByClassName('refiner_checkboxes');
-	var allAttributesIdsInPage = [];
-	for(i = 0; i < items.length; i++) {
-		if(items[i].checked) {
-			allAttributesIdsInPage.push(items[i].value);
-		}
-	}
-	
-	if(allAttributesIdsInPage.length === 0) {
-		allAttributesIdsInPage.push(-1);
-	}
-
-	document.getElementById('attribute_ids').value = allAttributesIdsInPage.toString();
-
-	reRenderPage();
+function replaceRequestParameter(key, value) {
+	var url = window.location.href;
+	var updatedUrl = updateQueryStringParameter(url, key, value);
+	ChangeUrl(url, updatedUrl);
 }
 
-function reRenderPage() {
-	getProductsOnRefinerChange($('#child_category_ids').val(),$('#attribute_ids').val());
+function ChangeUrl(page, url) {
+	if (typeof (history.pushState) != "undefined") {
+		var obj = {
+			Page : page,
+			Url : url
+		};
+		history.pushState({}, null, obj.Url);
+	} else {
+		window.location.href = "homePage";
+		alert("Browser does not support HTML5.");
+	}
+}
+
+function isDuplicateValue(attributes, value) {
+	var values = attributes.split("--");
+	for (i = 0; i < values.length; i++) {
+		if (values[i] === value) {
+			return true;
+		}
+	}
+	return false;
 }
 
 function updateQueryStringParameter(uri, key, value) {
-  var re = new RegExp("([?|&])" + key + "=.*?(&|#|$)", "i");
-  if (uri.match(re)) {
-    return uri.replace(re, '$1' + key + "=" + value + '$2');
-  } else {
-    var hash =  '';
-    if( uri.indexOf('#') !== -1 ){
-        hash = uri.replace(/.*#/, '#');
-        uri = uri.replace(/#.*/, '');
-    }
-    var separator = uri.indexOf('?') !== -1 ? "&" : "?";    
-    return uri + separator + key + "=" + value + hash;
-  }
+	var re = new RegExp("([?|&])" + key + "=.*?(&|#|$)", "i");
+	if (uri.match(re)) {
+		return uri.replace(re, '$1' + key + "=" + value + '$2');
+	} else {
+		var hash = '';
+		if (uri.indexOf('#') !== -1) {
+			hash = uri.replace(/.*#/, '#');
+			uri = uri.replace(/#.*/, '');
+		}
+		var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+		return uri + separator + key + "=" + value + hash;
+	}
 }
 
 function isEmpty(str) {
-    return (!str || 0 === str.length);
+	return (!str || 0 === str.length);
 }
 
 function isBlank(str) {
-    return (!str || /^\s*$/.test(str));
+	return (!str || /^\s*$/.test(str));
 }
 
-function getRequestParam(name){
-   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-      return decodeURIComponent(name[1]);
+function getRequestParam(name) {
+	if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)'))
+			.exec(location.search))
+		return decodeURIComponent(name[1]);
+}
+
+function removeRequestParameterValueOnly(key, value) {
+
+	var updatedArray = [];
+	var param = getRequestParam(key);
+	if (!isEmpty(param)) {
+		var values = param.split(SPLIT_CHAR);
+		for (i = 0; i < values.length; i++) {
+			if (parseInt(values[i]) === parseInt(value)) {
+
+			} else {
+				updatedArray.push(values[i]);
+			}
+		}
+	} else {
+		alert('Could not remove non-existing request parameter');
+	}
+
+	replaceRequestParameter(ATTRIBUTES, updatedArray);
+
+	return updatedArray;
+}
+
+function removeRequestParameter(parameter) {
+	url = window.location.href;
+	var urlparts = url.split('?');
+
+	if (urlparts.length >= 2) {
+		var urlBase = urlparts.shift(); // get first part, and remove from array
+		var queryString = urlparts.join("?"); // join it back up
+
+		var prefix = encodeURIComponent(parameter) + '=';
+		var pars = queryString.split(/[&;]/g);
+		for ( var i = pars.length; i-- > 0;)
+			// reverse iteration as may be destructive
+			if (pars[i].lastIndexOf(prefix, 0) !== -1) // idiom for
+				// string.startsWith
+				pars.splice(i, 1);
+		url = urlBase + '?' + pars.join('&');
+	}
+	return url;
 }

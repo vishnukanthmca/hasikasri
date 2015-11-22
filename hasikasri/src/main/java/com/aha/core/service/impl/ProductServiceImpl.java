@@ -38,18 +38,19 @@ public class ProductServiceImpl implements ProductService {
 		Double minPrice = 0d;
 		Double maxPrice = 100000000d;
 
-		if (input.getMinPrice() != null) {
-			minPrice = input.getMinPrice().doubleValue();
-		}
-
-		if (input.getMaxPrice() != null) {
-			maxPrice = input.getMaxPrice().doubleValue();
-		}
+		// if (input.getMinPrice() != null) {
+		// minPrice = input.getMinPrice().doubleValue();
+		// }
+		//
+		// if (input.getMaxPrice() != null) {
+		// maxPrice = input.getMaxPrice().doubleValue();
+		// }
 
 		PageRequest pageRequest = new PageRequest(page,
 				NO_OF_PRODUCTS_PER_PAGE, Sort.Direction.DESC, "id");
 
-		if (input.getAttributeIds().contains(-1L)) {
+		if (input.getAttributeIds().contains(-1L)
+				&& input.getAttributeIds().size() == 1) {
 			return productRepository.findByCategoryIds(input.getCategoryIds(),
 					minPrice, maxPrice, pageRequest);
 		} else {
@@ -66,20 +67,21 @@ public class ProductServiceImpl implements ProductService {
 		Double minPrice = 0d;
 		Double maxPrice = 100000000d;
 
-		if (input.getMinPrice() != null) {
-			minPrice = input.getMinPrice().doubleValue();
-		}
-
-		if (input.getMaxPrice() != null) {
-			maxPrice = input.getMaxPrice().doubleValue();
-		}
+		// if (input.getMinPrice() != null) {
+		// minPrice = input.getMinPrice().doubleValue();
+		// }
+		//
+		// if (input.getMaxPrice() != null) {
+		// maxPrice = input.getMaxPrice().doubleValue();
+		// }
 
 		PageRequest pageRequest = new PageRequest(page,
 				NO_OF_PRODUCTS_PER_PAGE, Sort.Direction.DESC, "id");
 
 		List<Product> list = null;
 
-		if (input.getAttributeIds().contains(-1L)) {
+		if (input.getAttributeIds().contains(-1L)
+				&& input.getAttributeIds().size() == 1) {
 			list = productRepository.getAllRefinersByCategory(
 					input.getCategoryIds(), minPrice, maxPrice, pageRequest);
 		} else {

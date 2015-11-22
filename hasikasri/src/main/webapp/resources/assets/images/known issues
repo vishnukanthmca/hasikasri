@@ -6,4 +6,7 @@
 # MAKE ALL IMAGES INTO ONE IMAGE - IMAGE SPRITING
 # highlight the back to top button when scrolled to the end
 # Use chrome developer tools audit to enable performance
-# When back button clicked  
+# When back button clicked
+# display color with the names
+# price display
+# when checkbox ids are added to the url just make them unclear by adding special characters  
