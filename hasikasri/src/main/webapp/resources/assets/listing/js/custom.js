@@ -3,6 +3,7 @@ var CHILD_CATEGORIES = "child_cat";
 var ATTRIBUTES = "ref";
 var SPLIT_CHAR = "^";
 var JOIN_CHAR = "_";
+var SPLIT_CHAR_ATTRIBUTES = ":";
 
 $(document).ready(function() {
 
@@ -20,7 +21,7 @@ function getProducts() {
 		url : "product/findProducts?page=0",
 		method : 'POST',
 		contentType : "application/json; charset=utf-8",
-		data : getInputToLoadProducts(),
+		data : getInput(),
 		success : function(data) {
 			renderProducts(data, false);
 		}
@@ -99,22 +100,47 @@ function assignRating(data) {
 
 // refiner related method starts here
 function getSelectedRefiners() {
-	return $("input[name=refiner_checkboxes]:checked").map(function() {
-		return this.id;
-	}).get().join(SPLIT_CHAR);
+	var checkedBoxes = [ "-1" ];
+	$("input[name=refiner_checkboxes]:checked").map(
+			function() {
+				var label = $('#' + this.id).next("label").html();
+				var value = label + SPLIT_CHAR_ATTRIBUTES
+						+ getFirstValueFromId(this.id);
+				checkedBoxes.push(value);
+			});
+
+	return checkedBoxes;
+}
+
+function getFirstValueFromId(id) {
+	var ids = id.split(JOIN_CHAR);
+	return ids[0];
 }
 
 function makeSelectedFromParam() {
 
 	var param = getRequestParam(ATTRIBUTES);
-	var refiners = param.split(SPLIT_CHAR);
+	var refiners = param.split(",");
+
 	$("input[name=refiner_checkboxes]").each(function(index, element) {
 		for (i = 0; i < refiners.length; i++) {
-			if (refiners[i] === element.id) {
+			if (isSameAttribute(refiners[i], element.id)) {
 				$(this).prop('checked', true);
 			}
 		}
 	});
+}
+
+function isSameAttribute(param, checkboxId) {
+	var label = getLabelText(checkboxId);
+	var attr = label + SPLIT_CHAR_ATTRIBUTES + getFirstValueFromId(checkboxId);
+
+	var isSame = attr === param;
+	return isSame;
+}
+
+function getLabelText(id) {
+	return $('#' + id).next("label").html();
 }
 
 function highlightCheckBoxes() {
@@ -126,23 +152,38 @@ function getProductsOnRefinerChange() {
 	reRenderPage();
 }
 
-function getInputToLoadProducts() {
+function getIdsOfCheckboxes(names) {
 
-	var param = getRequestParam(ATTRIBUTES).split(SPLIT_CHAR);
+	var selectedAttributesId = [];
 
-	var attributeIds = [];
+	$("input[name=refiner_checkboxes]").each(function(index, element) {
+		for (i = 0; i < names.length; i++) {
+			if (isSameAttribute(names[i], element.id)) {
+				selectedAttributesId.push(element.value);
+			}
+		}
+	});
 
-	for (i = 0; i < param.length; i++) {
-		attributeIds.push(param[i].split("_").join(","));
+	return selectedAttributesId;
+}
+
+function getInput() {
+
+	var attributeIds = getRequestParam(ATTRIBUTES).split(",");
+
+	var ids = "-1";
+
+	if (attributeIds[0].indexOf("-1") > -1 && attributeIds.length <= 1) {
+		alert(true);
+	} else {
+		ids = getIdsOfCheckboxes(attributeIds).join(",");
 	}
-
-	attributeIds = attributeIds.join(",");
-
 	var categoryIds = getRequestParam(CHILD_CATEGORIES);
 
-	var numericAttributeIds = attributeIds.split(',').map(function(s) {
+	var numericAttributeIds = ids.split(',').map(function(s) {
 		return Number(s);
 	});
+
 	var numericCategoryIds = categoryIds.split(',').map(function(s) {
 		return Number(s);
 	});
@@ -161,7 +202,7 @@ function getRefiners() {
 		url : "product/findRefiners",
 		method : 'POST',
 		contentType : "application/json; charset=utf-8",
-		data : getInputToLoadProducts(),
+		data : getInput(),
 		success : function(data) {
 			renderRefiners(data);
 		}
@@ -199,7 +240,8 @@ function renderRefiners(filters) {
 
 					var attribute = attributes[j];
 
-					var idAndValue = changeCommaSeparatedToHashSeparated(attribute.attributeIds);
+					var idAndValue = changeCommaSeparatedToHashSeparated(
+							attribute.attributeIds, refiner.name);
 
 					var checkbox = '<div class="checkbox checkbox-success">'
 							+ '<input name="refiner_checkboxes" class="refiner_checkboxes" id="'
@@ -207,8 +249,8 @@ function renderRefiners(filters) {
 							+ '" onchange="replaceRequestParameterForCheckBoxes(ATTRIBUTES, getSelectedRefiners());getProductsOnRefinerChange();" value="'
 							+ attribute.attributeIds
 							+ '" type="checkbox" id="checkbox' + attribute.id
-							+ '"> <label for="' + idAndValue + '"> '
-							+ attribute.value + ' </label>' + '</div>';
+							+ '"> <label for="' + idAndValue + '">'
+							+ attribute.value + '</label>' + '</div>';
 					checkboxes += checkbox;
 				}
 			}
@@ -223,10 +265,12 @@ function renderRefiners(filters) {
 
 }
 
-function changeCommaSeparatedToHashSeparated(attributeIds) {
+function changeCommaSeparatedToHashSeparated(attributeIds, refinerName) {
 	var comma = attributeIds;
-	return comma.join(JOIN_CHAR);
+	var value = refinerName + comma.join(JOIN_CHAR);
+	return value;
 }
+
 // refiner related method ends here
 
 function getCategories() {
