@@ -236,7 +236,7 @@
 					<!-- All Refiners starts here -->
 					<div class="row" id="refiners_and_attributes">
 
-						<div class="refiner">
+						<!-- <div class="refiner">
 							<div class="panel panel-primary">
 								<div class="panel-heading refiner">
 									<button class="refiner_shrink_button" type="button"
@@ -254,7 +254,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<!-- All Refiners ends here -->
 

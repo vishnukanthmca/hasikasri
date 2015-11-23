@@ -7,14 +7,13 @@ var JOIN_CHAR = "_";
 $(document).ready(function() {
 
 	getCategories();
-
 });
 
 function reRenderPage() {
 	getRefiners();
-	highlightCheckBoxes();
 }
 
+// refiner related method starts here
 function getSelectedRefiners() {
 	return $("input[name=refiner_checkboxes]:checked").map(function() {
 		return this.id;
@@ -25,7 +24,6 @@ function makeSelectedFromParam() {
 
 	var param = getRequestParam(ATTRIBUTES);
 	var refiners = param.split(SPLIT_CHAR);
-
 	$("input[name=refiner_checkboxes]").each(function(index, element) {
 		for (i = 0; i < refiners.length; i++) {
 			if (refiners[i] === element.id) {
@@ -36,18 +34,7 @@ function makeSelectedFromParam() {
 }
 
 function highlightCheckBoxes() {
-
-	if (isEmpty(getSelectedRefiners())) {
-		replaceRequestParameter(ATTRIBUTES, -1);
-		return false;
-	}
-
-	replaceRequestParameter(ATTRIBUTES, getSelectedRefiners());
-
 	makeSelectedFromParam();
-
-	replaceRequestParameter(ATTRIBUTES, getSelectedRefiners());
-
 }
 
 function getProductsOnRefinerChange() {
@@ -132,7 +119,7 @@ function renderRefiners(filters) {
 					var checkbox = '<div class="checkbox checkbox-success">'
 							+ '<input name="refiner_checkboxes" class="refiner_checkboxes" id="'
 							+ idAndValue
-							+ '" onchange="getProductsOnRefinerChange()" value="'
+							+ '" onchange="replaceRequestParameterForCheckBoxes(ATTRIBUTES, getSelectedRefiners());getProductsOnRefinerChange();" value="'
 							+ attribute.attributeIds
 							+ '" type="checkbox" id="checkbox' + attribute.id
 							+ '"> <label for="' + idAndValue + '"> '
@@ -146,12 +133,16 @@ function renderRefiners(filters) {
 			$('#refiners_and_attributes').append(refiners_html);
 		}
 	}
+
+	highlightCheckBoxes();
+
 }
 
 function changeCommaSeparatedToHashSeparated(attributeIds) {
 	var comma = attributeIds;
 	return comma.join(JOIN_CHAR);
 }
+// refiner related method ends here
 
 function getCategories() {
 
@@ -283,6 +274,7 @@ function getCategories() {
 					alert(error);
 				}
 			});
+
 }
 
 function getRequestParamForAttributes() {
@@ -322,6 +314,18 @@ function updateRequestParameter(key, value) {
 }
 
 function replaceRequestParameter(key, value) {
+	var url = window.location.href;
+	var updatedUrl = updateQueryStringParameter(url, key, value);
+	ChangeUrl(url, updatedUrl);
+}
+
+function replaceRequestParameterForCheckBoxes(key, value) {
+
+	if (isEmpty(value)) {
+		replaceRequestParameter(ATTRIBUTES, -1);
+		return;
+	}
+
 	var url = window.location.href;
 	var updatedUrl = updateQueryStringParameter(url, key, value);
 	ChangeUrl(url, updatedUrl);
