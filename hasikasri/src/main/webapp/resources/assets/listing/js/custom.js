@@ -11,6 +11,90 @@ $(document).ready(function() {
 
 function reRenderPage() {
 	getRefiners();
+	getProducts();
+}
+
+function getProducts() {
+
+	$.ajax({
+		url : "product/findProducts?page=0",
+		method : 'POST',
+		contentType : "application/json; charset=utf-8",
+		data : getInputToLoadProducts(),
+		success : function(data) {
+			renderProducts(data, false);
+		}
+	});
+}
+
+function renderProducts(data, append) {
+
+	if (data != null && data.length > 0 && !isEmpty(data)) {
+
+		var all_products = "";
+
+		for (i = 0; i < data.length; i++) {
+
+			var id = data[i].id;
+			var name = data[i].name;
+			var shortName = data[i].shortName;
+			var image = data[i].image;
+			var price = data[i].price;
+			var actualPrice = data[i].actualPrice;
+			var off = data[i].off;
+
+			var row_begin = i % 3;
+
+			if (row_begin === 0) {
+
+				if (i != 0) {
+					all_products += '</div>';
+				}
+
+				all_products += '<div class="row product_row">';
+			}
+
+			all_products += '<div class="col-lg-4 product">'
+					+ '<div class="thumbnail">'
+					+ '<a href="http://google.com"><img src="' + image
+					+ '" alt="' + name + '" class="thumbnail_images"></a>'
+					+ '<div class="caption"><div class="product_name_div">'
+					+ '<h6>' + shortName + '</h6></div>' + '<div id="' + id
+					+ '" class="rating_div"></div>' + '<p class="price_info">'
+					+ '<span class="price">Rs.' + price
+					+ '</span> <span class="actual_price">Rs.' + actualPrice
+					+ '</span></p>' + '</div></div></div>';
+
+		}
+
+		if (append === true) {
+			$('.product_container').append(all_products);
+		} else {
+			$('.product_container').html(all_products);
+		}
+
+	} else {
+		if (append === false) {
+			$('.product_container').html('<h4>Oops. No products found.</h4>');
+		}
+	}
+
+	$.fn.raty.defaults.path = 'resources/assets/listing/images';
+	assignRating(data);
+
+}
+
+function assignRating(data) {
+	if (data != null && data.length > 0) {
+		for (i = 0; i < data.length; i++) {
+			var id = data[i].id;
+			var rating = data[i].rating;
+			$('#' + id).raty({
+				readOnly : true,
+				score : rating
+			});
+		}
+	}
 }
 
 // refiner related method starts here
@@ -39,6 +123,7 @@ function highlightCheckBoxes() {
 
 function getProductsOnRefinerChange() {
 	highlightCheckBoxes();
+	reRenderPage();
 }
 
 function getInputToLoadProducts() {

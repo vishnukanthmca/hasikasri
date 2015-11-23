@@ -87,8 +87,8 @@ public class ProductServiceImpl implements ProductService {
 		} else {
 			list = productRepository
 					.getAllRefinersByCategoryAndAttributeIdAndPrice(
-							input.getCategoryIds(), input.getAttributeIds(),
-							minPrice, maxPrice, pageRequest);
+							input.getCategoryIds(), minPrice, maxPrice,
+							pageRequest);
 		}
 
 		Set<String> uniqueRefiners = new HashSet<>();

@@ -34,10 +34,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 			@Param("minPrice") Double minPrice,
 			@Param("maxPrice") Double maxPrice, Pageable pageable);
 
-	@Query("select distinct(product) from Product product join fetch product.attributes where product.id in(select distinct(p.id) from Product p join p.attributes a where p.category.id in :categoryIds AND a.id in :attributeIds AND p.price between :minPrice AND :maxPrice)")
+	@Query("select distinct(product) from Product product join fetch product.attributes where product.id in(select distinct(p.id) from Product p join p.attributes a where p.category.id in :categoryIds AND p.price between :minPrice AND :maxPrice)")
 	public List<Product> getAllRefinersByCategoryAndAttributeIdAndPrice(
 			@Param("categoryIds") List<Long> categoryIds,
-			@Param("attributeIds") List<Long> attributeIds,
 			@Param("minPrice") Double minPrice,
 			@Param("maxPrice") Double maxPrice, Pageable pageable);
 }
