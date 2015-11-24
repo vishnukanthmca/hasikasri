@@ -8,6 +8,9 @@ var SPLIT_CHAR_ATTRIBUTES = ":";
 $(document).ready(function() {
 
 	getCategories();
+
+	// listeners
+	sort();
 });
 
 function reRenderPage() {
@@ -414,6 +417,15 @@ function getRequestParamForAttributes() {
 	}
 
 	return attr;
+}
+
+function sort() {
+	$(".sort li a").click(function(e) {
+		var anchorText = $("#dLabel").text();
+		$("#dLabel").text($(this).text());
+		$(this).text(anchorText);
+		e.preventDefault();
+	});
 }
 
 /** uTILITY METHODS * */

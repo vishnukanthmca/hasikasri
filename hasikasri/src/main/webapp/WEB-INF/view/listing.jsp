@@ -226,7 +226,27 @@
 					<li><a href="home">Home</a></li>
 				</ol>
 			</div>
-
+			<div class="row">
+				<div id="sort_div_wrapper">
+					<div id="sort_div_left"></div>
+					<div id="sort_div_right">
+						<div class="dropdown sort">
+							<div id="sort_by_text">SORT BY</div>
+							<a id="dLabel" role="button" data-toggle="dropdown"
+								class="btn btn-primary sort_button" data-target=""
+								href="/page.html">What's New <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu multi-level" role="menu"
+								aria-labelledby="dropdownMenu">
+								<li><a href="#">Price: High To Low</a></li>
+								<li><a href="#">Price: Low To High</a></li>
+								<!-- <li class="divider"></li> -->
+								<li><a href="#">Discount: High To Low</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-lg-3" id="left_block">
 					<div class="row">
