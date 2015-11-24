@@ -12,7 +12,6 @@ $(document).ready(function() {
 
 function reRenderPage() {
 	getRefiners();
-	getProducts();
 }
 
 function getProducts() {
@@ -159,6 +158,7 @@ function getIdsOfCheckboxes(names) {
 	$("input[name=refiner_checkboxes]").each(function(index, element) {
 		for (i = 0; i < names.length; i++) {
 			if (isSameAttribute(names[i], element.id)) {
+
 				selectedAttributesId.push(element.value);
 			}
 		}
@@ -169,12 +169,11 @@ function getIdsOfCheckboxes(names) {
 
 function getInput() {
 
-	var attributeIds = getRequestParam(ATTRIBUTES).split(",");
-
+	var param = getRequestParam(ATTRIBUTES);
+	var attributeIds = param.split(",");
 	var ids = "-1";
 
 	if (attributeIds[0].indexOf("-1") > -1 && attributeIds.length <= 1) {
-		alert(true);
 	} else {
 		ids = getIdsOfCheckboxes(attributeIds).join(",");
 	}
@@ -262,6 +261,8 @@ function renderRefiners(filters) {
 	}
 
 	highlightCheckBoxes();
+
+	getProducts();
 
 }
 
@@ -429,16 +430,6 @@ function updateRequestParameter(key, value) {
 		var updatedUrl = url + '&' + key + '=' + value;
 		ChangeUrl(url, updatedUrl);
 
-	} else {
-		var duplicate = isDuplicateValue(attributes, value);
-		if (!duplicate) {
-			attributes += SPLIT_CHAR + value;
-			var updatedUrl = updateQueryStringParameter(url, key, attributes);
-			ChangeUrl(url, updatedUrl);
-			console.log("updatedUrl = " + updatedUrl);
-		} else {
-			// do nothing
-		}
 	}
 }
 
