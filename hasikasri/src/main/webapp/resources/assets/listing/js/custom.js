@@ -162,7 +162,6 @@ function getIdsOfCheckboxes(names) {
 	$("input[name=refiner_checkboxes]").each(function(index, element) {
 		for (i = 0; i < names.length; i++) {
 			if (isSameAttribute(names[i], element.id)) {
-
 				selectedAttributesId.push(element.value);
 			}
 		}
@@ -274,7 +273,7 @@ function renderRefiners(filters) {
 }
 
 function changeCommaSeparatedToHashSeparated(attributeIds, refinerName) {
-	var comma = attributeIds;
+	var comma = attributeIds.sort();
 	var value = refinerName + comma.join(JOIN_CHAR);
 	return value;
 }

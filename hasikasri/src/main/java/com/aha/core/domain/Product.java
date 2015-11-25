@@ -55,7 +55,7 @@ public class Product {
 	private Double rating;
 
 	@Column
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date addedDate;
 
 	public Long getId() {
