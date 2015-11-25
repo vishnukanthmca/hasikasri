@@ -1,5 +1,6 @@
 package com.aha.core.domain;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Product {
@@ -50,6 +53,10 @@ public class Product {
 
 	@Column
 	private Double rating;
+
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date addedDate;
 
 	public Long getId() {
 		return id;
@@ -145,6 +152,14 @@ public class Product {
 
 	public void setAttributes(List<Attribute> attributes) {
 		this.attributes = attributes;
+	}
+
+	public Date getAddedDate() {
+		return addedDate;
+	}
+
+	public void setAddedDate(Date addedDate) {
+		this.addedDate = addedDate;
 	}
 
 	@Override

@@ -36,6 +36,10 @@ public class ProductController {
 			return null;
 		}
 
+		if (!input.isValidSort()) {
+			return "Not an authenticated sort";
+		}
+
 		List<Product> products = productService.findByCategoryIds(input, page);
 
 		if (products == null || products.isEmpty()) {
@@ -60,6 +64,10 @@ public class ProductController {
 				|| input.getAttributeIds() == null
 				|| input.getAttributeIds().isEmpty()) {
 			return null;
+		}
+
+		if (!input.isValidSort()) {
+			return "Not an authenticated sort";
 		}
 
 		FilterDto dto = productService.getAllRefinersByCategory(input, 0);

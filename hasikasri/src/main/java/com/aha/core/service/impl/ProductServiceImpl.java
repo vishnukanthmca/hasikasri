@@ -7,12 +7,12 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.aha.core.domain.Attribute;
 import com.aha.core.domain.Product;
 import com.aha.core.service.ProductService;
+import com.aha.core.util.Util;
 import com.aha.persistence.repository.ProductRepository;
 import com.aha.web.dto.request.GetProductsInputDto;
 import com.aha.web.dto.response.AttributeDto;
@@ -47,7 +47,12 @@ public class ProductServiceImpl implements ProductService {
 		// }
 
 		PageRequest pageRequest = new PageRequest(page,
-				NO_OF_PRODUCTS_PER_PAGE, Sort.Direction.DESC, "id");
+				NO_OF_PRODUCTS_PER_PAGE, Util.getSortOrder(input
+						.getInternalSort()), Util.getSortColumn(input
+						.getInternalSort()));
+
+		System.out.println(Util.getSortOrder(input.getInternalSort()) + "->"
+				+ Util.getSortColumn(input.getInternalSort()));
 
 		if (input.getAttributeIds().contains(-1L)
 				&& input.getAttributeIds().size() == 1) {
@@ -76,7 +81,9 @@ public class ProductServiceImpl implements ProductService {
 		// }
 
 		PageRequest pageRequest = new PageRequest(page,
-				NO_OF_PRODUCTS_PER_PAGE, Sort.Direction.DESC, "id");
+				NO_OF_PRODUCTS_PER_PAGE, Util.getSortOrder(input
+						.getInternalSort()), Util.getSortColumn(input
+						.getInternalSort()));
 
 		List<Product> list = null;
 

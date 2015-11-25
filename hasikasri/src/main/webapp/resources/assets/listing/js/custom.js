@@ -4,6 +4,7 @@ var ATTRIBUTES = "ref";
 var SPLIT_CHAR = "^";
 var JOIN_CHAR = "_";
 var SPLIT_CHAR_ATTRIBUTES = ":";
+var SORT = "sort";
 
 $(document).ready(function() {
 
@@ -180,6 +181,7 @@ function getInput() {
 	} else {
 		ids = getIdsOfCheckboxes(attributeIds).join(",");
 	}
+
 	var categoryIds = getRequestParam(CHILD_CATEGORIES);
 
 	var numericAttributeIds = ids.split(',').map(function(s) {
@@ -192,8 +194,10 @@ function getInput() {
 
 	var input = {
 		categoryIds : numericCategoryIds,
-		attributeIds : numericAttributeIds
+		attributeIds : numericAttributeIds,
+		sort : getRequestParam(SORT)
 	};
+
 	input = JSON.stringify(input);
 	return input;
 }
@@ -296,6 +300,8 @@ function getCategories() {
 
 						updateRequestParameter(ATTRIBUTES,
 								getRequestParamForAttributes());
+
+						createRequestParamForSort();
 
 						reRenderPage();
 
@@ -422,10 +428,32 @@ function getRequestParamForAttributes() {
 function sort() {
 	$(".sort li a").click(function(e) {
 		var anchorText = $("#dLabel").text();
-		$("#dLabel").text($(this).text());
+		var selected = $(this).text();
+		$("#dLabel").text(selected);
 		$(this).text(anchorText);
+
+		replaceRequestParameter(SORT, selected);
+
 		e.preventDefault();
+
+		reRenderPage();
 	});
+}
+
+function swapSort(sort) {
+	$('a', $('.sort')).each(function() {
+		var matches = false;
+		if ($(this).text().indexOf(sort) > -1) {
+			matches = true;
+		}
+		var currentAnchor = $(this).text();
+		var first = $("#dLabel").text();
+		if (matches === true) {
+			$(this).text(first);
+			$("#dLabel").text(currentAnchor);
+		}
+	});
+
 }
 
 /** uTILITY METHODS * */
@@ -443,6 +471,16 @@ function updateRequestParameter(key, value) {
 		ChangeUrl(url, updatedUrl);
 
 	}
+}
+
+function createRequestParamForSort() {
+	var sort = getRequestParam(SORT);
+	if (isEmpty(sort)) {
+		replaceRequestParameter(SORT, $("#dLabel").text());
+	} else {
+		swapSort(sort);
+	}
+
 }
 
 function replaceRequestParameter(key, value) {

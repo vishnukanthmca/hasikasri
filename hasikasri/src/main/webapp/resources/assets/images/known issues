@@ -11,4 +11,5 @@
 # price display
 # when checkbox ids are added to the url just make them unclear by adding special characters
 # sort drop down arrange alphabetically
-# refiners arrange alphabetically  
+# refiners arrange alphabetically
+# on refresh assign the non existing sorting option to drop down   
