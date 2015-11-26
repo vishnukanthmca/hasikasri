@@ -293,9 +293,9 @@ span.nav-toggle-icon {
 }
 
 .refiner_buttons {
-	background-color: white;
+	background-color: #3174AF;
 	background-image: none;
 	border-color: blue;
-	color: black;
+	color: white;
 	margin: 0px 2px;
 }
