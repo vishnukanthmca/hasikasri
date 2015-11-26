@@ -299,3 +299,7 @@ span.nav-toggle-icon {
 	color: white;
 	margin: 0px 2px;
 }
+
+.typeahead {
+	z-index: 1051;
+}

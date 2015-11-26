@@ -12,6 +12,7 @@ $(document).ready(function() {
 
 	// listeners
 	sort();
+	search();
 });
 
 function reRenderPage() {
@@ -494,6 +495,57 @@ function swapSort(sort) {
 		}
 	});
 
+}
+
+function search() {
+
+	var $input = $('.form-control');
+
+	$input.typeahead({
+		source : function(query, process) {
+			console.log(query);
+			$.ajax({
+				url : "search/getTerms?query=" + query,
+				method : "get",
+				success : function(data) {
+					console.log(data);
+					var input = [ {
+						id : "someId1",
+						name : "Display name 1"
+					}, {
+						id : "someId2",
+						name : "Display name 2"
+					} ];
+
+					process(data);
+				}
+			});
+
+			return i;
+		},
+		autoSelect : true
+	});
+
+	$input.change(function() {
+		var current = $input.typeahead("getActive");
+		console.log("current " + current);
+		if (current) {
+			// Some item from your model is active!
+			if (current.name == $input.val()) {
+				// This means the exact match is found. Use toLowerCase() if you
+				// want case insensitive match.
+				console.log("exact match");
+			} else {
+				// This means it is only a partial match, you can either add a
+				// new item
+				// or take the active if you don't want new items
+				console.log("partial match");
+			}
+		} else {
+			// Nothing is active so it is a new value (or maybe empty value)
+			console.log("nothing is active");
+		}
+	});
 }
 
 /** uTILITY METHODS * */
