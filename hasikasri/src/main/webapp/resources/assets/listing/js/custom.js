@@ -125,13 +125,54 @@ function makeSelectedFromParam() {
 	var param = getRequestParam(ATTRIBUTES);
 	var refiners = param.split(",");
 
+	$('#sort_div_left').empty();
+
 	$("input[name=refiner_checkboxes]").each(function(index, element) {
 		for (i = 0; i < refiners.length; i++) {
 			if (isSameAttribute(refiners[i], element.id)) {
 				$(this).prop('checked', true);
+				addButtons(element.name, element.id);
 			}
 		}
 	});
+}
+
+function addButtons(name, id) {
+	var buttonId = 'button' + getLabelText(id) + SPLIT_CHAR_ATTRIBUTES
+			+ getFirstValueFromId(id);
+
+	var exists = false;
+
+	$('button', $('#sort_div_left')).each(function() {
+		if ($(this).prop("id") == buttonId) {
+			exists = true;
+			return;
+		}
+	});
+
+	if (exists == false) {
+		$('#sort_div_left')
+				.append(
+						'<button type="button" onclick="buttonClick(\''
+								+ buttonId
+								+ '\')" class="btn btn-primary btn-xs refiner_buttons" id="'
+								+ buttonId
+								+ '"><span class="glyphicon glyphicon-remove"></span>'
+								+ getLabelText(id) + ' </button>');
+	}
+}
+
+function buttonClick(id) {
+	var button = id.replace('button', '');
+	$("input[name=refiner_checkboxes]").each(function(index, element) {
+		if (isSameAttribute(button, element.id)) {
+			$(this).prop("checked", false);
+		}
+	});
+
+	replaceRequestParameterForCheckBoxes(ATTRIBUTES, getSelectedRefiners());
+	getProductsOnRefinerChange();
+	// highlightCheckBoxes();
 }
 
 function isSameAttribute(param, checkboxId) {
@@ -151,7 +192,7 @@ function highlightCheckBoxes() {
 }
 
 function getProductsOnRefinerChange() {
-	highlightCheckBoxes();
+	// highlightCheckBoxes();
 	reRenderPage();
 }
 

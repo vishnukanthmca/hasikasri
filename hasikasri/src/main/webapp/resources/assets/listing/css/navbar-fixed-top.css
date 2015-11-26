@@ -250,8 +250,7 @@ span.nav-toggle-icon {
 }
 
 #sort_div_left {
-	display: flex;
-	flex-direction: column;
+	
 }
 
 #sort_div_right {
@@ -291,4 +290,12 @@ span.nav-toggle-icon {
 	border-color: blue;
 	background-color: #3174AF;
 	background-image: none;
+}
+
+.refiner_buttons {
+	background-color: white;
+	background-image: none;
+	border-color: blue;
+	color: black;
+	margin: 0px 2px;
 }
