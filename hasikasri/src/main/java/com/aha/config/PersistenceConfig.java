@@ -16,6 +16,8 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.aha.core.util.Application;
+
 @Configuration
 @EnableJpaRepositories(basePackages = { "com.aha" })
 @EnableTransactionManagement
@@ -57,6 +59,8 @@ public class PersistenceConfig {
 		properties.put("hibernate.dialect",
 				"org.hibernate.dialect.MySQL5InnoDBDialect");
 		properties.put("hibernate.show_sql", "true");
+		properties.put("hibernate.search.default.indexBase",
+				Application.INDEX_DIRECTORY);
 		return properties;
 	}
 

@@ -82,3 +82,51 @@ function listenRefinerHeadingButton() {
 	});
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2)------------------------------------------------------------------------------------
+FullTextSession fullTextSession = org.hibernate.search.Search.getFullTextSession(getSession());  
+    QueryBuilder qb = fullTextSession.getSearchFactory().buildQueryBuilder().forEntity(Song.class).get();  
+
+    if(searchTerm==null || searchTerm.equals(""))
+        searchTerm="*";
+    else
+        searchTerm="*"+searchTerm+"*";
+    Query luceneQuery1 = qb.bool()
+            .should(qb.keyword().wildcard().onField("name").matching(searchTerm).createQuery())
+            .should(qb.keyword().wildcard().onField("album").matching(searchTerm).createQuery())
+            .should(qb.keyword().wildcard().onField("artist").matching(searchTerm).createQuery()).createQuery();
+    Query luceneQuery2 = qb.bool()
+            .must(qb.keyword().wildcard().onField("playList.place.id").matching(playlist.getPlace().getId()).createQuery())
+            .must(qb.keyword().wildcard().onField("playList.id").matching(playlist.getId()).createQuery())
+            .createQuery();
+    BooleanQuery finalLuceneQuery=new BooleanQuery();
+    finalLuceneQuery.add(luceneQuery1, BooleanClause.Occur.MUST);
+    finalLuceneQuery.add(luceneQuery2, BooleanClause.Occur.MUST);
+    FullTextQuery query = fullTextSession.createFullTextQuery(finalLuceneQuery, Song.class);
+    org.apache.lucene.search.Sort sort = new Sort(new SortField("nvotes",SortField.INT,true));
+    query.setSort(sort);
+    List<Song> songs = query.setFirstResult(page*limit).setMaxResults(limit).list();
+    
+3)--------------------------------------------------------------------------------------------

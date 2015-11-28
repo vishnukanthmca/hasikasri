@@ -15,7 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 @Entity
+@Indexed
 public class Category {
 
 	@Id
@@ -23,6 +27,7 @@ public class Category {
 	private Long id;
 
 	@Column
+	@Field
 	private String name;
 
 	@Column

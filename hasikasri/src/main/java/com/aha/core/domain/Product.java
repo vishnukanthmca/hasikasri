@@ -14,7 +14,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
+
 @Entity
+@Indexed
 public class Product {
 
 	@Id
@@ -25,6 +31,7 @@ public class Product {
 	private String pid;
 
 	@Column
+	@Field(index = Index.YES, analyze = Analyze.YES)
 	private String name;
 
 	@ManyToOne(fetch = FetchType.EAGER)
