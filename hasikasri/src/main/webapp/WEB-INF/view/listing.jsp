@@ -206,10 +206,14 @@
 							<li><a href="#">Separated link</a></li>
 						</ul>
 					</div>
-					<input type="text" data-provide="typeahead" class="form-control"
+					<!-- <input type="text" data-provide="typeahead" class="form-control"
 						placeholder="What are you looking for?"
 						aria-describedby="basic-addon2"> <span
-						class="input-group-addon" id="basic-addon2">Search</span>
+						class="input-group-addon" id="basic-addon2">Search</span> -->
+					<div id="scrollable-dropdown-menu" class="col-md-8">
+						<input class="typeahead form-control" id="basic-addon2"
+							type="text" placeholder="Search">
+					</div>
 				</div>
 				<!-- /input-group -->
 			</div>
@@ -315,7 +319,7 @@
 			})
 		})
 	</script>
-	<script src="resources/assets/listing/js/bootstrap3-typeahead.js"></script>
+	<script src="resources/assets/listing/js/typeahead.bundle.js"></script>
 	<script src="resources/assets/listing/js/custom.js"></script>
 
 	<input type="hidden" id="current_cat_id"

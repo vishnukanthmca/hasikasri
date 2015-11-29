@@ -5,13 +5,12 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
 import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +52,8 @@ public class SearchRepository {
 
 		dtos.addAll(getAttributes(string));
 
+		System.out.println("All dtos " + dtos);
+
 		return dtos;
 	}
 
@@ -65,15 +66,16 @@ public class SearchRepository {
 		org.apache.lucene.search.Query productQuery = qb.keyword().wildcard()
 				.onField("value").matching(string + "*").createQuery();
 
-		BooleanQuery booleanQuery = new BooleanQuery();
-		booleanQuery.add(productQuery, BooleanClause.Occur.SHOULD);
-
-		Query jpaQuery = em.createFullTextQuery(booleanQuery, Attribute.class);
-		jpaQuery.setFirstResult(0);
-		jpaQuery.setMaxResults(2);
+		FullTextQuery query = em.createFullTextQuery(productQuery,
+				Attribute.class);
+		query.setProjection("id", "value");
+		query.setResultTransformer(Transformers.aliasToBean(Attribute.class));
 
 		@SuppressWarnings("unchecked")
-		List<Attribute> attributes = jpaQuery.getResultList();
+		List<Attribute> attributes = query.getResultList();
+
+		System.out.println("categories size=" + attributes.size() + " -> "
+				+ attributes);
 
 		List<SearchDto> dtos = new ArrayList<SearchDto>();
 
@@ -100,17 +102,18 @@ public class SearchRepository {
 		org.apache.lucene.search.Query productQuery = qb.keyword().wildcard()
 				.onField("name").matching(string + "*").createQuery();
 
-		BooleanQuery booleanQuery = new BooleanQuery();
-		booleanQuery.add(productQuery, BooleanClause.Occur.SHOULD);
-
-		Query jpaQuery = em.createFullTextQuery(booleanQuery, Category.class);
-		jpaQuery.setFirstResult(0);
-		jpaQuery.setMaxResults(2);
+		FullTextQuery query = em.createFullTextQuery(productQuery,
+				Category.class);
+		query.setProjection("id", "name");
+		query.setResultTransformer(Transformers.aliasToBean(Category.class));
 
 		@SuppressWarnings("unchecked")
-		List<Category> categories = jpaQuery.getResultList();
+		List<Category> categories = query.getResultList();
 
 		List<SearchDto> dtos = new ArrayList<SearchDto>();
+
+		System.out.println("categories size=" + categories.size() + " -> "
+				+ categories);
 
 		if (categories != null && !categories.isEmpty()) {
 
@@ -122,9 +125,9 @@ public class SearchRepository {
 		}
 
 		return dtos;
-
 	}
 
+	@Transactional
 	private List<SearchDto> getProducts(String string) {
 
 		em = Search.getFullTextEntityManager(entityManager);
@@ -135,15 +138,24 @@ public class SearchRepository {
 		org.apache.lucene.search.Query productQuery = qb.keyword().wildcard()
 				.onField("name").matching(string + "*").createQuery();
 
-		BooleanQuery booleanQuery = new BooleanQuery();
-		booleanQuery.add(productQuery, BooleanClause.Occur.SHOULD);
+		// BooleanQuery booleanQuery = new BooleanQuery();
+		// booleanQuery.add(productQuery,
+		// org.apache.lucene.search.BooleanClause.Occur.SHOULD);
 
-		Query jpaQuery = em.createFullTextQuery(booleanQuery, Product.class);
-		jpaQuery.setFirstResult(0);
-		jpaQuery.setMaxResults(2);
+		// Query jpaQuery = em.createFullTextQuery(booleanQuery, Product.class);
+		// jpaQuery.setFirstResult(0);
+		// jpaQuery.setMaxResults(2);
+
+		FullTextQuery query = em.createFullTextQuery(productQuery,
+				Product.class);
+		query.setProjection("id", "name");
+		query.setResultTransformer(Transformers.aliasToBean(Product.class));
 
 		@SuppressWarnings("unchecked")
-		List<Product> products = jpaQuery.getResultList();
+		List<Product> products = query.getResultList();
+
+		System.out.println("categories size=" + products.size() + " -> "
+				+ products);
 
 		List<SearchDto> dtos = new ArrayList<SearchDto>();
 

@@ -18,6 +18,7 @@ import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 @Entity
 @Indexed
@@ -31,7 +32,7 @@ public class Product {
 	private String pid;
 
 	@Column
-	@Field(index = Index.YES, analyze = Analyze.YES)
+	@Field(index = Index.YES, analyze = Analyze.YES, store = Store.YES)
 	private String name;
 
 	@ManyToOne(fetch = FetchType.EAGER)

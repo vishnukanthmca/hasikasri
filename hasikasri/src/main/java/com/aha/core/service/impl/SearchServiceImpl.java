@@ -2,6 +2,7 @@ package com.aha.core.service.impl;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -36,8 +37,22 @@ public class SearchServiceImpl implements SearchService {
 			return null;
 		}
 
-		return repository.query(searchTerm);
+		List<SearchDto> dtos = new ArrayList<SearchDto>();
+		String[] words = searchTerm.split(" ");
 
+		System.out.println("words " + words.length);
+
+		if (words != null && words.length > 1) {
+			for (String s : words) {
+				if (s != null && !s.trim().isEmpty()) {
+					dtos.addAll(repository.query(s));
+				}
+			}
+		} else if (words != null && words.length == 1) {
+			dtos.addAll(repository.query(searchTerm));
+		}
+
+		return dtos;
 	}
 
 	private String removeStopWords(String sentence) {

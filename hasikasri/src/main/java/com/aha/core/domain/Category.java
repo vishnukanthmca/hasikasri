@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 @Entity
 @Indexed
@@ -27,7 +28,7 @@ public class Category {
 	private Long id;
 
 	@Column
-	@Field
+	@Field(store = Store.YES)
 	private String name;
 
 	@Column
@@ -102,4 +103,10 @@ public class Category {
 	public void setChildrenCategories(List<Category> childrenCategories) {
 		this.childrenCategories = childrenCategories;
 	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + "]";
+	}
+
 }

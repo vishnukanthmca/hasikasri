@@ -494,57 +494,66 @@ function swapSort(sort) {
 			$("#dLabel").text(currentAnchor);
 		}
 	});
-
 }
 
 function search() {
 
-	var $input = $('.form-control');
+	// Instantiate the Bloodhound suggestion engine
+	var keywordsEngine = new Bloodhound(
+			{
+				datumTokenizer : function(datum) {
+					return Bloodhound.tokenizers.whitespace(datum.value
+							.toString());
+				},
+				queryTokenizer : Bloodhound.tokenizers.whitespace,
+				// local : keywords,
+				remote : {
+					url : 'search/getTerms?',
 
-	$input.typeahead({
-		source : function(query, process) {
-			console.log(query);
-			$.ajax({
-				url : "search/getTerms?query=" + query,
-				method : "get",
-				success : function(data) {
-					console.log(data);
-					var input = [ {
-						id : "someId1",
-						name : "Display name 1"
-					}, {
-						id : "someId2",
-						name : "Display name 2"
-					} ];
-
-					process(data);
+					replace : function(url, uriEncodedQuery) {
+						var val = $(".typeahead").filter(":focus").attr("id")
+								.slice(0, -2);
+						var res = (url + "&query=" + encodeURIComponent(uriEncodedQuery));
+						return res
+					},
+					filter : function(keywords) {
+						// Map the remote source JSON array to a JavaScript
+						// object array
+						return $.map(keywords, function(keyword) {
+							console.log("keyword " + JSON.stringify(keywords));
+							return {
+								value : keyword.name
+							};
+						});
+					}
+				},
+				dupDetector : function(remoteMatch, localMatch) {
+					return remoteMatch.value === localMatch.value;
 				}
+
+			// },
+			// prefetch : {
+			// url : 'resources/assets/listing/js/keywords.json',
+			// filter : function(keywords) {
+			// // Map the remote source JSON array to a JavaScript object array
+			// return $.map(keywords, function(keyword) {
+			// return {
+			// value : keyword.value
+			// };
+			// });
+			// }
+			// }
 			});
 
-			return i;
-		},
-		autoSelect : true
-	});
+	// kicks off the loading/processing of `local` and `prefetch`
+	// keywordsEngine.initialize();
 
-	$input.change(function() {
-		var current = $input.typeahead("getActive");
-		console.log("current " + current);
-		if (current) {
-			// Some item from your model is active!
-			if (current.name == $input.val()) {
-				// This means the exact match is found. Use toLowerCase() if you
-				// want case insensitive match.
-				console.log("exact match");
-			} else {
-				// This means it is only a partial match, you can either add a
-				// new item
-				// or take the active if you don't want new items
-				console.log("partial match");
-			}
-		} else {
-			// Nothing is active so it is a new value (or maybe empty value)
-			console.log("nothing is active");
-		}
+	$('#scrollable-dropdown-menu .typeahead').typeahead(null, {
+		name : 'keyword',
+		displayKey : 'value',
+		// `ttAdapter` wraps the suggestion engine in an adapter that
+		// is compatible with the typeahead jQuery plugin
+		source : keywordsEngine.ttAdapter()
 	});
 }
 

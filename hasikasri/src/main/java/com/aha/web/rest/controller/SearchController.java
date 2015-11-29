@@ -26,6 +26,9 @@ public class SearchController {
 
 		searchService.startIndexing();
 		List<SearchDto> dtos = searchService.query(query);
+
+		System.out.println(dtos);
+
 		return new Gson().toJson(dtos);
 	}
 }

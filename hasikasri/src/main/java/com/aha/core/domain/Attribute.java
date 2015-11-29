@@ -9,6 +9,7 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.Store;
 
 @Entity
 @Indexed
@@ -19,7 +20,7 @@ public class Attribute {
 	private Long id;
 
 	@Column
-	@Field
+	@Field(store = Store.YES)
 	private String value;
 
 	@Column
@@ -59,4 +60,11 @@ public class Attribute {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+
+	@Override
+	public String toString() {
+		return "Attribute [id=" + id + ", value=" + value + ", refiner="
+				+ refiner + "]";
+	}
+
 }
