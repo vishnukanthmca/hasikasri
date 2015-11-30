@@ -130,3 +130,48 @@ FullTextSession fullTextSession = org.hibernate.search.Search.getFullTextSession
     List<Song> songs = query.setFirstResult(page*limit).setMaxResults(limit).list();
     
 3)--------------------------------------------------------------------------------------------
+ var local_props = new Bloodhound({
+        datumTokenizer: function (p) {
+            return Bloodhound.tokenizers.whitespace(p.name);
+        },
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: portfolio_props,
+        limit: 100
+    });
+
+    var remote_props = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        remote: 'properties/searchPropertiesLike?substr=%QUERY',
+        dupDetector: function(remoteMatch, localMatch) {
+            return remoteMatch.name === localMatch.name;
+        },
+        limit: 100
+    });
+
+    local_props.initialize();
+    remote_props.initialize();
+
+    $('#typeahead-property').typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 2
+    },
+    {
+        name: 'port_properties',
+        displayKey: 'name',
+        source: local_props.ttAdapter(),
+        templates: {
+            header: '<h3>Your Portfolio Properties</h3>'
+        }
+    },
+    {
+        name: 'dir_properties',
+        displayKey: 'name',
+        source: remote_props.ttAdapter(),
+        templates: {
+            header: '<h3>Properties Directory</h3>'
+        }
+    });
+  4)----------------------------------------------------------------------------------
+  

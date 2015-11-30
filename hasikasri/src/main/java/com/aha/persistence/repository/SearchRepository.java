@@ -70,6 +70,7 @@ public class SearchRepository {
 				Attribute.class);
 		query.setProjection("id", "value");
 		query.setResultTransformer(Transformers.aliasToBean(Attribute.class));
+		query.setMaxResults(5);
 
 		@SuppressWarnings("unchecked")
 		List<Attribute> attributes = query.getResultList();
@@ -106,6 +107,7 @@ public class SearchRepository {
 				Category.class);
 		query.setProjection("id", "name");
 		query.setResultTransformer(Transformers.aliasToBean(Category.class));
+		query.setMaxResults(5);
 
 		@SuppressWarnings("unchecked")
 		List<Category> categories = query.getResultList();
@@ -138,18 +140,11 @@ public class SearchRepository {
 		org.apache.lucene.search.Query productQuery = qb.keyword().wildcard()
 				.onField("name").matching(string + "*").createQuery();
 
-		// BooleanQuery booleanQuery = new BooleanQuery();
-		// booleanQuery.add(productQuery,
-		// org.apache.lucene.search.BooleanClause.Occur.SHOULD);
-
-		// Query jpaQuery = em.createFullTextQuery(booleanQuery, Product.class);
-		// jpaQuery.setFirstResult(0);
-		// jpaQuery.setMaxResults(2);
-
 		FullTextQuery query = em.createFullTextQuery(productQuery,
 				Product.class);
 		query.setProjection("id", "name");
 		query.setResultTransformer(Transformers.aliasToBean(Product.class));
+		query.setMaxResults(5);
 
 		@SuppressWarnings("unchecked")
 		List<Product> products = query.getResultList();
