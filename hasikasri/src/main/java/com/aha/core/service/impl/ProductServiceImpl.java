@@ -202,4 +202,9 @@ public class ProductServiceImpl implements ProductService {
 
 		return filterDto;
 	}
+
+	@Override
+	public Product findById(Long id) {
+		return productRepository.findOne(id);
+	}
 }

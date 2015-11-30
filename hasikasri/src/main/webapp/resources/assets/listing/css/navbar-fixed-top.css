@@ -118,6 +118,7 @@ span.nav-toggle-icon {
 
 .thumbnail:hover {
 	border-color: #337AB7;
+	cursor: pointer;
 	/*no need to specify border-style and border-width again*/
 }
 

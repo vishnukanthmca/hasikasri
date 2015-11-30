@@ -1,0 +1,140 @@
+body {
+	min-height: 2000px;
+	padding-top: 70px;
+}
+
+@media ( min-width : 1000px) {
+	.container {
+		/**width: 1008px;**/
+		
+	}
+}
+
+.no-touch .cd-top:hover {
+	background-color: #e86256;
+	opacity: 1;
+}
+
+.static_top {
+	margin: 0 auto;
+	width: 843px;
+}
+
+#owl-demo .item img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+#bar {
+	width: 0%;
+	max-width: 100%;
+	height: 4px;
+	background: #7fc242;
+}
+
+#progressBar {
+	width: 100%;
+	background: #EDEDED;
+}
+
+#search_div {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	width: 65%;
+}
+
+.nav-list {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-bottom: 0;
+}
+
+.nav-list-main {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-bottom: 0;
+}
+
+span.nav-toggle-icon {
+	font-size: 7px !important;
+	top: -2px !important;
+	color: #888 !important;
+}
+/** search drop down start **/
+.demo {
+	margin: 50px 0;
+	position: relative;
+}
+
+.typeahead, .tt-query, .tt-hint {
+	border: 2px solid #CCCCCC;
+	/** border-radius: 8px 8px 8px 8px;**/
+	font-size: 14px;
+	/**height: 30px;**/
+	line-height: 30px;
+	outline: medium none;
+	padding: 8px 12px;
+	width: 396px;
+}
+
+.typeahead {
+	background-color: #FFFFFF;
+}
+
+.typeahead:focus {
+	border: 2px solid #0097CF;
+}
+
+.tt-query {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+.tt-hint {
+	color: #999999;
+}
+
+.tt-dropdown-menu {
+	background-color: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 8px 8px 8px 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 12px;
+	padding: 8px 0;
+	width: 422px;
+}
+
+.tt-suggestion {
+	font-size: 18px;
+	line-height: 24px;
+	padding: 3px 20px;
+}
+
+.tt-suggestion.tt-cursor {
+	background-color: #0097CF;
+	color: #FFFFFF;
+}
+
+.tt-suggestion p {
+	margin: 0;
+}
+
+.gist {
+	font-size: 14px;
+}
+
+#basic-addon2 {
+	border-radius: 2px;
+	width: 350px;
+}
+
+.tt-menu {
+	background-color: white;
+	width: 100%;
+	border-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+	border-radius: 5px;
+	max-height: 150px;
+	overflow-y: auto;
+}
+
+/** search drop down end **/

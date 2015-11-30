@@ -60,14 +60,27 @@ function renderProducts(data, append) {
 			}
 
 			all_products += '<div class="col-lg-4 product">'
-					+ '<div class="thumbnail">'
-					+ '<a href="http://google.com"><img src="' + image
-					+ '" alt="' + name + '" class="thumbnail_images"></a>'
+					+ '<div class="thumbnail">' + '<a><img src="'
+					+ image
+					+ '" alt="'
+					+ name
+					+ '" class="thumbnail_images" onclick="postToDetail('
+					+ id
+					+ ')" id="product'
+					+ id
+					+ '"></a>'
 					+ '<div class="caption"><div class="product_name_div">'
-					+ '<h6>' + shortName + '</h6></div>' + '<div id="' + id
-					+ '" class="rating_div"></div>' + '<p class="price_info">'
-					+ '<span class="price">Rs.' + price
-					+ '</span> <span class="actual_price">Rs.' + actualPrice
+					+ '<h6>'
+					+ shortName
+					+ '</h6></div>'
+					+ '<div id="'
+					+ id
+					+ '" class="rating_div"></div>'
+					+ '<p class="price_info">'
+					+ '<span class="price">Rs.'
+					+ price
+					+ '</span> <span class="actual_price">Rs.'
+					+ actualPrice
 					+ '</span></p>' + '</div></div></div>';
 
 		}
@@ -555,6 +568,14 @@ function search() {
 		// is compatible with the typeahead jQuery plugin
 		source : keywordsEngine.ttAdapter()
 	});
+}
+
+function postToDetail(id) {
+	var input = '<input type="hidden" name="productId" value="' + id + '" />';
+	$("body").append(
+			'<form action="detail" method="post" id="product_">' + input
+					+ '</form>');
+	$("#product_").submit();
 }
 
 /** uTILITY METHODS * */
