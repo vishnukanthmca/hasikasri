@@ -1,6 +1,7 @@
 package com.aha.web.dto.response;
 
 import com.aha.core.domain.Image;
+import com.aha.core.util.Application;
 
 public class ImageDto {
 
@@ -17,7 +18,15 @@ public class ImageDto {
 		this.imageId = image.getId();
 		this.productId = productId;
 		this.type = image.getType();
-		this.location = image.getLocation();
+		this.location = getPhysicalLocation(image.getLocation());
+	}
+
+	private String getPhysicalLocation(String image) {
+		if (image == null) {
+			return null;
+		}
+		return Application.IMAGES_DOMAIN + Application.DETAIL_IMAGES_PATH
+				+ image.trim();
 	}
 
 	public Long getImageId() {

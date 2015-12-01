@@ -153,27 +153,27 @@
 									<div class="row">
 										<div class="col-xs-6 col-sm-2">
 											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/images/190.jpg"></a>
+												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
 											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/images/190.jpg"></a>
+												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
 											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/images/190.jpg"></a>
+												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
 											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/images/190.jpg"></a>
+												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
 											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/images/190.jpg"></a>
+												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
 											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/images/190.jpg"></a>
+												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
 										</div>
 									</div>
 								</div>
@@ -226,7 +226,49 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-6" style="border: 1px solid red;">column 1</div>
+				<div class="col-md-6" style="border: 1px solid red;">
+					<div class="row">
+						<%-- <c:forEach begin="0" items="${product.resources/assets/detail/images}"
+							end="${product.resources/assets/detail/imagesSize}" var="img">
+							<img id="zoom_03" src="${img.location}"
+								data-zoom-image="resources/assets/detail/resources/assets/detail/images/large/image1.jpg" />
+
+
+						</c:forEach>
+						
+						
+ --%>
+						<div id="gallery_01">
+							<img id="zoom_03"
+								src="resources/assets/detail/images/small/image1.png"
+								data-zoom-image="resources/assets/detail/images/large/image1.jpg" />
+							<div id="gal1">
+								<a href="#"
+									data-image="resources/assets/detail/images/small/image1.png"
+									data-zoom-image="resources/assets/detail/images/large/image1.jpg">
+									<img id="zoom_03"
+									src="resources/assets/detail/images/thumb/image1.jpg" />
+								</a> <a href="#"
+									data-image="resources/assets/detail/images/small/image2.png"
+									data-zoom-image="resources/assets/detail/images/large/image2.jpg">
+									<img id="zoom_03"
+									src="resources/assets/detail/images/thumb/image2.jpg" />
+								</a> <a href="#"
+									data-image="resources/assets/detail/images/small/image3.png"
+									data-zoom-image="resources/assets/detail/images/large/image3.jpg">
+									<img id="zoom_03"
+									src="resources/assets/detail/images/thumb/image3.jpg" />
+								</a> <a href="#"
+									data-image="resources/assets/detail/images/small/image4.png"
+									data-zoom-image="resources/assets/detail/images/large/image4.jpg">
+									<img id="zoom_03"
+									src="resources/assets/detail/images/thumb/image4.jpg" />
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="row">bottom</div>
+				</div>
 				<div class="col-md-6" style="border: 1px solid red;">
 					<div id="product_info_div">
 						<div class="row">
@@ -244,6 +286,7 @@
 	<script src="resources/assets/detail/js/bootstrap.min.js"></script>
 	<script src="resources/assets/detail/js/bootstrap-treeview.js"></script>
 	<script src="resources/assets/detail/js/jquery.raty.js"></script>
+	<script src="resources/assets/detail/js/jquery.elevatezoom.js"></script>
 
 	<script>
 		$(function() {

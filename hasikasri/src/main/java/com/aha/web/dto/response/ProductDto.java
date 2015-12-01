@@ -66,7 +66,7 @@ public class ProductDto {
 			return null;
 		}
 
-		return Application.IMAGES_DOMAIN + Application.IMAGES_PATH
+		return Application.IMAGES_DOMAIN + Application.LISTING_IMAGES_PATH
 				+ image.trim();
 	}
 

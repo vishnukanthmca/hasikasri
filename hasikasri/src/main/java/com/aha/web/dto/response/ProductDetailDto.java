@@ -29,4 +29,11 @@ public class ProductDetailDto {
 	public void setImages(List<ImageDto> images) {
 		this.images = images;
 	}
+
+	public int getImagesSize() {
+		if (images == null) {
+			return 0;
+		}
+		return images.size();
+	}
 }
