@@ -61,7 +61,9 @@ public class HomeController {
 			} else {
 
 				ProductDetailDto dto = new ProductDetailDto(product.getName(),
-						getImages(productId));
+						getImages(productId), product.getRating(),
+						product.getActualPrice(), product.getPrice(),
+						product.getDiscount());
 				modelAndView.addObject("product", dto);
 			}
 		}

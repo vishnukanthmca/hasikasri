@@ -19,11 +19,11 @@ public class ProductDto {
 
 	private Double rating;
 
-	private Double actualPrice;
+	private Integer actualPrice;
 
-	private Double price;
+	private Integer price;
 
-	private Integer off;
+	private Integer discount;
 
 	public ProductDto(Product product) {
 		this.createProductDto(product);
@@ -34,9 +34,11 @@ public class ProductDto {
 		this.pid = product.getPid();
 		this.name = product.getName();
 		this.rating = product.getRating();
-		this.actualPrice = product.getActualPrice();
-		this.price = product.getPrice();
-		this.off = calculateOff();
+		this.price = product.getPrice().intValue();
+
+		if (product.getActualPrice() != null) {
+			this.actualPrice = product.getActualPrice().intValue();
+		}
 
 		this.createShortName();
 
@@ -49,15 +51,6 @@ public class ProductDto {
 		} else {
 			this.shortName = this.name;
 		}
-	}
-
-	private Integer calculateOff() {
-
-		if (price == null || actualPrice == null) {
-			return null;
-		}
-
-		return (int) Math.floor(100 - ((price / actualPrice) * 100));
 	}
 
 	private String generateImageLocation(String image) {
@@ -118,28 +111,28 @@ public class ProductDto {
 		this.rating = rating;
 	}
 
-	public Double getActualPrice() {
+	public Integer getActualPrice() {
 		return actualPrice;
 	}
 
-	public void setActualPrice(Double actualPrice) {
+	public void setActualPrice(Integer actualPrice) {
 		this.actualPrice = actualPrice;
 	}
 
-	public Double getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 
-	public Integer getOff() {
-		return off;
+	public Integer getDiscount() {
+		return discount;
 	}
 
-	public void setOff(Integer off) {
-		this.off = off;
+	public void setDiscount(Integer discount) {
+		this.discount = discount;
 	}
 
 	public String getShortName() {

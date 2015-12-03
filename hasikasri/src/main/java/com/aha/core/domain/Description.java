@@ -7,23 +7,20 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Review {
+public class Description {
 
 	@Id
 	@GeneratedValue
 	private Long id;
 
 	@Column
-	private String comment;
+	private String type;
 
 	@Column
-	private User user;
+	private String description;
 
 	@ManyToOne
 	private Product product;
-
-	@Column
-	private Double rating;
 
 	public Long getId() {
 		return id;
@@ -33,20 +30,20 @@ public class Review {
 		this.id = id;
 	}
 
-	public String getComment() {
-		return comment;
+	public String getType() {
+		return type;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public User getUser() {
-		return user;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Product getProduct() {
@@ -55,13 +52,5 @@ public class Review {
 
 	public void setProduct(Product product) {
 		this.product = product;
-	}
-
-	public Double getRating() {
-		return rating;
-	}
-
-	public void setRating(Double rating) {
-		this.rating = rating;
 	}
 }

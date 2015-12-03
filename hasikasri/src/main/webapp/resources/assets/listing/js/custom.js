@@ -46,7 +46,7 @@ function renderProducts(data, append) {
 			var image = data[i].image;
 			var price = data[i].price;
 			var actualPrice = data[i].actualPrice;
-			var off = data[i].off;
+			var discount = data[i].discount;
 
 			var row_begin = i % 3;
 

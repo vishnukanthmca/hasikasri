@@ -64,4 +64,14 @@ public class Util {
 
 		return column;
 	}
+
+	public static Integer calculateOff(Double price, Double actualPrice) {
+
+		if (price == null || actualPrice == null) {
+			return null;
+		}
+
+		return (int) Math.floor(100 - ((price / actualPrice) * 100));
+	}
+
 }

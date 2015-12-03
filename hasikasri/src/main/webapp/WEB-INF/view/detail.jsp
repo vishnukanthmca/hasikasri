@@ -274,8 +274,87 @@
 						<div class="row">
 							<h3>${product.name}</h3>
 						</div>
+						<div class="row">
+							<hr />
+							<div id="rating" data-score='${product.rating}'></div>
+							<div>&nbsp;&nbsp;&nbsp;&nbsp;5 ratings</div>
+						</div>
+
+						<div class="row">
+							<hr />
+							<div id="size">
+								SIZE <input type="text" class="textbox" name="quantity" size="3" />
+							</div>
+						</div>
+						<div class="row">
+							<hr />
+							<div id="check_availability">
+								<span id="check_availability_text">Check availability</span> <br />
+								Pincode <input type="text" class="textbox" name="quantity"
+									size="6" />
+							</div>
+						</div>
+						<div class="row">
+							<hr />
+							<div id="price_details">
+								<c:if test="${product.actualPrice != null}">
+									List Price: <label id="actualPrice">Rs.
+										${product.actualPrice}</label>
+								</c:if>
+								<br /> <label id="price">Rs.${product.price}</label>
+								<c:if test="${product.discount != null}">
+									<label id="discount"> ${product.discount}% OFF</label>
+								</c:if>
+								<c:if test="${product.deliveryCharge != null}">
+									<label id="delivery_charge"> +
+										${product.deliveryCharge} Delivery</label>
+								</c:if>
+								<c:if test="${product.deliveryCharge == null}">
+									<label id="delivery_charge"> FREE Delivery</label>
+								</c:if>
+							</div>
+						</div>
+						<div class="row">
+							<hr />
+
+							<div id="add_to_cart">
+								<button type="button" class="btn btn-success add_to_cart">
+									ADD TO CART</button>
+							</div>
+							<div id="buy_now">
+								<button type="button" class="btn btn-success buy_now">
+									BUY NOW</button>
+							</div>
+						</div>
 					</div>
 				</div>
+			</div>
+
+			<div class="row">
+				<div id="rootwizard">
+					<ul>
+						<li><a href="#tab1" data-toggle="tab">Product Description</a></li>
+						<li><a href="#tab2" data-toggle="tab">Shipping Details</a></li>
+						<li><a href="#tab3" data-toggle="tab">Return Policy</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane" id="tab1">
+							<table class="table product_description_table">
+								<tr class="info">
+									<td>Name</td>
+									<td>Apple</td>
+								</tr>
+								<tr>
+									<td>Model</td>
+									<td>XX-II</td>
+								</tr>
+							</table>
+						</div>
+						<div class="tab-pane" id="tab2">2</div>
+						<div class="tab-pane" id="tab3">3</div>
+					</div>
+				</div>
+
 			</div>
 
 		</div>
@@ -287,6 +366,7 @@
 	<script src="resources/assets/detail/js/bootstrap-treeview.js"></script>
 	<script src="resources/assets/detail/js/jquery.raty.js"></script>
 	<script src="resources/assets/detail/js/jquery.elevatezoom.js"></script>
+	<script src="resources/assets/detail/js/pills.js"></script>
 
 	<script>
 		$(function() {

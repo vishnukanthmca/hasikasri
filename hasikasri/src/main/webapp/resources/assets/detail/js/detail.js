@@ -1,7 +1,28 @@
 $(document).ready(function() {
 	search();
 	zoom();
+	raty();
+	pills();
 });
+
+function pills() {
+	// $('#rootwizard').bootstrapWizard({
+	// 'tabClass' : 'nav nav-pills'
+	// });
+
+	$('#rootwizard').bootstrapWizard();
+
+}
+
+function raty() {
+	$.fn.raty.defaults.path = 'resources/assets/detail/images';
+	$('#rating').raty({
+		readOnly : true,
+		score : function() {
+			return $(this).attr('data-score');
+		}
+	});
+}
 
 function zoom() {
 	// initiate the plugin and pass the id of the div containing gallery images
@@ -10,6 +31,8 @@ function zoom() {
 		cursor : 'pointer',
 		galleryActiveClass : 'active',
 		imageCrossfade : true,
+		zoomWindowWidth : 570,
+		zoomWindowHeight : 430,
 		loadingIcon : 'resources/assets/listing/images/GreenLoader.gif'
 	});
 
