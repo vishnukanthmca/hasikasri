@@ -20,15 +20,18 @@ public class ProductDetailDto {
 
 	private List<DescriptionDto> descriptions;
 
+	private List<BreadcrumbDto> breadcrumbs;
+
 	public ProductDetailDto(String name, List<ImageDto> images, Double rating,
 			Double actualPrice, Double price, Double discount,
-			List<DescriptionDto> descriptions) {
+			List<DescriptionDto> descriptions, List<BreadcrumbDto> breadcrumbs) {
 		super();
 		this.name = name;
 		this.images = images;
 		this.rating = rating;
 		this.price = price.intValue();
 		this.descriptions = descriptions;
+		this.breadcrumbs = breadcrumbs;
 
 		if (actualPrice != null) {
 			this.actualPrice = actualPrice.intValue();
@@ -53,6 +56,14 @@ public class ProductDetailDto {
 		}
 
 		return this.descriptions.size();
+	}
+
+	public int getBreadcrumbsSize() {
+		if (this.breadcrumbs == null) {
+			return 0;
+		}
+
+		return this.breadcrumbs.size();
 	}
 
 	public String getName() {
@@ -119,4 +130,11 @@ public class ProductDetailDto {
 		this.descriptions = descriptionDtos;
 	}
 
+	public List<BreadcrumbDto> getBreadcrumbs() {
+		return breadcrumbs;
+	}
+
+	public void setBreadcrumbs(List<BreadcrumbDto> breadcrumbs) {
+		this.breadcrumbs = breadcrumbs;
+	}
 }

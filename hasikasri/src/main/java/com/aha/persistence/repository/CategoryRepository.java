@@ -14,4 +14,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 	public Category findByActive(@Param("active") Boolean active,
 			@Param("id") Long id);
 
+	@Query("select c from Category c join c.products p where p.id in(:productId) AND c.active = :active order by c.parentCategory.id asc")
+	public Category findByProductId(@Param("active") Boolean active,
+			@Param("productId") Long productId);
 }

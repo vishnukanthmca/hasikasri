@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.aha.core.domain.Category;
 import com.aha.core.service.CategoryService;
-import com.aha.web.dto.response.BreadcrumbDto;
+import com.aha.core.util.Util;
 import com.aha.web.dto.response.CategoryDto;
 import com.google.gson.Gson;
 
@@ -34,52 +34,13 @@ public class CategoryController {
 		CategoryDto categoriesDto = null;
 		if (category != null) {
 			categoriesDto = print(category);
-			categoriesDto.setBreadcrumps(getParents(category));
+			categoriesDto.setBreadcrumps(Util.getParents(category));
 		}
 
 		Gson gson = new Gson();
 		String json = gson.toJson(categoriesDto);
 		System.out.println("end time " + (System.currentTimeMillis() - start));
 		return json;
-	}
-
-	private List<BreadcrumbDto> getParents(Category category) {
-
-		List<BreadcrumbDto> breadcrumps = new ArrayList<>();
-
-		if (category != null) {
-
-			BreadcrumbDto bto = new BreadcrumbDto();
-			bto.setId(category.getId());
-			bto.setName(category.getName());
-			breadcrumps.add(bto);
-
-			Category parentCategory = category.getParentCategory();
-
-			if (parentCategory != null) {
-
-				BreadcrumbDto bto1 = new BreadcrumbDto();
-				bto1.setId(parentCategory.getId());
-				bto1.setName(parentCategory.getName());
-
-				breadcrumps.add(bto1);
-
-				Category grandParentCategory = parentCategory
-						.getParentCategory();
-
-				if (grandParentCategory != null) {
-
-					BreadcrumbDto bto2 = new BreadcrumbDto();
-					bto2.setId(grandParentCategory.getId());
-					bto2.setName(grandParentCategory.getName());
-					breadcrumps.add(bto2);
-				}
-			}
-		}
-
-		java.util.Collections.reverse(breadcrumps);
-
-		return breadcrumps;
 	}
 
 	/**
@@ -168,8 +129,6 @@ public class CategoryController {
 		}
 
 		dto.setChildrenIds(childrenIdsList);
-
-		System.out.println("categoryCount " + categoryCount);
 
 		return dto;
 	}

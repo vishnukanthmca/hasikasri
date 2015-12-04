@@ -222,6 +222,10 @@
 			<div class="row">
 				<ol class="breadcrumb" id="breadcrumb_category">
 					<li><a href="home">Home</a></li>
+					<c:forEach begin="0" end="${product.breadcrumbsSize}"
+						var="breadcrumb" items="${product.breadcrumbs}">
+						<li><a href="listing?cat=${breadcrumb.id}">${breadcrumb.name}</a></li>
+					</c:forEach>
 				</ol>
 			</div>
 
