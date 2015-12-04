@@ -340,14 +340,19 @@
 					<div class="tab-content">
 						<div class="tab-pane" id="tab1">
 							<table class="table product_description_table">
-								<tr class="info">
-									<td>Name</td>
-									<td>Apple</td>
-								</tr>
-								<tr>
-									<td>Model</td>
-									<td>XX-II</td>
-								</tr>
+								<c:forEach begin="0" end="${product.descriptionsSize}"
+									items="${product.descriptions}" var="description"
+									varStatus="currentIndex">
+									<c:if test="${currentIndex.index % 2 == 0}">
+										<tr class="info">
+									</c:if>
+									<c:if test="${currentIndex.index % 2 != 0}">
+										<tr class="warning">
+									</c:if>
+									<td>${description.type}</td>
+									<td>${description.description}</td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 						<div class="tab-pane" id="tab2">2</div>

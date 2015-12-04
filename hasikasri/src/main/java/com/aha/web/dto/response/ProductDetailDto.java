@@ -18,13 +18,17 @@ public class ProductDetailDto {
 
 	private Integer deliveryCharge;
 
+	private List<DescriptionDto> descriptions;
+
 	public ProductDetailDto(String name, List<ImageDto> images, Double rating,
-			Double actualPrice, Double price, Double discount) {
+			Double actualPrice, Double price, Double discount,
+			List<DescriptionDto> descriptions) {
 		super();
 		this.name = name;
 		this.images = images;
 		this.rating = rating;
 		this.price = price.intValue();
+		this.descriptions = descriptions;
 
 		if (actualPrice != null) {
 			this.actualPrice = actualPrice.intValue();
@@ -41,6 +45,14 @@ public class ProductDetailDto {
 			return 0;
 		}
 		return images.size();
+	}
+
+	public int getDescriptionsSize() {
+		if (this.descriptions == null) {
+			return 0;
+		}
+
+		return this.descriptions.size();
 	}
 
 	public String getName() {
@@ -98,4 +110,13 @@ public class ProductDetailDto {
 	public void setDeliveryCharge(Integer deliveryCharge) {
 		this.deliveryCharge = deliveryCharge;
 	}
+
+	public List<DescriptionDto> getDescriptions() {
+		return descriptions;
+	}
+
+	public void setDescriptions(List<DescriptionDto> descriptionDtos) {
+		this.descriptions = descriptionDtos;
+	}
+
 }
