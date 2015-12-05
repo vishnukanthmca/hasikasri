@@ -224,3 +224,33 @@ span.nav-toggle-icon {
 	width: 70%;
 	margin: auto;
 }
+
+/** login with facebook start**/
+.btn-facebook {
+	color: #ffffff;
+	background-color: #133783;
+	border-color: #133783;
+}
+
+.btn-facebook:hover, .btn-facebook:focus, .btn-facebook:active,
+	.btn-facebook.active, .open .dropdown-toggle.btn-facebook {
+	color: #ffffff;
+	background-color: #0e285f;
+	border-color: #0b214e;
+}
+
+.btn-facebook:active, .btn-facebook.active, .open .dropdown-toggle.btn-facebook
+	{
+	background-image: none;
+}
+
+.btn-facebook.disabled, .btn-facebook[disabled], fieldset[disabled] .btn-facebook,
+	.btn-facebook.disabled:hover, .btn-facebook[disabled]:hover, fieldset[disabled] .btn-facebook:hover,
+	.btn-facebook.disabled:focus, .btn-facebook[disabled]:focus, fieldset[disabled] .btn-facebook:focus,
+	.btn-facebook.disabled:active, .btn-facebook[disabled]:active, fieldset[disabled] .btn-facebook:active,
+	.btn-facebook.disabled.active, .btn-facebook[disabled].active, fieldset[disabled] .btn-facebook.active
+	{
+	background-color: #133783;
+	border-color: #133783;
+}
+/** login with facebook end **/
