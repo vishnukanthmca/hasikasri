@@ -5,12 +5,11 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.core.StopAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.aha.core.service.SearchService;
@@ -20,7 +19,7 @@ import com.aha.web.dto.response.SearchDto;
 @Service
 public class SearchServiceImpl implements SearchService {
 
-	@Inject
+	@Autowired
 	private SearchRepository repository;
 
 	@Override
