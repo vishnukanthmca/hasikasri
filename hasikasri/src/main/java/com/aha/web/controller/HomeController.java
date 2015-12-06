@@ -33,6 +33,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/listing")
 	public ModelAndView listing() {
+		System.out.println("facebook " + faceBook);
 		ModelAndView modelAndView = new ModelAndView(LISTING_PAGE);
 		return modelAndView;
 	}
