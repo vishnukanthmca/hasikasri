@@ -27,6 +27,8 @@ dependencies {
     compile "org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final"
 	compile "org.hibernate:hibernate-search-orm:5.0.0.Final"
     compile 'mysql:mysql-connector-java:5.1.31'
+    compile 'org.springframework.social:spring-social-facebook:1.1.0.RELEASE'
+    compile 'org.springframework.social:spring-social-core:1.1.4.RELEASE'
     
     providedCompile 'javax.servlet:javax.servlet-api:3.1-b01'
 
