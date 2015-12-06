@@ -174,4 +174,8 @@ FullTextSession fullTextSession = org.hibernate.search.Search.getFullTextSession
         }
     });
   4)----------------------------------------------------------------------------------
+#https://www.facebook.com/dialog/oauth?client_id=540849602746977&redirect_uri=http://localhost:8080/hasikasri/callback&scope=email
+# https://console.developers.google.com/apis/library?project=hasikasri-1151
+#https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/hasikasri/googleCallback&response_type=code&client_id=594808748972-iar49e14t7k1rhpu9j8lrrpc4jt6cijs.apps.googleusercontent.com
+
   

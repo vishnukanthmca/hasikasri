@@ -1,12 +1,12 @@
 package com.aha.web.controller;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aha.config.social.facebook.FBConnection;
-import com.aha.config.social.facebook.FBGraph;
 import com.aha.core.service.ImageService;
 import com.aha.core.service.ProductService;
 
@@ -129,4 +128,98 @@ public class HomeController {
 			e.printStackTrace();
 		}
 	}
+
+	@RequestMapping(value = "/googleCallback", method = RequestMethod.GET)
+	@ResponseBody
+	public void googleCallback(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		try {
+			response.setContentType("text/html");
+			// FBConnection fbConnection = new FBConnection();
+			// String accessToken = fbConnection.getAccessToken(code);
+			//
+			// FBGraph fbGraph = new FBGraph(accessToken);
+			// String graph = fbGraph.getFBGraph();
+			// Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
+			// ServletOutputStream out = response.getOutputStream();
+			// out.println("<h1>Facebook Login using Java</h1>");
+			// out.println("<h2>Application Main Menu</h2>");
+			// out.println("<div>Welcome " + fbProfileData.get("first_name"));
+			// out.println("<div>Your Email: " + fbProfileData.get("email"));
+			// out.println("<div>You are " + fbProfileData.get("id"));
+
+			System.out.println("url " + request.getQueryString());
+
+			String graph = null;
+			try {
+
+				// String g =
+				// "https://www.googleapis.com/auth/userinfo.email?access_token="
+				// + code;
+				// String g =
+				// "www.googleapis.com?/oauth2/v1/tokeninfo?id_token="
+				// + code;
+				URL u = new URL("");
+				System.out.println("url " + u);
+				URLConnection c = u.openConnection();
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						c.getInputStream()));
+				String inputLine;
+				StringBuffer b = new StringBuffer();
+				while ((inputLine = in.readLine()) != null)
+					b.append(inputLine + "\n");
+				in.close();
+				graph = b.toString();
+				System.out.println("graph " + graph);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("ERROR in getting FB graph data. "
+						+ e);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void sendPost() throws Exception {
+
+		String url = "https://selfsolve.apple.com/wcResults.do";
+		URL obj = new URL(url);
+		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+		// add reuqest header
+		con.setRequestMethod("POST");
+		// con.setRequestProperty("User-Agent", USER_AGENT);
+		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+		String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+
+		// Send post request
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(urlParameters);
+		wr.flush();
+		wr.close();
+
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'POST' request to URL : " + url);
+		System.out.println("Post parameters : " + urlParameters);
+		System.out.println("Response Code : " + responseCode);
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(
+				con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+
+		// print result
+		System.out.println(response.toString());
+
+	}
+
 }
