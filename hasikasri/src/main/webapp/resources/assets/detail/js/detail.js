@@ -117,10 +117,21 @@ function displayCart() {
 	if (isEmpty(html)) {
 		$('.cd-cart-items').html(
 				"<div class='empty_cart'>Your cart is empty.</div>");
+		$('.cd-cart-total').hide();
+		$('.checkout-btn').html("");
+		$("a.checkout-btn").attr("href", "#");
+		$('.cd-go-to-cart').html("");
+		("a.cd-go-to-cart").attr("href", "#");
 	} else {
 		$('.cd-cart-items').html(html);
+		$('.cd-cart-total').show();
+		$('.checkout-btn').html("Checkout");
+		$("a.checkout-btn").attr("href", "hello");
+		$('.cd-go-to-cart').html("Go to cart page");
+		$("a.cd-go-to-cart").attr("href", "google");
 	}
 	$('#cart_total').html(total);
+
 }
 
 function pills() {
