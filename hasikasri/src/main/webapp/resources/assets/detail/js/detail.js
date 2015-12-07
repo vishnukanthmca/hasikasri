@@ -3,22 +3,7 @@ $(document).ready(function() {
 	zoom();
 	raty();
 	pills();
-	google();
 });
-
-function google() {
-	alert(' ');
-	$
-			.ajax({
-				url : 'https://accounts.google.com/o/oauth2/v2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/hasikasri/googleCallback&response_type=token&client_id=594808748972-iar49e14t7k1rhpu9j8lrrpc4jt6cijs.apps.googleusercontent.com',
-				method : "get",
-				data : "",
-				success : function(data) {
-					alert(data);
-				},
-			});
-
-}
 
 function pills() {
 	// $('#rootwizard').bootstrapWizard({
