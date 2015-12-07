@@ -257,3 +257,11 @@ span.nav-toggle-icon {
 .cart_td {
 	padding: 0px 3px;
 }
+
+.empty_cart {
+	padding-top: 90px;
+	padding-left: 20px;
+	color: gray;
+	font-size: 20px;
+	font-weight: bold;
+}

@@ -7,6 +7,26 @@ $(document).ready(function() {
 
 });
 
+function removeFromCart(productPid) {
+	var cart = localStorage.getItem("cart");
+	var products = JSON.parse(cart);
+
+	if (products == null) {
+		products = new Array();
+	}
+
+	for (i = 0; i < products.length; i++) {
+		var pid = products[i].pid;
+
+		if (productPid === pid) {
+			products.splice(i, 1);
+		}
+	}
+
+	localStorage.setItem("cart", JSON.stringify(products));
+	displayCart();
+}
+
 function addToCart(productPid, productPrice, productName) {
 
 	var cart = localStorage.getItem("cart");
@@ -22,17 +42,25 @@ function addToCart(productPid, productPrice, productName) {
 		var pid = products[i].pid;
 
 		if (productPid === pid) {
-			products[i].quantity = (parseInt(products[i].quantity) + parseInt($(
+			var newQuantity = (parseInt(products[i].quantity) + parseInt($(
 					'#quantity').val()));
+			var newPrice = parseInt(productPrice) * newQuantity;
+
+			products[i].quantity = newQuantity;
+			products[i].price = newPrice;
 			isDuplicate = true;
 		}
 	}
 
 	if (!isDuplicate) {
+
+		var updatedPrice = parseInt($('#quantity').val())
+				* parseInt(productPrice);
+
 		var product = {
 			pid : productPid,
 			name : productName,
-			price : productPrice,
+			price : updatedPrice,
 			image : 'resources/assets/detail/images/small/image1.png',
 			quantity : $('#quantity').val()
 		};
@@ -43,7 +71,6 @@ function addToCart(productPid, productPrice, productName) {
 	localStorage.setItem("cart", JSON.stringify(products));
 	displayCart();
 	if (!$('#cd-cart').hasClass('speed-in')) {
-		// close lateral menu (if it's open)
 		$('#main-nav').removeClass('speed-in');
 		toggle_panel_visibility($('#cd-cart'), $('#cd-shadow-layer'), $('body'));
 	}
@@ -52,10 +79,11 @@ function addToCart(productPid, productPrice, productName) {
 function displayCart() {
 
 	var string = localStorage.getItem("cart");
-	// console.log("existing cart " + string);
 	var products = JSON.parse(string);
 
 	var html = "";
+
+	var total = 0;
 
 	if (products != null) {
 		for (i = 0; i < products.length; i++) {
@@ -78,31 +106,21 @@ function displayCart() {
 					+ '<td class="cart_td"><div class="cd-price">Rs.'
 					+ price
 					+ '</div></td>'
-					+ '<td><a href="#0" class="cd-item-remove cd-img-replace">Remove</a></td></tr></table></li>';
+					+ '<td><a href="#0" onclick="removeFromCart('
+					+ pid
+					+ ')" class="cd-item-remove cd-img-replace">Remove</a></td></tr></table></li>';
 			html += node;
+			total += parseInt(price);
 		}
 	}
 
-	$('.cd-cart-items').html(html);
-
-	// // alert(object.age);
-	// var obj = {
-	// name : "velmani",
-	// age : 28
-	// };
-	//
-	// var obj1 = {
-	// name : "vishnu",
-	// age : 29
-	// };
-	//
-	// var arr = new Array();
-	// arr.push(obj);
-	// arr.push(obj1);
-	//
-	// localStorage.setItem("cart", JSON.stringify(arr));
-
-	// $('.cd-cart-items').html();
+	if (isEmpty(html)) {
+		$('.cd-cart-items').html(
+				"<div class='empty_cart'>Your cart is empty.</div>");
+	} else {
+		$('.cd-cart-items').html(html);
+	}
+	$('#cart_total').html(total);
 }
 
 function pills() {
@@ -204,4 +222,8 @@ function search() {
 		// is compatible with the typeahead jQuery plugin
 		source : keywordsEngine.ttAdapter()
 	});
+}
+
+function isEmpty(str) {
+	return (!str || 0 === str.length);
 }

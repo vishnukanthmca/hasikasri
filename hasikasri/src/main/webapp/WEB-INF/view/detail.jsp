@@ -296,9 +296,8 @@
 							<hr />
 							<div id="size">
 								SIZE <input type="text" class="textbox" name="size" size="3" />
-								&nbsp; &nbsp; &nbsp; <input
-									type="text" class="textbox" name="quantity" value="1"
-									id="quantity" size="3" />
+								&nbsp; &nbsp; &nbsp; <input type="text" class="textbox"
+									name="quantity" value="1" id="quantity" size="3" />
 							</div>
 						</div>
 						<div class="row">
@@ -387,50 +386,14 @@
 
 	<div id="cd-cart">
 		<h2>Cart</h2>
+		<!-- cd-cart-items -->
 		<ul class="cd-cart-items">
-			<li><table>
-					<tr>
-						<td class="cart_td"><img
-							src="resources/assets/detail/images/small/image1.png" height="50"
-							width="75" /></td>
-						<td class="cart_td"><span class="cd-qty">1x</span></td>
-						<td class="cart_td" width="200">Product Name</td>
-
-						<td class="cart_td"><div class="cd-price">$9.99</div></td>
-						<td><a href="#0" class="cd-item-remove cd-img-replace">Remove</a></td>
-					</tr>
-				</table></li>
-			<li><table>
-					<tr>
-						<td class="cart_td"><img
-							src="resources/assets/detail/images/small/image1.png" height="50"
-							width="75" /></td>
-						<td class="cart_td"><span class="cd-qty">1x</span></td>
-						<td class="cart_td" width="200">Product Name</td>
-
-						<td class="cart_td"><div class="cd-price">$9.99</div></td>
-						<td><a href="#0" class="cd-item-remove cd-img-replace">Remove</a></td>
-					</tr>
-				</table></li>
-			<li><table>
-					<tr>
-						<td class="cart_td"><img
-							src="resources/assets/detail/images/small/image1.png" height="50"
-							width="75" /></td>
-						<td class="cart_td"><span class="cd-qty">1x</span></td>
-						<td class="cart_td" width="200">Product Name</td>
-
-						<td class="cart_td"><div class="cd-price">$9.99</div></td>
-						<td><a href="#0" class="cd-item-remove cd-img-replace">Remove</a></td>
-					</tr>
-				</table></li>
-
 		</ul>
 		<!-- cd-cart-items -->
 
 		<div class="cd-cart-total">
 			<p>
-				Total <span>$39.96</span>
+				Total <span id="cart_total">Rs. 0.0</span>
 			</p>
 		</div>
 		<!-- cd-cart-total -->
