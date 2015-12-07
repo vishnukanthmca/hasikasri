@@ -51,11 +51,11 @@ public class ProductDetailsController {
 			if (product == null) {
 				modelAndView.setViewName("error");
 			} else {
-				ProductDetailDto dto = new ProductDetailDto(product.getName(),
-						getImages(productId), product.getRating(),
-						product.getActualPrice(), product.getPrice(),
-						product.getDiscount(), getDescription(productId),
-						getBreadCrumbs(productId));
+				ProductDetailDto dto = new ProductDetailDto(product.getPid(),
+						product.getName(), getImages(productId),
+						product.getRating(), product.getActualPrice(),
+						product.getPrice(), product.getDiscount(),
+						getDescription(productId), getBreadCrumbs(productId));
 
 				modelAndView.addObject("product", dto);
 			}

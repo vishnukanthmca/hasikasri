@@ -4,6 +4,8 @@ import java.util.List;
 
 public class ProductDetailDto {
 
+	private String pid;
+
 	private String name;
 
 	private List<ImageDto> images;
@@ -22,10 +24,11 @@ public class ProductDetailDto {
 
 	private List<BreadcrumbDto> breadcrumbs;
 
-	public ProductDetailDto(String name, List<ImageDto> images, Double rating,
-			Double actualPrice, Double price, Double discount,
+	public ProductDetailDto(String pid, String name, List<ImageDto> images,
+			Double rating, Double actualPrice, Double price, Double discount,
 			List<DescriptionDto> descriptions, List<BreadcrumbDto> breadcrumbs) {
 		super();
+		this.pid = pid;
 		this.name = name;
 		this.images = images;
 		this.rating = rating;
@@ -136,5 +139,13 @@ public class ProductDetailDto {
 
 	public void setBreadcrumbs(List<BreadcrumbDto> breadcrumbs) {
 		this.breadcrumbs = breadcrumbs;
+	}
+
+	public String getPid() {
+		return pid;
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
 	}
 }

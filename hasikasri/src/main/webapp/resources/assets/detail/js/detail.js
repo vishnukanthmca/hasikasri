@@ -3,7 +3,107 @@ $(document).ready(function() {
 	zoom();
 	raty();
 	pills();
+	displayCart();
+
 });
+
+function addToCart(productPid, productPrice, productName) {
+
+	var cart = localStorage.getItem("cart");
+	var products = JSON.parse(cart);
+
+	if (products == null) {
+		products = new Array();
+	}
+
+	var isDuplicate = false;
+
+	for (i = 0; i < products.length; i++) {
+		var pid = products[i].pid;
+
+		if (productPid === pid) {
+			products[i].quantity = (parseInt(products[i].quantity) + parseInt($(
+					'#quantity').val()));
+			isDuplicate = true;
+		}
+	}
+
+	if (!isDuplicate) {
+		var product = {
+			pid : productPid,
+			name : productName,
+			price : productPrice,
+			image : 'resources/assets/detail/images/small/image1.png',
+			quantity : $('#quantity').val()
+		};
+
+		products.push(product);
+	}
+
+	localStorage.setItem("cart", JSON.stringify(products));
+	displayCart();
+	if (!$('#cd-cart').hasClass('speed-in')) {
+		// close lateral menu (if it's open)
+		$('#main-nav').removeClass('speed-in');
+		toggle_panel_visibility($('#cd-cart'), $('#cd-shadow-layer'), $('body'));
+	}
+}
+
+function displayCart() {
+
+	var string = localStorage.getItem("cart");
+	// console.log("existing cart " + string);
+	var products = JSON.parse(string);
+
+	var html = "";
+
+	if (products != null) {
+		for (i = 0; i < products.length; i++) {
+
+			var pid = products[i].pid;
+			var name = products[i].name;
+			var price = products[i].price;
+			var image = products[i].image;
+			var quantity = products[i].quantity;
+
+			var node = '<li><table><tr><td class="cart_td"><img	src="'
+					+ image
+					+ '" height="50" width="75" /></td>'
+					+ '<td class="cart_td"><span class="cd-qty">'
+					+ quantity
+					+ 'x</span></td>'
+					+ '<td class="cart_td" width="200">'
+					+ name
+					+ '</td>'
+					+ '<td class="cart_td"><div class="cd-price">Rs.'
+					+ price
+					+ '</div></td>'
+					+ '<td><a href="#0" class="cd-item-remove cd-img-replace">Remove</a></td></tr></table></li>';
+			html += node;
+		}
+	}
+
+	$('.cd-cart-items').html(html);
+
+	// // alert(object.age);
+	// var obj = {
+	// name : "velmani",
+	// age : 28
+	// };
+	//
+	// var obj1 = {
+	// name : "vishnu",
+	// age : 29
+	// };
+	//
+	// var arr = new Array();
+	// arr.push(obj);
+	// arr.push(obj1);
+	//
+	// localStorage.setItem("cart", JSON.stringify(arr));
+
+	// $('.cd-cart-items').html();
+}
 
 function pills() {
 	// $('#rootwizard').bootstrapWizard({

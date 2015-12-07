@@ -23,6 +23,7 @@
 	rel="stylesheet">
 <link href="resources/assets/listing/css/jquery.raty.css"
 	rel="stylesheet">
+<link href="resources/assets/common/css/style.css" rel="stylesheet">
 
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -219,6 +220,12 @@
 			</div>
 		</div>
 
+		<header>
+			<div id="cd-cart-trigger">
+				<a class="cd-img-replace" href="#0">Cart</a>
+			</div>
+		</header>
+
 	</div>
 
 	<div class="container">
@@ -294,6 +301,39 @@
 			<img src="resources/assets/listing/images/loader_icon.gif" />
 		</div>
 	</div>
+
+	<div id="cd-cart">
+		<h2>Cart</h2>
+		<ul class="cd-cart-items">
+			<li><span class="cd-qty">1x</span> Product Name
+				<div class="cd-price">$9.99</div> <a href="#0"
+				class="cd-item-remove cd-img-replace">Remove</a></li>
+
+			<li><span class="cd-qty">2x</span> Product Name
+				<div class="cd-price">$19.98</div> <a href="#0"
+				class="cd-item-remove cd-img-replace">Remove</a></li>
+
+			<li><span class="cd-qty">1x</span> Product Name
+				<div class="cd-price">$9.99</div> <a href="#0"
+				class="cd-item-remove cd-img-replace">Remove</a></li>
+		</ul>
+		<!-- cd-cart-items -->
+
+		<div class="cd-cart-total">
+			<p>
+				Total <span>$39.96</span>
+			</p>
+		</div>
+		<!-- cd-cart-total -->
+
+		<a href="#0" class="checkout-btn">Checkout</a>
+
+		<p class="cd-go-to-cart">
+			<a href="#0">Go to cart page</a>
+		</p>
+	</div>
+	<!-- cd-cart -->
+
 	<!-- /container -->
 
 
@@ -308,6 +348,7 @@
 	<script src="resources/assets/listing/js/bootstrap.min.js"></script>
 	<script src="resources/assets/listing/js/bootstrap-treeview.js"></script>
 	<script src="resources/assets/listing/js/jquery.raty.js"></script>
+	<script src="resources/assets/common/js/main.js"></script>
 
 	<!-- 	<script
 		src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css"></script>-->

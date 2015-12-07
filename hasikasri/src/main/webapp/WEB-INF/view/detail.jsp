@@ -19,6 +19,7 @@
 <link href="resources/assets/detail/css/yamm.css" rel="stylesheet">
 
 <link href="resources/assets/detail/css/detail.css" rel="stylesheet">
+<link href="resources/assets/common/css/style.css" rel="stylesheet">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--if lt IE 9
@@ -152,28 +153,28 @@
 								<div class="yamm-content">
 									<div class="row">
 										<div class="col-xs-6 col-sm-2">
-											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
+											<a href="#" class="thumbnail"><img alt="150x200"
+												src="resources/assets/detail/resources/assets/detail/images/200.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
-											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
+											<a href="#" class="thumbnail"><img alt="150x200"
+												src="resources/assets/detail/resources/assets/detail/images/200.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
-											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
+											<a href="#" class="thumbnail"><img alt="150x200"
+												src="resources/assets/detail/resources/assets/detail/images/200.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
-											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
+											<a href="#" class="thumbnail"><img alt="150x200"
+												src="resources/assets/detail/resources/assets/detail/images/200.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
-											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
+											<a href="#" class="thumbnail"><img alt="150x200"
+												src="resources/assets/detail/resources/assets/detail/images/200.jpg"></a>
 										</div>
 										<div class="col-xs-6 col-sm-2">
-											<a href="#" class="thumbnail"><img alt="150x190"
-												src="resources/assets/detail/resources/assets/detail/images/190.jpg"></a>
+											<a href="#" class="thumbnail"><img alt="150x200"
+												src="resources/assets/detail/resources/assets/detail/images/200.jpg"></a>
 										</div>
 									</div>
 								</div>
@@ -213,6 +214,13 @@
 				<!-- /input-group -->
 			</div>
 		</div>
+
+		<header>
+			<div id="cd-cart-trigger">
+				<a class="cd-img-replace" href="#0">Cart</a>
+			</div>
+		</header>
+
 	</div>
 
 	<div class="container">
@@ -287,7 +295,10 @@
 						<div class="row">
 							<hr />
 							<div id="size">
-								SIZE <input type="text" class="textbox" name="quantity" size="3" />
+								SIZE <input type="text" class="textbox" name="size" size="3" />
+								&nbsp; &nbsp; &nbsp; <input
+									type="text" class="textbox" name="quantity" value="1"
+									id="quantity" size="3" />
 							</div>
 						</div>
 						<div class="row">
@@ -322,8 +333,10 @@
 							<hr />
 
 							<div id="add_to_cart">
-								<button type="button" class="btn btn-success add_to_cart">
-									ADD TO CART</button>
+								<button
+									onclick="addToCart(${product.pid},${product.price},'${product.name}')"
+									type="button" class="btn btn-success add_to_cart">ADD
+									TO CART</button>
 							</div>
 							<div id="buy_now">
 								<button type="button" class="btn btn-success buy_now">
@@ -370,12 +383,73 @@
 		<!-- /container -->
 
 	</div>
+
+
+	<div id="cd-cart">
+		<h2>Cart</h2>
+		<ul class="cd-cart-items">
+			<li><table>
+					<tr>
+						<td class="cart_td"><img
+							src="resources/assets/detail/images/small/image1.png" height="50"
+							width="75" /></td>
+						<td class="cart_td"><span class="cd-qty">1x</span></td>
+						<td class="cart_td" width="200">Product Name</td>
+
+						<td class="cart_td"><div class="cd-price">$9.99</div></td>
+						<td><a href="#0" class="cd-item-remove cd-img-replace">Remove</a></td>
+					</tr>
+				</table></li>
+			<li><table>
+					<tr>
+						<td class="cart_td"><img
+							src="resources/assets/detail/images/small/image1.png" height="50"
+							width="75" /></td>
+						<td class="cart_td"><span class="cd-qty">1x</span></td>
+						<td class="cart_td" width="200">Product Name</td>
+
+						<td class="cart_td"><div class="cd-price">$9.99</div></td>
+						<td><a href="#0" class="cd-item-remove cd-img-replace">Remove</a></td>
+					</tr>
+				</table></li>
+			<li><table>
+					<tr>
+						<td class="cart_td"><img
+							src="resources/assets/detail/images/small/image1.png" height="50"
+							width="75" /></td>
+						<td class="cart_td"><span class="cd-qty">1x</span></td>
+						<td class="cart_td" width="200">Product Name</td>
+
+						<td class="cart_td"><div class="cd-price">$9.99</div></td>
+						<td><a href="#0" class="cd-item-remove cd-img-replace">Remove</a></td>
+					</tr>
+				</table></li>
+
+		</ul>
+		<!-- cd-cart-items -->
+
+		<div class="cd-cart-total">
+			<p>
+				Total <span>$39.96</span>
+			</p>
+		</div>
+		<!-- cd-cart-total -->
+
+		<a href="#0" class="checkout-btn">Checkout</a>
+
+		<p class="cd-go-to-cart">
+			<a href="#0">Go to cart page</a>
+		</p>
+	</div>
+	<!-- cd-cart -->
+
 	<script src="resources/assets/detail/js/jquery-1.9.1.min.js"></script>
 	<script src="resources/assets/detail/js/bootstrap.min.js"></script>
 	<script src="resources/assets/detail/js/bootstrap-treeview.js"></script>
 	<script src="resources/assets/detail/js/jquery.raty.js"></script>
 	<script src="resources/assets/detail/js/jquery.elevatezoom.js"></script>
 	<script src="resources/assets/detail/js/pills.js"></script>
+	<script src="resources/assets/common/js/main.js"></script>
 
 	<script>
 		$(function() {
