@@ -254,14 +254,3 @@ span.nav-toggle-icon {
 	border-color: #133783;
 }
 /** login with facebook end **/
-.cart_td {
-	padding: 0px 3px;
-}
-
-.empty_cart {
-	padding-top: 90px;
-	padding-left: 20px;
-	color: gray;
-	font-size: 20px;
-	font-weight: bold;
-}
