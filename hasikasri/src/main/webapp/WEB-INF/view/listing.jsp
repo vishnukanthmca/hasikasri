@@ -24,6 +24,7 @@
 <link href="resources/assets/listing/css/jquery.raty.css"
 	rel="stylesheet">
 <link href="resources/assets/common/css/style.css" rel="stylesheet">
+<link href="resources/assets/common/css/login.css" rel="stylesheet">
 
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -221,6 +222,9 @@
 		</div>
 
 		<header>
+			<div>
+				<a id="modal_trigger" href="#modal" class="btn">Login/Signup</a>
+			</div>
 			<div id="cd-cart-trigger">
 				<a class="cd-img-replace" href="#0">Cart</a>
 			</div>
@@ -327,6 +331,90 @@
 	<!-- /container -->
 
 
+	<div id="modal" class="popupContainer" style="display: none;">
+		<header class="popupHeader">
+			<span class="header_title">Login</span> <span class="modal_close"><i
+				class="fa fa-times">&#10006;</i></span>
+		</header>
+
+		<section class="popupBody">
+			<!-- Social Login -->
+			<div class="social_login">
+				<div class="action_btns">
+					<div class="login_button">
+						<a href="#" id="login_form" class="btn">Mobile no or email</a>
+					</div>
+					<div class="signup_or_div_container">
+						<div class="signup_or_div">
+							<span class="signup_or">OR</span>
+						</div>
+					</div>
+					<div id="social_signin_div">
+						<div id="facebook_login">
+							<a href="#" class="social_box fb"> <span class="icon"><i
+									class="fa fa-facebook"></i></span> <span class="icon_title">Facebook</span></a>
+						</div>
+						<div id="google_login">
+							<a href="#" class="social_box google"> <span class="icon"><i
+									class="fa fa-google-plus"></i></span> <span class="icon_title">Google</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Username & Password Login form -->
+			<div class="user_login">
+				<form>
+					<label>Email / Username</label> <input type="text" /> <br /> <label>Password</label>
+					<input type="password" /> <br />
+
+					<div class="checkbox">
+						<input id="remember" type="checkbox" /> <label for="remember">Remember
+							me on this computer</label>
+					</div>
+
+					<div class="action_btns">
+						<div class="one_half">
+							<a href="#" class="btn back_btn"><i
+								class="fa fa-angle-double-left"></i> Back</a>
+						</div>
+						<div class="one_half last">
+							<a href="#" class="btn btn_red">Login</a>
+						</div>
+					</div>
+				</form>
+
+				<a href="#" class="forgot_password">Forgot password?</a>
+			</div>
+
+			<!-- Register Form -->
+			<div class="user_register">
+				<form>
+					<label>Full Name</label> <input type="text" /> <br /> <label>Email
+						Address</label> <input type="email" /> <br /> <label>Password</label> <input
+						type="password" /> <br />
+
+					<div class="checkbox">
+						<input id="send_updates" type="checkbox" /> <label
+							for="send_updates">Send me occasional email updates</label>
+					</div>
+
+					<div class="action_btns">
+						<div class="one_half">
+							<a href="#" class="btn back_btn"><i
+								class="fa fa-angle-double-left"></i> Back</a>
+						</div>
+						<div class="one_half last">
+							<a href="#" class="btn btn_red">Register</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+	</div>
+
+
 
 	<!-- /container -->
 	<!-- Bootstrap core JavaScript-->
@@ -339,6 +427,7 @@
 	<script src="resources/assets/listing/js/bootstrap-treeview.js"></script>
 	<script src="resources/assets/listing/js/jquery.raty.js"></script>
 	<script src="resources/assets/common/js/main.js"></script>
+	<script src="resources/assets/common/js/jquery.leanModal.min.js"></script>
 
 	<!-- 	<script
 		src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css"></script>-->
