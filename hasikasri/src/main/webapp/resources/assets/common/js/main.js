@@ -244,3 +244,16 @@ function displayCart() {
 	$('#cart_total').html("Rs. " + total);
 
 }
+
+$(document).ready(function() {
+	$('#login-trigger').click(function(e) {
+		e.preventDefault();
+		$('#login-content').slideToggle(1);
+		$(this).toggleClass('active');
+
+		if ($(this).hasClass('active'))
+			$(this).find('span').html('&#x25B2;')
+		else
+			$(this).find('span').html('&#x25BC;')
+	})
+});

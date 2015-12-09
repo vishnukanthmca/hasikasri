@@ -192,7 +192,6 @@
 		<div class="container static_top">
 			<div id="search_div">
 
-
 				<div class="input-group">
 					<div class="input-group-btn">
 						<button type="button" class="btn btn-default dropdown-toggle"
@@ -221,6 +220,32 @@
 		</div>
 
 		<header>
+			<div>
+				<a href="register">New User?</a>
+			</div>
+			<div class="login_div">
+				<nav>
+					<ul>
+						<li id="login"><a id="login-trigger" href="#"> Log in <span></span>
+						</a>
+							<div id="login-content">
+								<form>
+									<fieldset id="inputs">
+										<input id="username" type="email" name="Email"
+											placeholder="Your email address" required> <input
+											id="password" type="password" name="Password"
+											placeholder="Password" required>
+									</fieldset>
+									<fieldset id="actions">
+										<input type="submit" id="submit" value="Log in"> <label><input
+											type="checkbox" checked="checked"> Keep me signed in</label>
+									</fieldset>
+								</form>
+							</div></li>
+
+					</ul>
+				</nav>
+			</div>
 			<div id="cd-cart-trigger">
 				<a class="cd-img-replace" href="#0">Cart</a>
 			</div>

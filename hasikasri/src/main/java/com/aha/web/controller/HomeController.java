@@ -13,6 +13,7 @@ public class HomeController {
 
 	private static final String HOME_PAGE = "home";
 	private static final String LISTING_PAGE = "listing";
+	private static final String REGISTER_PAGE = "register";
 	private static final String ERROR_PAGE = "error";
 
 	@Autowired
@@ -30,6 +31,12 @@ public class HomeController {
 	@RequestMapping(value = "/listing")
 	public ModelAndView listing() {
 		ModelAndView modelAndView = new ModelAndView(LISTING_PAGE);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/register")
+	public ModelAndView register() {
+		ModelAndView modelAndView = new ModelAndView(REGISTER_PAGE);
 		return modelAndView;
 	}
 
