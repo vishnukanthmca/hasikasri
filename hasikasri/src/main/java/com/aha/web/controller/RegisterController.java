@@ -17,8 +17,9 @@ public class RegisterController {
 	public @ResponseBody String join(
 			@ModelAttribute("form") @Valid RegisterInputDto dto) {
 
-		System.out.println(dto);
-
+		
+		
 		return "join";
 	}
+
 }

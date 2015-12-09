@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort.Direction;
 
 import com.aha.core.domain.Category;
 import com.aha.web.dto.response.BreadcrumbDto;
+import com.lambdaworks.crypto.SCryptUtil;
 
 public class Util {
 
@@ -117,5 +118,13 @@ public class Util {
 		java.util.Collections.reverse(breadcrumps);
 
 		return breadcrumps;
+	}
+
+	public static String encodePassword(String password) {
+		return SCryptUtil.scrypt(password, 16, 16, 16);
+	}
+
+	public static boolean decodePassword(String password, String hash) {
+		return SCryptUtil.check(password, hash);
 	}
 }

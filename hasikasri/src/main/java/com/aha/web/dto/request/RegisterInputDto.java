@@ -1,9 +1,14 @@
 package com.aha.web.dto.request;
 
+import java.util.Date;
+
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.aha.core.domain.User;
+import com.aha.core.util.Util;
 
 public class RegisterInputDto {
 
@@ -17,6 +22,16 @@ public class RegisterInputDto {
 
 	@NotBlank
 	private String password;
+
+	public User getUser() {
+
+		User user = new User();
+		user.setCreatedDate(new Date());
+		user.setEmail(email);
+		user.setMobile(mobile.toString());
+		user.setPassword(Util.encodePassword(password));
+		return user;
+	}
 
 	public String getEmail() {
 		return email;

@@ -26,6 +26,15 @@ public class User implements Serializable {
 	private String email;
 
 	@Column
+	private String alternateEmail;
+
+	@Column
+	private String mobile;
+
+	@Column
+	private String alternateMobile;
+
+	@Column
 	private String password;
 
 	@Column
@@ -66,6 +75,46 @@ public class User implements Serializable {
 
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAlternateEmail() {
+		return alternateEmail;
+	}
+
+	public void setAlternateEmail(String alternateEmail) {
+		this.alternateEmail = alternateEmail;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getAlternateMobile() {
+		return alternateMobile;
+	}
+
+	public void setAlternateMobile(String alternateMobile) {
+		this.alternateMobile = alternateMobile;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }
