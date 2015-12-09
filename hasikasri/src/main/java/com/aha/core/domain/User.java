@@ -7,11 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Table
 @Entity
 public class User implements Serializable {
 
@@ -23,6 +21,12 @@ public class User implements Serializable {
 
 	@Column
 	private String name;
+
+	@Column
+	private String email;
+
+	@Column
+	private String password;
 
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
@@ -64,5 +68,4 @@ public class User implements Serializable {
 		this.updatedDate = updatedDate;
 	}
 
-	
 }

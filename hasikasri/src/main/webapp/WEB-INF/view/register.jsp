@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Join xxx</title>
+<title>Join yy</title>
 
 
 
@@ -20,12 +20,13 @@
 		<div class="container">
 			<h1>Welcome</h1>
 
-			<form class="form">
-				<input type="text" placeholder="Mobile" class="numeric-only"
-					required title="Enter mobile no" pattern=".{10,}" maxlength="10">
-				<input type="email" placeholder="Email" required title="Enter email">
-				<input type="password" placeholder="Password" pattern=".{3,}"
-					required title="Min 3 characters">
+			<form class="form" action="join" method="post">
+				<input type="text" id="name" placeholder="Mobile" name="mobile"
+					class="numeric-only" required title="Mobile no" pattern=".{10,}"
+					maxlength="10"> <input id="email" name="email" type="email"
+					placeholder="Email" required title="Email"> <input
+					type="password" id="password" placeholder="Password"
+					name="password" pattern=".{3,}" required title="Min 3 characters">
 				<button type="submit" id="login-button">Join</button>
 			</form>
 		</div>
