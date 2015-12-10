@@ -22,13 +22,13 @@ public class User implements Serializable {
 	@Column
 	private String name;
 
-	@Column
+	@Column(unique = true)
 	private String email;
 
 	@Column
 	private String alternateEmail;
 
-	@Column
+	@Column(unique = true)
 	private String mobile;
 
 	@Column
@@ -44,6 +44,20 @@ public class User implements Serializable {
 	@Column
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedDate;
+
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date lastLoginDate;
+
+	@Column
+	private Boolean mobileVerified;
+
+	@Column
+	private Boolean emailVerified;
+
+	/** whether the user registered manually or registered by shipping **/
+	@Column
+	private String registerType;
 
 	public Long getId() {
 		return id;
@@ -117,4 +131,39 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public Date getLastLoginDate() {
+		return lastLoginDate;
+	}
+
+	public void setLastLoginDate(Date lastLoginDate) {
+		this.lastLoginDate = lastLoginDate;
+	}
+
+	public String getRegisterType() {
+		return registerType;
+	}
+
+	public void setRegisterType(String registerType) {
+		this.registerType = registerType;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Boolean getMobileVerified() {
+		return mobileVerified;
+	}
+
+	public void setMobileVerified(Boolean mobileVerified) {
+		this.mobileVerified = mobileVerified;
+	}
+
+	public Boolean getEmailVerified() {
+		return emailVerified;
+	}
+
+	public void setEmailVerified(Boolean emailVerified) {
+		this.emailVerified = emailVerified;
+	}
 }

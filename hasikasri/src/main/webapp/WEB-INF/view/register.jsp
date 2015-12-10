@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,8 +20,13 @@
 	<div class="wrapper">
 		<div class="container">
 			<h1>Welcome</h1>
-
-			<form class="form" action="join" method="post">
+			<c:if test="${userExists}">
+				<div id="error_message">
+					User already exists.Please login. <a id="anchor" href="home">Go
+						to login page</a>
+				</div>
+			</c:if>
+			<form class="form" action="register" method="post">
 				<input type="text" id="name" placeholder="Mobile" name="mobile"
 					class="numeric-only" required title="Mobile no" pattern=".{10,}"
 					maxlength="10"> <input id="email" name="email" type="email"
@@ -30,7 +36,6 @@
 				<button type="submit" id="login-button">Join</button>
 			</form>
 		</div>
-
 		<ul class="bg-bubbles">
 			<li></li>
 			<li></li>
