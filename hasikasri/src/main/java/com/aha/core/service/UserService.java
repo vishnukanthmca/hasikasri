@@ -16,5 +16,5 @@ public interface UserService {
 	
 	public Boolean isUserPresent(LoginDto dto);
 
-	public boolean login(LoginDto dto);
+	public User login(LoginDto dto);
 }

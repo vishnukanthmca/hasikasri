@@ -42,24 +42,30 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public boolean login(LoginDto dto) {
+	public User login(LoginDto dto) {
 		User user = null;
 		try {
 			Long.parseLong(dto.getEmailOrMobile());
 			user = repository.findByMobile(dto.getEmailOrMobile());
 			if (user != null) {
-				return Util.decodePassword(dto.getPassword(),
+				boolean authenticated = Util.decodePassword(dto.getPassword(),
 						user.getPassword());
+				if (authenticated) {
+					return user;
+				}
 			}
 		} catch (NumberFormatException e) {
 			user = repository.findByEmail(dto.getEmailOrMobile());
 			if (user != null) {
-				return Util.decodePassword(dto.getPassword(),
+				boolean authenticated = Util.decodePassword(dto.getPassword(),
 						user.getPassword());
+				if (authenticated) {
+					return user;
+				}
 			}
 		}
 
-		return false;
+		return null;
 	}
 
 	@Override

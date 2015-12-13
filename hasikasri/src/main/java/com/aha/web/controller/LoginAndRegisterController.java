@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aha.core.domain.User;
 import com.aha.core.service.UserService;
 import com.aha.web.dto.request.LoginDto;
 import com.aha.web.dto.request.RegisterInputDto;
@@ -50,13 +51,20 @@ public class LoginAndRegisterController {
 			return "notregistered";
 		}
 
-		boolean authenticated = userService.login(dto);
+		User user = userService.login(dto);
 
-		if (authenticated) {
-			session.setAttribute("user", dto.getEmailOrMobile());
+		if (user != null) {
+
+			int index = user.getEmail().indexOf("@");
+			if (index > 0) {
+				session.setAttribute("user", user.getEmail()
+						.substring(0, index));
+			}
+
+			return "true";
+		} else {
+			return "false";
 		}
-
-		return String.valueOf(authenticated);
 	}
 
 	@RequestMapping("/logout")
