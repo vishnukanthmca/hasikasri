@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -220,34 +221,45 @@
 		</div>
 
 		<header>
-			<div>
-				<a href="register">New User?</a>
-			</div>
-			<div class="login_div">
-				<nav>
-					<ul>
-						<li id="login"><a id="login-trigger" href="#"> Log in <span></span>
-						</a>
-							<div id="login-content">
-								<div id="login_failed_message"></div>
-								<form method="post" action="login" name="form">
-									<fieldset id="inputs">
-										<input id="emailOrMobile" type="email" name="emailOrMobile"
-											placeholder="Email/Mobile" required> <input
-											id="password" type="password" name="Password"
-											placeholder="Password" required>
-									</fieldset>
-									<fieldset id="actions">
-										<input type="button" id="login_button" value="Log in">
-										<label><input type="checkbox" checked="checked">
-											Keep me signed in</label>
-									</fieldset>
-								</form>
-							</div></li>
+			<c:if test="${sessionScope.user != null }">
+				<div class="login_div">Hi, ${sessionScope.user}</div>
+				<div class="logout_div">
+					<a href="logout">&nbsp;&nbsp;&nbsp;&nbsp;Logout</a>
+				</div>
+			</c:if>
+			<c:if test="${sessionScope.user == null }">
+				<div>
+					<a href="register">New User?</a>
+				</div>
+			</c:if>
+			<c:if test="${sessionScope.user == null}">
+				<div class="login_div">
+					<nav>
+						<ul>
+							<li id="login"><a id="login-trigger" href="#"> Log in <span></span>
+							</a>
+								<div id="login-content">
+									<div id="login_failed_message"></div>
+									<form method="post" action="login" name="form">
+										<fieldset id="inputs">
+											<input id="emailOrMobile" type="email" name="emailOrMobile"
+												placeholder="Email/Mobile" required> <input
+												id="password" type="password" name="Password"
+												placeholder="Password" required>
+										</fieldset>
+										<fieldset id="actions">
+											<input type="button" id="login_button" value="Log in">
+											<label><input type="checkbox" checked="checked">
+												Keep me signed in</label>
+										</fieldset>
+									</form>
+								</div></li>
 
-					</ul>
-				</nav>
-			</div>
+						</ul>
+					</nav>
+				</div>
+			</c:if>
+
 			<div id="cd-cart-trigger">
 				<a class="cd-img-replace" href="#0">Cart</a>
 			</div>
