@@ -14,21 +14,28 @@ $(document).ready(function() {
 	sort();
 	search();
 	login();
+	loadOnScrollToBottom();
 });
 
-function reRenderPage() {
-	getRefiners();
+function reRenderPage(append) {
+	getRefiners(append);
 }
 
-function getProducts() {
+function getProducts(append) {
+
+	var page = getRequestParam("page");
+
+	if (isEmpty(page)) {
+		page = 0;
+	}
 
 	$.ajax({
-		url : "product/findProducts?page=0",
+		url : "product/findProducts?page=" + page,
 		method : 'POST',
 		contentType : "application/json; charset=utf-8",
 		data : getInput(),
 		success : function(data) {
-			renderProducts(data, false);
+			renderProducts(data, append);
 		}
 	});
 }
@@ -208,7 +215,7 @@ function highlightCheckBoxes() {
 
 function getProductsOnRefinerChange() {
 	// highlightCheckBoxes();
-	reRenderPage();
+	reRenderPage(false);
 }
 
 function getIdsOfCheckboxes(names) {
@@ -257,7 +264,7 @@ function getInput() {
 	return input;
 }
 
-function getRefiners() {
+function getRefiners(append) {
 
 	$.ajax({
 		url : "product/findRefiners",
@@ -265,12 +272,12 @@ function getRefiners() {
 		contentType : "application/json; charset=utf-8",
 		data : getInput(),
 		success : function(data) {
-			renderRefiners(data);
+			renderRefiners(append, data);
 		}
 	});
 }
 
-function renderRefiners(filters) {
+function renderRefiners(append, filters) {
 
 	var refiners = filters.refiners;
 
@@ -324,7 +331,7 @@ function renderRefiners(filters) {
 
 	highlightCheckBoxes();
 
-	getProducts();
+	getProducts(append);
 
 }
 
@@ -358,15 +365,11 @@ function getCategories() {
 
 						createRequestParamForSort();
 
-						reRenderPage();
+						replaceRequestParameter("page", 0);
 
-						// loadRefiners($('#current_cat_id').val(),
-						// attributeIds);
+						reRenderPage(false);
 
 						$('#child_category_ids').val(data.childrenIds);
-
-						// loadProductsOnPageLoad($('#child_category_ids').val(),
-						// attributeIds);
 
 						for (b = 0; b < data.breadcrumps.length; ++b) {
 
@@ -491,7 +494,7 @@ function sort() {
 
 		e.preventDefault();
 
-		reRenderPage();
+		reRenderPage(false);
 	});
 }
 
@@ -508,6 +511,28 @@ function swapSort(sort) {
 			$("#dLabel").text(currentAnchor);
 		}
 	});
+}
+
+function loadOnScrollToBottom() {
+
+	$(window).data('ajaxready', true).scroll(
+			function() {
+
+				if ($(window).data('ajaxready') == false) {
+					return;
+				}
+
+				if ($(window).scrollTop() >= ($(document).height() - $(window)
+						.height())) {
+
+					var page = getRequestParam("page");
+					replaceRequestParameter("page", ++page);
+					$(window).data('ajaxready', true);
+
+					reRenderPage(true);
+				}
+
+			});
 }
 
 function search() {
