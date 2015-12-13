@@ -338,6 +338,10 @@ opacity
 
 
 
+
+
+
+
 :
 
 
@@ -353,7 +357,11 @@ opacity
 
 
 
+
+
  
+
+
 
 
 
@@ -407,6 +415,10 @@ opacity
 
 
 
+
+
+
+
 :
 
 
@@ -422,7 +434,11 @@ opacity
 
 
 
+
+
  
+
+
 
 
 
@@ -476,6 +492,10 @@ opacity
 
 
 
+
+
+
+
 :
 
 
@@ -491,7 +511,11 @@ opacity
 
 
 
+
+
  
+
+
 
 
 
@@ -653,6 +677,11 @@ nav li #login-content {
 
 .login_div {
 	margin-right: 120px;
+}
+
+#login_failed_message {
+	color: red;
+	font-weight: bold;
 }
 
 /** end login **/

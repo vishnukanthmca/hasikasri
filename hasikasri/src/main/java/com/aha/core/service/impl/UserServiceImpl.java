@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.aha.core.domain.User;
 import com.aha.core.service.UserService;
+import com.aha.core.util.Util;
 import com.aha.persistence.repository.UserRepository;
+import com.aha.web.dto.request.LoginDto;
 import com.aha.web.dto.request.RegisterInputDto;
 
 @Service
@@ -34,6 +36,43 @@ public class UserServiceImpl implements UserService {
 		if (this.findUserByEmail(email) != null
 				|| this.findUserByMobile(mobile) != null) {
 			return true;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean login(LoginDto dto) {
+		User user = null;
+		try {
+			Long.parseLong(dto.getEmailOrMobile());
+			user = repository.findByMobile(dto.getEmailOrMobile());
+			if (user != null) {
+				return Util.decodePassword(dto.getPassword(),
+						user.getPassword());
+			}
+		} catch (NumberFormatException e) {
+			user = repository.findByEmail(dto.getEmailOrMobile());
+			if (user != null) {
+				return Util.decodePassword(dto.getPassword(),
+						user.getPassword());
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public Boolean isUserPresent(LoginDto dto) {
+		try {
+			Long.parseLong(dto.getEmailOrMobile());
+			if (this.findUserByMobile(dto.getEmailOrMobile()) != null) {
+				return true;
+			}
+		} catch (NumberFormatException e) {
+			if (this.findUserByEmail(dto.getEmailOrMobile()) != null) {
+				return true;
+			}
 		}
 
 		return false;

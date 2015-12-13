@@ -16,9 +16,7 @@ $('.form').submit(function(evt) {
 });
 
 $(document).ready(function() {
-
 	$('a').on('click', function() {
-		alert(' ');
-		window.location.href = "home"; // Change This
+		window.location.href = "home";
 	});
 });

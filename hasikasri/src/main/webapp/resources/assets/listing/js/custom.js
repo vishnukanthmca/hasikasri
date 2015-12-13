@@ -13,6 +13,7 @@ $(document).ready(function() {
 	// listeners
 	sort();
 	search();
+	login();
 });
 
 function reRenderPage() {
@@ -576,6 +577,38 @@ function postToDetail(id) {
 			'<form action="detail" method="post" id="product_">' + input
 					+ '</form>');
 	$("#product_").submit();
+}
+
+function login() {
+
+	$("#login_button").click(function(e) {
+		$.ajax({
+			url : "login",
+			method : 'POST',
+			contentType : "application/json",
+			data : getLoginInput(),
+			success : function(data) {
+				var message = "";
+				if (data === "notregistered") {
+					message = "You are not registered with us. Please signup."
+				} else if (data === "false") {
+					message = "Invalid credentials. Please try again."
+				} else if (data == "true") {
+					window.location = window.location.href;
+				}
+				$("#login_failed_message").html(message);
+			}
+		});
+	});
+}
+
+function getLoginInput() {
+	var login = {
+		emailOrMobile : $("#emailOrMobile").val(),
+		password : $("#password").val()
+	}
+
+	return JSON.stringify(login);
 }
 
 /** uTILITY METHODS * */

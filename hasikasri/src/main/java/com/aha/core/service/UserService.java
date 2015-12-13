@@ -1,6 +1,7 @@
 package com.aha.core.service;
 
 import com.aha.core.domain.User;
+import com.aha.web.dto.request.LoginDto;
 import com.aha.web.dto.request.RegisterInputDto;
 
 public interface UserService {
@@ -12,4 +13,8 @@ public interface UserService {
 	public User findUserByMobile(String email);
 
 	public boolean isUserPresent(String email, String mobile);
+	
+	public Boolean isUserPresent(LoginDto dto);
+
+	public boolean login(LoginDto dto);
 }

@@ -229,16 +229,18 @@
 						<li id="login"><a id="login-trigger" href="#"> Log in <span></span>
 						</a>
 							<div id="login-content">
-								<form>
+								<div id="login_failed_message"></div>
+								<form method="post" action="login" name="form">
 									<fieldset id="inputs">
-										<input id="username" type="email" name="Email"
-											placeholder="Your email address" required> <input
+										<input id="emailOrMobile" type="email" name="emailOrMobile"
+											placeholder="Email/Mobile" required> <input
 											id="password" type="password" name="Password"
 											placeholder="Password" required>
 									</fieldset>
 									<fieldset id="actions">
-										<input type="submit" id="submit" value="Log in"> <label><input
-											type="checkbox" checked="checked"> Keep me signed in</label>
+										<input type="button" id="login_button" value="Log in">
+										<label><input type="checkbox" checked="checked">
+											Keep me signed in</label>
 									</fieldset>
 								</form>
 							</div></li>
