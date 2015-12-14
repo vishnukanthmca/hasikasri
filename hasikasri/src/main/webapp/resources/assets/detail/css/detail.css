@@ -254,3 +254,11 @@ span.nav-toggle-icon {
 	border-color: #133783;
 }
 /** login with facebook end **/
+.review_rows {
+	margin-bottom: 30px;
+}
+
+.review_headline {
+	padding-bottom: 12px;
+	font-weight: bold;
+}

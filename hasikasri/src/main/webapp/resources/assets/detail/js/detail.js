@@ -23,6 +23,13 @@ function raty() {
 			return $(this).attr('data-score');
 		}
 	});
+
+	$('.review_rating').raty({
+		readOnly : true,
+		score : function() {
+			return $(this).attr('data-score');
+		}
+	});
 }
 
 function zoom() {

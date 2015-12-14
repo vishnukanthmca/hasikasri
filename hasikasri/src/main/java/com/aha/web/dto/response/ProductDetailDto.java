@@ -2,6 +2,8 @@ package com.aha.web.dto.response;
 
 import java.util.List;
 
+import com.aha.core.domain.Review;
+
 public class ProductDetailDto {
 
 	private String pid;
@@ -24,9 +26,13 @@ public class ProductDetailDto {
 
 	private List<BreadcrumbDto> breadcrumbs;
 
+	private List<ReviewDto> reviews;
+
 	public ProductDetailDto(String pid, String name, List<ImageDto> images,
 			Double rating, Double actualPrice, Double price, Double discount,
-			List<DescriptionDto> descriptions, List<BreadcrumbDto> breadcrumbs) {
+			List<DescriptionDto> descriptions, List<BreadcrumbDto> breadcrumbs,
+			List<ReviewDto> reviews) {
+
 		super();
 		this.pid = pid;
 		this.name = name;
@@ -35,6 +41,7 @@ public class ProductDetailDto {
 		this.price = price.intValue();
 		this.descriptions = descriptions;
 		this.breadcrumbs = breadcrumbs;
+		this.reviews = reviews;
 
 		if (actualPrice != null) {
 			this.actualPrice = actualPrice.intValue();
@@ -147,5 +154,13 @@ public class ProductDetailDto {
 
 	public void setPid(String pid) {
 		this.pid = pid;
+	}
+
+	public List<ReviewDto> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<ReviewDto> reviews) {
+		this.reviews = reviews;
 	}
 }

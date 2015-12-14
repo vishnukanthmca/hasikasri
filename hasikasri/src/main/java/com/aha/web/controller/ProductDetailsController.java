@@ -13,15 +13,18 @@ import com.aha.core.domain.Category;
 import com.aha.core.domain.Description;
 import com.aha.core.domain.Image;
 import com.aha.core.domain.Product;
+import com.aha.core.domain.Review;
 import com.aha.core.service.CategoryService;
 import com.aha.core.service.DescriptionService;
 import com.aha.core.service.ImageService;
 import com.aha.core.service.ProductService;
+import com.aha.core.service.ReviewService;
 import com.aha.core.util.Util;
 import com.aha.web.dto.response.BreadcrumbDto;
 import com.aha.web.dto.response.DescriptionDto;
 import com.aha.web.dto.response.ImageDto;
 import com.aha.web.dto.response.ProductDetailDto;
+import com.aha.web.dto.response.ReviewDto;
 
 @Controller
 public class ProductDetailsController {
@@ -40,6 +43,9 @@ public class ProductDetailsController {
 	@Autowired
 	private CategoryService categoryService;
 
+	@Autowired
+	private ReviewService reviewService;
+
 	@RequestMapping(value = "/detail", method = RequestMethod.POST)
 	public ModelAndView detail(Long productId) {
 
@@ -55,7 +61,9 @@ public class ProductDetailsController {
 						product.getName(), getImages(productId),
 						product.getRating(), product.getActualPrice(),
 						product.getPrice(), product.getDiscount(),
-						getDescription(productId), getBreadCrumbs(productId));
+						getDescription(productId), getBreadCrumbs(productId),
+						getReviews(reviewService
+								.getReviewsForProduct(productId)));
 
 				modelAndView.addObject("product", dto);
 			}
@@ -100,6 +108,19 @@ public class ProductDetailsController {
 				ImageDto dto = new ImageDto(image, productId);
 				dtos.add(dto);
 			}
+		}
+		return dtos;
+	}
+
+	private List<ReviewDto> getReviews(List<Review> reviews) {
+		List<ReviewDto> dtos = new ArrayList<>();
+		if (reviews != null) {
+			reviews.forEach(r -> {
+				ReviewDto dto = new ReviewDto(r.getReview(), r.getUsername(), r
+						.getRating(), r.getAddedDate(), r.getHeadLine());
+				dtos.add(dto);
+
+			});
 		}
 		return dtos;
 	}

@@ -389,7 +389,6 @@ function getCategories() {
 							}
 
 							$('#breadcrumb_category').append(breadcrumb);
-
 						}
 					}
 

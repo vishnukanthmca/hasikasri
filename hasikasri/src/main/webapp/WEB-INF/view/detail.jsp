@@ -349,12 +349,17 @@
 			<div class="row">
 				<div id="rootwizard">
 					<ul>
-						<li><a href="#tab1" data-toggle="tab">Product Description</a></li>
-						<li><a href="#tab2" data-toggle="tab">Shipping Details</a></li>
-						<li><a href="#tab3" data-toggle="tab">Return Policy</a></li>
+						<li><a href="#product_description" data-toggle="tab">Product
+								Description</a></li>
+						<li><a href="#user_reviews" data-toggle="tab">User
+								Reviews</a></li>
+						<li><a href="#shipping_details" data-toggle="tab">Shipping
+								Details</a></li>
+						<li><a href="#return_policy" data-toggle="tab">Return
+								Policy</a></li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane" id="tab1">
+						<div class="tab-pane" id="product_description">
 							<table class="table product_description_table">
 								<c:forEach begin="0" end="${product.descriptionsSize}"
 									items="${product.descriptions}" var="description"
@@ -371,8 +376,26 @@
 								</c:forEach>
 							</table>
 						</div>
-						<div class="tab-pane" id="tab2">2</div>
-						<div class="tab-pane" id="tab3">3</div>
+						<div class="tab-pane" id="user_reviews">
+							<div class="well well-lg">
+								<c:forEach items="${product.reviews}" var="review">
+									<table class="review_rows">
+										<tr>
+											<td width="200" valign="top"><div class="review_rating"
+													data-score="${review.rating}"></div>
+												<div class="review_username">${review.username}</div>
+												<div class="review_date">${review.addedDate}</div></td>
+											<td><div class="review_headline">${review.headLine}</div>
+												<div class="review_review">${review.review}</div></td>
+											<td></td>
+										</tr>
+
+									</table>
+								</c:forEach>
+							</div>
+						</div>
+						<div class="tab-pane" id="shipping_details">2</div>
+						<div class="tab-pane" id="return_policy">3</div>
 					</div>
 				</div>
 
