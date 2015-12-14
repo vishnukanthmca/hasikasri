@@ -324,12 +324,13 @@
 													<td><div class="price_separator">-</div></td>
 													<td><input id="price_textbox_max" id="min_price"
 														type=text size="8" /></td>
-													<td><input type="button" value="Go" /></td>
+													<td><input type="button" id="price_go_button"
+														value="Go" /></td>
 												</tr>
 												<tr>
-													<td><span class="price_label">From</span></td>
+													<td><span id="min_price_label" class="price_label">From</span></td>
 													<td>&nbsp;</td>
-													<td><span class="price_label">To</span></td>
+													<td><span id="max_price_label" class="price_label">To</span></td>
 													<td>&nbsp;</td>
 												</tr>
 											</table>

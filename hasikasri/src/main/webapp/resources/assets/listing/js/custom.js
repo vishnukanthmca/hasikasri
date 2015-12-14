@@ -17,8 +17,13 @@ $(document).ready(function() {
 	loadOnScrollToBottom();
 });
 
-function reRenderPage(append) {
-	getRefiners(append);
+function reRenderPage(append, resetPageInUrl) {
+
+	if (resetPageInUrl) {
+		replaceRequestParameter("page", 0);
+	}
+
+	getRefiners(append, resetPageInUrl);
 }
 
 function getProducts(append) {
@@ -215,7 +220,7 @@ function highlightCheckBoxes() {
 
 function getProductsOnRefinerChange() {
 	// highlightCheckBoxes();
-	reRenderPage(false);
+	reRenderPage(false, true);
 }
 
 function getIdsOfCheckboxes(names) {
@@ -271,6 +276,17 @@ function getRefiners(append) {
 		method : 'POST',
 		contentType : "application/json; charset=utf-8",
 		data : getInput(),
+		beforeSend : function() {
+			$('#loader-icon_left').show();
+			$('#left_block').addClass("disable");
+			$('#left_block :input').prop('disabled', 'true');
+		},
+		complete : function() {
+			$('#loader-icon_left').hide();
+			$('#left_block').removeClass("disable");
+			// $('#left_block').addClass("enable");
+			$('#left_block :input').removeProp('disabled');
+		},
 		success : function(data) {
 			renderRefiners(append, data);
 		}
@@ -280,6 +296,14 @@ function getRefiners(append) {
 function renderRefiners(append, filters) {
 
 	var refiners = filters.refiners;
+
+	var minPrice = filters.minPrice;
+	var maxPrice = filters.maxPrice;
+
+	console.log(minPrice + " " + maxPrice);
+
+	$("#min_price_label").html(minPrice);
+	$("#max_price_label").html(maxPrice);
 
 	$('#refiners_and_attributes').empty();
 
@@ -367,7 +391,7 @@ function getCategories() {
 
 						replaceRequestParameter("page", 0);
 
-						reRenderPage(false);
+						reRenderPage(false, true);
 
 						$('#child_category_ids').val(data.childrenIds);
 
@@ -493,7 +517,7 @@ function sort() {
 
 		e.preventDefault();
 
-		reRenderPage(false);
+		reRenderPage(false, true);
 	});
 }
 
@@ -528,7 +552,7 @@ function loadOnScrollToBottom() {
 					replaceRequestParameter("page", ++page);
 					$(window).data('ajaxready', true);
 
-					reRenderPage(true);
+					reRenderPage(true, false);
 				}
 
 			});

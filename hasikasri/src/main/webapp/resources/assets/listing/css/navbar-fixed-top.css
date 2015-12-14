@@ -404,3 +404,7 @@ span.nav-toggle-icon {
 	color: gray;
 	font-size: 12px;
 }
+
+#price_go_button {
+	height: 25px;
+}
