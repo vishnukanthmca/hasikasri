@@ -387,3 +387,20 @@ span.nav-toggle-icon {
 }
 
 /** search drop down end **/
+#price_textbox_min {
+	height: 25px;
+}
+
+#price_textbox_max {
+	height: 25px;
+	margin-right: 10px;
+}
+
+.price_separator {
+	margin: 0px 12px;
+}
+
+.price_label {
+	color: gray;
+	font-size: 12px;
+}

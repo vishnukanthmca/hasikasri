@@ -303,9 +303,8 @@
 					</div>
 
 					<!-- All Refiners starts here -->
-					<div class="row" id="refiners_and_attributes">
-
-						<!-- <div class="refiner">
+					<div class="row">
+						<div class="refiner">
 							<div class="panel panel-primary">
 								<div class="panel-heading refiner">
 									<button class="refiner_shrink_button" type="button"
@@ -317,14 +316,33 @@
 								</div>
 								<div class="collapse in" id="shrinkprice">
 									<div class="panel-body" id="price_slider">
+										<div>
+											<table>
+												<tr>
+													<td><input id="price_textbox_min" type=text size="8"
+														id="max_price" /></td>
+													<td><div class="price_separator">-</div></td>
+													<td><input id="price_textbox_max" id="min_price"
+														type=text size="8" /></td>
+													<td><input type="button" value="Go" /></td>
+												</tr>
+												<tr>
+													<td><span class="price_label">From</span></td>
+													<td>&nbsp;</td>
+													<td><span class="price_label">To</span></td>
+													<td>&nbsp;</td>
+												</tr>
+											</table>
+										</div>
 										<div id="loader-icon_left">
 											<img src="resources/assets/listing/images/GreenLoader.gif" />
 										</div>
 									</div>
 								</div>
 							</div>
-						</div> -->
+						</div>
 					</div>
+					<div class="row" id="refiners_and_attributes"></div>
 					<!-- All Refiners ends here -->
 
 
