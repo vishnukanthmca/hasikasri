@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,15 +20,13 @@ import com.aha.web.dto.response.MyOrderDto;
 import com.aha.web.dto.response.MyOrderItemsDto;
 
 @Controller
-@RequestMapping("/order")
 public class OrderController {
 
 	@Autowired
 	private OrderService orderService;
 
-	@RequestMapping("getOrders")
-	public ModelAndView getOrders(HttpSession session,
-			@ModelAttribute("form") Long userId) {
+	@RequestMapping("/myorders")
+	public ModelAndView getOrders(HttpSession session) {
 
 		ModelAndView view = new ModelAndView();
 
@@ -38,11 +35,16 @@ public class OrderController {
 			return view;
 		}
 
+		Long userId = Long.parseLong(session.getAttribute("userId").toString());
+
+		view.setViewName("myorders");
+
 		List<Order> orders = orderService.getOrders(userId);
 		if (orders != null) {
 
 			view.addObject("orders", getOrdersList(orders));
 		}
+
 		return view;
 	}
 
@@ -65,10 +67,15 @@ public class OrderController {
 
 							if (product != null) {
 
+								String sellerName = "";
+								if (product.getSeller() != null) {
+									sellerName = product.getSeller().getName();
+								}
+
 								MyOrderItemsDto itemsDto = new MyOrderItemsDto(
-										product.getImage(), product.getName(),
-										product.getPrice(), item.getQuantity(),
-										product.getSeller().getName());
+										product.getListingImage(), product
+												.getName(), product.getPrice(),
+										item.getQuantity(), sellerName);
 								itemsDtos.add(itemsDto);
 							}
 						});
@@ -112,10 +119,19 @@ public class OrderController {
 					billingAddress.getPincode(), billingAddress.getLandmark());
 		}
 
+		String orderedDate = null;
+		if (order.getOrderedDate() != null) {
+			orderedDate = order.getOrderedDate().toString();
+		}
+
+		String deliveredDate = null;
+		if (order.getDelivery().getDeliveredDate() != null) {
+			deliveredDate = order.getDelivery().getDeliveredDate().toString();
+		}
+
 		MyOrderDto orderDto = new MyOrderDto(order.getOrderId(),
-				delivery.getReceivedPerson(),
-				order.getOrderedDate().toString(), order.getStatus(),
-				shippingAddressDto, billingAddressDto);
+				delivery.getReceivedPerson(), orderedDate, order.getStatus(),
+				shippingAddressDto, billingAddressDto, deliveredDate);
 		return orderDto;
 	}
 }

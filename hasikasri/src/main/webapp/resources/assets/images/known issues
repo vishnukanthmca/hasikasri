@@ -17,4 +17,6 @@
 # multi color in refiners
 # hide button for cart side window
 # from register page open sign in window
-# min and max price should be correct in listing 
+# min and max price should be correct in listing
+# Ensure creating absolute constraints on database for possibilities
+# implement sessions everywhere including back button press 

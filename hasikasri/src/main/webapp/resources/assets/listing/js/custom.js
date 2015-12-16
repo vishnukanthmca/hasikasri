@@ -56,7 +56,7 @@ function renderProducts(data, append) {
 			var id = data[i].id;
 			var name = data[i].name;
 			var shortName = data[i].shortName;
-			var image = data[i].image;
+			var image = data[i].listingImage;
 			var price = data[i].price;
 			var actualPrice = data[i].actualPrice;
 			var discount = data[i].discount;

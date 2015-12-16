@@ -1,5 +1,7 @@
 package com.aha.web.dto.response;
 
+import com.aha.core.util.Util;
+
 public class MyOrderItemsDto {
 
 	private String image;
@@ -20,6 +22,8 @@ public class MyOrderItemsDto {
 		this.price = price;
 		this.quantity = quantity;
 		this.sellerName = sellerName;
+
+		this.image = Util.generateImageLocation(image);
 	}
 
 	public String getImage() {

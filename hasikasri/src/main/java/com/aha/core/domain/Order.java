@@ -35,10 +35,10 @@ public class Order {
 	@Column
 	private String status;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
 	private List<OrderedItem> orderedItems;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	private Delivery delivery;
 
 	@OneToOne

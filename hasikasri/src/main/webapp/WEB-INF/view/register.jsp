@@ -7,9 +7,6 @@
 
 
 
-
-<link rel="stylesheet" href="css/style.css">
-
 <link href="resources/assets/register/css/style.css" rel="stylesheet">
 
 

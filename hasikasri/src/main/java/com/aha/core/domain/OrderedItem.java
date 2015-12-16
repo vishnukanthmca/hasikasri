@@ -1,7 +1,5 @@
 package com.aha.core.domain;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,9 +23,6 @@ public class OrderedItem {
 	@Column
 	private Float discount;
 
-	@ManyToOne
-	private List<Order> order;
-
 	@Column
 	private String size;
 
@@ -39,6 +34,9 @@ public class OrderedItem {
 
 	@Column
 	private Double actualPrice;
+
+	@ManyToOne
+	private Order order;
 
 	public Long getId() {
 		return id;
@@ -72,14 +70,6 @@ public class OrderedItem {
 		this.discount = discount;
 	}
 
-	public List<Order> getOrder() {
-		return order;
-	}
-
-	public void setOrder(List<Order> order) {
-		this.order = order;
-	}
-
 	public String getSize() {
 		return size;
 	}
@@ -110,5 +100,13 @@ public class OrderedItem {
 
 	public void setActualPrice(Double actualPrice) {
 		this.actualPrice = actualPrice;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 }

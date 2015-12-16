@@ -18,9 +18,11 @@ public class MyOrderDto {
 
 	private List<MyOrderItemsDto> items;
 
+	private String deliveredDate;
+
 	public MyOrderDto(String orderId, String receivedPerson,
 			String orderedDate, String orderStatus, AddressDto shippingAddress,
-			AddressDto billingAddress) {
+			AddressDto billingAddress, String deliveredDate) {
 		super();
 		this.orderId = orderId;
 		this.receivedPerson = receivedPerson;
@@ -28,6 +30,7 @@ public class MyOrderDto {
 		this.orderStatus = orderStatus;
 		this.shippingAddress = shippingAddress;
 		this.billingAddress = billingAddress;
+		this.deliveredDate = deliveredDate;
 	}
 
 	public String getOrderId() {
@@ -84,5 +87,13 @@ public class MyOrderDto {
 
 	public void setBillingAddress(AddressDto billingAddress) {
 		this.billingAddress = billingAddress;
+	}
+
+	public String getDeliveredDate() {
+		return deliveredDate;
+	}
+
+	public void setDeliveredDate(String deliveredDate) {
+		this.deliveredDate = deliveredDate;
 	}
 }

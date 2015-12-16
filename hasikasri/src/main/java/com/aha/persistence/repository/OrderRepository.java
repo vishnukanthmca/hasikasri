@@ -10,5 +10,6 @@ import com.aha.core.domain.User;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
+
 	public List<Order> findByUser(User user);
 }

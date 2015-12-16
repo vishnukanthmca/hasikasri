@@ -57,7 +57,7 @@ public class Product {
 	private Seller seller;
 
 	@Column
-	private String image;
+	private String listingImage;
 
 	@Column
 	private Double rating;
@@ -122,12 +122,12 @@ public class Product {
 		this.seller = seller;
 	}
 
-	public String getImage() {
-		return image;
+	public String getListingImage() {
+		return listingImage;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setListingImage(String listingImage) {
+		this.listingImage = listingImage;
 	}
 
 	public Double getRating() {

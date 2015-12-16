@@ -25,9 +25,6 @@ public class Delivery {
 	@Temporal(TemporalType.DATE)
 	private Date expectedDeliveryDate;
 
-	@OneToOne
-	private Order order;
-
 	@Column
 	@Temporal(TemporalType.DATE)
 	private Date orderedDate;
@@ -70,14 +67,6 @@ public class Delivery {
 
 	public void setExpectedDeliveryDate(Date expectedDeliveryDate) {
 		this.expectedDeliveryDate = expectedDeliveryDate;
-	}
-
-	public Order getOrder() {
-		return order;
-	}
-
-	public void setOrder(Order order) {
-		this.order = order;
 	}
 
 	public Date getOrderedDate() {

@@ -127,4 +127,15 @@ public class Util {
 	public static boolean decodePassword(String password, String hash) {
 		return SCryptUtil.check(password, hash);
 	}
+
+	public static String generateImageLocation(String image) {
+
+		if (image == null) {
+			return null;
+		}
+
+		return Application.IMAGES_DOMAIN + Application.LISTING_IMAGES_PATH
+				+ image.trim();
+	}
+
 }

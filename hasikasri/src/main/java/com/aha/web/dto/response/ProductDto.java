@@ -2,6 +2,7 @@ package com.aha.web.dto.response;
 
 import com.aha.core.domain.Product;
 import com.aha.core.util.Application;
+import com.aha.core.util.Util;
 
 public class ProductDto {
 
@@ -15,7 +16,7 @@ public class ProductDto {
 
 	private String brand;
 
-	private String image;
+	private String listingImage;
 
 	private Double rating;
 
@@ -42,7 +43,8 @@ public class ProductDto {
 
 		this.createShortName();
 
-		this.image = generateImageLocation(product.getImage());
+		this.listingImage = Util.generateImageLocation(product
+				.getListingImage());
 	}
 
 	private void createShortName() {
@@ -51,16 +53,6 @@ public class ProductDto {
 		} else {
 			this.shortName = this.name;
 		}
-	}
-
-	private String generateImageLocation(String image) {
-
-		if (image == null) {
-			return null;
-		}
-
-		return Application.IMAGES_DOMAIN + Application.LISTING_IMAGES_PATH
-				+ image.trim();
 	}
 
 	public Long getId() {
@@ -95,12 +87,12 @@ public class ProductDto {
 		this.brand = brand;
 	}
 
-	public String getImage() {
-		return image;
+	public String getListingImage() {
+		return listingImage;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setListingImage(String listingImage) {
+		this.listingImage = listingImage;
 	}
 
 	public Double getRating() {
