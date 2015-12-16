@@ -17,18 +17,15 @@
 
 	<div id="rootwizard">
 		<ul>
-			<li><a href="#product_description" data-toggle="tab">Product
-					Description</a></li>
-			<li><a href="#user_reviews" data-toggle="tab">User Reviews</a></li>
-			<li><a href="#shipping_details" data-toggle="tab">Shipping
-					Details</a></li>
-			<li><a href="#return_policy" data-toggle="tab">Return Policy</a></li>
+			<li><a href="#past_orders" data-toggle="tab">Past Orders</a></li>
+			<li><a href="#open_orders" data-toggle="tab">Open Orders</a></li>
+			<li><a href="#cancelled_orders" data-toggle="tab">Cancelled
+					Orders</a></li>
+
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane" id="product_description">1</div>
-			<div class="tab-pane" id="user_reviews">4</div>
-			<div class="tab-pane" id="shipping_details">2</div>
-			<div class="tab-pane" id="return_policy">
+			<div class="tab-pane" id="past_orders">
+
 				<!--  accordion content starts -->
 				<c:forEach var="order" items="${orders}">
 					<div class="panel panel-default">
@@ -59,7 +56,11 @@
 					</div>
 				</c:forEach>
 				<!--  accordion content ends -->
+
 			</div>
+			<div class="tab-pane" id="open_orders"></div>
+			<div class="tab-pane" id="cancelled_orders">2</div>
+
 		</div>
 	</div>
 
