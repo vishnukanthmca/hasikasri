@@ -59,6 +59,7 @@ public class LoginAndRegisterController {
 			if (index > 0) {
 				session.setAttribute("user", user.getEmail()
 						.substring(0, index));
+				session.setAttribute("userId", user.getId());
 			}
 
 			return "true";

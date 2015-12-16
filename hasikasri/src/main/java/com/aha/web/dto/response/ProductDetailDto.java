@@ -2,8 +2,6 @@ package com.aha.web.dto.response;
 
 import java.util.List;
 
-import com.aha.core.domain.Review;
-
 public class ProductDetailDto {
 
 	private String pid;
