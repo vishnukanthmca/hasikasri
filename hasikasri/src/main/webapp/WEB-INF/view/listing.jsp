@@ -226,7 +226,7 @@
 				<div class="login_div">Hi, ${sessionScope.user}</div>
 				<div class="logout_div">
 					<a href="logout">&nbsp;&nbsp;&nbsp;&nbsp;Logout</a> <a
-						href="myorders">Orders</a>
+						href="getOrders">Orders</a>
 				</div>
 			</c:if>
 			<c:if test="${sessionScope.user == null }">

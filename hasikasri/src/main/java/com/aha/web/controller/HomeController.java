@@ -15,6 +15,7 @@ public class HomeController {
 	private static final String LISTING_PAGE = "listing";
 	private static final String REGISTER_PAGE = "register";
 	private static final String ERROR_PAGE = "error";
+	private static final String MY_ORDERS_PAGE = "redirect:myorders";
 
 	@Autowired
 	private ProductService productService;
@@ -43,6 +44,12 @@ public class HomeController {
 	@RequestMapping(value = "/error")
 	public ModelAndView error() {
 		ModelAndView modelAndView = new ModelAndView(ERROR_PAGE);
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/getOrders")
+	public ModelAndView myOrders() {
+		ModelAndView modelAndView = new ModelAndView(MY_ORDERS_PAGE);
 		return modelAndView;
 	}
 }
