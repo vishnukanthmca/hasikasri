@@ -17,6 +17,13 @@ public class OrderServiceImpl implements OrderService {
 	private OrderRepository repository;
 
 	@Override
+	public List<Order> getOrders(Long userId, Integer status) {
+		User user = new User();
+		user.setId(userId);
+		return repository.findByUserAndStatus(user, status);
+	}
+
+	@Override
 	public List<Order> getOrders(Long userId) {
 		User user = new User();
 		user.setId(userId);

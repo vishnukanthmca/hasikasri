@@ -33,7 +33,7 @@ public class Order {
 	private Date orderedDate;
 
 	@Column
-	private String status;
+	private Integer status;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
 	private List<OrderedItem> orderedItems;
@@ -68,11 +68,11 @@ public class Order {
 		this.orderedDate = orderedDate;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

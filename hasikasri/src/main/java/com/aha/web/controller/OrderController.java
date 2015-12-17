@@ -15,6 +15,7 @@ import com.aha.core.domain.Delivery;
 import com.aha.core.domain.Order;
 import com.aha.core.domain.Product;
 import com.aha.core.service.OrderService;
+import com.aha.core.util.Enum;
 import com.aha.web.dto.response.AddressDto;
 import com.aha.web.dto.response.MyOrderDto;
 import com.aha.web.dto.response.MyOrderItemsDto;
@@ -40,15 +41,44 @@ public class OrderController {
 		view.setViewName("myorders");
 
 		List<Order> orders = orderService.getOrders(userId);
+
+		List<Order> openOrders = new ArrayList<>();
+		List<Order> deliveredOrders = new ArrayList<>();
+		List<Order> cancelledOrders = new ArrayList<>();
+
 		if (orders != null) {
 
-			view.addObject("orders", getOrdersList(orders));
+			orders.forEach(order -> {
+				if (order.getStatus() != null
+						&& order.getStatus().intValue() == Enum.OrderStatus.OPEN
+								.ordinal()) {
+					openOrders.add(order);
+				} else if (order.getStatus() != null
+						&& order.getStatus().intValue() == Enum.OrderStatus.DELIVERED
+								.ordinal()) {
+					deliveredOrders.add(order);
+				} else if (order.getStatus() != null
+						&& order.getStatus().intValue() == Enum.OrderStatus.CANCELLED
+								.ordinal()) {
+					cancelledOrders.add(order);
+				}
+			});
+
+			if (openOrders != null && !openOrders.isEmpty()) {
+				view.addObject("openOrders", createDtos(openOrders));
+			}
+			if (deliveredOrders != null && !deliveredOrders.isEmpty()) {
+				view.addObject("deliveredOrders", createDtos(deliveredOrders));
+			}
+			if (cancelledOrders != null && !cancelledOrders.isEmpty()) {
+				view.addObject("cancelledOrders", createDtos(cancelledOrders));
+			}
 		}
 
 		return view;
 	}
 
-	private List<MyOrderDto> getOrdersList(List<Order> orders) {
+	private List<MyOrderDto> createDtos(List<Order> orders) {
 
 		List<MyOrderDto> orderDtos = new ArrayList<>();
 
@@ -130,7 +160,8 @@ public class OrderController {
 		}
 
 		MyOrderDto orderDto = new MyOrderDto(order.getOrderId(),
-				delivery.getReceivedPerson(), orderedDate, order.getStatus(),
+				delivery.getReceivedPerson(), orderedDate,
+				Enum.OrderStatus.getString(order.getStatus()),
 				shippingAddressDto, billingAddressDto, deliveredDate);
 		return orderDto;
 	}
