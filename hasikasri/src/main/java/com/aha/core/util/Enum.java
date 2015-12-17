@@ -25,4 +25,30 @@ public class Enum {
 			return null;
 		}
 	}
+
+	public enum ReturnOrderStatus {
+
+		RETURN_ORDER_REQUEST_PLACED(0), RETURN_ORDER_REQUEST_APPROVED(1);
+
+		private int s;
+
+		ReturnOrderStatus(int s) {
+			this.s = s;
+		}
+
+		public int getValue() {
+			return s;
+		}
+
+		public static String getString(int s) {
+			for (OrderStatus i : OrderStatus.values()) {
+				if (i.getValue() == s) {
+					return i.name();
+				}
+			}
+
+			return null;
+		}
+	}
+
 }

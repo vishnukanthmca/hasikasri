@@ -19,4 +19,5 @@
 # from register page open sign in window
 # min and max price should be correct in listing
 # Ensure creating absolute constraints on database for possibilities
-# implement sessions everywhere including back button press 
+# implement sessions everywhere including back button press
+# return order transfer money to wallet 

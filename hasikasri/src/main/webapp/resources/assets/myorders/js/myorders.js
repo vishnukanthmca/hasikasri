@@ -1,6 +1,27 @@
 $(document).ready(function() {
 	pills();
+
+	$('#return_div a').click(function(e) {
+		$('#orderItemId').val($('#orderItemId_hidden').val());
+		$("#myModal").modal('show');
+	});
 });
+
+function placeReturnRequest() {
+
+	//
+	// $('#submit_return').click(function(e) {
+	// $.ajax({
+	// url : "login",
+	// method : 'POST',
+	// contentType : "application/json",
+	// data : getLoginInput(),
+	// success : function(data) {
+	//
+	// }
+	// });
+	// });
+}
 
 function pills() {
 	// $('#rootwizard').bootstrapWizard({

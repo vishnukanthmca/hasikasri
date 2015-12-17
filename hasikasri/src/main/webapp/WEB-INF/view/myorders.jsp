@@ -49,19 +49,11 @@
 											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
 												<c:if test="${item.quantity > 1}">&nbsp;nos</c:if></td>
 											<c:if test="true">
-												<td><div>
-														<a onclick="showReturnBox('textarea${order.orderId}')">return</a>
-													</div>
-													<div id="textarea${order.orderId}" class="return_text_area">
-														<div>
-															<textarea rows="4" cols="50"></textarea>
-														</div>
-														<div>
-															<input
-																onclick="placeReturnRequest('${item.orderItemId}')"
-																type="button" value="Submit" />
-														</div>
-													</div>
+												<td><div id="return_div">
+														<a>return</a>
+													</div></td>
+												<input type="hidden" id="orderItemId_hidden"
+													value="${item.orderItemId}" />
 											</c:if>
 										</tr>
 									</table>
@@ -146,26 +138,38 @@
 
 
 	<div id="myModal" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Confirmation</h4>
-				</div>
-				<div class="modal-body">
-					<p>Do you want to save changes you made to document before
-						closing?</p>
-					<p class="text-warning">
-						<small>If you don't save, your changes will be lost.</small>
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Save changes</button>
+		<form action="return" method="post" name="return">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Confirmation</h4>
+					</div>
+					<div class="modal-body">
+						<div>
+							<div class="return_text_area">
+								<div>
+									<textarea name="comment" rows="4" cols="50"></textarea>
+								</div>
+								<div>Please mention the reason for returning the product.</div>
+							</div>
+						</div>
+						<p>Are you sure you want to place return request?</p>
+						<p class="text-warning">
+							<small>Please click submit to place return request. You
+								request will be processed immediately.</small>
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" id="submit_return" class="btn btn-primary">Place
+							Return Request</button>
+					</div>
 				</div>
 			</div>
-		</div>
+			<input type="hidden" id="orderItemId" name="orderItemId" />
+		</form>
 	</div>
 
 
