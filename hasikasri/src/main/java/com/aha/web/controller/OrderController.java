@@ -109,7 +109,8 @@ public class OrderController {
 												.getIsReturnable(), order
 												.getDelivery()
 												.getDeliveredDate(), item
-												.getOrderItemId());
+												.getOrderItemId(), item
+												.getStatus());
 								itemsDtos.add(itemsDto);
 							}
 						});

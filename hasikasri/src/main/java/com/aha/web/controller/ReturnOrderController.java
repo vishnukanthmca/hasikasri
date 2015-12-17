@@ -31,7 +31,7 @@ public class ReturnOrderController {
 		returnOrderService.save(dto,
 				Long.parseLong(session.getAttribute("userId").toString()));
 
-		view.setViewName("myorders");
+		view.setViewName("redirect:myorders");
 
 		return view;
 	}

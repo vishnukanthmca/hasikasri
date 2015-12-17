@@ -6,6 +6,7 @@ import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 import com.aha.core.util.Util;
+import com.aha.core.util.Enum.OrderStatus;
 
 public class MyOrderItemsDto {
 
@@ -21,13 +22,13 @@ public class MyOrderItemsDto {
 
 	private Boolean isReturnable;
 
-	private Boolean displayReturnLink;
+	private String returnStatus;
 
 	private String orderItemId;
 
 	public MyOrderItemsDto(String image, String productName, Double price,
 			Integer quantity, String sellerName, Boolean isReturnable,
-			Date deliveredDate, String orderItemId) {
+			Date deliveredDate, String orderItemId, Integer status) {
 		super();
 		this.image = image;
 		this.productName = productName;
@@ -39,10 +40,10 @@ public class MyOrderItemsDto {
 
 		this.image = Util.generateImageLocation(image);
 
-		this.displayReturnLink = checkReturnDate(deliveredDate);
+		this.returnStatus = checkReturnDate(deliveredDate, status);
 	}
 
-	private Boolean checkReturnDate(Date deliveredDate) {
+	private String checkReturnDate(Date deliveredDate, Integer status) {
 
 		if (deliveredDate != null && this.getIsReturnable() != null
 				&& this.getIsReturnable()) {
@@ -52,10 +53,19 @@ public class MyOrderItemsDto {
 			int days = Days.daysBetween(currentDate, date1).getDays();
 
 			if (days <= 7) {
-				return true;
+				return "link";
 			}
 		}
-		return false;
+
+		if (status.equals(OrderStatus.RETURN_ORDER_REQUEST_APPROVED.ordinal())) {
+			return "returned";
+		}
+
+		if (status.equals(OrderStatus.RETURN_ORDER_REQUEST_PLACED.ordinal())) {
+			return "returnedRequested";
+		}
+
+		return null;
 	}
 
 	public String getImage() {
@@ -106,12 +116,12 @@ public class MyOrderItemsDto {
 		this.isReturnable = isReturnable;
 	}
 
-	public Boolean getDisplayReturnLink() {
-		return displayReturnLink;
+	public String getReturnStatus() {
+		return returnStatus;
 	}
 
-	public void setDisplayReturnLink(Boolean displayReturnLink) {
-		this.displayReturnLink = displayReturnLink;
+	public void setReturnStatus(String returnStatus) {
+		this.returnStatus = returnStatus;
 	}
 
 	public String getOrderItemId() {
