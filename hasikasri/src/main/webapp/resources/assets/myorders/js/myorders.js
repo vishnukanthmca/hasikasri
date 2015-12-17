@@ -11,6 +11,11 @@ function pills() {
 
 }
 
+function placeReturnRequest(orderItemId) {
+	console.log(orderItemId);
+	$("#myModal").modal('show');
+}
+
 function showReturnBox(id) {
 	if ($('#' + id).is(':visible')) {
 		$('#' + id).hide();
