@@ -38,6 +38,9 @@ public class OrderedItem {
 	@ManyToOne
 	private Order order;
 
+	@Column
+	private String orderItemId;
+
 	public Long getId() {
 		return id;
 	}
@@ -109,4 +112,13 @@ public class OrderedItem {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+
+	public String getOrderItemId() {
+		return orderItemId;
+	}
+
+	public void setOrderItemId(String orderItemId) {
+		this.orderItemId = orderItemId;
+	}
+
 }

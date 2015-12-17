@@ -33,7 +33,7 @@
 							<h4 class="panel-title">
 								<a role="button" data-toggle="collapse" data-parent="#accordion"
 									href="#${order.orderId}" aria-expanded="true"
-									aria-controls="collapseOne"> ${order.orderId} #1 </a>
+									aria-controls="collapseOne"> ${order.orderId}</a>
 							</h4>
 						</div>
 						<div id="${order.orderId}" class="panel-collapse collapse in"
@@ -48,6 +48,21 @@
 											<td>${item.price}</td>
 											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
 												<c:if test="${item.quantity > 1}">&nbsp;nos</c:if></td>
+											<c:if test="true">
+												<td><div>
+														<a onclick="showReturnBox('textarea${order.orderId}')">return</a>
+													</div>
+													<div id="textarea${order.orderId}" class="return_text_area">
+														<div>
+															<textarea rows="4" cols="50"></textarea>
+														</div>
+														<div>
+															<input type="button" value="Submit" />
+														</div>
+													</div></td>
+
+											</c:if>
+
 										</tr>
 									</table>
 								</c:forEach>
@@ -66,7 +81,7 @@
 							<h4 class="panel-title">
 								<a role="button" data-toggle="collapse" data-parent="#accordion"
 									href="#${order.orderId}" aria-expanded="true"
-									aria-controls="collapseOne"> ${order.orderId} #1 </a>
+									aria-controls="collapseOne"> ${order.orderId}</a>
 							</h4>
 						</div>
 						<div id="${order.orderId}" class="panel-collapse collapse in"
@@ -99,7 +114,7 @@
 							<h4 class="panel-title">
 								<a role="button" data-toggle="collapse" data-parent="#accordion"
 									href="#${order.orderId}" aria-expanded="true"
-									aria-controls="collapseOne"> ${order.orderId} #1 </a>
+									aria-controls="collapseOne"> ${order.orderId}</a>
 							</h4>
 						</div>
 						<div id="${order.orderId}" class="panel-collapse collapse in"
@@ -112,6 +127,8 @@
 											<td><img height="75" width="75" src="${item.image}" /></td>
 											<td>${item.productName}</td>
 											<td>${item.price}</td>
+											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
+												<c:if test="${item.quantity > 1}">&nbsp;nos</c:if></td>
 											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
 												<c:if test="${item.quantity > 1}">&nbsp;nos</c:if></td>
 										</tr>

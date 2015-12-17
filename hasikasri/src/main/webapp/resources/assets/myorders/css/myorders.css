@@ -6,3 +6,7 @@
 .order_items_table {
 	margin-top: 10px;
 }
+
+.return_text_area {
+	display: none;
+}

@@ -66,6 +66,9 @@ public class Product {
 	@Temporal(TemporalType.DATE)
 	private Date addedDate;
 
+	@Column
+	private Boolean isReturnable;
+
 	public Long getId() {
 		return id;
 	}
@@ -168,6 +171,14 @@ public class Product {
 
 	public void setAddedDate(Date addedDate) {
 		this.addedDate = addedDate;
+	}
+
+	public Boolean getIsReturnable() {
+		return isReturnable;
+	}
+
+	public void setIsReturnable(Boolean isReturnable) {
+		this.isReturnable = isReturnable;
 	}
 
 	@Override

@@ -105,7 +105,11 @@ public class OrderController {
 								MyOrderItemsDto itemsDto = new MyOrderItemsDto(
 										product.getListingImage(), product
 												.getName(), product.getPrice(),
-										item.getQuantity(), sellerName);
+										item.getQuantity(), sellerName, product
+												.getIsReturnable(), order
+												.getDelivery()
+												.getDeliveredDate(), item
+												.getOrderItemId());
 								itemsDtos.add(itemsDto);
 							}
 						});
