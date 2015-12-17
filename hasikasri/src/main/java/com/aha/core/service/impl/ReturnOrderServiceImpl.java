@@ -10,7 +10,7 @@ import com.aha.core.domain.ReturnOrder;
 import com.aha.core.domain.User;
 import com.aha.core.service.OrderedItemService;
 import com.aha.core.service.ReturnOrderService;
-import com.aha.core.util.Enum.ReturnOrderStatus;
+import com.aha.core.util.Enum.OrderStatus;
 import com.aha.persistence.repository.ReturnOrderRepository;
 import com.aha.web.dto.request.ReturnInputDto;
 
@@ -25,17 +25,18 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
 
 	@Override
 	public void save(ReturnInputDto dto, Long userId) {
-		repository.save(createReturnOrderEntity(dto, userId));
+
+		OrderedItem orderedItem = getOrderedItem(dto);
+		repository.save(createReturnOrderEntity(orderedItem, dto, userId));
+
+		orderedItem
+				.setStatus(OrderStatus.RETURN_ORDER_REQUEST_PLACED.ordinal());
+
+		orderedItemService.updateOrderedItem(orderedItem);
 	}
 
-	public ReturnOrder createReturnOrderEntity(ReturnInputDto dto, Long userId) {
-
-		OrderedItem orderedItem = orderedItemService.findByOrderItemId(dto
-				.getOrderItemId());
-		if (orderedItem == null) {
-			throw new IllegalStateException(
-					"OrderedItem is null which should not be.");
-		}
+	public ReturnOrder createReturnOrderEntity(OrderedItem orderedItem,
+			ReturnInputDto dto, Long userId) {
 
 		User user = new User();
 		user.setId(userId);
@@ -46,8 +47,18 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
 		order.setOrderedItem(orderedItem);
 		order.setUser(user);
 		order.setReturnDate(new Date());
-		order.setStatus(ReturnOrderStatus.RETURN_ORDER_REQUEST_PLACED.ordinal());
+		order.setStatus(OrderStatus.RETURN_ORDER_REQUEST_PLACED.ordinal());
 
 		return order;
+	}
+
+	private OrderedItem getOrderedItem(ReturnInputDto dto) {
+		OrderedItem orderedItem = orderedItemService.findByOrderItemId(dto
+				.getOrderItemId());
+		if (orderedItem == null) {
+			throw new IllegalStateException(
+					"OrderedItem is null which should not be.");
+		}
+		return orderedItem;
 	}
 }

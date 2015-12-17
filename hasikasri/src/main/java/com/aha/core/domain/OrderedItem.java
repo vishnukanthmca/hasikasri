@@ -41,6 +41,9 @@ public class OrderedItem {
 	@Column
 	private String orderItemId;
 
+	@Column
+	private Integer status;
+
 	public Long getId() {
 		return id;
 	}
@@ -119,6 +122,14 @@ public class OrderedItem {
 
 	public void setOrderItemId(String orderItemId) {
 		this.orderItemId = orderItemId;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 }

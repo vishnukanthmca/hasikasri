@@ -18,4 +18,9 @@ public class OrderedItemServiceImpl implements OrderedItemService {
 		return repository.findByOrderItemId(orderItemId);
 	}
 
+	@Override
+	public void updateOrderedItem(OrderedItem item) {
+		repository.save(item);
+	}
+
 }
