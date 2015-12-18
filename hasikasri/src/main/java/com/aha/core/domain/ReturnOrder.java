@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -27,7 +28,7 @@ public class ReturnOrder {
 	@Column
 	private String comments;
 
-	@OneToOne(mappedBy="returnOrder")
+	@OneToOne(fetch = FetchType.EAGER)
 	private OrderedItem orderedItem;
 
 	@Column

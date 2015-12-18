@@ -28,7 +28,10 @@ public class OrderedItem {
 	private String size;
 
 	@Column
-	private Double soldPrice;
+	private Double unitSoldPrice;
+
+	@Column
+	private Double totalSoldPrice;
 
 	@Column
 	private Double originalPrice;
@@ -45,7 +48,7 @@ public class OrderedItem {
 	@Column
 	private Integer status;
 
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "orderedItem")
+	@OneToOne(fetch = FetchType.EAGER)
 	private ReturnOrder returnOrder;
 
 	public Long getId() {
@@ -88,12 +91,20 @@ public class OrderedItem {
 		this.size = size;
 	}
 
-	public Double getSoldPrice() {
-		return soldPrice;
+	public Double getUnitSoldPrice() {
+		return unitSoldPrice;
 	}
 
-	public void setSoldPrice(Double soldPrice) {
-		this.soldPrice = soldPrice;
+	public void setUnitSoldPrice(Double unitSoldPrice) {
+		this.unitSoldPrice = unitSoldPrice;
+	}
+
+	public Double getTotalSoldPrice() {
+		return totalSoldPrice;
+	}
+
+	public void setTotalSoldPrice(Double totalSoldPrice) {
+		this.totalSoldPrice = totalSoldPrice;
 	}
 
 	public Double getOriginalPrice() {

@@ -92,11 +92,12 @@ public class OrderController {
 				List<MyOrderItemsDto> itemsDtos = new ArrayList<>();
 
 				order.getOrderedItems().forEach(
-						item -> {
+						orderedItem -> {
 
-							Product product = item.getProduct();
+							Product product = orderedItem.getProduct();
 
-							ReturnOrder returnOrder = item.getReturnOrder();
+							ReturnOrder returnOrder = orderedItem
+									.getReturnOrder();
 
 							String adminComments = null;
 							String returnDate = null;
@@ -118,13 +119,14 @@ public class OrderController {
 
 								MyOrderItemsDto itemsDto = new MyOrderItemsDto(
 										product.getListingImage(), product
-												.getName(), product.getPrice(),
-										item.getQuantity(), sellerName, product
-												.getIsReturnable(), order
+												.getName(), orderedItem
+												.getTotalSoldPrice(),
+										orderedItem.getQuantity(), sellerName,
+										product.getIsReturnable(), order
 												.getDelivery()
-												.getDeliveredDate(), item
-												.getOrderItemId(), item
-												.getStatus(), adminComments,
+												.getDeliveredDate(),
+										orderedItem.getOrderItemId(),
+										orderedItem.getStatus(), adminComments,
 										returnDate);
 								itemsDtos.add(itemsDto);
 							}

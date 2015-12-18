@@ -14,7 +14,7 @@ public class MyOrderItemsDto {
 
 	private String productName;
 
-	private Double price;
+	private Double totalSoldPrice;
 
 	private Integer quantity;
 
@@ -30,14 +30,14 @@ public class MyOrderItemsDto {
 
 	private String returnDate;
 
-	public MyOrderItemsDto(String image, String productName, Double price,
-			Integer quantity, String sellerName, Boolean isReturnable,
-			Date deliveredDate, String orderItemId, Integer status,
-			String adminComments, String returnDate) {
+	public MyOrderItemsDto(String image, String productName,
+			Double totalSoldPrice, Integer quantity, String sellerName,
+			Boolean isReturnable, Date deliveredDate, String orderItemId,
+			Integer status, String adminComments, String returnDate) {
 		super();
 		this.image = image;
 		this.productName = productName;
-		this.price = price;
+		this.totalSoldPrice = totalSoldPrice;
 		this.quantity = quantity;
 		this.sellerName = sellerName;
 		this.isReturnable = isReturnable;
@@ -92,12 +92,12 @@ public class MyOrderItemsDto {
 		this.productName = productName;
 	}
 
-	public Double getPrice() {
-		return price;
+	public Double getTotalSoldPrice() {
+		return totalSoldPrice;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setTotalSoldPrice(Double totalSoldPrice) {
+		this.totalSoldPrice = totalSoldPrice;
 	}
 
 	public Integer getQuantity() {

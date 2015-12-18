@@ -45,7 +45,7 @@
 										<tr>
 											<td><img height="75" width="75" src="${item.image}" /></td>
 											<td>${item.productName}</td>
-											<td>${item.price}</td>
+											<td>${item.totalSoldPrice}</td>
 											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
 												<c:if test="${item.quantity > 1}">&nbsp;nos</c:if></td>
 											<c:if
@@ -90,7 +90,7 @@
 										<tr>
 											<td><img height="75" width="75" src="${item.image}" /></td>
 											<td>${item.productName}</td>
-											<td>${item.price}</td>
+											<td>${item.totalSoldPrice}</td>
 											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
 												<c:if test="${item.quantity > 1}">&nbsp;nos</c:if></td>
 										</tr>
@@ -123,7 +123,7 @@
 										<tr>
 											<td><img height="75" width="75" src="${item.image}" /></td>
 											<td>${item.productName}</td>
-											<td>${item.price}</td>
+											<td>${item.totalSoldPrice}</td>
 											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
 												<c:if test="${item.quantity > 1}">&nbsp;nos</c:if></td>
 											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
