@@ -45,7 +45,7 @@ public class Category {
 	private List<Category> childrenCategories;
 
 	@Column
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date temporaryDate;
 
 	public Long getId() {

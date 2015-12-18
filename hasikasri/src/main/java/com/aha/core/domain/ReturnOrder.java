@@ -21,17 +21,25 @@ public class ReturnOrder {
 	private User user;
 
 	@Column
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date returnDate;
-
-	@Column
-	private Integer status;
 
 	@Column
 	private String comments;
 
-	@OneToOne
+	@OneToOne(mappedBy="returnOrder")
 	private OrderedItem orderedItem;
+
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date approvedDate;
+
+	@Column
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date returnOrderReceivedDate;
+
+	@Column
+	private String adminComments;
 
 	public Long getId() {
 		return id;
@@ -47,14 +55,6 @@ public class ReturnOrder {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
 	}
 
 	public Date getReturnDate() {
@@ -79,6 +79,30 @@ public class ReturnOrder {
 
 	public void setOrderedItem(OrderedItem orderedItem) {
 		this.orderedItem = orderedItem;
+	}
+
+	public Date getApprovedDate() {
+		return approvedDate;
+	}
+
+	public void setApprovedDate(Date approvedDate) {
+		this.approvedDate = approvedDate;
+	}
+
+	public String getAdminComments() {
+		return adminComments;
+	}
+
+	public void setAdminComments(String adminComments) {
+		this.adminComments = adminComments;
+	}
+
+	public Date getReturnOrderReceivedDate() {
+		return returnOrderReceivedDate;
+	}
+
+	public void setReturnOrderReceivedDate(Date returnOrderReceivedDate) {
+		this.returnOrderReceivedDate = returnOrderReceivedDate;
 	}
 
 }

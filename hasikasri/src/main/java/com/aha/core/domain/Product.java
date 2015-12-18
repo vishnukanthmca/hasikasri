@@ -63,7 +63,7 @@ public class Product {
 	private Double rating;
 
 	@Column
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date addedDate;
 
 	@Column

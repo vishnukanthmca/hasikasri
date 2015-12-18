@@ -48,12 +48,17 @@
 											<td>${item.price}</td>
 											<td>${item.quantity}<c:if test="${item.quantity == 1}">&nbsp;no</c:if>
 												<c:if test="${item.quantity > 1}">&nbsp;nos</c:if></td>
-											<c:if test="true">
+											<c:if
+												test="${item.returnStatus.equals('DISPLAY_RETURN_LINK')}">
 												<td><div id="return_div">
 														<a>return</a>
 													</div></td>
 												<input type="hidden" id="orderItemId_hidden"
 													value="${item.orderItemId}" />
+											</c:if>
+											<c:if test="${item.returnStatus.equals('RETURNED')}">
+												<td><div id="return_div">You returned this item
+														on ${item.returnDate} due to ${item.adminComments}</div></td>
 											</c:if>
 										</tr>
 									</table>

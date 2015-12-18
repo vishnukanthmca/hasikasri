@@ -27,11 +27,14 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
 	public void save(ReturnInputDto dto, Long userId) {
 
 		OrderedItem orderedItem = getOrderedItem(dto);
-		repository.save(createReturnOrderEntity(orderedItem, dto, userId));
+		ReturnOrder returnOrder = createReturnOrderEntity(orderedItem, dto,
+				userId);
+		repository.save(returnOrder);
 
 		orderedItem
 				.setStatus(OrderStatus.RETURN_ORDER_REQUEST_PLACED.ordinal());
 
+		orderedItem.setReturnOrder(returnOrder);
 		orderedItemService.updateOrderedItem(orderedItem);
 	}
 
@@ -47,7 +50,6 @@ public class ReturnOrderServiceImpl implements ReturnOrderService {
 		order.setOrderedItem(orderedItem);
 		order.setUser(user);
 		order.setReturnDate(new Date());
-		order.setStatus(OrderStatus.RETURN_ORDER_REQUEST_PLACED.ordinal());
 
 		return order;
 	}

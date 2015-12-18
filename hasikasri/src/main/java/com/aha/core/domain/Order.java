@@ -29,7 +29,7 @@ public class Order {
 	private User user;
 
 	@Column
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderedDate;
 
 	@Column

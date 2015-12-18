@@ -2,6 +2,7 @@ package com.aha.core.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -43,6 +44,9 @@ public class OrderedItem {
 
 	@Column
 	private Integer status;
+
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "orderedItem")
+	private ReturnOrder returnOrder;
 
 	public Long getId() {
 		return id;
@@ -130,6 +134,14 @@ public class OrderedItem {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public ReturnOrder getReturnOrder() {
+		return returnOrder;
+	}
+
+	public void setReturnOrder(ReturnOrder returnOrder) {
+		this.returnOrder = returnOrder;
 	}
 
 }

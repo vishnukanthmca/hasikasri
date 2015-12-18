@@ -26,9 +26,14 @@ public class MyOrderItemsDto {
 
 	private String orderItemId;
 
+	private String adminComments;
+
+	private String returnDate;
+
 	public MyOrderItemsDto(String image, String productName, Double price,
 			Integer quantity, String sellerName, Boolean isReturnable,
-			Date deliveredDate, String orderItemId, Integer status) {
+			Date deliveredDate, String orderItemId, Integer status,
+			String adminComments, String returnDate) {
 		super();
 		this.image = image;
 		this.productName = productName;
@@ -37,32 +42,35 @@ public class MyOrderItemsDto {
 		this.sellerName = sellerName;
 		this.isReturnable = isReturnable;
 		this.orderItemId = orderItemId;
+		this.adminComments = adminComments;
+		this.returnDate = returnDate;
 
 		this.image = Util.generateImageLocation(image);
 
 		this.returnStatus = checkReturnDate(deliveredDate, status);
+
 	}
 
 	private String checkReturnDate(Date deliveredDate, Integer status) {
 
 		if (deliveredDate != null && this.getIsReturnable() != null
-				&& this.getIsReturnable()) {
+				&& this.getIsReturnable() && status == null) {
 			LocalDate date1 = new LocalDate(deliveredDate);
-			LocalDate currentDate = new LocalDate(deliveredDate);
+			LocalDate currentDate = new LocalDate(new Date());
 
-			int days = Days.daysBetween(currentDate, date1).getDays();
+			int days = Days.daysBetween(date1, currentDate).getDays();
 
 			if (days <= 7) {
-				return "link";
+				return "DISPLAY_RETURN_LINK";
 			}
 		}
 
 		if (status.equals(OrderStatus.RETURN_ORDER_REQUEST_APPROVED.ordinal())) {
-			return "returned";
+			return "RETURNED";
 		}
 
 		if (status.equals(OrderStatus.RETURN_ORDER_REQUEST_PLACED.ordinal())) {
-			return "returnedRequested";
+			return "RETURN REQUEST PLACED";
 		}
 
 		return null;
@@ -130,6 +138,22 @@ public class MyOrderItemsDto {
 
 	public void setOrderItemId(String orderItemId) {
 		this.orderItemId = orderItemId;
+	}
+
+	public String getAdminComments() {
+		return adminComments;
+	}
+
+	public void setAdminComments(String adminComments) {
+		this.adminComments = adminComments;
+	}
+
+	public String getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(String returnDate) {
+		this.returnDate = returnDate;
 	}
 
 }

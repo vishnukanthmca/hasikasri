@@ -14,6 +14,7 @@ import com.aha.core.domain.Address;
 import com.aha.core.domain.Delivery;
 import com.aha.core.domain.Order;
 import com.aha.core.domain.Product;
+import com.aha.core.domain.ReturnOrder;
 import com.aha.core.service.OrderService;
 import com.aha.core.util.Enum;
 import com.aha.web.dto.response.AddressDto;
@@ -95,6 +96,19 @@ public class OrderController {
 
 							Product product = item.getProduct();
 
+							ReturnOrder returnOrder = item.getReturnOrder();
+
+							String adminComments = null;
+							String returnDate = null;
+
+							if (returnOrder != null) {
+								adminComments = returnOrder.getAdminComments();
+								if (returnOrder.getReturnDate() != null) {
+									returnDate = returnOrder.getReturnDate()
+											.toString();
+								}
+							}
+
 							if (product != null) {
 
 								String sellerName = "";
@@ -110,7 +124,8 @@ public class OrderController {
 												.getDelivery()
 												.getDeliveredDate(), item
 												.getOrderItemId(), item
-												.getStatus());
+												.getStatus(), adminComments,
+										returnDate);
 								itemsDtos.add(itemsDto);
 							}
 						});

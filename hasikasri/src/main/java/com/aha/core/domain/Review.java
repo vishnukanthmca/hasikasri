@@ -40,7 +40,7 @@ public class Review {
 	private String headLine;
 
 	@Column
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date addedDate;
 
 	public Long getId() {
