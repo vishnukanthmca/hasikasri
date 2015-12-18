@@ -13,8 +13,10 @@ public interface UserService {
 	public User findUserByMobile(String email);
 
 	public boolean isUserPresent(String email, String mobile);
-	
+
 	public Boolean isUserPresent(LoginDto dto);
 
 	public User login(LoginDto dto);
+
+	public User findOne(Long userId);
 }

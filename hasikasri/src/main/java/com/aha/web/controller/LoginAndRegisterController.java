@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aha.core.domain.User;
 import com.aha.core.service.UserService;
+import com.aha.web.dto.request.AccountDto;
 import com.aha.web.dto.request.LoginDto;
 import com.aha.web.dto.request.RegisterInputDto;
 
@@ -70,5 +71,36 @@ public class LoginAndRegisterController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "home";
+	}
+
+	@RequestMapping("/myaccount")
+	public ModelAndView myaccount(HttpSession session) {
+
+		ModelAndView view = new ModelAndView();
+
+		if (session.getAttribute("userId") == null) {
+			view.setViewName("home");
+			return view;
+		}
+
+		Long userId = Long.parseLong(session.getAttribute("userId").toString());
+		view.setViewName("account");
+
+		User user = userService.findOne(userId);
+
+		if (user == null) {
+			view.setViewName("logout");
+			return view;
+		}
+
+		AccountDto dto = new AccountDto();
+		dto.setEmail(user.getEmail());
+		dto.setMobile(user.getMobile());
+		dto.setName(user.getName());
+		dto.setUsername(user.getUsername());
+
+		view.addObject("user", dto);
+
+		return view;
 	}
 }
