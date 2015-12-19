@@ -69,7 +69,9 @@ public class LoginAndRegisterController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
+		if (session != null) {
+			session.invalidate();
+		}
 		return "home";
 	}
 
@@ -97,7 +99,6 @@ public class LoginAndRegisterController {
 		dto.setEmail(user.getEmail());
 		dto.setMobile(user.getMobile());
 		dto.setName(user.getName());
-		dto.setUsername(user.getUsername());
 
 		view.addObject("user", dto);
 

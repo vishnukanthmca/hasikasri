@@ -21,4 +21,6 @@
 # Ensure creating absolute constraints on database for possibilities
 # implement sessions everywhere including back button press
 # return order transfer money to wallet
-# check for sync and async clicks in ui 
+# check for sync and async clicks in ui
+# after user delete, when he signs up again decide to insert a new record or update old
+# for resend sms code also do verify 

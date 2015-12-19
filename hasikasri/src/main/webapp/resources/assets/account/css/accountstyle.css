@@ -720,3 +720,12 @@ Shadow layer
 #change_password_div {
 	margin-top: 10px;
 }
+
+#verification_code_label {
+	display: none;
+	color: green;
+}
+
+#mobile_verificationcode {
+	width: 80px;
+}

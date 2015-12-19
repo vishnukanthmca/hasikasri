@@ -111,18 +111,20 @@
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 		</div>
 
-		<form action="">
+		<form class="form" name="form">
 			<fieldset>
 				<legend>Account Info</legend>
 
 				<div class="half-width">
 					<label for="userName">Mobile</label> <input type="text"
-						id="userName" name="userName" value="${user.mobile }">
+						id="mobile_textbox" value="${user.mobile }" placeholder="Mobile"
+						name="mobile" class="numeric-only" required title="Mobile no"
+						pattern=".{10,}" maxlength="10">
 				</div>
 
 				<div class="half-width">
 					<label for="userEmail">Email</label> <input type="email"
-						id="userEmail" name="userEmail">
+						id="email_textbox" name="userEmail">
 				</div>
 				<div id="change_password_div">
 					<label id="change_password_label">Change password</label>
@@ -132,7 +134,6 @@
 						<label for="userPassword">Old Password</label> <input
 							type="password" id="userPassword" name="userPassword">
 					</div>
-
 					<div class="half-width">
 						<label for="userPasswordRepeat">New Password</label> <input
 							type="password" id="userPasswordRepeat" name="userPasswordRepeat">
@@ -142,12 +143,11 @@
 					<label for="userName">Name</label> <input type="text" id="userName"
 						name="userName">
 				</div>
-
-				<div class="half-width">
+				<!-- <div class="half-width">
 					<label for="userEmail">Username</label> <input type="email"
 						id="userEmail" name="userEmail">
 				</div>
-
+ -->
 
 			</fieldset>
 
@@ -156,11 +156,17 @@
 
 				<div>
 					<ul class="cd-payment-gateways">
-						<li><input type="radio" name="payment-method" id="paypal"
-							value="paypal"> <label for="paypal">Paypal</label></li>
+						<li><div id="verification_code_label">
+								<p class="half-width">
+									<label>Enter verification code sent to mobile</label> <input
+										type="text" id="mobile_verificationcode">
+								</p>
+								<p class="half-width">
+									<button id="verify_mobile_button">Verify</button>
+								</p>
+							</div></li>
 
-						<li><input type="radio" name="payment-method" id="card"
-							value="card" checked> <label for="card">Card</label></li>
+
 					</ul>
 					<!-- .cd-payment-gateways -->
 				</div>
@@ -212,7 +218,7 @@
 
 			<fieldset>
 				<div>
-					<input type="submit" value="Get started">
+					<button type="submit" value="UPDATE" id="update">UPDATE</button>
 				</div>
 			</fieldset>
 		</form>
@@ -223,10 +229,12 @@
 
 	<div class="cd-overlay"></div>
 	<!-- shadow layer -->
-	<script src="resources/assets/account/js/jquery-2.1.4.js"></script>
+	<script src="resources/assets/register/js/jquery-2.1.4.min.js"></script>
 	<script src="resources/assets/account/js/velocity.min.js"></script>
 	<script src="resources/assets/account/js/main.js"></script>
 	<script src="resources/assets/account/js/account.js"></script>
 	<!-- Resource jQuery -->
+	<input type="hidden" value="${user.mobile }" id="backup_mobile" />
+	<input type="hidden" value="${user.email }" id="backup_email" />
 </body>
 </html>
