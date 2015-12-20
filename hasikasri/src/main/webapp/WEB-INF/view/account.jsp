@@ -110,9 +110,9 @@
 				</h4>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 		</div>
+		<fieldset>
+			<form class="form" name="form">
 
-		<form class="form" name="form">
-			<fieldset>
 				<legend>Profile</legend>
 				<div id="main_container">
 					<div class="row">
@@ -137,21 +137,41 @@
 						</div>
 						<div class="row">
 							<div class="half-width">
-								<input type="text" pattern=".{6,}" id="mobile_verificationcode">
+								<input type="text" maxlength="6" id="mobile_verificationcode">
 							</div>
 							<div class="half-width">
 								<button id="verify_mobile_button">Verify</button>
 							</div>
 						</div>
-
 					</div>
 				</div>
-			</fieldset>
-		</form>
+			</form>
+			<form name="email_form" class="form">
+				<div id="email_main_container">
+					<div class="row">
+						<div class="half-width" id="email_div">
+							<label id="email_label">${user.email }</label> <input
+								id="email_textbox" name="email" type="email" placeholder="Email"
+								required title="Email">
+						</div>
+						<div class="half-width">
+							<a id="edit_email">Edit</a>
+							<button type="submit" id="update_email_button">UPDATE</button>
+							<button type="submit" id="cancel_update_email_button">CANCEL</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+
+
 
 		<a href="#0" class="cd-close"></a>
 	</div>
 	<!-- .cd-form -->
+
+
+
 
 	<div class="cd-overlay"></div>
 	<!-- shadow layer -->

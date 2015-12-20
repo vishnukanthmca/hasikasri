@@ -833,3 +833,38 @@ Shadow layer
 .verify_mobile_message_text span {
 	color: green;
 }
+
+/** email **/
+#email_textbox {
+	display: none;
+}
+
+#update_email_button {
+	display: none;
+}
+
+#cancel_update_email_button {
+	display: none;
+	margin-left: 10px;
+}
+
+#verify_email_message {
+	display: none;
+	margin-top: 20px;
+}
+
+.verify_email_message_text {
+	margin-bottom: 10px;
+}
+
+.verify_email_message_text span {
+	color: green;
+}
+
+#email_main_container button {
+	float: left;
+}
+
+#email_main_container {
+	margin-top: 20px;
+}

@@ -4,13 +4,18 @@ $(document).ready(function() {
 	updateMobile();
 	cancelMobileUpdate();
 	verifyMobile();
+
+	showEmailTextbox();
+	updateEmail();
+	cancelEmailUpdate();
+	verifyEmail();
 });
 
 function cancelMobileUpdate() {
 	$("#cancel_update_mobile_button").click(function(e) {
 		e.preventDefault();
 
-		hideAll();
+		hideAllMobile();
 	});
 }
 
@@ -85,7 +90,7 @@ function verifyMobile() {
 				} else if (data === "success") {
 					widow.location.href = widow.location.href;
 				} else if (data === "failed") {
-					hideAll();
+					hideAllMobile();
 				}
 			}
 		});
@@ -100,7 +105,7 @@ function getMobileVerifyInput() {
 	return input;
 }
 
-function hideAll() {
+function hideAllMobile() {
 	$("#mobile_label").show();
 	$("#mobile_textbox").hide();
 	$("#update_mobile_button").hide();
@@ -120,3 +125,110 @@ $(document).on('keyup', '.numeric-only', function(event) {
 		this.value = this.value.slice(0, -1);
 	}
 });
+
+// email
+
+function showEmailTextbox() {
+	$("#edit_email").click(function(e) {
+		$("#email_label").hide();
+		$("#email_textbox").show();
+		$("#update_email_button").show();
+		$("#cancel_update_email_button").show();
+		$(this).hide();
+	});
+}
+
+function updateEmail() {
+	$('form').submit(function(evt) {
+
+		evt.preventDefault();
+
+		$("#new_email").html($("#email_textbox").val());
+		$("#email_verificationcode").val('');
+
+		var oldemail = $("#backup_email").val();
+		var newemail = $("#email_textbox").val();
+
+		if (oldemail != newemail) {
+			$("#verify_email_message").show();
+			sendSms();
+		}
+
+	});
+}
+
+function cancelEmailUpdate() {
+	$("#cancel_update_email_button").click(function(e) {
+		e.preventDefault();
+
+		hideAll();
+	});
+}
+
+function hideAll() {
+	$("#email_label").show();
+	$("#email_textbox").hide();
+	$("#update_email_button").hide();
+	$("#cancel_update_email_button").hide();
+	$("#edit_email").show();
+	$("#verify_email_message").hide();
+
+	$("#email_textbox").val($("#backup_email").val());
+
+}
+
+function verifyEmail() {
+	$("#verify_email_button").click(function(e) {
+		e.preventDefault();
+		$.ajax({
+			url : 'verifyMobile',
+			method : 'GET',
+			data : getEmailVerifyInput(),
+			success : function(data) {
+				console.log(data);
+				if (data === "success") {
+					window.location.href = "myaccount";
+				} else if (data === "verificationcodesent") {
+					$("#verification_code_label").show();
+				} else if (data === "malfunctioned") {
+					window.location.href = "home";
+				} else if (data === "success") {
+					widow.location.href = widow.location.href;
+				} else if (data === "failed") {
+					hideAll();
+				}
+			}
+		});
+	});
+}
+function getEmailVerifyInput() {
+	var input = {
+		email : $("#email_textbox").val(),
+		code : $("#email_verificationcode").val()
+	};
+	return input;
+}
+
+function sendEmail() {
+	$.ajax({
+		url : 'sendSms',
+		method : 'GET',
+		data : getEmailInput(),
+		success : function(data) {
+			if (data === "unauthorized") {
+				window.location = "home";
+			} else if (data === "verificationcodesent") {
+				// $("#verification_code_label").show();
+			} else if (data === "failed") {
+
+			}
+		}
+	});
+}
+
+function getEmailInput() {
+	var input = {
+		email : $("#email_textbox").val()
+	};
+	return input;
+}
