@@ -137,7 +137,7 @@
 						</div>
 						<div class="row">
 							<div class="half-width">
-								<input type="text" id="mobile_verificationcode">
+								<input type="text" pattern=".{6,}" id="mobile_verificationcode">
 							</div>
 							<div class="half-width">
 								<button id="verify_mobile_button">Verify</button>

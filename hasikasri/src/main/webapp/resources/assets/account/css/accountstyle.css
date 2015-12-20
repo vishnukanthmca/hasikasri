@@ -751,8 +751,7 @@ Shadow layer
 }
 
 #mobile_verificationcode {
-	width: 80px;
-}
+	width: 80px;}
 
 .verify_mobile {
 	vertical-align: bottom;
@@ -833,3 +832,4 @@ Shadow layer
 .verify_mobile_message_text span {
 	color: green;
 }
+

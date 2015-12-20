@@ -30,6 +30,7 @@ function updateMobile() {
 		evt.preventDefault();
 
 		$("#new_mobile").html($("#mobile_textbox").val());
+		$("#mobile_verificationcode").val('');
 
 		var oldmobile = $("#backup_mobile").val();
 		var newmobile = $("#mobile_textbox").val();
@@ -110,3 +111,12 @@ function hideAll() {
 	$("#mobile_textbox").val($("#backup_mobile").val());
 
 }
+
+$(document).on('keyup', '.numeric-only', function(event) {
+
+	var v = this.value;
+	if ($.isNumeric(v) === false) {
+		// chop off the last char entered
+		this.value = this.value.slice(0, -1);
+	}
+});
