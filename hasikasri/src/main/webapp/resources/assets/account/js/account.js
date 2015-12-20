@@ -3,8 +3,14 @@ $(document).ready(function() {
 	profile();
 	update();
 	verifyMobile();
-
+	resendSms();
 });
+
+function resendSms() {
+	$("#resend_code").click(function(e) {
+		sendSms();
+	});
+}
 
 function update() {
 	$('#update').click(function(evt) {
@@ -73,6 +79,9 @@ function verifyMobile() {
 					$("#verification_code_label").show();
 				} else if (data === "malfunctioned") {
 					window.location.href = "home";
+				} else if (data === "success") {
+				} else if (data === "failed") {
+					$("#mobile_verification_code_incorrect").show();
 				}
 			}
 		});

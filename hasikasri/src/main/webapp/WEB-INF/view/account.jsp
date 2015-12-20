@@ -154,21 +154,28 @@
 			<fieldset>
 				<legend>Payment Method</legend>
 
-				<div>
-					<ul class="cd-payment-gateways">
-						<li><div id="verification_code_label">
-								<p class="half-width">
-									<label>Enter verification code sent to mobile</label> <input
-										type="text" id="mobile_verificationcode">
-								</p>
-								<p class="half-width">
-									<button id="verify_mobile_button">Verify</button>
-								</p>
-							</div></li>
-
-
-					</ul>
-					<!-- .cd-payment-gateways -->
+				<div id="verification_code_label">
+					<table id="mobile_verification_heading">
+						<tr>
+							<td colspan="2"><label>Enter verification code sent
+									to mobile</label></td>
+						</tr>
+					</table>
+					<table>
+						<tr>
+							<td class="verify_mobile"><input type="text"
+								id="mobile_verificationcode"></td>
+							<td class="verify_mobile"><button id="verify_mobile_button">Verify</button></td>
+						</tr>
+					</table>
+					<table id="resend_table">
+						<tr>
+							<td><a id="resend_code">Resend</a></td>
+							<td><label id="mobile_verification_code_incorrect"
+								class="error_message">Incorrect verification code.
+									Please type it again.</label></td>
+						</tr>
+					</table>
 				</div>
 
 				<div class="cd-credit-card">

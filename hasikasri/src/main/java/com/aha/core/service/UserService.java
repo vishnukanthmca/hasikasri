@@ -19,4 +19,6 @@ public interface UserService {
 	public User login(LoginDto dto);
 
 	public User findOne(Long userId);
+
+	public User saveUser(User user);
 }

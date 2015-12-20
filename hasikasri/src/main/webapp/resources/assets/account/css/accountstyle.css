@@ -21,6 +21,7 @@ body {
 a {
 	color: #95ac5f;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 input {
@@ -604,6 +605,9 @@ Form
 	.cd-form input[type="submit"] {
 		float: right;
 	}
+	.form button {
+		float: right;
+	}
 	.cd-form .cd-close {
 		/* move close icon outside the form container */
 		top: -40px;
@@ -661,12 +665,33 @@ Buttons
 	font-weight: bold;
 }
 
+.cd-pricing-footer a, .form button {
+	display: inline-block;
+	padding: 1em 1.8em;
+	border-radius: 50em;
+	text-transform: uppercase;
+	font-size: 1.3rem;
+	font-weight: bold;
+}
+
 .cd-pricing-footer a {
 	border: 1px solid rgba(223, 79, 113, 0.4);
 	color: #df4f71;
 }
 
 .cd-form input[type="submit"] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	background-color: #df4f71;
+	color: #ffffff;
+	border: none;
+	cursor: pointer;
+}
+
+.form button {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	-ms-appearance: none;
@@ -728,4 +753,29 @@ Shadow layer
 
 #mobile_verificationcode {
 	width: 80px;
+}
+
+.verify_mobile {
+	vertical-align: bottom;
+}
+
+.error_message {
+	color: red;
+	display: none;
+}
+
+#mobile_verification_code_incorrect {
+	margin-left: 45px;
+}
+
+#resend_table {
+	margin-top: 12px;
+}
+
+#verify_mobile_button {
+	margin-left: 20px;
+}
+
+#mobile_verification_heading {
+	margin-bottom: 10px;
 }
