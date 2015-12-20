@@ -113,119 +113,38 @@
 
 		<form class="form" name="form">
 			<fieldset>
-				<legend>Account Info</legend>
-
-				<div class="half-width">
-					<label for="userName">Mobile</label> <input type="text"
-						id="mobile_textbox" value="${user.mobile }" placeholder="Mobile"
-						name="mobile" class="numeric-only" required title="Mobile no"
-						pattern=".{10,}" maxlength="10">
-				</div>
-
-				<div class="half-width">
-					<label for="userEmail">Email</label> <input type="email"
-						id="email_textbox" name="userEmail">
-				</div>
-				<div id="change_password_div">
-					<label id="change_password_label">Change password</label>
-				</div>
-				<div id="password_fields">
-					<div class="half-width">
-						<label for="userPassword">Old Password</label> <input
-							type="password" id="userPassword" name="userPassword">
+				<legend>Profile</legend>
+				<div id="main_container">
+					<div class="row">
+						<div class="half-width" id="mobile_div">
+							<label id="mobile_label">${user.mobile }</label> <input
+								type="text" id="mobile_textbox" value="${user.mobile }"
+								placeholder="Mobile" name="mobile" class="numeric-only" required
+								title="Mobile no" pattern=".{10,}" maxlength="10">
+						</div>
+						<div class="half-width">
+							<a id="edit_mobile">Edit</a>
+							<button type="submit" id="update_mobile_button">UPDATE</button>
+							<button type="submit" id="cancel_update_mobile_button">CANCEL</button>
+						</div>
 					</div>
-					<div class="half-width">
-						<label for="userPasswordRepeat">New Password</label> <input
-							type="password" id="userPasswordRepeat" name="userPasswordRepeat">
+					<div id="verify_mobile_message">
+						<div>
+							<div class="verify_mobile_message_text">
+								<span> Verification code sent to <span id="new_mobile"></span></span>
+							</div>
+							<div class="half-width"></div>
+						</div>
+						<div class="row">
+							<div class="half-width">
+								<input type="text" id="mobile_verificationcode">
+							</div>
+							<div class="half-width">
+								<button id="verify_mobile_button">Verify</button>
+							</div>
+						</div>
+
 					</div>
-				</div>
-				<div class="half-width">
-					<label for="userName">Name</label> <input type="text" id="userName"
-						name="userName">
-				</div>
-				<!-- <div class="half-width">
-					<label for="userEmail">Username</label> <input type="email"
-						id="userEmail" name="userEmail">
-				</div>
- -->
-
-			</fieldset>
-
-			<fieldset>
-				<legend>Payment Method</legend>
-
-				<div id="verification_code_label">
-					<table id="mobile_verification_heading">
-						<tr>
-							<td colspan="2"><label>Enter verification code sent
-									to mobile</label></td>
-						</tr>
-					</table>
-					<table>
-						<tr>
-							<td class="verify_mobile"><input type="text"
-								id="mobile_verificationcode"></td>
-							<td class="verify_mobile"><button id="verify_mobile_button">Verify</button></td>
-						</tr>
-					</table>
-					<table id="resend_table">
-						<tr>
-							<td><a id="resend_code">Resend</a></td>
-							<td><label id="mobile_verification_code_incorrect"
-								class="error_message">Incorrect verification code.
-									Please type it again.</label></td>
-						</tr>
-					</table>
-				</div>
-
-				<div class="cd-credit-card">
-					<div>
-						<p class="half-width">
-							<label for="cardNumber">Card Number</label> <input type="text"
-								id="cardNumber" name="cardNumber">
-						</p>
-
-						<p class="half-width">
-							<label>Expiration date</label> <b> <span class="cd-select">
-									<select name="card-expiry-month" id="card-expiry-month">
-										<option value="1">1</option>
-										<option value="1">2</option>
-										<option value="1">3</option>
-										<option value="1">4</option>
-										<option value="1">5</option>
-										<option value="1">6</option>
-										<option value="1">7</option>
-										<option value="1">8</option>
-										<option value="1">9</option>
-										<option value="1">10</option>
-										<option value="1">11</option>
-										<option value="1">12</option>
-								</select>
-							</span> <span class="cd-select"> <select name="card-expiry-year"
-									id="card-expiry-year">
-										<option value="2015">2015</option>
-										<option value="2015">2016</option>
-										<option value="2015">2017</option>
-										<option value="2015">2018</option>
-										<option value="2015">2019</option>
-										<option value="2015">2020</option>
-								</select>
-							</span>
-							</b>
-						</p>
-
-						<p class="half-width">
-							<label for="cardCvc">Card CVC</label> <input type="text"
-								id="cardCvc" name="cardCvc">
-						</p>
-					</div>
-				</div>
-				<!-- .cd-credit-card -->
-			</fieldset>
-
-			<fieldset>
-				<div>
-					<button type="submit" value="UPDATE" id="update">UPDATE</button>
 				</div>
 			</fieldset>
 		</form>
