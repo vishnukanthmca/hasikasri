@@ -160,6 +160,23 @@
 							<button type="submit" id="cancel_update_email_button">CANCEL</button>
 						</div>
 					</div>
+
+					<div id="verify_email_message">
+						<div>
+							<div class="verify_email_message_text">
+								<span> Verification code sent to <span id="new_email"></span></span>
+							</div>
+							<div class="half-width"></div>
+						</div>
+						<div class="row">
+							<div class="half-width">
+								<input type="text" pattern=".{6,}" id="email_verificationcode">
+							</div>
+							<div class="half-width">
+								<button id="verify_email_button">Verify</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			</form>
 		</fieldset>

@@ -15,6 +15,7 @@ function cancelMobileUpdate() {
 	$("#cancel_update_mobile_button").click(function(e) {
 		e.preventDefault();
 
+		hideAllEmail();
 		hideAllMobile();
 	});
 }
@@ -26,6 +27,7 @@ function showMobileTextbox() {
 		$("#update_mobile_button").show();
 		$("#cancel_update_mobile_button").show();
 		$(this).hide();
+		hideAllEmail();
 	});
 }
 
@@ -135,6 +137,7 @@ function showEmailTextbox() {
 		$("#update_email_button").show();
 		$("#cancel_update_email_button").show();
 		$(this).hide();
+		hideAllMobile();
 	});
 }
 
@@ -160,12 +163,12 @@ function updateEmail() {
 function cancelEmailUpdate() {
 	$("#cancel_update_email_button").click(function(e) {
 		e.preventDefault();
-
-		hideAll();
+		hideAllMobile();
+		hideAllEmail();
 	});
 }
 
-function hideAll() {
+function hideAllEmail() {
 	$("#email_label").show();
 	$("#email_textbox").hide();
 	$("#update_email_button").hide();
@@ -195,7 +198,7 @@ function verifyEmail() {
 				} else if (data === "success") {
 					widow.location.href = widow.location.href;
 				} else if (data === "failed") {
-					hideAll();
+					hideAllEmail();
 				}
 			}
 		});
