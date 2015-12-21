@@ -11,13 +11,6 @@ html {
 	font-size: 62.5%;
 }
 
-body {
-	font-size: 1.6rem;
-	font-family: "Open Sans", sans-serif;
-	color: #0f222b;
-	background-color: #0f222b;
-}
-
 a {
 	color: #95ac5f;
 	text-decoration: none;
@@ -167,7 +160,7 @@ Pricing tables
 	text-align: left;
 }
 
-.cd-pricing-features li {
+.cd-pricing-features li, li {
 	line-height: 1.5;
 	margin-bottom: .4em;
 	overflow: auto;
@@ -907,4 +900,36 @@ Shadow layer
 
 #cancel_change_password_button {
 	margin-left: 10px;
+}
+
+.modal-dialog {
+	width: 900px;
+	height: 400.5px;
+	top: 22.25px;
+	opacity: 1;
+	transform: translateX(0px) translateY(0px);
+}
+
+#profile_desc {
+	padding: 10px;
+}
+
+#help_info {
+	padding: 10px;
+}
+
+#heading {
+	font-size: 18px;
+}
+
+#main_content {
+	padding: 10px;
+}
+
+.first_column {
+	
+}
+
+.second_column {
+	
 }

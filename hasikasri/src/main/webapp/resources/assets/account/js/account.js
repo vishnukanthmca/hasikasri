@@ -1,5 +1,10 @@
 $(document).ready(function() {
 
+	$('#edit_profile_div').click(function(e) {
+
+		$("#myModal").modal('show');
+	});
+
 	showMobileTextbox();
 	updateMobile();
 	cancelMobileUpdate();
