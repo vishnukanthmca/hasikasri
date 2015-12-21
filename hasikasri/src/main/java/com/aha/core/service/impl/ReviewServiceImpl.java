@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.aha.core.domain.Product;
 import com.aha.core.domain.Review;
 import com.aha.core.service.ReviewService;
 import com.aha.persistence.repository.ReviewRepository;
@@ -19,10 +18,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<Review> getReviewsForProduct(Long productId) {
 
-		Product product = new Product();
-		product.setId(productId);
-
-		return repository.findByProduct(product);
+		return repository.findByProduct(productId);
 	}
 
 }

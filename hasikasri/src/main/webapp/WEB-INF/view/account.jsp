@@ -179,6 +179,31 @@
 					</div>
 				</div>
 			</form>
+
+			<form name="password_form" class="form">
+				<div id="password_main_container">
+					<div class="row">
+						<div class="half-width" id="password_div">
+							<label id="password_label">Passwords</label>
+						</div>
+						<div class="half-width">
+							<a id="update_password">Edit</a>
+						</div>
+					</div>
+					<div id="passwords_textboxes">
+						<div class="half-width" id="password_div">
+							<input type="text" placeholder="old password" /> &nbsp; &nbsp;
+							&nbsp; <input type="text" placeholder="new password" />
+
+						</div>
+						<div class="half-width">
+							<button id="change_password_button">Change</button>
+							<button type="submit" id="cancel_change_password_button">CANCEL</button>
+						</div>
+					</div>
+				</div>
+			</form>
+
 		</fieldset>
 
 

@@ -797,7 +797,8 @@ Shadow layer
 	cursor: pointer;
 }
 
-#main_container label, #email_main_container label {
+#main_container label, #email_main_container label,
+	#password_main_container label {
 	font-size: 16px;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -883,4 +884,27 @@ Shadow layer
 	text-decoration: none;
 	cursor: pointer;
 	float: right;
+}
+
+#password_main_container {
+	margin-top: 20px;
+}
+
+#passwords_textboxes {
+	display: none;
+}
+
+#password_main_container a {
+	color: #95ac5f;
+	text-decoration: none;
+	cursor: pointer;
+	float: right;
+}
+
+#password_main_container button {
+	float: left;
+}
+
+#cancel_change_password_button {
+	margin-left: 10px;
 }

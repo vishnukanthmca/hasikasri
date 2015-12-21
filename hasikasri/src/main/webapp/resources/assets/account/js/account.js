@@ -9,7 +9,20 @@ $(document).ready(function() {
 	updateEmail();
 	cancelEmailUpdate();
 	verifyEmail();
+
+	showPasswordsTextBox();
+	cancelPasswordChange();
 });
+
+function showPasswordsTextBox() {
+	$("#update_password").click(function(e) {
+		$(this).hide();
+		hideAllEmail();
+		hideAllMobile();
+
+		$("#passwords_textboxes").show();
+	});
+}
 
 function cancelMobileUpdate() {
 	$("#cancel_update_mobile_button").click(function(e) {
@@ -114,6 +127,7 @@ function hideAllMobile() {
 	$("#cancel_update_mobile_button").hide();
 	$("#edit_mobile").show();
 	$("#verify_mobile_message").hide();
+	$("#passwords_textboxes").hide();
 
 	$("#mobile_textbox").val($("#backup_mobile").val());
 
@@ -175,9 +189,9 @@ function hideAllEmail() {
 	$("#cancel_update_email_button").hide();
 	$("#edit_email").show();
 	$("#verify_email_message").hide();
+	$("#passwords_textboxes").hide();
 
 	$("#email_textbox").val($("#backup_email").val());
-
 }
 
 function verifyEmail() {
@@ -234,4 +248,13 @@ function getEmailInput() {
 		email : $("#email_textbox").val()
 	};
 	return input;
+}
+
+function cancelPasswordChange() {
+	$("#cancel_change_password_button").click(function(e) {
+		e.preventDefault();
+		hideAllMobile();
+		hideAllEmail();
+		$("#update_password").show();
+	});
 }
