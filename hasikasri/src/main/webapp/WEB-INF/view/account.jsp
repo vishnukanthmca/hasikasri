@@ -142,7 +142,7 @@
 									<br />
 									<div id="main_container">
 										<div class="row">
-											<div class="col-lg-6">
+											<div class="col-lg-6 user_info">
 												<div class="first_column" id="mobile_div">
 													<label id="mobile_label">${user.mobile }</label> <input
 														type="text" id="mobile_textbox" value="${user.mobile }"
@@ -159,7 +159,7 @@
 											</div>
 										</div>
 										<div id="verify_mobile_message">
-											<div class="col-lg-12">
+											<div class="col-lg-12 user_info">
 												<div class="verify_mobile_message_text">
 													<span> Verification code sent to <span
 														id="new_mobile"></span></span>
@@ -181,7 +181,7 @@
 								<form name="email_form" class="form">
 									<div id="email_main_container">
 										<div class="row">
-											<div class="col-lg-6" id="email_div">
+											<div class="col-lg-6 user_info" id="email_div">
 												<label id="email_label">${user.email }</label> <input
 													id="email_textbox" name="email" type="email"
 													placeholder="Email" required title="Email">
@@ -194,7 +194,7 @@
 										</div>
 
 										<div id="verify_email_message">
-											<div class="col-lg-12">
+											<div class="col-lg-12 user_info">
 												<div class="verify_email_message_text">
 													<span> Verification code sent to <span
 														id="new_email"></span></span>
@@ -216,7 +216,7 @@
 								<form name="password_form" class="form">
 									<div id="password_main_container">
 										<div class="row">
-											<div class="col-lg-6" id="password_div">
+											<div class="col-lg-6 user_info" id="password_div">
 												<label id="password_label">Passwords</label>
 											</div>
 											<div class="col-lg-6">
