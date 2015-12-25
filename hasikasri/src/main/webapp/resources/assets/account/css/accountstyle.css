@@ -172,12 +172,12 @@ Pricing tables
 	margin-bottom: 0;
 }
 
-.cd-pricing-features em {
+.cd-pricing-features em, #profile_desc em {
 	position: relative;
 	padding-left: 28px;
 }
 
-.cd-pricing-features em::before {
+.cd-pricing-features em::before, #profile_desc em::before {
 	/* this is the icon (check or cross) next to the plan feature */
 	position: absolute;
 	content: '';
@@ -194,7 +194,8 @@ Pricing tables
 	background: url(../images/cd-icons-plan.svg) no-repeat -24px 0;
 }
 
-.cd-pricing-features .available em::before {
+.cd-pricing-features .available em::before, #profile_desc .available em::before
+	{
 	background-position: 0 0;
 }
 
@@ -388,7 +389,7 @@ Form
 	padding-top: 0;
 }
 
-.cd-form legend {
+#heading {
 	width: 100%;
 	font-size: 2.3rem;
 	line-height: 1.2;
@@ -412,7 +413,7 @@ Form
 	color: #0f222b;
 }
 
-.cd-form input[type="text"], .cd-form input[type="email"], .cd-form input[type="password"],
+input[type="text"], input[type="email"], input[type="password"],
 	.cd-form select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -423,10 +424,14 @@ Form
 	border: 2px solid #e5e5e5;
 	border-radius: 0;
 	background: transparent;
+	width: 100%;
+	display: block;
+	/* 	margin-top: 6px; */
+	padding: 0 16px;
 }
 
-.cd-form input[type="text"]:focus, .cd-form input[type="email"]:focus,
-	.cd-form input[type="password"]:focus, .cd-form select:focus {
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus,
+	select:focus {
 	outline: none;
 	/** border-color: #95ac5f;**/
 }
@@ -774,7 +779,7 @@ Shadow layer
 }
 
 #main_container {
-	margin-top: 40px;
+	margin-top: 20px;
 }
 
 #main_container a {
@@ -911,19 +916,24 @@ Shadow layer
 }
 
 #profile_desc {
-	padding: 10px;
+	padding: 20px 20px;
+	border-radius: .30em 0 0;
+	background: #95AC5F;
 }
 
 #help_info {
-	padding: 10px;
+	padding: 20px;
+	background-color: #F2F2F2;
+	height: 390px;
 }
 
 #heading {
-	font-size: 18px;
+	font-size: 25px;
 }
 
 #main_content {
-	padding: 10px;
+	padding: 20px 35px;
+	height: 600px;
 }
 
 .first_column {
@@ -932,4 +942,47 @@ Shadow layer
 
 .second_column {
 	
+}
+
+.modal-body {
+	padding: 0px;
+	border-radius: 10em 10em 10em 0.25em;
+}
+
+.row {
+	margin: 0px;
+}
+
+.modal-body .col-lg-3 {
+	padding: 0px;
+}
+
+.modal-body .col-lg-3 {
+	padding: 0px;
+}
+
+.modal-body .col-lg-3 {
+	padding: 0px;
+}
+
+.modal-content {
+	/* padding: 0px 0px; */
+	border-bottom: 1px solid #eee;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.modal-content::after {
+	border-radius: 10em;
+}
+
+.left_header {
+	font-size: 25px;
+	padding-left: 20px;
+	margin-bottom: 18px;
+	color: white;
 }

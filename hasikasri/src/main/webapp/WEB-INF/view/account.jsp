@@ -7,10 +7,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link
-	href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600'
-	rel='stylesheet' type='text/css'>
-
 <link href="resources/assets/account/css/accountreset.css"
 	rel="stylesheet">
 
@@ -20,6 +16,9 @@
 <link href="resources/assets/account/css/accountstyle.css"
 	rel="stylesheet">
 
+<link
+	href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600'
+	rel='stylesheet' type='text/css'>
 
 
 <title>My Account</title>
@@ -108,6 +107,7 @@
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="row" id="profile_desc">
+								<header class="left_header">Profile</header>
 								<ul>
 									<li class="available"><em>${user.mobile }</em></li>
 									<li class="available"><em>${user.email }</em></li>
@@ -138,7 +138,7 @@
 							<div id="main_content">
 								<form class="form" name="form">
 
-									<div id="heading">Profile</div>
+									<div id="heading">Account Info</div>
 									<br />
 									<div id="main_container">
 										<div class="row">
@@ -236,7 +236,6 @@
 										</div>
 									</div>
 								</form>
-
 							</div>
 						</div>
 					</div>
