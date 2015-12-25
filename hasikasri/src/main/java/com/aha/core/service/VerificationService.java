@@ -6,5 +6,8 @@ public interface VerificationService {
 
 	public int generateRandomNo();
 
-	public boolean sendSMS(String mobile);
+	public boolean sendSms(String mobile);
+
+	public boolean sendEmail(String email);
+
 }

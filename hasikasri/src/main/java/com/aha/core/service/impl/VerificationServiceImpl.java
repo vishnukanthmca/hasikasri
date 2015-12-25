@@ -21,7 +21,14 @@ public class VerificationServiceImpl implements VerificationService {
 	}
 
 	@Override
-	public boolean sendSMS(String mobile) {
+	public boolean sendSms(String mobile) {
+		// TODO implement sms code
+		return true;
+	}
+
+	@Override
+	public boolean sendEmail(String email) {
+		// TODO implement email code
 		return true;
 	}
 

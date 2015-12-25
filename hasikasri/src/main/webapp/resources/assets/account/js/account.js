@@ -77,7 +77,7 @@ function sendSms() {
 			if (data === "unauthorized") {
 				window.location = "home";
 			} else if (data === "verificationcodesent") {
-				// $("#verification_code_label").show();
+				// $("#verification_code_labeinal").show();
 			} else if (data === "failed") {
 
 			}
@@ -173,7 +173,7 @@ function updateEmail() {
 
 		if (oldemail != newemail) {
 			$("#verify_email_message").show();
-			sendSms();
+			sendEmail();
 		}
 
 	});
@@ -203,7 +203,7 @@ function verifyEmail() {
 	$("#verify_email_button").click(function(e) {
 		e.preventDefault();
 		$.ajax({
-			url : 'verifyMobile',
+			url : 'verifyEmail',
 			method : 'GET',
 			data : getEmailVerifyInput(),
 			success : function(data) {
@@ -233,7 +233,7 @@ function getEmailVerifyInput() {
 
 function sendEmail() {
 	$.ajax({
-		url : 'sendSms',
+		url : 'sendEmail',
 		method : 'GET',
 		data : getEmailInput(),
 		success : function(data) {

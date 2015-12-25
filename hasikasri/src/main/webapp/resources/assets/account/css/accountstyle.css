@@ -779,7 +779,7 @@ Shadow layer
 }
 
 #main_container {
-	margin-top: 20px;
+	margin-top: 25px;
 }
 
 #main_container a {
@@ -928,11 +928,12 @@ Shadow layer
 }
 
 #heading {
-	font-size: 25px;
+	/* 	font-size: 25px; */
+	
 }
 
 #main_content {
-	padding: 20px 35px;
+	padding: 20px 25px;
 	height: 600px;
 }
 
@@ -993,4 +994,8 @@ Shadow layer
 
 .user_info_right {
 	padding-right: 0px;
+}
+
+.main_lg {
+	padding: 0px;
 }

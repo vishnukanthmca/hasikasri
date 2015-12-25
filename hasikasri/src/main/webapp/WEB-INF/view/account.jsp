@@ -134,12 +134,11 @@
 										elit.</p>
 							</div>
 						</div>
-						<div class="col-lg-9">
+						<div class="col-lg-9 main_lg">
 							<div id="main_content">
 								<form class="form" name="form">
 
 									<div id="heading">Account Info</div>
-									<br />
 									<div id="main_container">
 										<div class="row">
 											<div class="col-lg-6 user_info">
@@ -167,7 +166,7 @@
 
 											</div>
 											<div class="row">
-												<div class="col-lg-6">
+												<div class="col-lg-6 user_info">
 													<input type="text" maxlength="6"
 														id="mobile_verificationcode">
 												</div>
@@ -183,8 +182,8 @@
 										<div class="row">
 											<div class="col-lg-6 user_info" id="email_div">
 												<label id="email_label">${user.email }</label> <input
-													id="email_textbox" name="email" type="email"
-													placeholder="Email" required title="Email">
+													id="email_textbox" value="${user.email }" name="email"
+													type="email" placeholder="Email" required title="Email">
 											</div>
 											<div class="col-lg-6 user_info_right">
 												<a id="edit_email">Edit</a>
