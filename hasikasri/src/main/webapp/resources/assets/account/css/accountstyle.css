@@ -990,3 +990,7 @@ Shadow layer
 .user_info {
 	padding-left: 0px;
 }
+
+.user_info_right {
+	padding-right: 0px;
+}

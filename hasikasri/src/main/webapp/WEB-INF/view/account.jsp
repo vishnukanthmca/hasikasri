@@ -150,7 +150,7 @@
 														required title="Mobile no" pattern=".{10,}" maxlength="10">
 												</div>
 											</div>
-											<div class="col-lg-6">
+											<div class="col-lg-6 user_info_right">
 												<div class="second-column">
 													<a id="edit_mobile">Edit</a>
 													<button type="submit" id="update_mobile_button">UPDATE</button>
@@ -171,7 +171,7 @@
 													<input type="text" maxlength="6"
 														id="mobile_verificationcode">
 												</div>
-												<div class="col-lg-6">
+												<div class="col-lg-6 user_info_right">
 													<button id="verify_mobile_button">Verify</button>
 												</div>
 											</div>
@@ -186,7 +186,7 @@
 													id="email_textbox" name="email" type="email"
 													placeholder="Email" required title="Email">
 											</div>
-											<div class="col-lg-6">
+											<div class="col-lg-6 user_info_right">
 												<a id="edit_email">Edit</a>
 												<button type="submit" id="update_email_button">UPDATE</button>
 												<button type="submit" id="cancel_update_email_button">CANCEL</button>
@@ -201,11 +201,11 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-lg-6">
+												<div class="col-lg-6 user_info">
 													<input type="text" pattern=".{6,}"
 														id="email_verificationcode">
 												</div>
-												<div class="col-lg-6">
+												<div class="col-lg-6 user_info ">
 													<button id="verify_email_button">Verify</button>
 												</div>
 											</div>
@@ -219,17 +219,17 @@
 											<div class="col-lg-6 user_info" id="password_div">
 												<label id="password_label">Passwords</label>
 											</div>
-											<div class="col-lg-6">
+											<div class="col-lg-6 user_info_right">
 												<a id="update_password">Edit</a>
 											</div>
 										</div>
 										<div id="passwords_textboxes">
-											<div class="col-lg-6" id="password_div">
+											<div class="col-lg-6 user_info" id="password_div">
 												<input type="text" placeholder="old password" /> &nbsp;
 												&nbsp; &nbsp; <input type="text" placeholder="new password" />
 
 											</div>
-											<div class="col-lg-6">
+											<div class="col-lg-6 user_info">
 												<button id="change_password_button">Change</button>
 												<button type="submit" id="cancel_change_password_button">CANCEL</button>
 											</div>
