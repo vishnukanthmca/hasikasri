@@ -26,8 +26,8 @@ function showPasswordsTextBox() {
 		hideAllEmail();
 		hideAllMobile();
 
-		$("#new_password_textbox").val(' ');
-		$("#old_password_textbox").val(' ');
+		$("#new_password_textbox").val('');
+		$("#old_password_textbox").val('');
 
 		$("#passwords_textboxes").show();
 	});
@@ -138,7 +138,7 @@ function hideAllMobile() {
 	$("#edit_mobile").show();
 	$("#verify_mobile_message").hide();
 	$("#passwords_textboxes").hide();
-	$(".invalid_old_password_error").hide();
+	$(".password_error").hide();
 
 	$("#mobile_textbox").val($("#backup_mobile").val());
 
@@ -202,7 +202,7 @@ function hideAllEmail() {
 	$("#edit_email").show();
 	$("#verify_email_message").hide();
 	$("#passwords_textboxes").hide();
-	$(".invalid_old_password_error").hide();
+	$(".password_error").hide();
 
 	$("#email_textbox").val($("#backup_email").val());
 }
@@ -281,24 +281,36 @@ function getChangePasswordInput() {
 }
 
 function changePassword() {
-	$('form').submit(function(evt) {
+	$('form')
+			.submit(
+					function(evt) {
 
-		evt.preventDefault();
+						evt.preventDefault();
 
-		$.ajax({
-			url : 'changePassword',
-			method : 'POST',
-			contentType : "application/json",
-			data : getChangePasswordInput(),
-			success : function(data) {
-				if (data === "unauthorized") {
-					window.location = "home";
-				} else if (data === "incorrectoldpassword") {
-					$(".invalid_old_password_error").show();
-				} else if (data === "failed") {
+						$
+								.ajax({
+									url : 'changePassword',
+									method : 'POST',
+									contentType : "application/json",
+									data : getChangePasswordInput(),
+									success : function(data) {
+										if (data === "unauthorized") {
+											window.location = "home";
+										} else if (data === "incorrectoldpassword") {
+											showPasswordMessage("<span>Invalid old password</span>");
+										} else if (data === "success") {
+											showPasswordMessage("<span style='color:green'>Password successfully changed</span>");
+											$("#passwords_textboxes").hide();
+											$("#update_password").show();
+										} else if (data === "samepassword") {
+											showPasswordMessage("<span>Old password is same as new password</span>");
+										}
+									}
+								});
+					});
+}
 
-				}
-			}
-		});
-	});
+function showPasswordMessage(message) {
+	$(".password_error").html(message);
+	$(".password_error").show();
 }

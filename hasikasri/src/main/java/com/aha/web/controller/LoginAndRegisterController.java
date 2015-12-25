@@ -130,10 +130,14 @@ public class LoginAndRegisterController {
 			return "incorrectoldpassword";
 		}
 
+		if (Util.decodePassword(dto.getNewPassword(), user.getPassword())) {
+			return "samepassword";
+		}
+
 		user.setPassword(Util.encodePassword(dto.getNewPassword()));
 
 		userService.saveUser(user);
 
-		return "failed";
+		return "success";
 	}
 }

@@ -1000,7 +1000,7 @@ Shadow layer
 	padding: 0px;
 }
 
-.invalid_old_password_error {
+.password_error {
 	color: #FF5555;
 	display: none;
 	margin-bottom: 10px;

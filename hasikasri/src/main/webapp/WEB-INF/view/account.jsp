@@ -153,7 +153,7 @@
 												<div class="second-column">
 													<a id="edit_mobile">Edit</a>
 													<button type="submit" id="update_mobile_button">UPDATE</button>
-													<button type="submit" id="cancel_update_mobile_button">CANCEL</button>
+													<button type="button" id="cancel_update_mobile_button">CANCEL</button>
 												</div>
 											</div>
 										</div>
@@ -187,7 +187,7 @@
 											<div class="col-lg-6 user_info_right">
 												<a id="edit_email">Edit</a>
 												<button type="submit" id="update_email_button">UPDATE</button>
-												<button type="submit" id="cancel_update_email_button">CANCEL</button>
+												<button type="button" id="cancel_update_email_button">CANCEL</button>
 											</div>
 										</div>
 
@@ -221,20 +221,23 @@
 												<a id="update_password">Edit</a>
 											</div>
 										</div>
-										<div class="invalid_old_password_error">
+										<div class="password_error">
 											<span>Invalid old password</span>
 										</div>
+										<!-- <div class="change_password_success">
+											<span>Password changed successfully</span>
+										</div> -->
 										<div id="passwords_textboxes">
 											<div class="col-lg-6 user_info" id="password_div">
-												<input type="password" id="old_password_textbox"
-													placeholder="old password" /> &nbsp; &nbsp; &nbsp; <input
+												<input type="password" required title="old password"
+													id="old_password_textbox" placeholder="old password" />
+												&nbsp; &nbsp; &nbsp; <input required title="new password"
 													type="password" id="new_password_textbox"
 													placeholder="new password" />
-
 											</div>
 											<div class="col-lg-6 user_info">
-												<button id="change_password_button">Change</button>
-												<button type="submit" id="cancel_change_password_button">CANCEL</button>
+												<button type="submit" id="change_password_button">Change</button>
+												<button type="button" id="cancel_change_password_button">CANCEL</button>
 											</div>
 										</div>
 									</div>
