@@ -163,7 +163,6 @@
 													<span> Verification code sent to <span
 														id="new_mobile"></span></span>
 												</div>
-
 											</div>
 											<div class="row">
 												<div class="col-lg-6 user_info">
@@ -222,10 +221,15 @@
 												<a id="update_password">Edit</a>
 											</div>
 										</div>
+										<div class="invalid_old_password_error">
+											<span>Invalid old password</span>
+										</div>
 										<div id="passwords_textboxes">
 											<div class="col-lg-6 user_info" id="password_div">
-												<input type="text" placeholder="old password" /> &nbsp;
-												&nbsp; &nbsp; <input type="text" placeholder="new password" />
+												<input type="password" id="old_password_textbox"
+													placeholder="old password" /> &nbsp; &nbsp; &nbsp; <input
+													type="password" id="new_password_textbox"
+													placeholder="new password" />
 
 											</div>
 											<div class="col-lg-6 user_info">

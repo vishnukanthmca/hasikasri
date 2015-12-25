@@ -109,7 +109,7 @@ public class LoginAndRegisterController {
 
 	@RequestMapping(value = "changePassword", method = RequestMethod.POST)
 	public @ResponseBody String changePassword(HttpSession session,
-			ChangePasswordDto dto) {
+			@RequestBody ChangePasswordDto dto) {
 
 		if (session.getAttribute("userId") == null) {
 			if (session != null) {

@@ -17,6 +17,7 @@ $(document).ready(function() {
 
 	showPasswordsTextBox();
 	cancelPasswordChange();
+	changePassword();
 });
 
 function showPasswordsTextBox() {
@@ -24,6 +25,9 @@ function showPasswordsTextBox() {
 		$(this).hide();
 		hideAllEmail();
 		hideAllMobile();
+
+		$("#new_password_textbox").val(' ');
+		$("#old_password_textbox").val(' ');
 
 		$("#passwords_textboxes").show();
 	});
@@ -44,6 +48,7 @@ function showMobileTextbox() {
 		$("#mobile_textbox").show();
 		$("#update_mobile_button").show();
 		$("#cancel_update_mobile_button").show();
+		$("#update_password").show();
 		$(this).hide();
 		hideAllEmail();
 	});
@@ -133,6 +138,7 @@ function hideAllMobile() {
 	$("#edit_mobile").show();
 	$("#verify_mobile_message").hide();
 	$("#passwords_textboxes").hide();
+	$(".invalid_old_password_error").hide();
 
 	$("#mobile_textbox").val($("#backup_mobile").val());
 
@@ -155,6 +161,7 @@ function showEmailTextbox() {
 		$("#email_textbox").show();
 		$("#update_email_button").show();
 		$("#cancel_update_email_button").show();
+		$("#update_password").show();
 		$(this).hide();
 		hideAllMobile();
 	});
@@ -195,6 +202,7 @@ function hideAllEmail() {
 	$("#edit_email").show();
 	$("#verify_email_message").hide();
 	$("#passwords_textboxes").hide();
+	$(".invalid_old_password_error").hide();
 
 	$("#email_textbox").val($("#backup_email").val());
 }
@@ -261,5 +269,36 @@ function cancelPasswordChange() {
 		hideAllMobile();
 		hideAllEmail();
 		$("#update_password").show();
+	});
+}
+
+function getChangePasswordInput() {
+	var input = {
+		oldPassword : $("#old_password_textbox").val(),
+		newPassword : $("#new_password_textbox").val()
+	};
+	return JSON.stringify(input);
+}
+
+function changePassword() {
+	$('form').submit(function(evt) {
+
+		evt.preventDefault();
+
+		$.ajax({
+			url : 'changePassword',
+			method : 'POST',
+			contentType : "application/json",
+			data : getChangePasswordInput(),
+			success : function(data) {
+				if (data === "unauthorized") {
+					window.location = "home";
+				} else if (data === "incorrectoldpassword") {
+					$(".invalid_old_password_error").show();
+				} else if (data === "failed") {
+
+				}
+			}
+		});
 	});
 }
