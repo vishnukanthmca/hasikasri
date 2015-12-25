@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aha.core.domain.User;
 import com.aha.core.service.UserService;
+import com.aha.core.util.Util;
 import com.aha.web.dto.request.AccountDto;
+import com.aha.web.dto.request.ChangePasswordDto;
 import com.aha.web.dto.request.LoginDto;
 import com.aha.web.dto.request.RegisterInputDto;
 
@@ -103,5 +105,35 @@ public class LoginAndRegisterController {
 		view.addObject("user", dto);
 
 		return view;
+	}
+
+	@RequestMapping(value = "changePassword", method = RequestMethod.POST)
+	public @ResponseBody String changePassword(HttpSession session,
+			ChangePasswordDto dto) {
+
+		if (session.getAttribute("userId") == null) {
+			if (session != null) {
+				session.invalidate();
+			}
+			return "unauthorized";
+		}
+
+		Long userId = Long.parseLong(session.getAttribute("userId").toString());
+
+		User user = userService.findOne(userId);
+
+		if (user == null) {
+			return "unauthorized";
+		}
+
+		if (!Util.decodePassword(dto.getOldPassword(), user.getPassword())) {
+			return "incorrectoldpassword";
+		}
+
+		user.setPassword(Util.encodePassword(dto.getNewPassword()));
+
+		userService.saveUser(user);
+
+		return "failed";
 	}
 }

@@ -201,7 +201,7 @@
 											</div>
 											<div class="row">
 												<div class="col-lg-6 user_info">
-													<input type="text" pattern=".{6,}"
+													<input type="text" maxlength="6"
 														id="email_verificationcode">
 												</div>
 												<div class="col-lg-6 user_info ">
