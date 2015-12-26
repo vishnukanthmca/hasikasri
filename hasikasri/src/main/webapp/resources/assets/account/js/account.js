@@ -5,6 +5,12 @@ $(document).ready(function() {
 		$("#myModal").modal('show');
 	});
 
+	$('#edit_addresses').click(function(e) {
+
+		$("#account_modal").modal('show');
+	});
+	
+
 	showMobileTextbox();
 	updateMobile();
 	cancelMobileUpdate();

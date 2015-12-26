@@ -68,11 +68,7 @@
 			</div> <footer class="cd-pricing-footer"> </footer></li>
 
 		<li><header class="cd-pricing-header">
-				<h2>Premier</h2>
-
-				<div class="cd-price">
-					<span>$29.99</span> <span>month</span>
-				</div>
+				<h2>Addresses</h2>
 			</header> <!-- .cd-pricing-header -->
 
 			<div class="cd-pricing-features">
@@ -83,11 +79,10 @@
 					<li class="available"><em>Feature 4</em></li>
 				</ul>
 			</div> <!-- .cd-pricing-features --> <footer class="cd-pricing-footer">
-				<a href="#0">Select</a>
+				<a id="edit_addresses">EDIT</a>
 			</footer> <!-- .cd-pricing-footer --></li>
 	</ul>
 	<!-- .cd-pricing -->
-
 
 	<div id="myModal" class="modal fade">
 		<div class="modal-dialog">
@@ -267,7 +262,16 @@
 			</div>
 		</div>
 	</div>
+	<!-- first modal ends here -->
 
+
+	<div id="account_modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
 
 
 

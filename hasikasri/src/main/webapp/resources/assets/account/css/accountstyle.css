@@ -1068,3 +1068,34 @@ Shadow layer
 	text-align: center;
 	margin-top: 85px;
 }
+/* 
+.modal.fade .modal-dialog {
+	-webkit-transform: scale(1.1, 1.1) !important;
+	-ms-transform: scale(1.1, 1.1) !important;
+	transform: scale(1.1, 1.1) !important;
+	-webkit-transition: -webkit-transform 0.3s ease-out !important;
+	-moz-transition: -moz-transform 0.3s ease-out !important;
+	-o-transition: -o-transform 0.3s ease-out !important;
+	transition: transform 0.3s ease-out !important;
+} */
+/* .modal {
+	! adjust transition time
+	-webkit-transition: all ease-out !important;
+	-moz-transition: all 0.3s ease-out !important;
+	-o-transition: all 0.3s ease-out !important;
+	transition: all 0.3s ease-out !important;
+}
+
+.modal.in .modal-dialog {
+	! editthis transform to any transform you want
+	-webkit-transform: scale(1, 1) !important;
+	-ms-transform: scale(1, 1) !important;
+	transform: scale(1, 1) !important;
+}
+
+.modal.fade .modal-dialog {
+	! disable sliding from left/right/top/bottom
+	-webkit-transform: translate(0, 0);
+	-ms-transform: translate(0, 0);
+	transform: translate(0, 0);
+} */
