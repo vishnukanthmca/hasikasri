@@ -54,7 +54,7 @@
 			</footer> <!-- .cd-pricing-footer --></li>
 
 		<li><header class="cd-pricing-header">
-				<h2>Popular</h2>
+				<h2>Wallet</h2>
 
 				<div class="cd-price">
 					<span>$19.99</span> <span>month</span>
