@@ -662,7 +662,7 @@ Buttons
 	font-weight: bold;
 }
 
-.cd-pricing-footer a, .form button {
+.cd-pricing-footer a, .form button, .name_form button {
 	display: inline-block;
 	padding: 1em 1.8em;
 	border-radius: 50em;
@@ -688,7 +688,7 @@ Buttons
 	cursor: pointer;
 }
 
-.form button {
+.form button, .name_form button {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	-ms-appearance: none;
@@ -796,7 +796,7 @@ Shadow layer
 }
 
 #main_container label, #email_main_container label,
-	#password_main_container label {
+	#password_main_container label, #name_main_container label {
 	font-size: 16px;
 	font-weight: bold;
 	text-transform: uppercase;
@@ -1004,4 +1004,30 @@ Shadow layer
 	color: #FF5555;
 	display: none;
 	margin-bottom: 10px;
+}
+
+.name_right {
+	float: right;
+	padding-right: 0px;
+}
+
+#name_textboxes {
+	display: none;
+}
+
+#change_name_button {
+	float: left;
+}
+
+#cancel_change_name_button {
+	float: left;
+	margin-left: 10px;
+}
+
+#name_main_container {
+	margin-top: 20px;
+}
+
+#update_name {
+	float: right;
 }

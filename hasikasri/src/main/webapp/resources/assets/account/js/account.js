@@ -18,10 +18,68 @@ $(document).ready(function() {
 	showPasswordsTextBox();
 	cancelPasswordChange();
 	changePassword();
+
+	showNameTextbox();
+	cancelNameChange();
+	changeName();
 });
+
+function getNameChangeInput() {
+	var input = {
+		name : $("#name_textbox").val(),
+	};
+	return input;
+}
+
+function changeName() {
+	$('.name_form').submit(function(evt) {
+
+		evt.preventDefault();
+
+		$.ajax({
+			url : 'changeName',
+			method : 'GET',
+			data : getNameChangeInput(),
+			success : function(data) {
+				console.log(data);
+				if (data === "success") {
+					window.location.href = "myaccount";
+				}
+			}
+		});
+	});
+}
+
+function cancelNameChange() {
+	$("#cancel_change_name_button").click(function(e) {
+		e.preventDefault();
+		hideAllMobile();
+		hideAllEmail();
+		$("#name_textboxes").hide();
+		$("#update_name").show();
+		$("#name_div").show();
+	});
+}
+
+function showNameTextbox() {
+	$("#update_name").click(function(e) {
+		e.preventDefault();
+
+		$(this).hide();
+		hideAllEmail();
+		hideAllMobile();
+
+		$("#name_div").hide();
+		$("#name_textbox").val($("#backup_name").val());
+
+		$("#name_textboxes").show();
+	});
+}
 
 function showPasswordsTextBox() {
 	$("#update_password").click(function(e) {
+		e.preventDefault();
+
 		$(this).hide();
 		hideAllEmail();
 		hideAllMobile();
@@ -231,6 +289,7 @@ function verifyEmail() {
 		});
 	});
 }
+
 function getEmailVerifyInput() {
 	var input = {
 		email : $("#email_textbox").val(),
@@ -281,7 +340,7 @@ function getChangePasswordInput() {
 }
 
 function changePassword() {
-	$('form')
+	$('password_form')
 			.submit(
 					function(evt) {
 

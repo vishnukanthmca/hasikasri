@@ -221,13 +221,13 @@
 												<a id="update_password">Edit</a>
 											</div>
 										</div>
-										<div class="password_error">
+										<div class="row password_error">
 											<span>Invalid old password</span>
 										</div>
 										<!-- <div class="change_password_success">
 											<span>Password changed successfully</span>
 										</div> -->
-										<div id="passwords_textboxes">
+										<div class="row" id="passwords_textboxes">
 											<div class="col-lg-6 user_info" id="password_div">
 												<input type="password" required title="old password"
 													id="old_password_textbox" placeholder="old password" />
@@ -242,6 +242,33 @@
 										</div>
 									</div>
 								</form>
+
+								<form name="name_form" class="name_form">
+									<div id="name_main_container">
+										<div class="row">
+											<div class="col-lg-6 user_info" id="name_div">
+												<label id="name_label">${user.name}</label>
+											</div>
+											<div class="col-lg-6 name_right">
+												<a id="update_name">Edit</a>
+											</div>
+										</div>
+										<!-- <div class="change_password_success">
+											<span>Password changed successfully</span>
+										</div> -->
+										<div class="row" id="name_textboxes">
+											<div class="col-lg-6 user_info" id="name_div">
+												<input type="text" value="${user.name}" required
+													title="name" id="name_textbox" placeholder="name" />
+											</div>
+											<div class="col-lg-6 user_info">
+												<button type="submit" id="change_name_button">Change</button>
+												<button type="button" id="cancel_change_name_button">CANCEL</button>
+											</div>
+										</div>
+									</div>
+								</form>
+
 							</div>
 						</div>
 					</div>
@@ -262,5 +289,6 @@
 	<!-- Resource jQuery -->
 	<input type="hidden" value="${user.mobile }" id="backup_mobile" />
 	<input type="hidden" value="${user.email }" id="backup_email" />
+	<input type="hidden" value="${user.name }" id="backup_name" />
 </body>
 </html>

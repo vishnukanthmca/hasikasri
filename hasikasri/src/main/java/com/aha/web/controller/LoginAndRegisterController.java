@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -135,6 +136,32 @@ public class LoginAndRegisterController {
 		}
 
 		user.setPassword(Util.encodePassword(dto.getNewPassword()));
+
+		userService.saveUser(user);
+
+		return "success";
+	}
+
+	@RequestMapping(value = "changeName", method = RequestMethod.GET)
+	public @ResponseBody String changeName(HttpSession session,
+			@RequestParam("name") String name) {
+
+		if (session.getAttribute("userId") == null) {
+			if (session != null) {
+				session.invalidate();
+			}
+			return "unauthorized";
+		}
+
+		Long userId = Long.parseLong(session.getAttribute("userId").toString());
+
+		User user = userService.findOne(userId);
+
+		if (user == null) {
+			return "unauthorized";
+		}
+
+		user.setName(name);
 
 		userService.saveUser(user);
 
