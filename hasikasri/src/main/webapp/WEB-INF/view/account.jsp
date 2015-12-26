@@ -41,12 +41,7 @@
 				<ul>
 					<li class="available"><em>${user.mobile }</em></li>
 					<li class="available"><em>${user.email }</em></li>
-					<c:if test="${user.username == null}">
-						<li class="unavailable"><em>add username</em></li>
-					</c:if>
-					<c:if test="${user.username != null}">
-						<li class="available"><em>${user.username }</em></li>
-					</c:if>
+
 					<c:if test="${user.name == null}">
 						<li class="unavailable"><em>add name</em></li>
 					</c:if>
@@ -111,12 +106,6 @@
 								<ul>
 									<li class="available"><em>${user.mobile }</em></li>
 									<li class="available"><em>${user.email }</em></li>
-									<c:if test="${user.username == null}">
-										<li class="unavailable"><em>add username</em></li>
-									</c:if>
-									<c:if test="${user.username != null}">
-										<li class="available"><em>${user.username }</em></li>
-									</c:if>
 									<c:if test="${user.name == null}">
 										<li class="unavailable"><em>add name</em></li>
 									</c:if>
@@ -138,7 +127,13 @@
 							<div id="main_content">
 								<form class="form" name="form">
 
-									<div id="heading">Account Info</div>
+									<div id="heading">
+										Account Info
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
 									<div id="main_container">
 										<div class="row">
 											<div class="col-lg-6 user_info">
