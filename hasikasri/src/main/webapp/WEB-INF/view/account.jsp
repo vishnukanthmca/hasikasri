@@ -215,7 +215,7 @@
 									<div id="password_main_container">
 										<div class="row">
 											<div class="col-lg-6 user_info" id="password_div">
-												<label id="password_label">Passwords</label>
+												<label id="password_label">Password</label>
 											</div>
 											<div class="col-lg-6 user_info_right">
 												<a id="update_password">Edit</a>
