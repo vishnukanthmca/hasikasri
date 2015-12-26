@@ -10,6 +10,8 @@ public class AccountDto {
 
 	private String name;
 
+	private String walletAmount = "0";
+
 	public String getEmail() {
 		return email;
 	}
@@ -40,6 +42,14 @@ public class AccountDto {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getWalletAmount() {
+		return walletAmount;
+	}
+
+	public void setWalletAmount(String walletAmount) {
+		this.walletAmount = walletAmount;
 	}
 
 }

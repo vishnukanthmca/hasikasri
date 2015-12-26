@@ -56,21 +56,16 @@
 		<li><header class="cd-pricing-header">
 				<h2>Wallet</h2>
 
-				<div class="cd-price">
+				<!-- <div class="cd-price">
 					<span>$19.99</span> <span>month</span>
-				</div>
-			</header> <!-- .cd-pricing-header -->
+				</div> -->
+			</header>
 
-			<div class="cd-pricing-features">
-				<ul>
-					<li class="available"><em>Feature 1</em></li>
-					<li class="available"><em>Feature 2</em></li>
-					<li><em>Feature 3</em></li>
-					<li><em>Feature 4</em></li>
-				</ul>
-			</div> <!-- .cd-pricing-features --> <footer class="cd-pricing-footer">
-				<a href="#0">Select</a>
-			</footer> <!-- .cd-pricing-footer --></li>
+			<div class="wallet">
+				<h1>
+					<span id="wallet">Rs. ${user.walletAmount }</span>
+				</h1>
+			</div> <footer class="cd-pricing-footer"> </footer></li>
 
 		<li><header class="cd-pricing-header">
 				<h2>Premier</h2>

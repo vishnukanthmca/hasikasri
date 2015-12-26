@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aha.core.domain.User;
+import com.aha.core.domain.Wallet;
 import com.aha.core.service.UserService;
+import com.aha.core.service.WalletService;
 import com.aha.core.util.Util;
 import com.aha.web.dto.request.AccountDto;
 import com.aha.web.dto.request.ChangePasswordDto;
@@ -26,6 +28,9 @@ public class LoginAndRegisterController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private WalletService walletService;
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView join(@ModelAttribute("form") @Valid RegisterInputDto dto) {
@@ -99,6 +104,13 @@ public class LoginAndRegisterController {
 		}
 
 		AccountDto dto = new AccountDto();
+
+		Wallet wallet = walletService.findByUser(user);
+		if (wallet != null && wallet.getAmount() != null) {
+			int w = Integer.valueOf(wallet.getAmount().intValue());
+			dto.setWalletAmount(w + "");
+		}
+
 		dto.setEmail(user.getEmail());
 		dto.setMobile(user.getMobile());
 		dto.setName(user.getName());

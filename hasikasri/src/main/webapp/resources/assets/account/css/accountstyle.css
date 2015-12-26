@@ -104,6 +104,7 @@ Pricing tables
 		width: 28.0%;
 		float: left;
 		margin-right: 8%;
+		min-height: 340px;
 	}
 }
 
@@ -1061,4 +1062,9 @@ Shadow layer
 
 #heading  button:hover {
 	color: #df4f71;
+}
+
+.wallet {
+	text-align: center;
+	margin-top: 85px;
 }
