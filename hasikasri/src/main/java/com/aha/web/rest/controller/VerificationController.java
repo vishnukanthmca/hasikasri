@@ -174,4 +174,50 @@ public class VerificationController {
 
 		return "failed";
 	}
+
+	@RequestMapping(value = "/sendVerificationCodeForEmailOrMobile")
+	public @ResponseBody String sendSmsOrEmail(HttpSession session,
+			@RequestParam("emailOrMobile") String emailOrMobile) {
+
+		int code = verificationService.generateRandomNo();
+
+		System.out.println("code " + code);
+
+		session.setAttribute(emailOrMobile, code);
+
+		System.out.println("sendVerificationCodeForEmailOrMobile "
+				+ session.getAttribute(emailOrMobile));
+
+		return "verificationcodesent";
+	}
+
+	@RequestMapping(value = "/verifySmsOrEmail")
+	public @ResponseBody String verifySmsOrEmail(HttpSession session,
+			@RequestParam("emailOrMobile") String emailOrMobile,
+			@RequestParam("code") String code) {
+
+		System.out.println("verifySmsOrEmail "
+				+ session.getAttribute(emailOrMobile));
+
+		Integer sessionCode = (Integer) session.getAttribute(emailOrMobile);
+
+		if (sessionCode == null) {
+			if (session != null) {
+				session.invalidate();
+			}
+			return "malfunctioned";
+		}
+
+		if (sessionCode.toString().equals(code)) {
+
+			/*
+			 * // uncomment if double confirmation needed if
+			 * (userService.isUserPresent(emailOrMobile)) { return "true"; }
+			 */
+
+			return "success";
+		}
+
+		return "failure";
+	}
 }

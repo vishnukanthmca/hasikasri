@@ -16,9 +16,13 @@ public interface UserService {
 
 	public Boolean isUserPresent(LoginDto dto);
 
+	public Boolean isUserPresent(String emailOrMobile);
+
 	public User login(LoginDto dto);
 
 	public User findOne(Long userId);
 
 	public User saveUser(User user);
+
+	User getUserByEmailOrMobile(String emailOrMobile);
 }

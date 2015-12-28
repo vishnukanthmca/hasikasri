@@ -20,6 +20,7 @@ import com.aha.core.service.WalletService;
 import com.aha.core.util.Util;
 import com.aha.web.dto.request.AccountDto;
 import com.aha.web.dto.request.ChangePasswordDto;
+import com.aha.web.dto.request.ChangePasswordOnCheckoutDto;
 import com.aha.web.dto.request.LoginDto;
 import com.aha.web.dto.request.RegisterInputDto;
 
@@ -120,6 +121,27 @@ public class LoginAndRegisterController {
 		return view;
 	}
 
+	@RequestMapping(value = "changePasswordOnCheckout", method = RequestMethod.POST)
+	public ModelAndView changePasswordOnCheckout(HttpSession session,
+			@ModelAttribute ChangePasswordOnCheckoutDto dto) {
+
+		User user = userService.getUserByEmailOrMobile(dto.getEmailOrMobile());
+
+		ModelAndView view = new ModelAndView();
+
+		if (user == null) {
+			session.invalidate();
+			view.setViewName("redirect:home");
+			return view;
+		}
+
+		user.setPassword(Util.encodePassword(dto.getNewPassword()));
+		userService.saveUser(user);
+
+		view.setViewName("redirect:checkout");
+		return view;
+	}
+
 	@RequestMapping(value = "changePassword", method = RequestMethod.POST)
 	public @ResponseBody String changePassword(HttpSession session,
 			@RequestBody ChangePasswordDto dto) {
@@ -178,5 +200,15 @@ public class LoginAndRegisterController {
 		userService.saveUser(user);
 
 		return "success";
+	}
+
+	@RequestMapping(value = "/isUserExists", method = RequestMethod.POST)
+	public @ResponseBody String isUserExists(@RequestBody String emailOrMobile) {
+
+		if (userService.isUserPresent(emailOrMobile)) {
+			return "true";
+		}
+
+		return "false";
 	}
 }

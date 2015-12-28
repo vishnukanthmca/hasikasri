@@ -10,7 +10,6 @@ $(document).ready(function() {
 		$("#account_modal").modal('show');
 	});
 	
-
 	showMobileTextbox();
 	updateMobile();
 	cancelMobileUpdate();

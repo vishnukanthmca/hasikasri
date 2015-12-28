@@ -1,0 +1,118 @@
+body {
+	min-height: 2000px;
+	padding-top: 70px;
+}
+
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+#checkout_heading {
+	background-color: #16B594;
+	color: white;
+}
+
+#continue_button {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.panel {
+	border-top: none;
+}
+
+#password {
+	display: none;
+}
+
+#forgot_password_div {
+	display: none;
+}
+
+#verification_destination {
+	color: orange;
+}
+
+.verification_destination {
+	color: green;
+	margin-bottom: 20px;
+	font-style: italic;
+}
+
+#forgot_password {
+	display: none;
+	cursor: pointer;
+}
+
+#forgot_password_textbox {
+	margin-top: 20px;
+}
+
+#tick {
+	display: none;
+	margin-left: 10px;
+	float: left;
+}
+
+#wrong {
+	display: none;
+	margin-left: 10px;
+	float: left;
+}
+
+#verification_code_textbox {
+	float: left;
+}
+
+#left {
+	float: left;
+	width: 80%;
+}
+
+#right {
+	float: left;
+}
+
+#resend {
+	cursor: pointer;
+}
+
+#verification_msg_div {
+	margin-bottom: 10px;
+}

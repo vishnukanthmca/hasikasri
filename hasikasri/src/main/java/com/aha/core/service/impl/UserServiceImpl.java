@@ -93,4 +93,30 @@ public class UserServiceImpl implements UserService {
 	public User saveUser(User user) {
 		return repository.save(user);
 	}
+
+	@Override
+	public Boolean isUserPresent(String emailOrMobile) {
+		try {
+			Long.parseLong(emailOrMobile);
+			if (this.findUserByMobile(emailOrMobile) != null) {
+				return true;
+			}
+		} catch (NumberFormatException e) {
+			if (this.findUserByEmail(emailOrMobile) != null) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	@Override
+	public User getUserByEmailOrMobile(String emailOrMobile) {
+		try {
+			Long.parseLong(emailOrMobile);
+			return this.findUserByMobile(emailOrMobile);
+		} catch (NumberFormatException e) {
+			return findUserByEmail(emailOrMobile);
+		}
+	}
 }
