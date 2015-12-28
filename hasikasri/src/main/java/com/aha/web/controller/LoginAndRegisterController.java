@@ -138,6 +138,8 @@ public class LoginAndRegisterController {
 		user.setPassword(Util.encodePassword(dto.getNewPassword()));
 		userService.saveUser(user);
 
+		session.setAttribute("userId", user.getId());
+
 		view.setViewName("redirect:checkout");
 		return view;
 	}
