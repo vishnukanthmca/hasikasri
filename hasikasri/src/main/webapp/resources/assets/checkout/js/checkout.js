@@ -129,6 +129,10 @@ function checkuser() {
 				$("#login_failed_message").hide();
 				$("#login_failed_message").html('');
 
+				$("#verification_code_textbox").prop("disabled", false);
+				$("#change_link_div").show();
+				$("#loggedin_as_label").html($("#emailmobile_textbox").val());
+
 				if (isEmpty($("#password").val())) {
 					isUserExists();
 				} else {
@@ -144,7 +148,7 @@ function isValidInput() {
 
 	if (isValidEmail(input)) {
 		validInput = true;
-	} else if (!isNaN(input)) {
+	} else if (!isNaN(input) && input.length > 9) {
 		validInput = true;
 	}
 

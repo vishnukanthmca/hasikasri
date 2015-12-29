@@ -76,7 +76,9 @@
 											<div class="row" id="verification_msg_div">
 												Verification code sent to <span
 													id="verification_destination"></span><span
-													id="change_email"><a class="change_email_link">Change</a></span>
+													id="change_email"><img class="change_email_link"
+													src="resources/assets/checkout/images/editsvg.png"
+													height="20" width="20" /></span>
 											</div>
 											<div class="row">
 												<div id="left">
