@@ -117,12 +117,33 @@ body {
 	margin-bottom: 10px;
 }
 
-.panel panel-default {
-	border-radius: 0px 0px 0px 0px;
+#panel_overall {
+	border-radius: 0px 0px 5px 5px;
 }
 
 #login_failed_message {
 	display: none;
 	color: red;
 	margin-bottom: 10px;
+}
+
+#loggingin_as_message {
+	color: gray;
+}
+
+.change_email_link {
+	cursor: pointer;
+	margin-left: 10px;
+	margin-bottom: 6px;
+}
+
+#change_link_div {
+	display: none;
+	margin-bottom: 20px;
+}
+
+#loggedin_as_label {
+	text-transform: uppercase;
+	font-weight: bold;
+	color: green;
 }

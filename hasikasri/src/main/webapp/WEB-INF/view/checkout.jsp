@@ -39,7 +39,7 @@
 				</ul>
 				<div class="tab-content">
 					<div class="tab-pane" id="tab1">
-						<div class="panel panel-default">
+						<div class="panel panel-default" id="panel_overall">
 							<!-- <div class="panel-heading" id="checkout_heading">
 								<h3 class="panel-title">Please Identify yourself</h3>
 							</div> -->
@@ -51,6 +51,12 @@
 									<div id="email_and_password_div">
 										<form class="form-signin checkuser">
 											<div id="login_failed_message"></div>
+											<div id="change_link_div">
+												<label id="loggedin_as_label"></label><img
+													class="change_email_link"
+													src="resources/assets/checkout/images/editsvg.png"
+													height="20" width="20" />
+											</div>
 											<input type="text" id="emailmobile_textbox"
 												class="form-control"
 												placeholder="Email address or mobile number" required
@@ -67,7 +73,8 @@
 											action="changePasswordOnCheckout" method="post">
 											<div class="row" id="verification_msg_div">
 												Verification code sent to <span
-													id="verification_destination"></span>
+													id="verification_destination"></span><span
+													id="change_email"><a class="change_email_link">Change</a></span>
 											</div>
 											<div class="row">
 												<div id="left">

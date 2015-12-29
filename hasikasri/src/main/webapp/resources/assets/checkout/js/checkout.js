@@ -6,8 +6,15 @@ $(document).ready(function() {
 	onkeyupcode();
 	onfocus();
 	resend();
+	change();
 	// forgotpasswordSubmit();
 });
+
+function change() {
+	$(".change_email_link").click(function(e) {
+		window.location = window.location.href;
+	});
+}
 
 function disableTab() {
 	$(".disabled").click(function(e) {
@@ -67,21 +74,27 @@ function verify() {
 function forgotpassword() {
 	$("#forgot_password").click(function(e) {
 		sendVerificationCode();
-		$("#verification_destination").html($("#emailmobile_textbox").val());
-		$("#email_and_password_div").hide();
-		$("#forgot_password_div").show();
-		$("#verification_code_textbox").val('');
-		$("#forgot_password_textbox").val('');
-		$("#verification_code_textbox").focus();
-		$("#forgot_password_textbox").prop("disabled", "disabled");
-		$("#emailOrMobile_hidden").val($("#emailmobile_textbox").val());
+		forgotPasswordAfterProcess();
 	});
+}
+
+function forgotPasswordAfterProcess() {
+	$("#verification_destination").html($("#emailmobile_textbox").val());
+	$("#email_and_password_div").hide();
+	$("#forgot_password_div").show();
+	$("#verification_code_textbox").val('');
+	$("#forgot_password_textbox").val('');
+	$("#verification_code_textbox").focus();
+	$("#forgot_password_textbox").prop("disabled", "disabled");
+	$("#emailOrMobile_hidden").val($("#emailmobile_textbox").val());
 }
 
 function checkuser() {
 	$(".checkuser").submit(function(e) {
 		e.preventDefault();
 		$("#verification_code_textbox").prop("disabled", false);
+		$("#change_link_div").show();
+		$("#loggedin_as_label").html($("#emailmobile_textbox").val());
 		if (isEmpty($("#password").val())) {
 			isUserExists();
 		} else {
@@ -101,7 +114,7 @@ function login() {
 			if (data === "notregistered") {
 				message = "Incorrect password. Please try again."
 			} else if (data === "false") {
-				message = "Invalid credentials. Please try again."
+				message = "Invalid password. Please try again."
 			} else if (data == "true") {
 				window.location = window.location.href;
 			}
@@ -148,6 +161,9 @@ function isUserExists() {
 				$("#password").focus();
 				$("#forgot_password").show();
 				$("#password").prop("required", true);
+			} else if (data === "false") {
+				sendVerificationCode();
+				forgotPasswordAfterProcess();
 			}
 		}
 	});
