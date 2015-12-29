@@ -1,9 +1,6 @@
 $(document).ready(function() {
-	$(".disabled").click(function(e) {
-		e.preventDefault();
-		return false;
-	});
 
+	disableTab();
 	checkuser();
 	forgotpassword();
 	onkeyupcode();
@@ -11,6 +8,15 @@ $(document).ready(function() {
 	resend();
 	// forgotpasswordSubmit();
 });
+
+function disableTab() {
+	$(".disabled").click(function(e) {
+		e.preventDefault();
+		return false;
+	});
+
+	$("#password").val('');
+}
 
 function resend() {
 	$("#resend").click(function(e) {
@@ -76,8 +82,42 @@ function checkuser() {
 	$(".checkuser").submit(function(e) {
 		e.preventDefault();
 		$("#verification_code_textbox").prop("disabled", false);
-		isUserExists();
+		if (isEmpty($("#password").val())) {
+			isUserExists();
+		} else {
+			login();
+		}
 	});
+}
+
+function login() {
+	$.ajax({
+		url : "login",
+		method : 'POST',
+		contentType : "application/json",
+		data : getLoginInput(),
+		success : function(data) {
+			var message = "";
+			if (data === "notregistered") {
+				message = "Incorrect password. Please try again."
+			} else if (data === "false") {
+				message = "Invalid credentials. Please try again."
+			} else if (data == "true") {
+				window.location = window.location.href;
+			}
+			$("#login_failed_message").html(message);
+			$("#login_failed_message").show();
+		}
+	});
+}
+
+function getLoginInput() {
+	var login = {
+		emailOrMobile : $("#emailmobile_textbox").val(),
+		password : $("#password").val()
+	}
+
+	return JSON.stringify(login);
 }
 
 function sendVerificationCode() {
@@ -95,7 +135,6 @@ function sendVerificationCode() {
 }
 
 function isUserExists() {
-	var isUserExist = false;
 	$.ajax({
 		url : "isUserExists",
 		method : 'POST',
@@ -103,17 +142,15 @@ function isUserExists() {
 		data : $("#emailmobile_textbox").val(),
 		success : function(data) {
 			if (data === "true") {
-				isUserExist = true;
 				$("#emailmobile_textbox").hide();
 				$("#password").val('');
 				$("#password").show();
 				$("#password").focus();
 				$("#forgot_password").show();
+				$("#password").prop("required", true);
 			}
 		}
 	});
-
-	return isUserExist;
 }
 
 function getInput() {
@@ -122,4 +159,8 @@ function getInput() {
 	};
 
 	return input;
+}
+
+function isEmpty(str) {
+	return (!str || 0 === str.length);
 }

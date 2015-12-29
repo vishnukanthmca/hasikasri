@@ -116,3 +116,13 @@ body {
 #verification_msg_div {
 	margin-bottom: 10px;
 }
+
+.panel panel-default {
+	border-radius: 0px 0px 0px 0px;
+}
+
+#login_failed_message {
+	display: none;
+	color: red;
+	margin-bottom: 10px;
+}

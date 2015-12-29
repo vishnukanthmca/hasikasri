@@ -50,12 +50,13 @@
 								<c:if test="${user == null }">
 									<div id="email_and_password_div">
 										<form class="form-signin checkuser">
+											<div id="login_failed_message"></div>
 											<input type="text" id="emailmobile_textbox"
 												class="form-control"
 												placeholder="Email address or mobile number" required
 												autofocus /> <input class="form-control"
 												placeholder="Enter your password" value="" type="password"
-												id="password" required autofocus />
+												id="password" autofocus />
 											<button id="continue_button"
 												class="btn btn-lg btn-primary btn-block" type="submit">Continue</button>
 											<a id="forgot_password">Forgot password?</a>
@@ -101,7 +102,7 @@
 									</div>
 								</c:if>
 								<c:if test="${user != null }">
-									
+
 								</c:if>
 							</div>
 						</div>
