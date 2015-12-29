@@ -8,7 +8,23 @@ $(document).ready(function() {
 	resend();
 	change();
 	// forgotpasswordSubmit();
+	ajax();
 });
+
+function ajax() {
+
+	$(document).ajaxStart(function() {
+
+		NProgress.start();
+
+	});
+
+	$(document).ajaxStop(function() {
+
+		NProgress.done();
+
+	});
+}
 
 function isValidEmail(email) {
 	filter = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
