@@ -11,6 +11,8 @@
 	rel="stylesheet">
 <link href="resources/assets/checkout/css/prettify.css" rel="stylesheet">
 <link href="resources/assets/checkout/css/checkout.css" rel="stylesheet">
+<link href="resources/assets/checkout/css/nprogress.css"
+	rel="stylesheet">
 
 </head>
 <body>
@@ -129,6 +131,7 @@
 	<script src="resources/assets/checkout/js/jquery.bootstrap.wizard.js"></script>
 	<script src="resources/assets/checkout/js/prettify.js"></script>
 	<script src="resources/assets/checkout/js/checkout.js"></script>
+	<script src="resources/assets/checkout/js/nprogress.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#rootwizard').bootstrapWizard({
@@ -137,5 +140,16 @@
 			window.prettyPrint && prettyPrint()
 		});
 	</script>
+
+	<script>
+		$('body').show();
+		$('.version').text(NProgress.version);
+		NProgress.start();
+		setTimeout(function() {
+			NProgress.done();
+			$('.fade').removeClass('out');
+		}, 1000);
+	</script>
+
 </body>
 </html>

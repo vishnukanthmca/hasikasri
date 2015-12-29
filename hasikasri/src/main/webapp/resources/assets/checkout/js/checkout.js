@@ -10,6 +10,15 @@ $(document).ready(function() {
 	// forgotpasswordSubmit();
 });
 
+function isValidEmail(email) {
+	filter = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	if (filter.test(email)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function change() {
 	$(".change_email_link").click(function(e) {
 		window.location = window.location.href;
@@ -90,17 +99,40 @@ function forgotPasswordAfterProcess() {
 }
 
 function checkuser() {
-	$(".checkuser").submit(function(e) {
-		e.preventDefault();
-		$("#verification_code_textbox").prop("disabled", false);
-		$("#change_link_div").show();
-		$("#loggedin_as_label").html($("#emailmobile_textbox").val());
-		if (isEmpty($("#password").val())) {
-			isUserExists();
-		} else {
-			login();
-		}
-	});
+	$(".checkuser").submit(
+			function(e) {
+				e.preventDefault();
+
+				if (!isValidInput()) {
+					$("#login_failed_message").html(
+							"Please enter your email or mobile number");
+					$("#login_failed_message").show();
+					return;
+				}
+
+				$("#login_failed_message").hide();
+				$("#login_failed_message").html('');
+
+				if (isEmpty($("#password").val())) {
+					isUserExists();
+				} else {
+					login();
+				}
+			});
+}
+
+function isValidInput() {
+
+	var validInput = false;
+	var input = $("#emailmobile_textbox").val();
+
+	if (isValidEmail(input)) {
+		validInput = true;
+	} else if (!isNaN(input)) {
+		validInput = true;
+	}
+
+	return validInput;
 }
 
 function login() {
