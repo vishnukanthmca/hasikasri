@@ -2,11 +2,13 @@ package com.aha.core.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -57,7 +59,10 @@ public class User implements Serializable {
 
 	/** whether the user registered manually or registered by shipping **/
 	@Column
-	private String registerType;
+	private Integer registerType;
+
+	@OneToMany(mappedBy = "user")
+	private List<Address> addresses;
 
 	public Long getId() {
 		return id;
@@ -139,11 +144,11 @@ public class User implements Serializable {
 		this.lastLoginDate = lastLoginDate;
 	}
 
-	public String getRegisterType() {
+	public Integer getRegisterType() {
 		return registerType;
 	}
 
-	public void setRegisterType(String registerType) {
+	public void setRegisterType(Integer registerType) {
 		this.registerType = registerType;
 	}
 

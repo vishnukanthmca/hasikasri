@@ -29,8 +29,7 @@ public class VerificationController {
 	private LogService logService;
 
 	@RequestMapping("/sendEmail")
-	public @ResponseBody String sendEmail(HttpSession session,
-			@RequestParam("email") String email) {
+	public @ResponseBody String sendEmail(HttpSession session, @RequestParam("email") String email) {
 
 		if (session.getAttribute("userId") == null) {
 			if (session != null) {
@@ -54,8 +53,7 @@ public class VerificationController {
 	}
 
 	@RequestMapping("/sendSms")
-	public @ResponseBody String sendSms(HttpSession session,
-			@RequestParam("mobile") String mobile) {
+	public @ResponseBody String sendSms(HttpSession session, @RequestParam("mobile") String mobile) {
 
 		if (session.getAttribute("userId") == null) {
 			if (session != null) {
@@ -78,8 +76,7 @@ public class VerificationController {
 	}
 
 	@RequestMapping("/verifyMobile")
-	public @ResponseBody String verifyMobile(HttpSession session,
-			@RequestParam("mobile") String mobile, String code) {
+	public @ResponseBody String verifyMobile(HttpSession session, @RequestParam("mobile") String mobile, String code) {
 
 		if (session.getAttribute("userId") == null) {
 			if (session != null) {
@@ -99,8 +96,7 @@ public class VerificationController {
 
 		if (sessionCode.toString().equals(code)) {
 
-			User user = userService.findOne(Long.parseLong(session
-					.getAttribute("userId").toString()));
+			User user = userService.findOne(Long.parseLong(session.getAttribute("userId").toString()));
 
 			if (user == null) {
 				return "usernotfound";
@@ -113,8 +109,7 @@ public class VerificationController {
 			userService.saveUser(user);
 
 			Log databaseLog = new Log();
-			databaseLog.setActivity("User updated mobile from " + oldMobile
-					+ " to " + mobile);
+			databaseLog.setActivity("User updated mobile from " + oldMobile + " to " + mobile);
 			databaseLog.setDate(new Date());
 			databaseLog.setUser(user);
 
@@ -127,8 +122,7 @@ public class VerificationController {
 	}
 
 	@RequestMapping("/verifyEmail")
-	public @ResponseBody String verifyEmail(HttpSession session,
-			@RequestParam("email") String email, String code) {
+	public @ResponseBody String verifyEmail(HttpSession session, @RequestParam("email") String email, String code) {
 
 		if (session.getAttribute("userId") == null) {
 			if (session != null) {
@@ -148,8 +142,7 @@ public class VerificationController {
 
 		if (sessionCode.toString().equals(code)) {
 
-			User user = userService.findOne(Long.parseLong(session
-					.getAttribute("userId").toString()));
+			User user = userService.findOne(Long.parseLong(session.getAttribute("userId").toString()));
 
 			if (user == null) {
 				return "usernotfound";
@@ -162,8 +155,7 @@ public class VerificationController {
 			userService.saveUser(user);
 
 			Log databaseLog = new Log();
-			databaseLog.setActivity("User updated email from " + oldEmail
-					+ " to " + email);
+			databaseLog.setActivity("User updated email from " + oldEmail + " to " + email);
 			databaseLog.setDate(new Date());
 			databaseLog.setUser(user);
 
@@ -185,19 +177,16 @@ public class VerificationController {
 
 		session.setAttribute(emailOrMobile, code);
 
-		System.out.println("sendVerificationCodeForEmailOrMobile "
-				+ session.getAttribute(emailOrMobile));
+		System.out.println("sendVerificationCodeForEmailOrMobile " + session.getAttribute(emailOrMobile));
 
 		return "verificationcodesent";
 	}
 
 	@RequestMapping(value = "/verifySmsOrEmail")
 	public @ResponseBody String verifySmsOrEmail(HttpSession session,
-			@RequestParam("emailOrMobile") String emailOrMobile,
-			@RequestParam("code") String code) {
+			@RequestParam("emailOrMobile") String emailOrMobile, @RequestParam("code") String code) {
 
-		System.out.println("verifySmsOrEmail "
-				+ session.getAttribute(emailOrMobile));
+		System.out.println("verifySmsOrEmail " + session.getAttribute(emailOrMobile));
 
 		Integer sessionCode = (Integer) session.getAttribute(emailOrMobile);
 

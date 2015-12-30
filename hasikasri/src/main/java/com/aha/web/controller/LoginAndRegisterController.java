@@ -17,6 +17,7 @@ import com.aha.core.domain.User;
 import com.aha.core.domain.Wallet;
 import com.aha.core.service.UserService;
 import com.aha.core.service.WalletService;
+import com.aha.core.util.Enum;
 import com.aha.core.util.Util;
 import com.aha.web.dto.request.AccountDto;
 import com.aha.web.dto.request.ChangePasswordDto;
@@ -52,8 +53,7 @@ public class LoginAndRegisterController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public @ResponseBody String login(HttpSession session,
-			@RequestBody LoginDto dto) {
+	public @ResponseBody String login(HttpSession session, @RequestBody LoginDto dto) {
 
 		if (!userService.isUserPresent(dto)) {
 			return "notregistered";
@@ -65,8 +65,7 @@ public class LoginAndRegisterController {
 
 			int index = user.getEmail().indexOf("@");
 			if (index > 0) {
-				session.setAttribute("user", user.getEmail()
-						.substring(0, index));
+				session.setAttribute("user", user.getEmail().substring(0, index));
 				session.setAttribute("userId", user.getId());
 			}
 
@@ -122,8 +121,7 @@ public class LoginAndRegisterController {
 	}
 
 	@RequestMapping(value = "changePasswordOnCheckout", method = RequestMethod.POST)
-	public ModelAndView changePasswordOnCheckout(HttpSession session,
-			@ModelAttribute ChangePasswordOnCheckoutDto dto) {
+	public ModelAndView changePasswordOnCheckout(HttpSession session, @ModelAttribute ChangePasswordOnCheckoutDto dto) {
 
 		User user = userService.getUserByEmailOrMobile(dto.getEmailOrMobile());
 
@@ -136,6 +134,7 @@ public class LoginAndRegisterController {
 		}
 
 		user.setPassword(Util.encodePassword(dto.getNewPassword()));
+		user.setRegisterType(Enum.SignupType.CHECKOUT.ordinal());
 		userService.saveUser(user);
 
 		session.setAttribute("userId", user.getId());
@@ -145,8 +144,7 @@ public class LoginAndRegisterController {
 	}
 
 	@RequestMapping(value = "changePassword", method = RequestMethod.POST)
-	public @ResponseBody String changePassword(HttpSession session,
-			@RequestBody ChangePasswordDto dto) {
+	public @ResponseBody String changePassword(HttpSession session, @RequestBody ChangePasswordDto dto) {
 
 		if (session.getAttribute("userId") == null) {
 			if (session != null) {
@@ -179,8 +177,7 @@ public class LoginAndRegisterController {
 	}
 
 	@RequestMapping(value = "changeName", method = RequestMethod.GET)
-	public @ResponseBody String changeName(HttpSession session,
-			@RequestParam("name") String name) {
+	public @ResponseBody String changeName(HttpSession session, @RequestParam("name") String name) {
 
 		if (session.getAttribute("userId") == null) {
 			if (session != null) {
