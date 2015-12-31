@@ -42,7 +42,15 @@ public class CheckoutController {
 				return view;
 			}
 
-			view.addObject("user", prepareAddress(addressService.findByUser(user)));
+			List<AddressDto> dtos = prepareAddress(addressService.findByUser(user));
+			if (dtos == null || dtos.isEmpty()) {
+				view.addObject("addresses", "nil");
+			} else {
+				view.addObject("addresses", dtos);
+			}
+
+			view.addObject("user", "hello");
+
 		}
 
 		return view;

@@ -18,9 +18,6 @@ public class Address {
 	@GeneratedValue
 	private Long id;
 
-	@Column
-	private String street;
-
 	@OneToOne
 	private City city;
 
@@ -62,14 +59,6 @@ public class Address {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public void setStreet(String street) {
-		this.street = street;
 	}
 
 	public City getCity() {

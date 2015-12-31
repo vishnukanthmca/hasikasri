@@ -26,4 +26,5 @@
 # for resend sms code also do verify
 # Important: If user not found in the review table - EntityNotFoundException - handle that
 # handle - session timeout exception
-# non reproducible bug in checkout - when login try to change the email 
+# non reproducible bug in checkout - when login try to change the email
+# calculate city from pincode and store to db in add address 

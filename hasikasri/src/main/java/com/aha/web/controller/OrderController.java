@@ -50,17 +50,13 @@ public class OrderController {
 		if (orders != null) {
 
 			orders.forEach(order -> {
-				if (order.getStatus() != null
-						&& order.getStatus().intValue() == Enum.OrderStatus.OPEN
-								.ordinal()) {
+				if (order.getStatus() != null && order.getStatus().intValue() == Enum.OrderStatus.OPEN.ordinal()) {
 					openOrders.add(order);
 				} else if (order.getStatus() != null
-						&& order.getStatus().intValue() == Enum.OrderStatus.DELIVERED
-								.ordinal()) {
+						&& order.getStatus().intValue() == Enum.OrderStatus.DELIVERED.ordinal()) {
 					deliveredOrders.add(order);
 				} else if (order.getStatus() != null
-						&& order.getStatus().intValue() == Enum.OrderStatus.CANCELLED
-								.ordinal()) {
+						&& order.getStatus().intValue() == Enum.OrderStatus.CANCELLED.ordinal()) {
 					cancelledOrders.add(order);
 				}
 			});
@@ -91,46 +87,36 @@ public class OrderController {
 
 				List<MyOrderItemsDto> itemsDtos = new ArrayList<>();
 
-				order.getOrderedItems().forEach(
-						orderedItem -> {
+				order.getOrderedItems().forEach(orderedItem -> {
 
-							Product product = orderedItem.getProduct();
+					Product product = orderedItem.getProduct();
 
-							ReturnOrder returnOrder = orderedItem
-									.getReturnOrder();
+					ReturnOrder returnOrder = orderedItem.getReturnOrder();
 
-							String adminComments = null;
-							String returnDate = null;
+					String adminComments = null;
+					String returnDate = null;
 
-							if (returnOrder != null) {
-								adminComments = returnOrder.getAdminComments();
-								if (returnOrder.getReturnDate() != null) {
-									returnDate = returnOrder.getReturnDate()
-											.toString();
-								}
-							}
+					if (returnOrder != null) {
+						adminComments = returnOrder.getAdminComments();
+						if (returnOrder.getReturnDate() != null) {
+							returnDate = returnOrder.getReturnDate().toString();
+						}
+					}
 
-							if (product != null) {
+					if (product != null) {
 
-								String sellerName = "";
-								if (product.getSeller() != null) {
-									sellerName = product.getSeller().getName();
-								}
+						String sellerName = "";
+						if (product.getSeller() != null) {
+							sellerName = product.getSeller().getName();
+						}
 
-								MyOrderItemsDto itemsDto = new MyOrderItemsDto(
-										product.getListingImage(), product
-												.getName(), orderedItem
-												.getTotalSoldPrice(),
-										orderedItem.getQuantity(), sellerName,
-										product.getIsReturnable(), order
-												.getDelivery()
-												.getDeliveredDate(),
-										orderedItem.getOrderItemId(),
-										orderedItem.getStatus(), adminComments,
-										returnDate);
-								itemsDtos.add(itemsDto);
-							}
-						});
+						MyOrderItemsDto itemsDto = new MyOrderItemsDto(product.getListingImage(), product.getName(),
+								orderedItem.getTotalSoldPrice(), orderedItem.getQuantity(), sellerName,
+								product.getIsReturnable(), order.getDelivery().getDeliveredDate(),
+								orderedItem.getOrderItemId(), orderedItem.getStatus(), adminComments, returnDate);
+						itemsDtos.add(itemsDto);
+					}
+				});
 
 				orderDto.setItems(itemsDtos);
 				orderDtos.add(orderDto);
@@ -149,26 +135,21 @@ public class OrderController {
 		Delivery delivery = order.getDelivery();
 
 		if (delivery == null) {
-			throw new IllegalStateException(
-					"Delivery must be eager fetched but not.");
+			throw new IllegalStateException("Delivery must be eager fetched but not.");
 		}
 
 		AddressDto shippingAddressDto = null;
 		Address shipAddress = delivery.getShippingAddress();
 		if (shipAddress != null) {
-			shippingAddressDto = new AddressDto(shipAddress.getStreet(),
-					shipAddress.getCity().getName(), shipAddress.getState(),
-					shipAddress.getAddress(), shipAddress.getPincode(),
+			shippingAddressDto = new AddressDto(shipAddress.getAddress(), shipAddress.getPincode(),
 					shipAddress.getLandmark());
 		}
 
 		AddressDto billingAddressDto = null;
 		Address billingAddress = delivery.getShippingAddress();
 		if (billingAddress != null) {
-			billingAddressDto = new AddressDto(billingAddress.getStreet(),
-					billingAddress.getCity().getName(),
-					billingAddress.getState(), billingAddress.getAddress(),
-					billingAddress.getPincode(), billingAddress.getLandmark());
+			billingAddressDto = new AddressDto(billingAddress.getAddress(), billingAddress.getPincode(),
+					billingAddress.getLandmark());
 		}
 
 		String orderedDate = null;
@@ -181,10 +162,8 @@ public class OrderController {
 			deliveredDate = order.getDelivery().getDeliveredDate().toString();
 		}
 
-		MyOrderDto orderDto = new MyOrderDto(order.getOrderId(),
-				delivery.getReceivedPerson(), orderedDate,
-				Enum.OrderStatus.getString(order.getStatus()),
-				shippingAddressDto, billingAddressDto, deliveredDate);
+		MyOrderDto orderDto = new MyOrderDto(order.getOrderId(), delivery.getReceivedPerson(), orderedDate,
+				Enum.OrderStatus.getString(order.getStatus()), shippingAddressDto, billingAddressDto, deliveredDate);
 		return orderDto;
 	}
 }

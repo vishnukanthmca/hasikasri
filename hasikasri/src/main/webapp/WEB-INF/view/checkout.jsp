@@ -46,9 +46,6 @@
 								<h3 class="panel-title">Please Identify yourself</h3>
 							</div> -->
 							<div class="panel-body">
-								<!-- <h2 class="form-signin-heading">Please sign in</h2> -->
-								<!-- <label for="inputEmail" class="sr-only">Email address or
-							mobile no</label>  -->
 								<c:if test="${user == null }">
 									<div id="email_and_password_div">
 										<form class="form-signin checkuser">
@@ -112,8 +109,34 @@
 										</form>
 									</div>
 								</c:if>
-								<c:if test="${user != null }">
+								<c:if test="${user != null}">
+									<c:if test="${addresses == 'nil' }">
+										<button id="add_address_button"
+											class="btn btn-lg btn-primary btn-block" type="button">Add
+											Address</button>
+									</c:if>
 
+									<div id="current_address_div">
+										<div id="current_address_text">
+											Your item(s) will be delivered to this address
+											<hr />
+										</div>
+										<div id="current_address__display_div">
+											<table>
+												<tr>
+													<td></td>
+												</tr>
+											</table>
+											<div>
+												<span id="name_text">${addresses[0].name }</span>
+											</div>
+											<div>${addresses[0].address }</div>
+											<div>${addresses[0].pincode }</div>
+											<div>${addresses[0].country }</div>
+											<div>${addresses[0].mobile }</div>
+											<div id="change_address">Change delivery address</div>
+										</div>
+									</div>
 								</c:if>
 							</div>
 						</div>
@@ -132,6 +155,9 @@
 	<script src="resources/assets/checkout/js/bootstrap.min.js"></script>
 	<script src="resources/assets/checkout/js/jquery.bootstrap.wizard.js"></script>
 	<script src="resources/assets/checkout/js/prettify.js"></script>
+	<c:if test="${user == null }">
+		<script src="resources/assets/checkout/js/checkout_login.js"></script>
+	</c:if>
 	<script src="resources/assets/checkout/js/checkout.js"></script>
 	<script src="resources/assets/checkout/js/nprogress.js"></script>
 	<script>
@@ -152,6 +178,85 @@
 			$('.fade').removeClass('out');
 		}, 1000);
 	</script>
+
+	<c:if test="${addresses == 'nil' }">
+		<script>
+			$(document).ready(function() {
+				$("#address_modal").modal('show');
+			});
+		</script>
+	</c:if>
+
+	<div id="address_modal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content" id="modal_content">
+				<div class="modal-body">
+					<form class="form-signin add_address_form" id="add_address_form"
+						method="POST" action="addAddress">
+						<div class="row address_control">
+							<div class="left_label_div">
+								<label class="add_address_label" for="pincode">Pincode</label>
+							</div>
+							<div class="right_control_div">
+								<input class="form-control text_box_address" type="text"
+									name="pincode" id="pincode" required />
+							</div>
+						</div>
+						<div class="row address_control">
+							<div class="left_label_div">
+								<label class="add_address_label" for="name">Name</label>
+							</div>
+							<div class="right_control_div">
+								<input class="form-control text_box_address" type="text"
+									name="name" id="name" required />
+							</div>
+						</div>
+						<div class="row address_control">
+							<div class="left_label_div">
+								<label class="add_address_label" for="address">Address</label>
+							</div>
+							<div class="right_control_div">
+								<textarea class="form-control text_box_address" name="address"
+									id="address" required></textarea>
+							</div>
+						</div>
+						<div class="row address_control">
+							<div class="left_label_div">
+								<label class="add_address_label" for="landmark">Landmark</label>
+							</div>
+							<div class="right_control_div">
+								<input class="form-control text_box_address" type="text"
+									name="landmark" id="landmark" placeholder="(Optional)" />
+							</div>
+						</div>
+						<div class="row address_control">
+							<div class="left_label_div">
+								<label class="add_address_label" for="mobile">Mobile</label>
+							</div>
+							<div class="right_control_div">
+								<div class="input-group">
+									<span class="input-group-addon" id="mobile">+91</span> <input
+										type="text" class="form-control" id="mobile_textbox"
+										aria-describedby="basic-addon1" required>
+								</div>
+							</div>
+						</div>
+						<div class="row address_control">
+							<div class="left_label_div">
+								<label class="add_address_label" for="add_address_submit">&nbsp;</label>
+							</div>
+							<div class="right_control_div">
+								<button id="add_address_submit"
+									class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 </body>
 </html>
