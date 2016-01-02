@@ -202,7 +202,6 @@
 						<form class="form-signin add_address_form" id="add_address_form"
 							method="POST" action="addAddress">
 							<div class="row address_control">
-
 								<div class="col-lg-3 left_label_div">
 									<label class="add_address_label" for="pincode">Pincode</label>
 								</div>
@@ -263,7 +262,7 @@
 						</form>
 					</div>
 					<c:if test="${addresses != 'nil' }">
-						<div class="col-lg-3">
+						<div class="col-lg-3" id="right_address_list">
 							<c:forEach var="address" items="${addresses }">
 								<div>
 									<span id="name_text">${address.name }</span> <img

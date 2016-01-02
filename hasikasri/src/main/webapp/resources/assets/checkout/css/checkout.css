@@ -158,7 +158,6 @@ body {
 
 .right_control_div {
 	float: left;
-	width: 200px;
 }
 
 .add_address_label {
@@ -170,16 +169,17 @@ body {
 }
 
 .text_box_address {
-	width: 70%;
+	
 }
 
 .add_address_form {
-	max-width: 100%;
 	padding: 0px;
+	margin: 0px;
 }
 
 #add_address_form {
 	padding: 0px;
+	width: 100%;
 }
 
 .address_control {
@@ -231,10 +231,14 @@ body {
 }
 
 #left_column {
-	width: 10px;
+	width: 75%;
 }
 
 #address_modal_row {
 	margin: 0px;
 	padding: px;
+}
+
+#right_address_list {
+	padding-left: 0px;
 }
