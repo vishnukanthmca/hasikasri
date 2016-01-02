@@ -175,6 +175,7 @@ body {
 .add_address_form {
 	padding: 0px;
 	margin: 0px;
+	max-width: 100%;
 }
 
 #add_address_form {
@@ -188,7 +189,7 @@ body {
 }
 
 #mobile_textbox {
-	width: 66%;
+	
 }
 
 #emailmobile_textbox {
@@ -196,9 +197,7 @@ body {
 }
 
 #add_address_submit {
-	width: 25%;
 	float: right;
-	margin-right: 126px;
 	padding: 7px;
 }
 
@@ -231,7 +230,7 @@ body {
 }
 
 #left_column {
-	width: 75%;
+	
 }
 
 #address_modal_row {
@@ -241,4 +240,42 @@ body {
 
 #right_address_list {
 	padding-left: 0px;
+	/* margin-left: 5px; */
+	overflow: scroll;
+	height: 370px;
+}
+
+.individual_address {
+	border: 1px solid gray;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.individual_address:hover {
+	background: gray;
+	cursor: pointer;
+}
+
+.name_div_ind {
+	padding-bottom: 1px solid gray;
+}
+
+.mobile_div_ind {
+	padding-top: 10px;
+}
+
+.address_div_ind {
+	border-top: 1px solid gray;
+	padding-top: 10px;
+}
+
+.country_div_ind {
+	padding-bottom: 10px;
+	border-bottom: 1px solid gray;
+}
+
+.label_left {
+	width: 300px;
+	padding-right: 30px;
+	text-align: right;
 }
