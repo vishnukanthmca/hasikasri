@@ -165,7 +165,7 @@ body {
 }
 
 #modal_content {
-	height: 400px;
+	
 }
 
 .text_box_address {
@@ -198,7 +198,7 @@ body {
 
 #add_address_submit {
 	float: right;
-	padding: 7px;
+	padding: 7px 40px;
 }
 
 #add_address_button {
@@ -236,24 +236,18 @@ body {
 #address_modal_row {
 	margin: 0px;
 	padding: px;
+	float: left;
 }
 
 #right_address_list {
-	padding-left: 0px;
-	/* margin-left: 5px; */
-	overflow: scroll;
-	height: 370px;
+	
 }
 
 .individual_address {
 	border: 1px solid gray;
 	padding: 10px;
 	margin-bottom: 10px;
-}
-
-.individual_address:hover {
-	background: gray;
-	cursor: pointer;
+	width: 150px;
 }
 
 .name_div_ind {
@@ -275,7 +269,60 @@ body {
 }
 
 .label_left {
-	width: 300px;
+	width: 190px;
 	padding-right: 30px;
 	text-align: right;
+}
+
+/** thumbnail scroller starts **/
+.content {
+	overflow: auto;
+	position: relative;
+	padding: 10px;
+	background: #333;
+	margin: 10px auto;
+	width: 85%;
+	height: auto;
+}
+
+.content li {
+	margin: 0 4px;
+}
+
+.content li {
+	display: block;
+	border: 7px solid rgba(255, 255, 255, .1);
+}
+
+#content-1 {
+	padding: 10px 0px;
+	background-color: transparent;
+	width: 100%;
+}
+
+#content-1 .mTSButtonIcon {
+	fill: red;
+}
+
+#content-1 .mTSButton .mTSButtonIcon {
+	opacity: .5;
+}
+
+#content-1 .mTSButton:hover .mTSButtonIcon {
+	opacity: 1;
+}
+/** end scroller **/
+.td_addr {
+	vertical-align: top;
+}
+
+.deliver_here_button {
+	padding: 2px 2px;
+	border-radius: 4px;
+	margin-bottom: 8px;
+	font-size: 14px;
+}
+
+.modal-dialog {
+	width: 500px;
 }

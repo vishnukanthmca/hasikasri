@@ -13,6 +13,8 @@
 <link href="resources/assets/checkout/css/checkout.css" rel="stylesheet">
 <link href="resources/assets/checkout/css/nprogress.css"
 	rel="stylesheet">
+<link href="resources/assets/checkout/css/jquery.mThumbnailScroller.css"
+	rel="stylesheet">
 
 </head>
 <body>
@@ -161,6 +163,7 @@
 	</c:if>
 	<script src="resources/assets/checkout/js/checkout.js"></script>
 	<script src="resources/assets/checkout/js/nprogress.js"></script>
+	<script src="resources/assets/checkout/js/jquery.mThumbnailScroller.js"></script>
 	<script>
 		$(document).ready(function() {
 			$('#rootwizard').bootstrapWizard({
@@ -193,112 +196,141 @@
 			<div class="modal-content" id="modal_content">
 				<div class="modal-body">
 					<div class="row" id="address_modal_row">
+						<div class="col-lg-12">
+							<form class="form-signin add_address_form" id="add_address_form"
+								method="POST" action="addAddress">
+								<div class="row address_control">
+									<table>
+										<tr>
+											<td class="label_left"><label class="add_address_label"
+												for="pincode">Pincode</label></td>
+											<td width="70%"><input
+												class="form-control text_box_address" type="text"
+												name="pincode" id="pincode" required /></td>
+										</tr>
+									</table>
+								</div>
+
+								<div class="row address_control">
+									<table>
+										<tr>
+											<td class="label_left"><label class="add_address_label"
+												for="name">Name</label></td>
+											<td width="70%"><input
+												class="form-control text_box_address" type="text"
+												name="name" id="name" required /></td>
+										</tr>
+									</table>
+								</div>
+								<div class="row address_control">
+									<table>
+										<tr>
+											<td class="label_left"><label class="add_address_label"
+												for="address">Address</label></td>
+											<td width="70%"><textarea
+													class="form-control text_box_address" name="address"
+													id="address" required></textarea></td>
+										</tr>
+									</table>
+								</div>
+								<div class="row address_control">
+									<table>
+										<tr>
+											<td class="label_left"><label class="add_address_label"
+												for="landmark">Landmark</label></td>
+											<td width="70%"><input
+												class="form-control text_box_address" type="text"
+												name="landmark" id="landmark" placeholder="(Optional)" /></td>
+										</tr>
+									</table>
+								</div>
+								<div class="row address_control">
+									<table>
+										<tr>
+											<td class="label_left"><label class="add_address_label"
+												for="mobile">Mobile</label></td>
+											<td width="70%"><div class="input-group">
+													<span class="input-group-addon" id="mobile">+91</span> <input
+														type="text" name="mobile" class="form-control"
+														id="mobile_textbox" aria-describedby="basic-addon1"
+														required>
+												</div></td>
+										</tr>
+									</table>
+								</div>
+								<div class="row address_control">
+									<table>
+										<tr>
+											<td class="label_left">&nbsp;</td>
+											<td width="70%" align="right"><div class="input-group">
+													<button id="add_address_submit"
+														class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
+												</div></td>
+										</tr>
+									</table>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="row">
 						<c:if test="${addresses != 'nil' }">
-							<div class="col-lg-4" id="right_address_list">
-								<c:forEach var="address" items="${addresses }">
-									<div class="individual_address">
-										<div class="name_div_ind">
-											<span id="name_text">${address.name }</span> <img
-												id="edit_address"
-												src="resources/assets/checkout/images/editsvg.png"
-												height="20" width="20" />
+							<div class="col-lg-12" id="right_address_list">
 
-										</div>
-										<div class="address_div_ind">${address.address }</div>
-										<div>${address.pincode }</div>
-										<div class="country_div_ind">${address.country }</div>
-										<div class="mobile_div_ind">${address.mobile }</div>
-									</div>
-								</c:forEach>
+								<div id="content-1" class="content">
+									<ul>
+										<c:forEach var="address" items="${addresses }">
+											<li><div class="individual_address">
+													<div class="deliver_here">
+														<button
+															class="btn btn-lg btn-primary btn-block deliver_here_button"
+															type="button">Deliver Here</button>
+													</div>
+													<div class="name_div_ind">
+														<table>
+															<tr>
+																<td class="td_addr"><span id="name_text">${address.name }</span></td>
+																<td class="td_addr">
+																	<div>
+																		<img id="edit_address"
+																			src="resources/assets/checkout/images/editsvg.png"
+																			height="20" width="20" />
+																	</div>
+																	<div>
+																		<img id="edit_address"
+																			src="resources/assets/checkout/images/editsvg.png"
+																			height="20" width="20" />
+																	</div>
+																</td>
+															</tr>
+														</table>
+													</div>
+													<div class="address_div_ind">${address.address }</div>
+													<div>${address.pincode }</div>
+													<div class="country_div_ind">${address.country }</div>
+													<div class="mobile_div_ind">${address.mobile }</div>
+												</div></li>
+										</c:forEach>
+									</ul>
+								</div>
+
 							</div>
 						</c:if>
-
-						<c:if test="${addresses == 'nil' }">
-							<div class="col-lg-12">
-						</c:if>
-						<c:if test="${addresses != 'nil' }">
-							<div class="col-lg-8" id="left_column">
-						</c:if>
-						<form class="form-signin add_address_form" id="add_address_form"
-							method="POST" action="addAddress">
-							<div class="row address_control">
-								<table>
-									<tr>
-										<td class="label_left"><label class="add_address_label"
-											for="pincode">Pincode</label></td>
-										<td width="70%"><input
-											class="form-control text_box_address" type="text"
-											name="pincode" id="pincode" required /></td>
-									</tr>
-								</table>
-							</div>
-
-							<div class="row address_control">
-								<table>
-									<tr>
-										<td class="label_left"><label class="add_address_label"
-											for="name">Name</label></td>
-										<td width="70%"><input
-											class="form-control text_box_address" type="text" name="name"
-											id="name" required /></td>
-									</tr>
-								</table>
-							</div>
-							<div class="row address_control">
-								<table>
-									<tr>
-										<td class="label_left"><label class="add_address_label"
-											for="address">Address</label></td>
-										<td width="70%"><textarea
-												class="form-control text_box_address" name="address"
-												id="address" required></textarea></td>
-									</tr>
-								</table>
-							</div>
-							<div class="row address_control">
-								<table>
-									<tr>
-										<td class="label_left"><label class="add_address_label"
-											for="landmark">Landmark</label></td>
-										<td width="70%"><input
-											class="form-control text_box_address" type="text"
-											name="landmark" id="landmark" placeholder="(Optional)" /></td>
-									</tr>
-								</table>
-							</div>
-							<div class="row address_control">
-								<table>
-									<tr>
-										<td class="label_left"><label class="add_address_label"
-											for="mobile">Mobile</label></td>
-										<td width="70%"><div class="input-group">
-												<span class="input-group-addon" id="mobile">+91</span> <input
-													type="text" name="mobile" class="form-control"
-													id="mobile_textbox" aria-describedby="basic-addon1"
-													required>
-											</div></td>
-									</tr>
-								</table>
-							</div>
-							<div class="row address_control">
-								<table>
-									<tr>
-										<td class="label_left">&nbsp;</td>
-										<td width="70%"><div class="input-group">
-												<button id="add_address_submit"
-													class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
-											</div></td>
-									</tr>
-								</table>
-							</div>
-						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
+	<script>
+		(function($) {
+			$(window).load(function() {
 
+				$("#content-1").mThumbnailScroller({
+					type : "click-50",
+					theme : "buttons-out"
+				});
 
+			});
+		})(jQuery);
+	</script>
 </body>
 </html>
